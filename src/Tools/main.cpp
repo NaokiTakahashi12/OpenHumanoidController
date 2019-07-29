@@ -78,8 +78,8 @@ int main(int argc, char **argv) {
 		v << 1, 2, 1;
 		m = v.asDiagonal();
 		logger.message(Tools::Log::MessageLevels::debug, "Test: message matrix");
-		logger.message(Tools::Log::MessageLevels::debug, v);
-		logger.message(Tools::Log::MessageLevels::debug, m);
+//		logger.message(Tools::Log::MessageLevels::debug, v);
+//		logger.message(Tools::Log::MessageLevels::debug, m);
 
 		start_p = std::chrono::high_resolution_clock::now();
 
