@@ -1,0 +1,11 @@
+{
+	"Commnet": {
+		"Support": {
+			"Robot type": "Humanoid"
+		}
+	},
+	"Robot type": "Humanoid",
+	"URDF file": "../../../data/urdf/DARwInIO.urdf",
+	"Actuator config file": "actuator.conf.json",
+	"Sensor config file": "sensor.conf.json"
+}

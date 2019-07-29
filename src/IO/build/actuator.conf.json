@@ -1,0 +1,7 @@
+{
+	"Comment" : {
+		"Brief": "IO actuator config files"
+	},
+	"Servo motor config file": "servo.conf.json",
+	"Servo motor id config file": "humanoid.servo.id.conf.json"
+}

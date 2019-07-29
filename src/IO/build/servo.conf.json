@@ -1,0 +1,17 @@
+{
+	"Comment" : {
+		"Support actuator" : {
+			"Servo motor": "None",
+			"Servo motor": "Virtual",
+			"Servo motor": "MX28"
+		},
+		"Support control board" : {
+			"Control board": "None",
+			"Control board": "Virtual",
+			"Control board": "CM730"
+		}
+	},
+	"Servo motor": "MX28",
+	"Control board": "CM730",
+	"Servo motor device path": "/dev/ttyUSB0"
+}
