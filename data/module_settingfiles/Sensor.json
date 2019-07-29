@@ -1,0 +1,24 @@
+{
+	"Sensors" : {
+		"Support IMU lists" : [
+			{
+				"RTIMULib" : "IMU library",
+				"VMU931" : "variens calibreted imu"
+			}
+		],
+
+		"IMU" : [
+			{
+				"Device name" : "VMU931",
+				"Device address" : "/dev/tty.usbmodem931FE2343E1"
+			}
+		],
+
+		"Force sensor" : [
+			{
+				"Device name" : "none",
+				"Device address" : "node"
+			}
+		]
+	}
+}
