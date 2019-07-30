@@ -13,3 +13,10 @@ cd build/
 cmake .
 make
 ```
+
+## Run
+Example IO source module
+```
+cd src/IO/build
+./binary/IO.out
+```
