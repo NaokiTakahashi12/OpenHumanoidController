@@ -10,10 +10,11 @@
 
 namespace IO {
 	namespace Communicator {
-		TCP::TCP(boost::asio::io_service &io_service, const short &port) {
+		TCP::TCP(const short &port) {
+			io_service = std::make_unique<boost::asio::io_service>();
 			this->port = std::make_unique<short>(port);
 
-			socket = std::make_unique<boost::asio::ip::tcp::socket>(io_service);
+			socket = std::make_unique<boost::asio::ip::tcp::socket>(*io_service);
 			error_code = std::make_unique<boost::system::error_code>();
 		}
 
@@ -67,7 +68,7 @@ namespace IO {
 		}
 
 		boost::system::error_code &TCP::accept() {
-			acceptor = std::make_unique<boost::asio::ip::tcp::acceptor>(socket->get_io_service(), *endpoint);
+			acceptor = std::make_unique<boost::asio::ip::tcp::acceptor>(*io_service, *endpoint);
 			acceptor->accept(*socket);
 
 			return *error_code;

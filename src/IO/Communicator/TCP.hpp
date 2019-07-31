@@ -18,7 +18,7 @@ namespace IO {
 	namespace Communicator {
 		class TCP {
 			public :
-				TCP(boost::asio::io_service &, const short &port);
+				TCP(const short &port);
 				TCP(const TCP &) = delete;
 				~TCP();
 
@@ -35,6 +35,7 @@ namespace IO {
 			private :
 				std::unique_ptr<short> port;
 
+				std::unique_ptr<boost::asio::io_service> io_service;
 				std::unique_ptr<boost::system::error_code> error_code;
 				
 				std::unique_ptr<boost::asio::ip::tcp::socket> socket;

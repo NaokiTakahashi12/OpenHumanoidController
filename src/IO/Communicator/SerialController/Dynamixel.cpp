@@ -14,10 +14,8 @@ namespace IO {
 	namespace Communicator {
 		namespace  SerialController {
 			Dynamixel::Dynamixel() : SerialControllerBase() {
-				baud_rate(Protocols::DynamixelVersion1::default_baudrate);
-			}
-
-			Dynamixel::Dynamixel(RobotStatus::InformationPtr &robot_status_information_ptr) : SerialControllerBase(robot_status_information_ptr) {
+				constexpr auto default_baud_rate = 1000000;
+				baud_rate(default_baud_rate);
 			}
 
 			Dynamixel::~Dynamixel() {
@@ -38,15 +36,10 @@ namespace IO {
 					serial_flow_scheduler->set_parity_none();
 				}
 				serial_flow_scheduler->launch();
-				serial_flow_scheduler->run();
 			}
 
 			void Dynamixel::async_launch() {
 				async_launch_thread = std::make_unique<Thread>(&Dynamixel::launch, this);
-			}
-
-			void Dynamixel::packet(const SendPacket &packet) {
-				serial_flow_scheduler->set_send_packet(packet);
 			}
 
 			Dynamixel::DynamixelData Dynamixel::catch_packet(const ID &id) {
@@ -55,14 +48,14 @@ namespace IO {
 
 			Dynamixel::IDList Dynamixel::catch_packet_id() {
 				IDList id_list;
-				for(auto &&dm : data_map) {
-					id_list.push_back(dm.first);
+				for(const auto &[id, data] : data_map) {
+					id_list.push_back(id);
 				}
 				return id_list;
 			}
 
 			bool Dynamixel::is_exist(const ID &id) {
-				return data_map.find(id) != data_map.end();
+				return data_map.count(id) != 0;
 			}
 
 			Dynamixel::ParseFunction Dynamixel::create_data_parser() {
@@ -73,7 +66,11 @@ namespace IO {
 
 			bool Dynamixel::packet_splitter(const ReadBuffer &read_buffer, const Length &length) {
 				static unsigned int head_position;
-				if(Protocols::DynamixelVersion1::is_broken_packet(read_buffer, head_position)) {
+				if(SerialFlowScheduler::maximum_read_buffer <= head_position) {
+					head_position = 0;
+					return false;
+				}
+				else if(Protocols::DynamixelVersion1::is_broken_packet(read_buffer, head_position)) {
 					head_position = 0;
 					return false;
 				}
@@ -89,15 +86,11 @@ namespace IO {
 			void Dynamixel::data_parser(const ReadBuffer &read_buffer, const unsigned int &head_position) {
 				const auto id = Protocols::DynamixelVersion1::packet_id(read_buffer, head_position);
 				const auto data_length = Protocols::DynamixelVersion1::packet_length(read_buffer, head_position) - Protocols::DynamixelVersion1::number_of_error_size;
-
+				data_map[id].id = id;
 				data_map[id].error_code = Protocols::DynamixelVersion1::packet_error_code(read_buffer, head_position);
-				data_map[id].parameters.resize(data_length);
-				auto read_buffer_begin = read_buffer.begin() + head_position + Protocols::DynamixelVersion1::constant_head_byte_size() + 1;
-				std::copy(
-					read_buffer_begin,
-					read_buffer_begin + data_length,
-					data_map[id].parameters.begin()
-				);
+				data_map[id].contents.resize(data_length);
+				const auto read_buffer_begin = read_buffer.cbegin() + head_position + Protocols::DynamixelVersion1::constant_head_byte_size() + 1;
+				std::copy(read_buffer_begin, read_buffer_begin + data_length, data_map[id].contents.begin());
 			}
 		}
 	}

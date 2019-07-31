@@ -8,46 +8,27 @@
 
 #include "InertialMeasurementUnit.hpp"
 
+#include <stdexcept>
+
 namespace IO {
 	namespace Device {
 		namespace Sensor {
 			namespace IMU {
-				template <class IMUTYPE>
-				InertialMeasurementUnit<IMUTYPE>::InertialMeasurementUnit(RobotStatus::InformationPtr &robot_status_information_ptr) {
-					imu_device = std::make_unique<IMUTYPE>(robot_status_information_ptr);
+				void InertialMeasurementUnit::enable(const Streams &) {
+					throw std::logic_error("Unoverride from IO::Device::Sensor::IMU::InertialMeasurementUnit");
 				}
 
-				template <class IMUTYPE>
-				void InertialMeasurementUnit<IMUTYPE>::enable(const typename IMUTYPE::Streams &stream) {
-					imu_device->enable(stream);
+				void InertialMeasurementUnit::enable_all() {
+					throw std::logic_error("Unoverride from IO::Device::Sensor::IMU::InertialMeasurementUnit");
 				}
 
-				template <class IMUTYPE>
-				void InertialMeasurementUnit<IMUTYPE>::enable_all() {
-					imu_device->enable_all();
+				void InertialMeasurementUnit::launch() {
+					throw std::logic_error("Unoverride from IO::Device::Sensor::IMU::InertialMeasurementUnit");
 				}
 
-				template <class IMUTYPE>
-				void InertialMeasurementUnit<IMUTYPE>::port_name(const std::string &name) {
-					imu_device->port_name(name);
+				void InertialMeasurementUnit::async_launch() {
+					throw std::logic_error("Unoverride from IO::Device::Sensor::IMU::InertialMeasurementUnit");
 				}
-
-				template <class IMUTYPE>
-				void InertialMeasurementUnit<IMUTYPE>::launch() {
-					imu_device->launch();
-				}
-
-				template <class IMUTYPE>
-				void InertialMeasurementUnit<IMUTYPE>::async_launch() {
-					imu_device->async_launch();
-				}
-
-				template <class IMUTYPE>
-				typename InertialMeasurementUnit<IMUTYPE>::IMUDevicePtr InertialMeasurementUnit<IMUTYPE>::get_device() {
-					return std::move(imu_device);
-				}
-
-				template class InertialMeasurementUnit<VMU931>;
 			}
 		}
 	}

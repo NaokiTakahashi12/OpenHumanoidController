@@ -19,7 +19,7 @@ namespace IO {
 			class SerialControllerBase {
 				protected :
 					using Thread = std::thread;
-					using BaudRate = unsigned int;
+					using BaudRate = Communicator::SerialFlowScheduler::BaudRate;
 					using ReadBuffer = Communicator::SerialFlowScheduler::ReadBuffer;
 					using Length = Communicator::SerialFlowScheduler::Length;
 					using SendPacket = Communicator::SerialFlowScheduler::SinglePacket;
@@ -37,18 +37,23 @@ namespace IO {
 					virtual ~SerialControllerBase();
 
 					void port_name(const std::string &);
-					std::string port_name() const;
+					std::string &port_name() const;
 
 					void baud_rate(const BaudRate &);
-					BaudRate baud_rate() const;
+					BaudRate &baud_rate() const;
 
-					virtual void launch();
-					virtual void async_launch();
+					virtual void launch(),
+								 async_launch();
+
+					void register_parse(ParseFunction);
+
+					void set_packet(const SendPacket &);
+
+					void wait_for_send_packets() const;
 
 				private :
-					BaudRate baudrate;
-					std::string device_port_name;
-					std::unique_ptr<boost::asio::io_service> io_service;
+					std::unique_ptr<BaudRate> baudrate;
+					std::unique_ptr<std::string> device_port_name;
 			};
 		}
 	}

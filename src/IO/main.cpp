@@ -32,7 +32,9 @@
 #include "Communicator/Protocols/DynamixelVersion1.hpp"
 #include "Communicator/SerialController/Dynamixel.hpp"
 
-void serial_base_test(Tools::Log::LoggerPtr, boost::asio::io_service &, const std::string &);
+#include "Robot.hpp"
+
+void serial_base_test(Tools::Log::LoggerPtr, const std::string &);
 
 int main(int argc, char **argv) {
 	auto robo_info = std::make_shared<RobotStatus::Information>(argc, argv);
@@ -49,16 +51,36 @@ int main(int argc, char **argv) {
         std::string imu_port_name = clar.get("-imu");
 		std::string servo_port_name = clar.get("-servo");
 
+		auto robot = std::make_unique<IO::Robot>(robo_info);
+
 		if(!servo_port_name.empty()) {
 			logger->message(Tools::Log::MessageLevels::info, "Servo control device name is " + servo_port_name);
-			auto serial_controller = std::make_unique<IO::Communicator::SerialController::Dynamixel>();
+			auto serial_controller = std::make_shared<IO::Communicator::SerialController::Dynamixel>();
+			auto control_board = std::make_unique<IO::Device::ControlBoard::CM730>(robo_info);
+			auto serial_servo_motors = std::vector<IO::Device::Actuator::ServoMotor::MX28>();
+
+			control_board->register_controller(serial_controller);
+			for(auto i = 1; i <= 20; ++ i) {
+				serial_servo_motors.push_back(IO::Device::Actuator::ServoMotor::MX28(i, robo_info));
+				serial_servo_motors.back().register_controller(serial_controller);
+			}
+
 			serial_controller->port_name(servo_port_name);
+			serial_controller->baud_rate(1000000);
 			serial_controller->async_launch();
-			auto control_board = std::make_unique<IO::Device::ControlBoard::SerialControlBoard<IO::Communicator::SerialController::Dynamixel, IO::Device::ControlBoard::CM730>>();
+
 			control_board->enable_power(true);
-			auto serial_servo_motor = std::make_unique<IO::Device::Actuator::ServoMotor::SerialServoMotor<IO::Communicator::SerialController::Dynamixel, IO::Device::Actuator::ServoMotor::MX28>>();
+			std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            for(auto &&ssm : serial_servo_motors) {
+				ssm.enable_torque(true);
+				std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            }
+            for(auto &&ssm : serial_servo_motors) {
+				ssm.write_gain(1, 0, 0);
+				std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            }
 			while(true) {
-				std::this_thread::sleep_for(std::chrono::milliseconds(20));
+				serial_controller->wait_for_send_packets();
 			}
 		}
 		else {
@@ -67,31 +89,43 @@ int main(int argc, char **argv) {
 
 		if(!imu_port_name.empty()) {
 			logger->message(Tools::Log::MessageLevels::info, "IMU device name is " + imu_port_name);
-			auto imu_dev = std::make_unique<IO::Device::Sensor::IMU::InertialMeasurementUnit<IO::Device::Sensor::IMU::VMU931>>(robo_info);
+			auto imu_device = std::make_unique<IO::Device::Sensor::IMU::VMU931>(robo_info);
 
-			imu_dev->enable_all();
+			imu_device->enable_all();
 			logger->message(Tools::Log::MessageLevels::info, "Enable IMU functions");
-			imu_dev->port_name(imu_port_name);
+			imu_device->port_name(imu_port_name);
 			logger->message(Tools::Log::MessageLevels::info, "Set IMU port name");
-			imu_dev->async_launch();
+			imu_device->async_launch();
 			logger->message(Tools::Log::MessageLevels::info, "IMU launch");
 
 			while(true) {
-				std::this_thread::sleep_for(std::chrono::milliseconds(10));
+				RobotStatus::TimeSeriesData<Tools::Math::Vector3<float>> accel, euler, gyro;
 				if(robo_info->accelerometers_data) {
-					std::stringstream ss;
-					ss << "acc: " << robo_info->accelerometers_data->latest().value.transpose() << "\t" << robo_info->accelerometers_data->latest().timestamp << "\t";
-					logger->message(Tools::Log::MessageLevels::debug, ss.str());
+					const auto current_accel = robo_info->accelerometers_data->latest();
+					if(current_accel != accel) {
+						accel = current_accel;
+						std::stringstream ss;
+						ss << "acc: " << accel.value.transpose() << "\t" << accel.timestamp << "\t";
+						logger->message(Tools::Log::MessageLevels::debug, ss.str());
+					}
 				}
 				if(robo_info->eulerangles_data) {
-					std::stringstream ss;
-					ss << "ang: " << robo_info->eulerangles_data->latest().value.transpose() << "\t" << robo_info->eulerangles_data->latest().timestamp << "\t";
-					logger->message(Tools::Log::MessageLevels::debug, ss.str());
+					const auto current_euler = robo_info->eulerangles_data->latest();
+					if(current_euler != euler) {
+						euler = current_euler;
+						std::stringstream ss;
+						ss << "ang: " << euler.value.transpose() << "\t" << euler.timestamp << "\t";
+						logger->message(Tools::Log::MessageLevels::debug, ss.str());
+					}
 				}
 				if(robo_info->gyroscopes_data) {
-					std::stringstream ss;
-					ss << "gyr: " << robo_info->gyroscopes_data->latest().value.transpose() << "\t" << robo_info->gyroscopes_data->latest().timestamp << "\t";
-					logger->message(Tools::Log::MessageLevels::debug, ss.str());
+					const auto current_gyro = robo_info->gyroscopes_data->latest();
+					if(current_gyro != gyro) {
+						gyro = current_gyro;
+						std::stringstream ss;
+						ss << "gyr: " << gyro.value.transpose() << "\t" << gyro.timestamp << "\t";
+						logger->message(Tools::Log::MessageLevels::debug, ss.str());
+					}
 				}
 			}
 		}
@@ -189,8 +223,7 @@ int main(int argc, char **argv) {
 void communicator_for_tcp() {
 		std::cout << "Starting communicator" << std::endl;
 
-		boost::asio::io_service io;
-		IO::Communicator::TCP tcp(io, 5000);
+		IO::Communicator::TCP tcp(5000);
 
 		std::cout << "Build client or server" << std::endl;
 		std::cout << tcp.client("127.0.0.1").message() << std::endl;
@@ -203,10 +236,10 @@ void communicator_for_tcp() {
 		std::cout << "End communicator" << std::endl;
 }
 
-void serial_base_test(Tools::Log::LoggerPtr logger, boost::asio::io_service &io_service, const std::string &port_name) {
+void serial_base_test(Tools::Log::LoggerPtr logger, const std::string &port_name) {
 	if(!port_name.empty()) {
 		logger->message(Tools::Log::MessageLevels::info, "IMU device path is " + port_name);
-		auto serial_ptr = std::make_shared<IO::Communicator::SerialFlowScheduler>(io_service);
+		auto serial_ptr = std::make_shared<IO::Communicator::SerialFlowScheduler>();
 
 		if(serial_ptr->open(port_name)) {
 			logger->message(Tools::Log::MessageLevels::info, "Successful serial port connection");
@@ -236,6 +269,6 @@ void serial_base_test(Tools::Log::LoggerPtr logger, boost::asio::io_service &io_
 		);
 
 		serial_ptr->launch();
-		io_service.run();
 	}
 }
+

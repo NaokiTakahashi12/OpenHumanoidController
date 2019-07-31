@@ -25,13 +25,13 @@ namespace IO {
 	namespace Communicator {
 		class SerialFlowScheduleBase {
 			public :
-				SerialFlowScheduleBase(boost::asio::io_service &);
-				SerialFlowScheduleBase(boost::asio::serial_port &);
+				SerialFlowScheduleBase();
 
 				virtual ~SerialFlowScheduleBase();
 
-				static constexpr size_t maximum_read_buffer = 128;
+				static constexpr std::size_t maximum_read_buffer = 256;
 				using Byte = uint8_t;
+				using BaudRate = unsigned int;
 				using ReadBuffer = std::array<Byte, maximum_read_buffer>;
 				using Length = std::size_t;
 				using SinglePacket = std::string;
@@ -42,31 +42,29 @@ namespace IO {
 
 				void close();
 
-				bool is_open();
+				bool is_open() const;
 				bool open(const std::string &portname);
 
 				void launch();
 
-				void run();
-
 				void set_send_packet(const SinglePacket &);
 				void register_parse(ParseFunction);
 
-				void set_timeout_ms(const unsigned int &timeout_ms = 15),
-					 set_read_end_sleep_ms(const unsigned int &read_end_sleep_ms),
-					 set_write_end_sleep_ms(const unsigned int &write_end_sleep_ms),
-					 set_baudrate(const unsigned int &baudrate = 115200),
-					 set_character_size(const unsigned int &size = 8),
-					 set_flow_control_none(),
-					 set_stop_bits_is_one(),
-					 set_parity_none(),
-					 set_parity_even(),
-					 set_parity_odd();
+				SerialFlowScheduleBase &set_timeout_ms(const unsigned int &timeout_ms = 15),
+					 				   &set_read_end_sleep_ms(const unsigned int &read_end_sleep_ms),
+					 				   &set_write_end_sleep_ms(const unsigned int &write_end_sleep_ms),
+					 				   &set_baudrate(const BaudRate &baudrate = 115200),
+									   &set_character_size(const unsigned int &size = 8),
+									   &set_flow_control_none(),
+									   &set_stop_bits_is_one(),
+									   &set_parity_none(),
+									   &set_parity_even(),
+									   &set_parity_odd();
 
-				bool is_send_packet_empty();
+				bool is_send_packet_empty() const;
 
 			protected :
-				std::unique_ptr<std::mutex> mutex;
+				std::unique_ptr<std::mutex> packet_mutex;
 
 				PacketList send_packet_list;
 				ReadBuffer read_buffer;
@@ -77,10 +75,6 @@ namespace IO {
 							 read(),
 							 write();
 
-				virtual void initializer(),
-							 initializer(boost::asio::io_service &),
-							 initializer(boost::asio::serial_port &);
-
 				virtual void default_settings();
 
 				virtual void clean_read_buffer();
@@ -90,13 +84,14 @@ namespace IO {
 				std::chrono::milliseconds read_end_sleep_ms,
 							 			  write_end_sleep_ms;
 
+				std::unique_ptr<boost::asio::io_service> io_service;
 				std::unique_ptr<boost::asio::serial_port> port;
 				std::unique_ptr<boost::asio::deadline_timer> timer;
 				std::unique_ptr<boost::system::error_code> error_code;
 
 				void timeout_callback(const boost::system::error_code &),
-					 read_callback(const boost::system::error_code &, std::size_t),
-					 write_callback(const boost::system::error_code &, std::size_t);
+					 read_callback(const boost::system::error_code &, Length),
+					 write_callback(const boost::system::error_code &, Length);
 
 				void read_end(),
 					 write_end();

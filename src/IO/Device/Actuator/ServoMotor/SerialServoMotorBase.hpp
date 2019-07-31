@@ -9,10 +9,9 @@
 
 #pragma once
 
-#include <vector>
-#include <unordered_map>
+#include <RobotStatus/Information.hpp>
 
-#include "../../Communicator/SerialFlowScheduler.hpp"
+#include "../../Communicator/SerialReturnPacket.hpp"
 
 namespace IO {
 	namespace Device {
@@ -21,17 +20,24 @@ namespace IO {
 				class SerialServoMotorBase {
 					public :
 						using SendPacket = Communicator::SerialFlowScheduler::SinglePacket;
-						using ID = Communicator::SerialFlowScheduler::Byte;
-						using IDList = std::vector<ID>;
+						using WriteValue = Communicator::SerialFlowScheduler::Byte;
+						using ID = Communicator::SerialReturnPacket::PacketID;
 
-						SerialServoMotorBase();
+						SerialServoMotorBase(RobotStatus::InformationPtr &);
+						SerialServoMotorBase(const ID &, RobotStatus::InformationPtr &);
 
-						IDList id_list();
-						void id_list_push_back(const ID &);
-						void reset_id_list();
+						SerialServoMotorBase(const SerialServoMotorBase &);
+
+						virtual ~SerialServoMotorBase();
+
+						ID &id() const;
+						void id(const ID &) const;
 
 					protected :
-						std::unique_ptr<IDList> ids;
+						RobotStatus::InformationPtr robo_info;
+
+					private :
+						std::unique_ptr<ID> device_id;
 				};
 			}
 		}

@@ -9,34 +9,25 @@
 
 #pragma once
 
-#include "../../Communicator/SerialFlowScheduler.hpp"
+#include "SerialControlBoard.hpp"
+
 #include "../../Communicator/SerialController/Dynamixel.hpp"
 
 namespace IO {
 	namespace Device {
 		namespace ControlBoard {
-			class CM730 final {
+			class CM730 final : public SerialControlBoard<Communicator::SerialController::Dynamixel> {
 				public :
-					using SerialController = std::shared_ptr<Communicator::SerialController::Dynamixel>;
-					CM730();
+					CM730(RobotStatus::InformationPtr &);
+					CM730(const ID &, RobotStatus::InformationPtr &);
 
-					void register_controller(SerialController &);
-
-					Communicator::SerialFlowScheduler::Byte id() const;
-					void id(const Communicator::SerialFlowScheduler::Byte &);
-
-					void enable_power(const bool &flag);
-
-					void ping();
+					void enable_power(const bool &flag) override,
+					 	 ping() override;
 
 				private :
-					static constexpr Communicator::SerialFlowScheduler::Byte default_id = 0xc8;
+					static constexpr ID default_id = 0xc8;
 
-					Communicator::SerialFlowScheduler::Byte current_id;
-
-					Communicator::SerialFlowScheduler::SinglePacket create_switch_power_packet(const bool &);
-
-					SerialController serial_controller; 
+					SendPacket create_switch_power_packet(const bool &);
 			};
 		}
 	}

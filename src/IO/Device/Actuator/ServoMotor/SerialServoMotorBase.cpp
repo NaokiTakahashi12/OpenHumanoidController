@@ -12,23 +12,37 @@ namespace IO {
 	namespace Device {
 		namespace Actuator {
 			namespace ServoMotor {
-				SerialServoMotorBase::SerialServoMotorBase() {
-					ids = std::make_unique<IDList>();
+				SerialServoMotorBase::SerialServoMotorBase(RobotStatus::InformationPtr &robot_status_information_ptr) {
+					device_id = std::make_unique<ID>();
+					robo_info = robot_status_information_ptr;
 				}
 
-				SerialServoMotorBase::IDList SerialServoMotorBase::id_list() {
-					return *ids;
+				SerialServoMotorBase::SerialServoMotorBase(const ID &new_id, RobotStatus::InformationPtr &robot_status_information_ptr) : SerialServoMotorBase(robot_status_information_ptr) {
+					id(new_id);
 				}
 
-				void SerialServoMotorBase::id_list_push_back(const ID &id) {
-					ids->push_back(id);
-				}
-
-				void SerialServoMotorBase::reset_id_list() {
-					if(ids) {
-						ids.reset();
-						ids = std::make_unique<IDList>();
+				SerialServoMotorBase::SerialServoMotorBase(const SerialServoMotorBase &serial_servo_motor_base) {
+					if(this != &serial_servo_motor_base) {
+						this->device_id = std::make_unique<ID>(*serial_servo_motor_base.device_id);
+						this->robo_info = serial_servo_motor_base.robo_info;
 					}
+				}
+
+				SerialServoMotorBase::~SerialServoMotorBase() {
+				}
+
+				SerialServoMotorBase::ID &SerialServoMotorBase::id() const {
+					if(!device_id) {
+						throw std::runtime_error("Can not return device id from IO::Device::Actuator::ServoMotor:SerialServoMotorBase");
+					}
+					return *device_id;
+				}
+
+				void SerialServoMotorBase::id(const ID &new_id) const {
+					if(!device_id) {
+						throw std::runtime_error("Can not return device id from IO::Device::Actuator::ServoMotor:SerialServoMotorBase");
+					}
+					*device_id = new_id;
 				}
 			}
 		}
