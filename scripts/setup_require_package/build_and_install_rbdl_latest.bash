@@ -1,4 +1,13 @@
 #!/bin/bash
+sudo apt update && \
+sudo apt install -y \
+	wget \
+	unzip \
+	cmake \
+	make \
+	libunittest++-dev \
+	build-essential \
+&& \
 wget https://bitbucket.org/rbdl/rbdl/get/default.zip && \
 unzip default.zip
 cd rbdl-rbdl-0879ee8c548a && \
