@@ -13,7 +13,6 @@
 #include <memory>
 #include <vector>
 
-#include <Tools/Math/Matrix.hpp>
 #include <Tools/Log/Logger.hpp>
 
 #include "TimeSeries.hpp"
@@ -30,11 +29,9 @@ namespace RobotStatus {
 
 			using ServoDataType = std::vector<TimeSeries<float>>;
 
-			using CameraDataType = TimeSeries<Tools::Math::MatrixX<float>>;
-
 		public :
 			Information();
-			Information(int argc, char **argv);
+			Information(const int &argc, char **argv);
 
 			using ConfigName = std::string;
 
@@ -47,8 +44,6 @@ namespace RobotStatus {
 
 			std::unique_ptr<ServoDataType> read_servo_data;
 			std::unique_ptr<ServoDataType> write_servo_data;
-
-			std::unique_ptr<CameraDataType> camera_data;
 
 			std::shared_ptr<Tools::Log::Logger> logger;
 
@@ -66,8 +61,7 @@ namespace RobotStatus {
 
 			enum class DeviceType : char {
 				Sensor,
-				Actuator,
-				Camera
+				Actuator
 			};
 
 			template <DeviceType>
@@ -91,15 +85,12 @@ namespace RobotStatus {
 
 			void create_servo_data_space(const int &size);
 
-			void create_camera_data_space(const int &size = 1);
-
 		private :
 			RobotType robot_type;
 
 			std::unique_ptr<ConfigName> robot_configname,
 										sensor_configname,
-										actuator_configname,
-										camera_configname;
+										actuator_configname;
 	};
 
 	using InformationPtr = std::shared_ptr<Information>;

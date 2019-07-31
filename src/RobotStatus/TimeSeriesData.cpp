@@ -12,6 +12,18 @@
 
 namespace RobotStatus {
 	template <typename T>
+	TimeSeriesData<T>::TimeSeriesData() {
+	}
+
+	template <typename T>
+	TimeSeriesData<T>::TimeSeriesData(const TimeSeriesData<T> &time_series_data) {
+		if(this != &time_series_data) {
+			this->value = time_series_data.value;
+			this->timestamp = time_series_data.timestamp;
+		}
+	}
+
+	template <typename T>
 	TimeSeriesData<T> &TimeSeriesData<T>::operator = (const TimeSeriesData &data) {
 		if(this != &data) {
 			this->value = data.value;
@@ -50,29 +62,40 @@ namespace RobotStatus {
 		return this->timestamp > data.timestamp;
 	}
 
-	template struct TimeSeriesData<uint8_t>;
-	template struct TimeSeriesData<uint32_t>;
-	template struct TimeSeriesData<int>;
-	template struct TimeSeriesData<float>;
-	template struct TimeSeriesData<double>;
+	template class TimeSeriesData<int>;
+	template class TimeSeriesData<float>;
+	template class TimeSeriesData<double>;
 
-	template struct TimeSeriesData<Tools::Math::VectorX<int>>;
-	template struct TimeSeriesData<Tools::Math::VectorX<float>>;
-	template struct TimeSeriesData<Tools::Math::VectorX<double>>;
-	template struct TimeSeriesData<Tools::Math::Vector2<float>>;
-	template struct TimeSeriesData<Tools::Math::Vector3<float>>;
-	template struct TimeSeriesData<Tools::Math::Vector4<float>>;
-	template struct TimeSeriesData<Tools::Math::Vector2<double>>;
-	template struct TimeSeriesData<Tools::Math::Vector3<double>>;
-	template struct TimeSeriesData<Tools::Math::Vector4<double>>;
-	template struct TimeSeriesData<Tools::Math::MatrixX<int>>;
-	template struct TimeSeriesData<Tools::Math::MatrixX<float>>;
-	template struct TimeSeriesData<Tools::Math::MatrixX<double>>;
-	template struct TimeSeriesData<Tools::Math::Matrix2<float>>;
-	template struct TimeSeriesData<Tools::Math::Matrix3<float>>;
-	template struct TimeSeriesData<Tools::Math::Matrix4<float>>;
-	template struct TimeSeriesData<Tools::Math::Matrix2<double>>;
-	template struct TimeSeriesData<Tools::Math::Matrix3<double>>;
-	template struct TimeSeriesData<Tools::Math::Matrix4<double>>;
+	template class TimeSeriesData<Tools::Math::VectorX<int>>;
+	template class TimeSeriesData<Tools::Math::VectorX<float>>;
+	template class TimeSeriesData<Tools::Math::VectorX<double>>;
+
+	template class TimeSeriesData<Tools::Math::Vector2<int>>;
+	template class TimeSeriesData<Tools::Math::Vector2<float>>;
+	template class TimeSeriesData<Tools::Math::Vector2<double>>;
+
+	template class TimeSeriesData<Tools::Math::Vector3<int>>;
+	template class TimeSeriesData<Tools::Math::Vector3<float>>;
+	template class TimeSeriesData<Tools::Math::Vector3<double>>;
+
+	template class TimeSeriesData<Tools::Math::Vector4<int>>;
+	template class TimeSeriesData<Tools::Math::Vector4<float>>;
+	template class TimeSeriesData<Tools::Math::Vector4<double>>;
+
+	template class TimeSeriesData<Tools::Math::MatrixX<int>>;
+	template class TimeSeriesData<Tools::Math::MatrixX<float>>;
+	template class TimeSeriesData<Tools::Math::MatrixX<double>>;
+
+	template class TimeSeriesData<Tools::Math::Matrix2<int>>;
+	template class TimeSeriesData<Tools::Math::Matrix2<float>>;
+	template class TimeSeriesData<Tools::Math::Matrix2<double>>;
+
+	template class TimeSeriesData<Tools::Math::Matrix3<int>>;
+	template class TimeSeriesData<Tools::Math::Matrix3<float>>;
+	template class TimeSeriesData<Tools::Math::Matrix3<double>>;
+
+	template class TimeSeriesData<Tools::Math::Matrix4<int>>;
+	template class TimeSeriesData<Tools::Math::Matrix4<float>>;
+	template class TimeSeriesData<Tools::Math::Matrix4<double>>;
 }
 

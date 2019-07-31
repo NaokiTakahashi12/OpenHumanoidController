@@ -12,8 +12,10 @@
 #include <memory>
 #include <iterator>
 #include <vector>
+#include <mutex>
 #include <chrono>
 
+//#include "TimeSeriesBuffer.hpp"
 #include "TimeSeriesData.hpp"
 
 namespace RobotStatus {
@@ -34,7 +36,7 @@ namespace RobotStatus {
 			HoldType latest();
 
 			//! old n ---- 0 new
-			HoldType at(const int &);
+			HoldType &at(const int &);
 
 			HoldList get_raw(),
 					 get_all();
@@ -52,6 +54,10 @@ namespace RobotStatus {
 			int maximum_size_of_hold_list;
 
 			HoldListIterator seek_iterator;
+
+			//std::unique_ptr<TimeSeriesBuffer<T>> buffer;
+
+			std::unique_ptr<std::mutex> mutex;
 
 			std::unique_ptr<NanoSeconds> start_nanoseconds;
 
