@@ -13,7 +13,7 @@ namespace RobotStatus {
 		robot_type = RobotType::Null;
 	}
 
-	Information::Information(int argc, char **argv) {
+	Information::Information(const int &argc, char **argv) {
 		Information();
 		register_logger(argc, argv);
 	}
@@ -57,11 +57,6 @@ namespace RobotStatus {
 	}
 
 	template <>
-	void Information::set_config_filename<Information::DeviceType::Camera>(const ConfigName &camera_config_file_name) {
-		camera_configname = std::make_unique<ConfigName>(camera_config_file_name);
-	}
-
-	template <>
 	Information::ConfigName Information::get_config_filename<Information::DeviceType::Sensor>() const {
 		if(sensor_configname) {
 			return *sensor_configname;
@@ -78,14 +73,6 @@ namespace RobotStatus {
 	}
 
 	template <>
-	Information::ConfigName Information::get_config_filename<Information::DeviceType::Camera>() const {
-		if(camera_configname) {
-			return *camera_configname;
-		}
-		return NULL;
-	}
-
-	template <>
 	bool Information::empty_config_filename<Information::DeviceType::Sensor>() const {
 		return nullptr != sensor_configname.get();
 	}
@@ -93,11 +80,6 @@ namespace RobotStatus {
 	template <>
 	bool Information::empty_config_filename<Information::DeviceType::Actuator>() const {
 		return nullptr != actuator_configname.get();
-	}
-
-	template <>
-	bool Information::empty_config_filename<Information::DeviceType::Camera>() const {
-		return nullptr != camera_configname.get();
 	}
 
 	void Information::register_logger(int argc, char **argv) {
@@ -152,12 +134,6 @@ namespace RobotStatus {
 		if(!read_servo_data && !write_servo_data) {
 			read_servo_data = std::make_unique<ServoDataType>(size);
 			write_servo_data = std::make_unique<ServoDataType>(size);
-		}
-	}
-
-	void Information::create_camera_data_space(const int &size) {
-		if(!camera_data) {
-			camera_data = std::make_unique<CameraDataType>(size);
 		}
 	}
 }

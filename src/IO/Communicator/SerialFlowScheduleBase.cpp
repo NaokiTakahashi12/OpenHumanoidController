@@ -15,12 +15,16 @@
 
 namespace IO {
 	namespace Communicator {
-		SerialFlowScheduleBase::SerialFlowScheduleBase(boost::asio::io_service &io_service) {
-			initializer(io_service);
-		}
-
-		SerialFlowScheduleBase::SerialFlowScheduleBase(boost::asio::serial_port &serial_port) {
-			initializer(serial_port);
+		SerialFlowScheduleBase::SerialFlowScheduleBase() {
+			packet_mutex = std::make_unique<std::mutex>();
+			io_service = std::make_unique<boost::asio::io_service>();
+			port = std::make_unique<boost::asio::serial_port>(*io_service);
+			error_code = std::make_unique<boost::system::error_code>();
+			timer = std::make_unique<boost::asio::deadline_timer>(*io_service);
+			read_end_sleep_ms = std::chrono::milliseconds(0);
+			write_end_sleep_ms = std::chrono::milliseconds(0);
+			clean_read_buffer();
+			default_settings();
 		}
 
 		SerialFlowScheduleBase::~SerialFlowScheduleBase() {
@@ -39,7 +43,7 @@ namespace IO {
 			}
 		}
 
-		bool SerialFlowScheduleBase::is_open() {
+		bool SerialFlowScheduleBase::is_open() const {
 			return port->is_open();
 		}
 
@@ -56,19 +60,16 @@ namespace IO {
 			if(!port) {
 				throw std::logic_error("Can not connect serial port");
 			}
-			port->get_io_service().post(
+			io_service->post(
 					[this]() {
 						is_send_packet_empty() ? read() : write();
 					}
 			);
-		}
-
-		void SerialFlowScheduleBase::run() {
-			port->get_io_service().run();
+			io_service->run();
 		}
 
 		void SerialFlowScheduleBase::set_send_packet(const SinglePacket &send_packet) {
-			std::lock_guard<std::mutex> lock(*mutex);
+			auto lock = std::lock_guard<std::mutex>(*packet_mutex);
 			send_packet_list.push_back(send_packet);
 		}
 
@@ -76,48 +77,58 @@ namespace IO {
 			parse_data_functor = functor;
 		}
 
-		void SerialFlowScheduleBase::set_timeout_ms(const unsigned int &timeout_ms) {
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_timeout_ms(const unsigned int &timeout_ms) {
 			this->timeout_ms = timeout_ms;
+			return *this;
 		}
 
-		void SerialFlowScheduleBase::set_read_end_sleep_ms(const unsigned int &read_end_sleep_ms) {
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_read_end_sleep_ms(const unsigned int &read_end_sleep_ms) {
 			this->read_end_sleep_ms = std::chrono::milliseconds(read_end_sleep_ms);
+			return *this;
 		}
 
-		void SerialFlowScheduleBase::set_write_end_sleep_ms(const unsigned int &write_end_sleep_ms) {
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_write_end_sleep_ms(const unsigned int &write_end_sleep_ms) {
 			this->write_end_sleep_ms = std::chrono::milliseconds(write_end_sleep_ms);
+			return *this;
 		}
 
-		void SerialFlowScheduleBase::set_baudrate(const unsigned int &baudrate) {
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_baudrate(const BaudRate &baudrate) {
 			port->set_option(boost::asio::serial_port_base::baud_rate(baudrate));
+			return *this;
 		}
 
-		void SerialFlowScheduleBase::set_character_size(const unsigned int &size) {
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_character_size(const unsigned int &size) {
 			port->set_option(boost::asio::serial_port_base::character_size(size));
+			return *this;
 		}
 
-		void SerialFlowScheduleBase::set_flow_control_none() {
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_flow_control_none() {
 			port->set_option(boost::asio::serial_port_base::flow_control(boost::asio::serial_port_base::flow_control::none));
+			return *this;
 		}
 
-		void SerialFlowScheduleBase::set_stop_bits_is_one() {
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_stop_bits_is_one() {
 			port->set_option(boost::asio::serial_port_base::stop_bits(boost::asio::serial_port_base::stop_bits::one));
+			return *this;
 		}
 
-		void SerialFlowScheduleBase::set_parity_none() {
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_parity_none() {
 			port->set_option(boost::asio::serial_port_base::parity(boost::asio::serial_port_base::parity::none));
+			return *this;
 		}
 
-		void SerialFlowScheduleBase::set_parity_even() {
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_parity_even() {
 			port->set_option(boost::asio::serial_port_base::parity(boost::asio::serial_port_base::parity::even));
+			return *this;
 		}
 
-		void SerialFlowScheduleBase::set_parity_odd() {
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_parity_odd() {
 			port->set_option(boost::asio::serial_port_base::parity(boost::asio::serial_port_base::parity::odd));
+			return *this;
 		}
 
-		bool SerialFlowScheduleBase::is_send_packet_empty() {
-			std::lock_guard<std::mutex> lock(*mutex);
+		bool SerialFlowScheduleBase::is_send_packet_empty() const {
+			auto lock = std::lock_guard<std::mutex>(*packet_mutex);
 			return send_packet_list.size() == 0;
 		}
 
@@ -137,37 +148,13 @@ namespace IO {
 
 		void SerialFlowScheduleBase::write() {
 			if(is_send_packet_empty()) {
-				throw std::runtime_error("Send packet is none");
+				throw std::runtime_error("Send packet is none from IO::Communicator::SerialFlowScheduleBase");
 			}
 			boost::asio::async_write(
 					*port,
 					boost::asio::buffer(send_packet_list.front().data(), send_packet_list.front().size()),
 					std::bind(&SerialFlowScheduleBase::write_callback, this, std::placeholders::_1, std::placeholders::_2)
 			);
-		}
-
-		void SerialFlowScheduleBase::initializer() {
-			mutex = std::make_unique<std::mutex>();
-			error_code = std::make_unique<boost::system::error_code>();
-			timer = std::make_unique<boost::asio::deadline_timer>(port->get_io_service());
-			read_end_sleep_ms = std::chrono::milliseconds(0);
-			write_end_sleep_ms = std::chrono::milliseconds(0);
-			clean_read_buffer();
-			default_settings();
-		}
-
-		void SerialFlowScheduleBase::initializer(boost::asio::io_service &io_service) {
-			port = std::make_unique<boost::asio::serial_port>(io_service);
-
-			initializer();
-		}
-
-		void SerialFlowScheduleBase::initializer(boost::asio::serial_port &serial_port) {
-			port = std::make_unique<boost::asio::serial_port>(std::move(serial_port));
-
-			initializer();
-
-			launch();
 		}
 
 		void SerialFlowScheduleBase::default_settings() {
@@ -190,7 +177,7 @@ namespace IO {
 			}
 		}
 
-		void SerialFlowScheduleBase::read_callback(const boost::system::error_code &error, std::size_t bytes) {
+		void SerialFlowScheduleBase::read_callback(const boost::system::error_code &error, Length bytes) {
 			if(!error) {
 				if(parse_data_functor) {
 					parse_data_functor(read_buffer, bytes);
@@ -214,9 +201,10 @@ namespace IO {
 			}
 		}
 
-		void SerialFlowScheduleBase::write_callback(const boost::system::error_code &error, std::size_t bytes) {
+		void SerialFlowScheduleBase::write_callback(const boost::system::error_code &error, Length bytes) {
 			if(!error) {
 				if(bytes > 0) {
+					auto lock = std::lock_guard<std::mutex>(*packet_mutex);
 					send_packet_list.pop_front();
 				}
 				write_end();

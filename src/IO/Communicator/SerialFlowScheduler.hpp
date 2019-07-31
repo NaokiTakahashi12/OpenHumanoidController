@@ -17,8 +17,7 @@ namespace IO {
 	namespace Communicator {
 		class SerialFlowScheduler final : public SerialFlowScheduleBase {
 			public :
-				SerialFlowScheduler(boost::asio::io_service &);
-				SerialFlowScheduler(boost::asio::serial_port &);
+				SerialFlowScheduler();
 
 				SerialFlowScheduler(const SerialFlowScheduler &) = delete;
 

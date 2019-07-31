@@ -18,18 +18,20 @@
 #include <deque>
 
 #include <Tools/Log/Logger.hpp>
+#include <Tools/NonCopyable.hpp>
 
-#include "../SerialFlowScheduler.hpp"
+#include "../SerialReturnPacket.hpp"
 
 namespace IO {
 	namespace Communicator {
 		namespace SerialController {
-			class Dynamixel final : public SerialControllerBase {
+			class Dynamixel final : public SerialControllerBase, Tools::NonCopyable {
 				private :
-					struct DynamixelData {
-						SerialFlowScheduler::Byte error_code;
-						std::vector<SerialFlowScheduler::Byte> parameters;
+					struct DynamixelData : SerialReturnPacket {
+						using ErrorCode = SerialFlowScheduler::Byte;
+						ErrorCode error_code;
 					};
+
 					using ID = SerialFlowScheduler::Byte;
 					using IDList = std::vector<ID>;
 					using DynamixelDataMap = std::unordered_map<ID, DynamixelData>;
@@ -43,13 +45,10 @@ namespace IO {
 
 				public :
 					Dynamixel();
-					Dynamixel(RobotStatus::InformationPtr &);
 					~Dynamixel();
 
 					void launch() override;
 					void async_launch() override;
-
-					void packet(const SendPacket &);
 
 					DynamixelData catch_packet(const ID &);
 					IDList catch_packet_id();

@@ -30,7 +30,7 @@ namespace IO {
 						create_data_space(streams);
 					}
 					else {
-						throw std::runtime_error("Already exist stream list");
+						throw std::runtime_error("Already exist stream list from IO::Device::Sensor::IMU::VMU931");
 					}
 				}
 
@@ -47,26 +47,30 @@ namespace IO {
 
 				void VMU931::launch() {
 					if(!serial_flow_scheduler) {
-						throw std::runtime_error("Not exist SerialFlowScheduler pointer from VMU931");
+						throw std::runtime_error("Not exist SerialFlowScheduler pointer from IO::Device::Sensor::IMU::VMU931");
 					}
-					serial_flow_scheduler->register_parse(create_data_parser());
+					//serial_flow_scheduler->register_parse(create_data_parser());
+					register_parse(
+							[this](const ReadBuffer &read_buffer, const Length &bytes) {
+								return packet_splitter(read_buffer, bytes);
+							}
+					);
 					serial_flow_scheduler->set_send_packet(streaming_list);
 					serial_flow_scheduler->open(port_name());
 					serial_flow_scheduler->launch();
-
-					serial_flow_scheduler->run();
 				}
 
 				void VMU931::async_launch() {
 					async_launch_thread = std::make_unique<Thread>(&VMU931::launch, this);
 				}
 
+				/*
 				VMU931::ParseFunction VMU931::create_data_parser() {
 					return [this](const ReadBuffer &read_buffer, const Length &bytes) {
-						packet_splitter(read_buffer, bytes);
-						return true;
+						return packet_splitter(read_buffer, bytes);
 					};
 				}
+				*/
 
 				void VMU931::create_data_space(const Streams &stream) {
 					switch(stream) {
@@ -203,16 +207,17 @@ namespace IO {
 					}
 				}
 
-				void VMU931::packet_splitter(const ReadBuffer &read_buffer, const Length &bytes) {
+				bool VMU931::packet_splitter(const ReadBuffer &read_buffer, const Length &bytes) {
 					static uint8_t head_of_processing_packet = 0;
-
-					if(broken_packet_checker(read_buffer, bytes, head_of_processing_packet)) {
-						head_of_processing_packet = 0;
-						return;
+					if(!broken_packet_checker(read_buffer, bytes, head_of_processing_packet)) {
+						head_of_processing_packet += read_buffer.at(head_of_processing_packet + 1);
+						packet_splitter(read_buffer, bytes);
 					}
-
-					head_of_processing_packet += read_buffer.at(head_of_processing_packet + 1);
-					packet_splitter(read_buffer, bytes);
+					else {
+						head_of_processing_packet = 0;
+						return false;
+					}
+					return true;
 				}
 
 				bool VMU931::broken_packet_checker(const ReadBuffer &read_buffer, const Length &bytes, const uint8_t &head_position) {

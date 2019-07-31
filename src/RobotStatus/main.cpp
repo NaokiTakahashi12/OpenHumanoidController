@@ -40,9 +40,9 @@ int main() {
 		end_point = std::chrono::high_resolution_clock::now();
 		std::cout << "Sort time is " << std::chrono::duration<float, std::milli>(end_point - start_point).count() << " ms" << std::endl;
 
-		for(auto &&ts : time_series->get_raw()) {
-			std::cout << ts.value << std::endl;
-			std::cout << ts.timestamp << std::endl;
+		for(auto &&[value, timestamp] : time_series->get_raw()) {
+			std::cout << value << std::endl;
+			std::cout << timestamp << std::endl;
 		}
 		std::cout << std::endl;
 
@@ -61,6 +61,15 @@ int main() {
 		robo_info->set_config_filename<RobotStatus::Information::RobotType::Humanoid>("robot.conf");
 		std::cout << robo_info->get_config_filename<RobotStatus::Information::RobotType::Humanoid>() << std::endl;
 		robo_info->create_accel_data_space();
+
+		Tools::Math::Vector3<float> debug_accel_data;
+		debug_accel_data << 0,0,1;
+		for(auto i = 0; i < 10; i ++) {
+			robo_info->accelerometers_data->set(debug_accel_data);
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
+			robo_info->accelerometers_data->set(debug_accel_data);
+			std::cout << (robo_info->accelerometers_data->at(0).timestamp - robo_info->accelerometers_data->at(1).timestamp) * 0.000001 << " ms" << std::endl;
+		}
 	}
 	catch(const std::exception &error) {
 		std::cerr << error.what() << std::endl;

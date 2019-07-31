@@ -13,9 +13,12 @@
 
 namespace RobotStatus {
 	template <typename T>
-	struct TimeSeriesData {
+	class TimeSeriesData {
 		public :
 			using TimestampType = uint64_t;
+
+			TimeSeriesData();
+			TimeSeriesData(const TimeSeriesData<T> &);
 
 			T value;
 			TimestampType timestamp;

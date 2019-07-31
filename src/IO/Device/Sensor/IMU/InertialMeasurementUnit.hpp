@@ -11,30 +11,19 @@
 
 #include <RobotStatus/Information.hpp>
 
-#include "IMUBase.hpp"
-#include "VMU931.hpp"
+#include "InertialMeasurementUnitBase.hpp"
 
 namespace IO {
 	namespace Device {
 		namespace Sensor {
 			namespace IMU {
-				template <class IMUTYPE>
-				class InertialMeasurementUnit final {
-					private :
-						using IMUDevicePtr = std::unique_ptr<IMUTYPE>;
-						IMUDevicePtr imu_device;
-
+				class InertialMeasurementUnit : public InertialMeasurementUnitBase {
 					public :
-						InertialMeasurementUnit(RobotStatus::InformationPtr &);
+						virtual void enable(const Streams &),
+									 enable_all();
 
-						void enable(const typename IMUTYPE::Streams &),
-							 enable_all(),
-							 port_name(const std::string &name);
-
-						void launch(),
-							 async_launch();
-
-						IMUDevicePtr get_device();
+						virtual void launch(),
+									 async_launch();
 				};
 			}
 		}

@@ -13,35 +13,26 @@
 namespace IO {
 	namespace Device {
 		namespace ControlBoard {
-			CM730::CM730() {
-				current_id = default_id;
+			CM730::CM730(RobotStatus::InformationPtr &robot_status_information_ptr) : SerialControlBoard<Communicator::SerialController::Dynamixel>(robot_status_information_ptr) {
+				id(default_id);
 			}
 
-			void CM730::register_controller(SerialController &new_serial_controller) {
-				serial_controller = new_serial_controller;
-			}
-
-			Communicator::SerialFlowScheduler::Byte CM730::id() const {
-				return current_id;
-			}
-
-			void CM730::id(const Communicator::SerialFlowScheduler::Byte &new_id) {
-				current_id = new_id;
+			CM730::CM730(const ID &new_id, RobotStatus::InformationPtr &robot_status_information_ptr) : SerialControlBoard<Communicator::SerialController::Dynamixel>(new_id, robot_status_information_ptr) {
 			}
 
 			void CM730::enable_power(const bool &flag) {
-				serial_controller->packet(create_switch_power_packet(flag));
+				command_controller->set_packet(create_switch_power_packet(flag));
 			}
 
 			void CM730::ping() {
-				serial_controller->packet(Communicator::Protocols::DynamixelVersion1::create_ping_packet(current_id));
+				command_controller->set_packet(Communicator::Protocols::DynamixelVersion1::create_ping_packet(id()));
 			}
 
 			Communicator::SerialFlowScheduler::SinglePacket CM730::create_switch_power_packet(const bool &flag) {
-				auto value = flag ? Communicator::Protocols::DynamixelVersion1::enable :
+				const auto value = flag ? Communicator::Protocols::DynamixelVersion1::enable :
 									Communicator::Protocols::DynamixelVersion1::disable;
-				auto packet = Communicator::Protocols::DynamixelVersion1::create_write_packet(
-						current_id,
+				const auto packet = Communicator::Protocols::DynamixelVersion1::create_write_packet(
+						id(),
 						CM730ControlTable::dynamixel_power,
 						value
 				);

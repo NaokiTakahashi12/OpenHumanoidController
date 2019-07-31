@@ -10,14 +10,14 @@
 #pragma once
 
 #include "../../../Communicator/SerialController/SerialControllerBase.hpp"
-#include "IMUBase.hpp"
+#include "InertialMeasurementUnit.hpp"
 
 namespace IO {
 	namespace Device {
 		namespace Sensor {
 			namespace IMU {
 				//! @todo Catch string message
-				class VMU931 final : public IMUBase, public Communicator::SerialController::SerialControllerBase {
+				class VMU931 final : public InertialMeasurementUnit, public Communicator::SerialController::SerialControllerBase {
 					public :
 						VMU931(RobotStatus::InformationPtr &);
 
@@ -26,9 +26,6 @@ namespace IO {
 
 						void launch() override final;
 						void async_launch() override final;
-
-					protected :
-						ParseFunction create_data_parser() override final;
 
 					private :
 						static constexpr uint8_t data_start_bit = 0x01,
@@ -52,7 +49,7 @@ namespace IO {
 
 					 	void packet_parse(const ReadBuffer &read_buffer, const uint8_t &head_position);
 
-						void packet_splitter(const ReadBuffer &, const Length &);
+						bool packet_splitter(const ReadBuffer &, const Length &);
 
 						bool broken_packet_checker(const ReadBuffer &read_buffer, const Length &bytes, const uint8_t &head_position),
 							 constant_bit_checker(const ReadBuffer &read_buffer, const Length &bytes, const uint8_t &head_position),

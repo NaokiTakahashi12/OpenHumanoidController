@@ -14,18 +14,23 @@
 
 #include <Tools/Math/Matrix.hpp>
 
+#include "TimeSeriesData.hpp"
+
 namespace RobotStatus {
 	template <typename T>
 	TimeSeries<T>::TimeSeries(const int hold_data_size) {
 		if(hold_data_size < 0) {
 			throw std::runtime_error("Illegal size from RobotStatus::TimeSeries");
 		}
+		mutex = std::make_unique<std::mutex>();
+		//buffer = std::make_unique<TimeSeriesBuffer<T>>(hold_data_size);
 		maximum_size_of_hold_list = hold_data_size;
 		reset();
 	}
 
 	template <typename T>
 	TimeSeries<T> &TimeSeries<T>::operator = (const TimeSeries<T> &time_series) {
+		auto lock = std::lock_guard<std::mutex>(*mutex);
 		if(this != &time_series) {
 			this->maximum_size_of_hold_list = time_series.maximum_size_of_hold_list;
 			this->seek_iterator = time_series.seek_iterator;
@@ -37,11 +42,13 @@ namespace RobotStatus {
 
 	template <typename T>
 	typename TimeSeries<T>::HoldType TimeSeries<T>::latest() {
+		auto lock = std::lock_guard<std::mutex>(*mutex);
 		return *seek_iterator;
 	}
 
 	template <typename T>
-	typename TimeSeries<T>::HoldType TimeSeries<T>::at(const int &position) {
+	typename TimeSeries<T>::HoldType &TimeSeries<T>::at(const int &position) {
+		auto lock = std::lock_guard<std::mutex>(*mutex);
 		static int number_of_current_position;
 
 		number_of_current_position = std::distance(hold_list->begin(), seek_iterator);
@@ -58,18 +65,21 @@ namespace RobotStatus {
 
 	template <typename T>
 	typename TimeSeries<T>::HoldList TimeSeries<T>::get_raw() {
+		auto lock = std::lock_guard<std::mutex>(*mutex);
 		return *hold_list;
 	}
 
 	template <typename T>
 	typename TimeSeries<T>::HoldList TimeSeries<T>::get_all() {
-		static auto return_list = *hold_list;
+		auto lock = std::lock_guard<std::mutex>(*mutex);
+		auto return_list = *hold_list;
 		std::sort(return_list.begin(), return_list.end());
 		return return_list;
 	}
 
 	template <typename T>
 	void TimeSeries<T>::set(const T &value) {
+		auto lock = std::lock_guard<std::mutex>(*mutex);
 		++ seek_iterator;
 
 		if(seek_iterator >= hold_list->cend()) {
@@ -82,6 +92,7 @@ namespace RobotStatus {
 
 	template <typename T>
 	void TimeSeries<T>::set(const T &value, const typename HoldType::TimestampType &timestamp) {
+		auto lock = std::lock_guard<std::mutex>(*mutex);
 		++ seek_iterator;
 
 		if(seek_iterator >= hold_list->cend()) {
@@ -94,6 +105,7 @@ namespace RobotStatus {
 
 	template <typename T>
 	void TimeSeries<T>::reset() {
+		auto lock = std::lock_guard<std::mutex>(*mutex);
 		hold_list = std::make_unique<HoldList>(maximum_size_of_hold_list);
 		if(hold_list->size() <= 0) {
 			throw std::runtime_error("Failed create of hold list");
@@ -133,20 +145,33 @@ namespace RobotStatus {
 	template class TimeSeries<Tools::Math::VectorX<int>>;
 	template class TimeSeries<Tools::Math::VectorX<float>>;
 	template class TimeSeries<Tools::Math::VectorX<double>>;
+
+	template class TimeSeries<Tools::Math::Vector2<int>>;
 	template class TimeSeries<Tools::Math::Vector2<float>>;
-	template class TimeSeries<Tools::Math::Vector3<float>>;
-	template class TimeSeries<Tools::Math::Vector4<float>>;
 	template class TimeSeries<Tools::Math::Vector2<double>>;
+
+	template class TimeSeries<Tools::Math::Vector3<int>>;
+	template class TimeSeries<Tools::Math::Vector3<float>>;
 	template class TimeSeries<Tools::Math::Vector3<double>>;
+
+	template class TimeSeries<Tools::Math::Vector4<int>>;
+	template class TimeSeries<Tools::Math::Vector4<float>>;
 	template class TimeSeries<Tools::Math::Vector4<double>>;
+
 	template class TimeSeries<Tools::Math::MatrixX<int>>;
 	template class TimeSeries<Tools::Math::MatrixX<float>>;
 	template class TimeSeries<Tools::Math::MatrixX<double>>;
+
+	template class TimeSeries<Tools::Math::Matrix2<int>>;
 	template class TimeSeries<Tools::Math::Matrix2<float>>;
-	template class TimeSeries<Tools::Math::Matrix3<float>>;
-	template class TimeSeries<Tools::Math::Matrix4<float>>;
 	template class TimeSeries<Tools::Math::Matrix2<double>>;
+
+	template class TimeSeries<Tools::Math::Matrix3<int>>;
+	template class TimeSeries<Tools::Math::Matrix3<float>>;
 	template class TimeSeries<Tools::Math::Matrix3<double>>;
+
+	template class TimeSeries<Tools::Math::Matrix4<int>>;
+	template class TimeSeries<Tools::Math::Matrix4<float>>;
 	template class TimeSeries<Tools::Math::Matrix4<double>>;
 }
 
