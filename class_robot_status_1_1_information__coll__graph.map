@@ -1,0 +1,10 @@
+<map id="RobotStatus::Information" name="RobotStatus::Information">
+<area shape="rect" id="node1" title=" " alt="" coords="785,69,954,95"/>
+<area shape="rect" id="node2" title=" " alt="" coords="422,5,606,44"/>
+<area shape="rect" id="node3" title="STL class." alt="" coords="193,12,306,37"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,12,44,37"/>
+<area shape="rect" id="node5" title=" " alt="" coords="438,68,590,107"/>
+<area shape="rect" id="node6" href="$class_tools_1_1_log_1_1_logger.html" title=" " alt="" coords="184,75,315,100"/>
+<area shape="rect" id="node7" title=" " alt="" coords="417,173,611,212"/>
+<area shape="rect" id="node8" href="$class_robot_status_1_1_time_series.html" title=" " alt="" coords="150,180,350,205"/>
+</map>

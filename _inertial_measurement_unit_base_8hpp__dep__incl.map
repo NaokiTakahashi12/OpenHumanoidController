@@ -1,0 +1,8 @@
+<map id="src/IO/Device/Sensor/IMU/InertialMeasurementUnitBase.hpp" name="src/IO/Device/Sensor/IMU/InertialMeasurementUnitBase.hpp">
+<area shape="rect" id="node1" title="IMU device base class." alt="" coords="239,5,438,57"/>
+<area shape="rect" id="node2" href="$_inertial_measurement_unit_8hpp.html" title="IMU utility class." alt="" coords="109,112,333,151"/>
+<area shape="rect" id="node6" href="$_inertial_measurement_unit_base_8cpp.html" title=" " alt="" coords="358,105,556,157"/>
+<area shape="rect" id="node3" href="$_inertial_measurement_unit_8cpp.html" title=" " alt="" coords="5,205,229,244"/>
+<area shape="rect" id="node4" href="$_v_m_u931_8hpp.html" title="VMU931 (IMU) serial communicator class." alt="" coords="253,205,400,244"/>
+<area shape="rect" id="node5" href="$_v_m_u931_8cpp.html" title=" " alt="" coords="253,292,400,331"/>
+</map>

@@ -1,0 +1,45 @@
+var class_robot_status_1_1_information =
+[
+    [ "AccelerometersDataType", "class_robot_status_1_1_information.html#a54be0673ac40a2be7e0fdc3ba1d09342", null ],
+    [ "ConfigName", "class_robot_status_1_1_information.html#a5c40a1827c8e7bcaaf9c49ec67f5ebf5", null ],
+    [ "EulerAnglesDataType", "class_robot_status_1_1_information.html#a2415be7b6917e552b444a69b6e897047", null ],
+    [ "GyroscopesDataType", "class_robot_status_1_1_information.html#ad57d49ac439829834d8f5010942e864f", null ],
+    [ "HeadingDataType", "class_robot_status_1_1_information.html#a4c9ce9398b1a09b7fb4e5ca81f9535df", null ],
+    [ "MagnetometersDataType", "class_robot_status_1_1_information.html#a05a3a778f6ab729cfed01da54e75ef8b", null ],
+    [ "QuaternionsDataType", "class_robot_status_1_1_information.html#a62d1276e9bf9ee59902610fef9a56d13", null ],
+    [ "ServoDataType", "class_robot_status_1_1_information.html#a4d8de2760c9242769e5dd90c79585e29", null ],
+    [ "DeviceType", "class_robot_status_1_1_information.html#a136da63c20f55d814fb538363909a7ab", [
+      [ "Sensor", "class_robot_status_1_1_information.html#a136da63c20f55d814fb538363909a7aba06b185256c71c1aec263c6e22bf8ef6b", null ],
+      [ "Actuator", "class_robot_status_1_1_information.html#a136da63c20f55d814fb538363909a7abaa2ec2ef7ebb614cf7dd5d78b9bbf59b3", null ]
+    ] ],
+    [ "RobotType", "class_robot_status_1_1_information.html#aefc7f5fab2992b62d1f0aa891c7a9b6b", [
+      [ "Null", "class_robot_status_1_1_information.html#aefc7f5fab2992b62d1f0aa891c7a9b6babbb93ef26e3c101ff11cdd21cab08a94", null ],
+      [ "Humanoid", "class_robot_status_1_1_information.html#aefc7f5fab2992b62d1f0aa891c7a9b6baedf8b064c096691e539b7e2a3e28179d", null ],
+      [ "Cart", "class_robot_status_1_1_information.html#aefc7f5fab2992b62d1f0aa891c7a9b6baa85eba4c6c699122b2bb1387ea4813ad", null ]
+    ] ],
+    [ "Information", "class_robot_status_1_1_information.html#ac5291970d052be3d71b778093c024898", null ],
+    [ "Information", "class_robot_status_1_1_information.html#a8901e7dd462af970040940db69eb463a", null ],
+    [ "create_accel_data_space", "class_robot_status_1_1_information.html#a8696d38d37fa17ad12e3d39aa457d046", null ],
+    [ "create_euler_data_space", "class_robot_status_1_1_information.html#ac7e26ce535559c1d74b1083950bea49e", null ],
+    [ "create_gyro_data_space", "class_robot_status_1_1_information.html#a4041166cd7080c8281dcfb136bed8293", null ],
+    [ "create_head_data_space", "class_robot_status_1_1_information.html#ab41863f37e79f03bf91b535cbed748a9", null ],
+    [ "create_imu_data_space", "class_robot_status_1_1_information.html#aae761c1abb51c52a5841d55023c13cf1", null ],
+    [ "create_magnet_data_space", "class_robot_status_1_1_information.html#ae3d29271d9ee8d75b4d3cf799f275808", null ],
+    [ "create_quat_data_space", "class_robot_status_1_1_information.html#abdfa0e15f93a8bb062044d2814bbf2d4", null ],
+    [ "create_servo_data_space", "class_robot_status_1_1_information.html#af4d333f5bb6209337d796d8b9bf61857", null ],
+    [ "empty_config_filename", "class_robot_status_1_1_information.html#ad6be61531fdc1e8ff2f9f537444375cc", null ],
+    [ "get_config_filename", "class_robot_status_1_1_information.html#a39826a0a65fcb19bdccf64006b47b62f", null ],
+    [ "get_config_filename", "class_robot_status_1_1_information.html#a39826a0a65fcb19bdccf64006b47b62f", null ],
+    [ "register_logger", "class_robot_status_1_1_information.html#a96b45ca7a6fa17df02d90eb2b113e93c", null ],
+    [ "set_config_filename", "class_robot_status_1_1_information.html#a20b7fdb7706614b0cebe6094fdfe337b", null ],
+    [ "set_config_filename", "class_robot_status_1_1_information.html#a20b7fdb7706614b0cebe6094fdfe337b", null ],
+    [ "accelerometers_data", "class_robot_status_1_1_information.html#ac935fbaf5bfc259ff56aeb47058fa434", null ],
+    [ "eulerangles_data", "class_robot_status_1_1_information.html#a1ff7869fe6abb85399791e45d281b2de", null ],
+    [ "gyroscopes_data", "class_robot_status_1_1_information.html#a4d66efd19ca28223cff382ef9bf7039f", null ],
+    [ "heading_data", "class_robot_status_1_1_information.html#a3e2d7d6147898de3ede95c6d2f290e59", null ],
+    [ "logger", "class_robot_status_1_1_information.html#a7ad7e5389b0c80c57400b118dc01e0b1", null ],
+    [ "magnetometers_data", "class_robot_status_1_1_information.html#a2f791afdb19d1db3f87ad6767b7a300d", null ],
+    [ "quaternions_data", "class_robot_status_1_1_information.html#a44bd19e0e3b2d5e475d70e55f0e1a5a2", null ],
+    [ "read_servo_data", "class_robot_status_1_1_information.html#a1410c31988f3bd355dd7d21c5429ffa7", null ],
+    [ "write_servo_data", "class_robot_status_1_1_information.html#a89133af468bf99d9ea67cff4c7044f22", null ]
+];
