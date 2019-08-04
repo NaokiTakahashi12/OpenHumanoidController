@@ -17,10 +17,6 @@ namespace IO {
 				baudrate = std::make_unique<BaudRate>();
 				device_port_name = std::make_unique<std::string>();
 				baud_rate(0);
-			}
-
-			SerialControllerBase::SerialControllerBase(RobotStatus::InformationPtr &robot_status_information_ptr) : SerialControllerBase() {
-				robo_info = robot_status_information_ptr;
 				serial_flow_scheduler = std::make_unique<Communicator::SerialFlowScheduler>();
 			}
 

@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include "../../../Communicator/SerialController/SerialControllerBase.hpp"
+#include "../../../Communicator/SerialController/Simple.hpp"
 #include "InertialMeasurementUnit.hpp"
 
 namespace IO {
@@ -17,7 +17,7 @@ namespace IO {
 		namespace Sensor {
 			namespace IMU {
 				//! @todo Catch string message
-				class VMU931 final : public InertialMeasurementUnit, public Communicator::SerialController::SerialControllerBase {
+				class VMU931 final : public InertialMeasurementUnit {
 					public :
 						VMU931(RobotStatus::InformationPtr &);
 
@@ -28,10 +28,17 @@ namespace IO {
 						void async_launch() override final;
 
 					private :
+						using ReadBuffer = Communicator::SerialFlowScheduler::ReadBuffer;
+						using Length = Communicator::SerialFlowScheduler::Length;
+
 						static constexpr uint8_t data_start_bit = 0x01,
 								  		  		 data_end_bit = 0x04;
 
 						static constexpr auto streams_prefix = "var";
+
+						RobotStatus::InformationPtr robo_info;
+
+						std::unique_ptr<Communicator::SerialController::Simple> simple_serial_controller;
 
 						Communicator::SerialFlowScheduler::SinglePacket streaming_list;
 

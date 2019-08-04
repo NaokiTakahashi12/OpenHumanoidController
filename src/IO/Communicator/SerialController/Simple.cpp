@@ -1,12 +1,16 @@
 
+ /**
+   *
+   * @file Simple.cpp
+   * @author Naoki Takahashi
+   *
+   **/
+
 #include "Simple.hpp"
 
 namespace IO {
 	namespace Communicator {
 		namespace SerialController {
-			Simple::Simple() : SerialControllerBase() {
-			}
-
 			Simple::~Simple() {
 				if(serial_flow_scheduler) {
 					serial_flow_scheduler->close();

@@ -18,14 +18,13 @@
 #include <deque>
 
 #include <Tools/Log/Logger.hpp>
-#include <Tools/NonCopyable.hpp>
 
 #include "../SerialReturnPacket.hpp"
 
 namespace IO {
 	namespace Communicator {
 		namespace SerialController {
-			class Dynamixel final : public SerialControllerBase, Tools::NonCopyable {
+			class Dynamixel final : public SerialControllerBase {
 				private :
 					struct DynamixelData : SerialReturnPacket {
 						using ErrorCode = SerialFlowScheduler::Byte;

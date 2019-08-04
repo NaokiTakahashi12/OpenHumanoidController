@@ -16,9 +16,13 @@ namespace IO {
 	namespace Device {
 		namespace Sensor {
 			namespace IMU {
-				VMU931::VMU931(RobotStatus::InformationPtr &robot_status_information) : SerialControllerBase(robot_status_information) {
+				VMU931::VMU931(RobotStatus::InformationPtr &robot_status_information) : InertialMeasurementUnit() {
+					robo_info = robot_status_information;
+
 					robo_info->create_quat_data_space();
 					robo_info->create_euler_data_space();
+
+					simple_serial_controller = std::make_unique<Communicator::SerialController::Simple>();
 				}
 
 				void VMU931::enable(const VMU931::Streams &streams) {
@@ -46,31 +50,36 @@ namespace IO {
 				}
 
 				void VMU931::launch() {
-					if(!serial_flow_scheduler) {
-						throw std::runtime_error("Not exist SerialFlowScheduler pointer from IO::Device::Sensor::IMU::VMU931");
+					if(!simple_serial_controller) {
+						throw std::runtime_error("Not exist serial controller pointer from IO::Device::Sensor::IMU::VMU931");
 					}
-					//serial_flow_scheduler->register_parse(create_data_parser());
-					register_parse(
+
+					simple_serial_controller->register_parse(
 							[this](const ReadBuffer &read_buffer, const Length &bytes) {
 								return packet_splitter(read_buffer, bytes);
 							}
 					);
-					serial_flow_scheduler->set_send_packet(streaming_list);
-					serial_flow_scheduler->open(port_name());
-					serial_flow_scheduler->launch();
+					simple_serial_controller->set_packet(streaming_list);
+					simple_serial_controller->port_name(this->port_name());
+
+					simple_serial_controller->launch();
 				}
 
 				void VMU931::async_launch() {
-					async_launch_thread = std::make_unique<Thread>(&VMU931::launch, this);
-				}
+					if(!simple_serial_controller) {
+						throw std::runtime_error("Not exist serial controller pointer from IO::Device::Sensor::IMU::VMU931");
+					}
 
-				/*
-				VMU931::ParseFunction VMU931::create_data_parser() {
-					return [this](const ReadBuffer &read_buffer, const Length &bytes) {
-						return packet_splitter(read_buffer, bytes);
-					};
+					simple_serial_controller->register_parse(
+							[this](const ReadBuffer &read_buffer, const Length &bytes) {
+								return packet_splitter(read_buffer, bytes);
+							}
+					);
+					simple_serial_controller->set_packet(streaming_list);
+					simple_serial_controller->port_name(this->port_name());
+
+					simple_serial_controller->async_launch();
 				}
-				*/
 
 				void VMU931::create_data_space(const Streams &stream) {
 					switch(stream) {

@@ -14,6 +14,9 @@ namespace IO {
 	namespace Device {
 		namespace Sensor {
 			namespace IMU {
+				InertialMeasurementUnit::~InertialMeasurementUnit() {
+				}
+
 				void InertialMeasurementUnit::enable(const Streams &) {
 					throw std::logic_error("Unoverride from IO::Device::Sensor::IMU::InertialMeasurementUnit");
 				}

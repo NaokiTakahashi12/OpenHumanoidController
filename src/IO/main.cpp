@@ -89,7 +89,8 @@ int main(int argc, char **argv) {
 
 		if(!imu_port_name.empty()) {
 			logger->message(Tools::Log::MessageLevels::info, "IMU device name is " + imu_port_name);
-			auto imu_device = std::make_unique<IO::Device::Sensor::IMU::VMU931>(robo_info);
+			std::unique_ptr<IO::Device::Sensor::IMU::InertialMeasurementUnit> imu_device;
+			imu_device = std::make_unique<IO::Device::Sensor::IMU::VMU931>(robo_info);
 
 			imu_device->enable_all();
 			logger->message(Tools::Log::MessageLevels::info, "Enable IMU functions");
@@ -109,6 +110,9 @@ int main(int argc, char **argv) {
 						logger->message(Tools::Log::MessageLevels::debug, ss.str());
 					}
 				}
+				else {
+					logger->message(Tools::Log::MessageLevels::debug, "Not found accelerometers");
+				}
 				if(robo_info->eulerangles_data) {
 					const auto current_euler = robo_info->eulerangles_data->latest();
 					if(current_euler != euler) {
@@ -118,6 +122,9 @@ int main(int argc, char **argv) {
 						logger->message(Tools::Log::MessageLevels::debug, ss.str());
 					}
 				}
+				else {
+					logger->message(Tools::Log::MessageLevels::debug, "Not found eulerangles");
+				}
 				if(robo_info->gyroscopes_data) {
 					const auto current_gyro = robo_info->gyroscopes_data->latest();
 					if(current_gyro != gyro) {
@@ -126,6 +133,9 @@ int main(int argc, char **argv) {
 						ss << "gyr: " << gyro.value.transpose() << "\t" << gyro.timestamp << "\t";
 						logger->message(Tools::Log::MessageLevels::debug, ss.str());
 					}
+				}
+				else {
+					logger->message(Tools::Log::MessageLevels::debug, "Not found gyroscopes");
 				}
 			}
 		}

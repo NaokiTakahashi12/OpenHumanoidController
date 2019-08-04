@@ -1,4 +1,12 @@
 
+ /**
+   *
+   * @file Simple.hpp
+   * @brief Simple serial communication class
+   * @author Naoki Takahashi
+   *
+   **/
+
 #pragma once
 
 #include "SerialControllerBase.hpp"
@@ -8,7 +16,6 @@ namespace IO {
 		namespace SerialController {
 			class Simple final : public SerialControllerBase {
 				public :
-					Simple();
 					~Simple();
 
 					void launch() override,

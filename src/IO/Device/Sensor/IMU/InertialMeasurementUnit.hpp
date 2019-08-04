@@ -19,6 +19,8 @@ namespace IO {
 			namespace IMU {
 				class InertialMeasurementUnit : public InertialMeasurementUnitBase {
 					public :
+						virtual ~InertialMeasurementUnit();
+
 						virtual void enable(const Streams &),
 									 enable_all();
 

@@ -9,6 +9,8 @@
 
 #pragma once
 
+#include <string>
+
 namespace IO {
 	namespace Device {
 		namespace Sensor {
@@ -23,6 +25,12 @@ namespace IO {
 							Quaternions = 'q',
 							Heading = 'h'
 						};
+
+						void port_name(const std::string &);
+						std::string port_name() const;
+
+					private:
+						std::string device_port_name;
 				};
 			}
 		}

@@ -38,5 +38,18 @@ namespace IO {
 	template <>
 	void Robot::update<Robot::UpdateCommands::Sensors>() {
 	}
+
+	template <>
+	void Robot::register_device_map<Robot::RegisterDeviceType::SerialIMU, Robot::IMU>(const RegistMapHash &key, IMU &imu) {
+		if(!imu_device_map) {
+			imu_device_map = std::make_unique<IMURegistMap>();
+		}
+		(*imu_device_map)[key] = imu;
+	}
+
+	template <>
+	void Robot::register_device<Robot::RegisterDeviceType::SerialIMU, Robot::IMU>(IMU &imu_device) {
+		this->imu_device = std::make_unique<IMU>(imu_device);
+	}
 }
 
