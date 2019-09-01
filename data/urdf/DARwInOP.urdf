@@ -619,7 +619,7 @@
     <child link="MP_PELVIS_L" />
     <origin xyz="-0.005 0.037 -0.09355" rpy="0 3.14159 -1.5707963" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
   </joint>
 
   <joint name="j_thigh1_l" type="revolute">
@@ -627,7 +627,7 @@
     <child link="MP_THIGH1_L" />
     <origin xyz="0 0 0.028652" rpy="1.5707963 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
   </joint>
 
   <joint name="j_thigh2_l" type="revolute">
@@ -635,7 +635,7 @@
     <child link="MP_THIGH2_L" />
     <origin xyz="0 0 0" rpy="1.5707963 0 -1.5707963" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
   </joint>
 
   <joint name="j_tibia_l" type="revolute">
@@ -643,7 +643,7 @@
     <child link="MP_TIBIA_L" />
     <origin xyz="-0.093 0 0" rpy="0 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="0.0009939" />
   </joint>
 
   <joint name="j_ankle1_l" type="revolute">
@@ -651,7 +651,7 @@
     <child link="MP_ANKLE1_L" />
     <origin xyz="-0.093 0 0" rpy="3.14159 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
   </joint>
 
   <joint name="j_ankle2_l" type="revolute">
@@ -659,7 +659,7 @@
     <child link="MP_ANKLE2_L" />
     <origin xyz="0 0 0" rpy="-1.5707963 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
   </joint>
 
   <joint name="j_pelvis_r" type="revolute">
@@ -667,7 +667,7 @@
     <child link="MP_PELVIS_R" />
     <origin xyz="-0.005 -0.037 -0.09355" rpy="0 3.14159 1.5707963" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
   </joint>
 
   <joint name="j_thigh1_r" type="revolute">
@@ -675,7 +675,7 @@
     <child link="MP_THIGH1_R" />
     <origin xyz="0 0 0.028652" rpy="-1.5707963 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
   </joint>
 
   <joint name="j_thigh2_r" type="revolute">
@@ -683,7 +683,7 @@
     <child link="MP_THIGH2_R" />
     <origin xyz="0 0 0" rpy="1.5707963 0 -1.5707963" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
   </joint>
 
   <joint name="j_tibia_r" type="revolute">
@@ -691,7 +691,7 @@
     <child link="MP_TIBIA_R" />
     <origin xyz="0.093 0 0" rpy="0 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-0.0009939" upper="2.6179939" />
   </joint>
 
   <joint name="j_ankle1_r" type="revolute">
@@ -699,7 +699,7 @@
     <child link="MP_ANKLE1_R" />
     <origin xyz="0.093 0 0" rpy="3.14159 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
   </joint>
 
   <joint name="j_ankle2_r" type="revolute">
@@ -707,7 +707,7 @@
     <child link="MP_ANKLE2_R" />
     <origin xyz="0 0 0" rpy="-1.5707963 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
   </joint>
   
   <transmission name="t_j_pan">
