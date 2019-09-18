@@ -110,7 +110,7 @@ namespace IO {
 				}
 
 				MX28::SendPacket MX28::create_angle_write_packet(const float &degree, const ID &id) const {
-					Communicator::Protocols::DynamixelVersion1::Bytes write_degree_bytes;
+					static Communicator::Protocols::DynamixelVersion1::Bytes write_degree_bytes;
 					const short degree_write_value = degree * 10;
 
 					write_degree_bytes = static_cast<uint8_t>(Tools::Byte::low_byte(degree_write_value));

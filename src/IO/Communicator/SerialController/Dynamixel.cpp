@@ -64,18 +64,29 @@ namespace IO {
 				};
 			}
 
-			bool Dynamixel::packet_splitter(const ReadBuffer &read_buffer, const Length &length) {
-				static unsigned int head_position;
+			bool Dynamixel::packet_checker(const ReadBuffer &read_buffer, const Length &length, const Length &head_position) {
+				const auto return_packet_length = Protocols::DynamixelVersion1::packet_length(read_buffer, head_position);
 				if(SerialFlowScheduler::maximum_read_buffer <= head_position) {
-					head_position = 0;
+					return false;
+				}
+				else if(0 == return_packet_length || length <= return_packet_length) {
 					return false;
 				}
 				else if(Protocols::DynamixelVersion1::is_broken_packet(read_buffer, head_position)) {
+					return false;
+				}
+				return true;
+			}
+
+			bool Dynamixel::packet_splitter(const ReadBuffer &read_buffer, const Length &length) {
+				static unsigned int head_position;
+				if(!packet_checker(read_buffer, length, head_position)) {
 					head_position = 0;
 					return false;
 				}
 				data_parser(read_buffer, head_position);
 				head_position = Protocols::DynamixelVersion1::full_packet_size(read_buffer, head_position) + 1;
+
 				if(head_position < length) {
 					packet_splitter(read_buffer, length);
 				}

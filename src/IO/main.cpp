@@ -76,11 +76,22 @@ int main(int argc, char **argv) {
 				std::this_thread::sleep_for(std::chrono::milliseconds(50));
             }
             for(auto &&ssm : serial_servo_motors) {
-				ssm.write_gain(1, 0, 0);
+				ssm.write_gain(1, 1, 1);
 				std::this_thread::sleep_for(std::chrono::milliseconds(50));
             }
+			serial_controller->wait_for_send_packets();
+			std::this_thread::sleep_for(std::chrono::milliseconds(50));
 			while(true) {
-				serial_controller->wait_for_send_packets();
+				std::stringstream ss;
+				for(unsigned int i = 0; i < serial_servo_motors.size(); i ++) {
+					std::string string_angle_of_degree = clar.get("-angular" + std::to_string(i + 1));
+					if(!string_angle_of_degree.empty()) {
+						auto angle_of_degree = std::stof(string_angle_of_degree);
+						ss << "ID" + std::to_string(i + 1) + ": " << angle_of_degree << " ";
+						serial_servo_motors.at(i).write_angle(angle_of_degree);
+					}
+				}
+				logger->message(Tools::Log::MessageLevels::debug, ss.str());
 			}
 		}
 		else {

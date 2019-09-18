@@ -39,6 +39,7 @@ namespace IO {
 
 					ParseFunction create_data_parser() override;
 					
+					bool packet_checker(const ReadBuffer &, const Length &length, const Length &head_position);
 					bool packet_splitter(const ReadBuffer &, const Length &);
 					void data_parser(const ReadBuffer &, const unsigned int &);
 
