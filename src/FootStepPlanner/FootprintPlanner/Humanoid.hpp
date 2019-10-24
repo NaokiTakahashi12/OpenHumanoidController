@@ -21,10 +21,6 @@ namespace FootStepPlanner {
 		template <typename Scalar>
 		class Humanoid : public FootprintPlannerBase<Scalar> {
 			protected :
-				using FootprintPlannerBase<Scalar>::dimention_rank;
-				using typename FootprintPlannerBase<Scalar>::Vector;
-				using typename FootprintPlannerBase<Scalar>::EulerAngles;
-
 				using CountOfFootstep = unsigned int;
 
 			public :

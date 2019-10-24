@@ -10,7 +10,6 @@
 
 #include <cmath>
 #include <limits>
-#include <iostream>
 
 
 namespace FootStepPlanner {
@@ -18,7 +17,7 @@ namespace FootStepPlanner {
 		template <typename Scalar>
 		ConstantRangeBasedHumanoid<Scalar>::ConstantRangeBasedHumanoid() {
 			normalized_upper_limit_of_forward = 1;
-			maximum_count_of_footstep = 30;
+			maximum_count_of_footprint = 30;
 		}
 
 		template <typename Scalar>
@@ -31,13 +30,13 @@ namespace FootStepPlanner {
 		}
 
 		template <typename Scalar>
-		void ConstantRangeBasedHumanoid<Scalar>::footstep_range(const Scalar &new_maximum_footstep_range) {
-			maximum_footstep_range.x() = new_maximum_footstep_range;
+		void ConstantRangeBasedHumanoid<Scalar>::footstep_range(const Scalar &new_maximum_footprint_range) {
+			maximum_footprint_range.x() = new_maximum_footprint_range;
 		}
 
 		template <typename Scalar>
 		const Scalar &ConstantRangeBasedHumanoid<Scalar>::footstep_range() {
-			return maximum_footstep_range.x();
+			return maximum_footprint_range.x();
 		}
 
 		template <typename Scalar>
@@ -46,13 +45,13 @@ namespace FootStepPlanner {
 		}
 
 		template <typename Scalar>
-		void ConstantRangeBasedHumanoid<Scalar>::maximum_footstep(const CountOfFootstep &new_maximum_count_of_footstep) {
-			maximum_count_of_footstep = new_maximum_count_of_footstep;
+		void ConstantRangeBasedHumanoid<Scalar>::maximum_footprint(const CountOfFootstep &new_maximum_count_of_footprint) {
+			maximum_count_of_footprint = new_maximum_count_of_footprint;
 		}
 
 		template <typename Scalar>
-		const typename ConstantRangeBasedHumanoid<Scalar>::CountOfFootstep &ConstantRangeBasedHumanoid<Scalar>::maximum_footstep() {
-			return maximum_count_of_footstep;
+		const typename ConstantRangeBasedHumanoid<Scalar>::CountOfFootstep &ConstantRangeBasedHumanoid<Scalar>::maximum_footprint() {
+			return maximum_count_of_footprint;
 		}
 
 		template <typename Scalar>
@@ -77,17 +76,17 @@ namespace FootStepPlanner {
 
 		template <typename Scalar>
 		void ConstantRangeBasedHumanoid<Scalar>::begin_footstep_interval(const Scalar &interval) {
-			if(maximum_footstep_range.x() == 0) {
+			if(maximum_footprint_range.x() == 0) {
 				throw std::runtime_error("Footstep range is zero from FootStepPlanner::ConstantRangeBasedHumanoid");
 			}
-			this->initialize_body_point(maximum_footstep_range.x(), interval);
+			this->initialize_body_point(maximum_footprint_range.x(), interval);
 			this->register_current_frame();
 			current_footstep = 1;
 		}
 
 		template <typename Scalar>
 		void ConstantRangeBasedHumanoid<Scalar>::full_step() {
-			if(maximum_footstep_range.x() == 0) {
+			if(maximum_footprint_range.x() == 0) {
 				throw std::runtime_error("Footstep range is zero from FootStepPlanner::ConstantRangeBasedHumanoid");
 			}
 			if(!damping_function) {
@@ -100,24 +99,21 @@ namespace FootStepPlanner {
 				static Eigen::Quaternion<Scalar> forward_q;
 				const auto current_distance = normalized_distance_to_goal_scalar();
 
-				if(current_footstep >= maximum_count_of_footstep || current_distance >= 1 - std::numeric_limits<Scalar>::min()) {
+				if(is_maximum_step() || is_normalized_goal(current_distance)) {
 					break;
 				}
-				const auto forward_y_angle = limited_forward_y_angle(current_distance);
-				const auto forward_x_angle = limited_forward_x_angle(current_distance, forward_y_angle);
 
-				forward_x_q = Eigen::AngleAxis(forward_x_angle, maximum_footstep_range.UnitZ());
-				forward_y_q = Eigen::AngleAxis(forward_y_angle, maximum_footstep_range.UnitZ());
+				std::tie(forward_x_q, forward_y_q) = generate_forward_quaternion(current_distance, landing_switch_flag);
 
 				if(!std::exchange(landing_switch_flag, true)) {
 					forward_q = forward_x_q * forward_y_q;
-					this->current_bipedal_point.left = forward_q * maximum_footstep_range + this->current_bipedal_point.right;
-					this->current_bipedal_point.centor = forward_q * maximum_footstep_range / 2 + this->current_bipedal_point.right;
+					this->current_bipedal_point.left = forward_q * maximum_footprint_range + this->current_bipedal_point.right;
+					this->current_bipedal_point.centor = forward_q * maximum_footprint_range / 2 + this->current_bipedal_point.right;
 				}
 				else if(std::exchange(landing_switch_flag, false)) {
 					forward_q = forward_x_q.inverse() * forward_y_q;
-					this->current_bipedal_point.right = forward_q * maximum_footstep_range + this->current_bipedal_point.left;
-					this->current_bipedal_point.centor = forward_q * maximum_footstep_range / 2 + this->current_bipedal_point.left;
+					this->current_bipedal_point.right = forward_q * maximum_footprint_range + this->current_bipedal_point.left;
+					this->current_bipedal_point.centor = forward_q * maximum_footprint_range / 2 + this->current_bipedal_point.left;
 				}
 				this->register_current_frame();
 
@@ -136,51 +132,133 @@ namespace FootStepPlanner {
 		}
 
 		template <typename Scalar>
-		Scalar ConstantRangeBasedHumanoid<Scalar>::limited_forward_x_angle(const Scalar &normalized_distance, const Scalar &forward_y_angle) {
-			constexpr auto limit_angle = M_PI / 2 - std::numeric_limits<Scalar>::min();
-			const auto upper_limit = limit_angle * normalized_upper_limit_of_forward;
-			const auto lower_limit = limit_angle * normalized_lower_limit_of_forward;
-
-			auto limited_forward_angle = limit_angle - limit_angle * damping_function(normalized_distance);
-
-			if(upper_limit < limited_forward_angle) {
-				limited_forward_angle = upper_limit;
-			}
-			else if(lower_limit > limited_forward_angle) {
-				limited_forward_angle = upper_limit;
-			}
-
-			if(std::abs(std::abs(forward_y_angle) - std::abs(limited_forward_angle)) <= lower_limit) {
-				limited_forward_angle += lower_limit - (-std::abs(forward_y_angle) + limited_forward_angle);
-			}
-
-			return limited_forward_angle;
+		bool ConstantRangeBasedHumanoid<Scalar>::is_maximum_step() const {
+			return current_footstep >= maximum_count_of_footprint;
 		}
 
 		template <typename Scalar>
-		Scalar ConstantRangeBasedHumanoid<Scalar>::limited_forward_y_angle(const Scalar &normalized_distance) {
-			const Vector distance = this->goal_point->centor - this->current_bipedal_point.centor;
-			const auto yaw_distance = std::atan2(distance.y(), distance.x());
-
-			return yaw_distance * (2 * damping_function(normalized_distance));
+		bool ConstantRangeBasedHumanoid<Scalar>::is_normalized_goal(const Scalar &normalized_distance) const {
+			return normalized_distance >= 1;
 		}
 
 		template <typename Scalar>
-		Scalar ConstantRangeBasedHumanoid<Scalar>::normalized_distance_to_goal_scalar() {
-			const auto distance = distance_of_goal();
-			const auto ret = (this->current_bipedal_point.centor - this->begin_point->centor).template lpNorm<2>() / distance.template lpNorm<2>();
+		Scalar &ConstantRangeBasedHumanoid<Scalar>::round_range(const Scalar &x, const Scalar &upper, const Scalar &lower) const noexcept {
+			static Scalar ret;
+
+			round_range(ret = x, upper, lower);
 
 			return ret;
 		}
 
 		template <typename Scalar>
-		typename ConstantRangeBasedHumanoid<Scalar>::Vector ConstantRangeBasedHumanoid<Scalar>::normalized_distance_to_goal_vector() {
+		bool ConstantRangeBasedHumanoid<Scalar>::round_range(Scalar &x, const Scalar &upper, const Scalar &lower) const noexcept {
+			if(upper < x) {
+				x = upper;
+			}
+			else if(lower > x) {
+				x = lower;
+			}
+			else {
+				return false;
+			}
+			return true;
+		}
+
+		template <typename Scalar>
+		Scalar &ConstantRangeBasedHumanoid<Scalar>::limited_forward_x_angle(const Scalar &normalized_distance) {
+			static Scalar ret;
+
+			ret = constant_limited_forward_angle - constant_limited_forward_angle * damping_function(normalized_distance);
+
+			return ret;
+		}
+
+		template <typename Scalar>
+		Scalar &ConstantRangeBasedHumanoid<Scalar>::limited_forward_y_angle(const Scalar &normalized_distance) {
+			static Scalar ret;
+
+			const auto distance = this->goal_point->centor - this->current_bipedal_point.centor;
+			const auto yaw_distance = std::asin(distance.y() / distance.template lpNorm<2>());
+
+			ret = yaw_distance * (1 + damping_function(normalized_distance));
+
+			return ret;
+		}
+
+		template <typename Scalar>
+		void ConstantRangeBasedHumanoid<Scalar>::modificate_limited_forward_angles(Scalar &forward_x_angle, Scalar &forward_y_angle, const SwitchLandingFoot &) {
+			const auto upper_limit = constant_limited_forward_angle * normalized_upper_limit_of_forward;
+			const auto lower_limit = constant_limited_forward_angle * normalized_lower_limit_of_forward;
+
+			round_range(forward_x_angle, upper_limit, lower_limit);
+
+			if(std::abs(std::abs(forward_y_angle) - std::abs(forward_x_angle)) <= lower_limit) {
+				forward_x_angle += lower_limit - (-std::abs(forward_y_angle) + forward_x_angle);
+				round_range(forward_x_angle, upper_limit, lower_limit);
+			}
+		}
+
+		template <typename Scalar>
+		void ConstantRangeBasedHumanoid<Scalar>::modificate_limited_forward_angles(ForwardAngles &limited_forward_angles, const SwitchLandingFoot &landing_switch_flag) {
+			static Scalar forward_x_angle, forward_y_angle;
+
+			std::tie(forward_x_angle, forward_y_angle) = limited_forward_angles;
+
+			modificate_limited_forward_angles(forward_x_angle, forward_y_angle, landing_switch_flag);
+
+			limited_forward_angles = std::make_tuple(forward_x_angle, forward_y_angle);
+		}
+
+		template <typename Scalar>
+		typename ConstantRangeBasedHumanoid<Scalar>::ForwardAngles &ConstantRangeBasedHumanoid<Scalar>::generate_limited_forward_angles(const Scalar &normalized_distance, const SwitchLandingFoot &landing_switch_flag) {
+			static ForwardAngles ret;
+
+			ret = std::make_tuple(limited_forward_x_angle(normalized_distance), limited_forward_y_angle(normalized_distance));
+			modificate_limited_forward_angles(ret, landing_switch_flag);
+
+			return ret;
+		}
+
+		template <typename Scalar>
+		typename ConstantRangeBasedHumanoid<Scalar>::ForwardQuaternions &ConstantRangeBasedHumanoid<Scalar>::generate_forward_quaternion(const Scalar &normalized_distance, const SwitchLandingFoot &landing_switch_flag) {
+			static ForwardQuaternions ret;
+			const auto &limited_forward_angles = generate_limited_forward_angles(normalized_distance, landing_switch_flag);
+
+			ret = std::make_tuple(
+					Eigen::AngleAxis(std::get<0>(limited_forward_angles), maximum_footprint_range.UnitZ()),
+					Eigen::AngleAxis(std::get<1>(limited_forward_angles), maximum_footprint_range.UnitZ())
+			);
+
+			return ret;
+		}
+
+		template <typename Scalar>
+		Scalar &ConstantRangeBasedHumanoid<Scalar>::normalized_distance_to_goal_scalar() {
 			const auto distance = distance_of_goal();
-			Vector ret = this->current_bipedal_point.centor;
-			
-			ret.x() /= distance.x() == 0 ? 1 : distance.x();
-			ret.y() /= distance.y() == 0 ? 1 : distance.y();
-			ret.z() /= distance.z() == 0 ? 1 : distance.z();
+			static Scalar ret;
+
+			ret = (this->current_bipedal_point.centor - this->begin_point->centor).template lpNorm<2>() / distance.template lpNorm<2>();
+
+			return ret;
+		}
+
+		template <typename Scalar>
+		typename ConstantRangeBasedHumanoid<Scalar>::Vector &ConstantRangeBasedHumanoid<Scalar>::normalized_distance_to_goal_vector() {
+			static Vector distance;
+			static Vector ret;
+
+			distance = distance_of_goal();
+			ret = this->current_bipedal_point.centor;
+
+			if(ret.x() != 0 && distance.x() != 0) {
+				ret.x() /= distance.x();
+			}
+			if(ret.y() != 0 && distance.y() != 0) {
+				ret.y() /= distance.y();
+			}
+			if(ret.z() != 0 && distance.z() != 0) {
+				ret.z() /= distance.z();
+			}
 
 			return ret;
 		}
