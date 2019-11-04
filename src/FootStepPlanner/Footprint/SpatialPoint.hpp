@@ -19,11 +19,13 @@ namespace FootStepPlanner {
 			static constexpr auto rank = Dimention;
 
 			using Vector = Tools::Math::Vector<Scalar, rank>;
-			using EularAngles = Vector;
+			using EulerAngles = Vector;
 			using Ptr = std::unique_ptr<SpatialPoint>;
 
 			Vector centor;
-			EularAngles centor_eular_angles;
+			EulerAngles centor_eular_angles;
+
+			static Ptr make_ptr();
 		};
 	}
 }
