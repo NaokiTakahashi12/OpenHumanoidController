@@ -1,4 +1,11 @@
 
+/**
+  *
+  * @file CustomHumanoid.hpp
+  * @author Naoki Takahashi
+  *
+  **/
+
 #pragma once
 
 #include "Humanoid.hpp"
@@ -7,17 +14,19 @@
 
 namespace FootStepPlanner {
 	namespace FootprintPlanner {
+		//! @todo Design using configuration file.
 		template <typename Scalar>
 		class CustomHumanoid : public Humanoid<Scalar> {
-			private :
-				using typename Humanoid<Scalar>::Vector;
-				using typename Humanoid<Scalar>::EulerAngles;
-
 			public :
-				//using PatternFunctor = std::function<
+				using Ptr = std::unique_ptr<CustomHumanoid>;
 
 				CustomHumanoid();
 				~CustomHumanoid();
+
+				static std::string get_key();
+				static Ptr make_ptr();
+
+				void full_step() override;
 
 			private :
 
