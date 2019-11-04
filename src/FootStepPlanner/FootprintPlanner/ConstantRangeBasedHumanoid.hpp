@@ -30,6 +30,7 @@ namespace FootStepPlanner {
 				ConstantRangeBasedHumanoid();
 				~ConstantRangeBasedHumanoid();
 
+				static std::string get_key();
 				static Ptr make_ptr();
 
 				void footstep_range(const Scalar &);
@@ -48,8 +49,10 @@ namespace FootStepPlanner {
 
 				void begin_footstep_interval(const Scalar &interval);
 
-				//! @todo Rotation footprint
-				void full_step() override;
+				void config(const std::string &new_config_file_name) override final;
+
+				//! @todo Rotation pose footprint
+				void full_step() override final;
 
 			private :
 				using Humanoid<Scalar>::dimention_rank;
@@ -78,16 +81,16 @@ namespace FootStepPlanner {
 				bool is_maximum_step() const;
 				bool is_normalized_goal(const Scalar &) const;
 
-				Scalar &round_range(const Scalar &x, const Scalar &upper, const Scalar &lower) const noexcept;
+				decltype(auto) round_range(const Scalar &x, const Scalar &upper, const Scalar &lower) const noexcept;
 				bool round_range(Scalar &x, const Scalar &upper, const Scalar &lower) const noexcept;
 
-				Scalar &limited_forward_y_angle(const Scalar &normalized_distance);
-				Scalar &limited_forward_x_angle(const Scalar &normalized_distance);
-				void modificate_limited_forward_angles(Scalar &forward_x_angle, Scalar &forward_y_angle, const SwitchLandingFoot &);
-				void modificate_limited_forward_angles(ForwardAngles &, const SwitchLandingFoot &);
+				const Scalar &limited_forward_y_angle(const Scalar &normalized_distance) const;
+				const Scalar &limited_forward_x_angle(const Scalar &normalized_distance) const;
+				void modificate_limited_forward_angles(Scalar &forward_x_angle, Scalar &forward_y_angle, const SwitchLandingFoot &) const;
+				void modificate_limited_forward_angles(ForwardAngles &, const SwitchLandingFoot &) const;
 
-				ForwardAngles &generate_limited_forward_angles(const Scalar &normalized_distance, const SwitchLandingFoot &);
-				ForwardQuaternions &generate_forward_quaternion(const Scalar &normalized_distance, const SwitchLandingFoot &);
+				ForwardAngles &generate_limited_forward_angles(const Scalar &normalized_distance, const SwitchLandingFoot &) const;
+				ForwardQuaternions &generate_forward_quaternion(const Scalar &normalized_distance, const SwitchLandingFoot &) const;
 
 				Scalar &normalized_distance_to_goal_scalar();
 				Vector &normalized_distance_to_goal_vector();
