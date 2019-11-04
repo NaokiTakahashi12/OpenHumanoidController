@@ -24,6 +24,11 @@ namespace FootStepPlanner {
 		}
 
 		template <typename Scalar>
+		void Humanoid<Scalar>::clear_footprint() {
+			footprint_list.clear();
+		}
+
+		template <typename Scalar>
 		void Humanoid<Scalar>::register_current_frame() {
 			footprint_list.push_back(current_bipedal_point);
 		}

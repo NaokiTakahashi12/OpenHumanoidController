@@ -33,6 +33,8 @@ namespace FootStepPlanner {
 
 				FootprintList get_footprint_list() const;
 
+				virtual void clear_footprint() override;
+
 				//! @todo Return status
 				virtual void full_step() = 0;
 
