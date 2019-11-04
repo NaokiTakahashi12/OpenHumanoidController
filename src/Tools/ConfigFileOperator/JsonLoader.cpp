@@ -207,22 +207,26 @@ namespace Tools {
 		template bool JsonLoader::get_parameter<bool>(const std::string &);
 		template int JsonLoader::get_parameter<int>(const std::string &);
 		template float JsonLoader::get_parameter<float>(const std::string &);
+		template double JsonLoader::get_parameter<double>(const std::string &);
 		template char JsonLoader::get_parameter<char>(const std::string &);
 		template std::string JsonLoader::get_parameter<std::string>(const std::string &);
 
 		template std::vector<bool> JsonLoader::get_parameter_tree<bool>(const std::string &, const std::string &);
 		template std::vector<int> JsonLoader::get_parameter_tree<int>(const std::string &, const std::string &);
 		template std::vector<float> JsonLoader::get_parameter_tree<float>(const std::string &, const std::string &);
+		template std::vector<double> JsonLoader::get_parameter_tree<double>(const std::string &, const std::string &);
 		template std::vector<char> JsonLoader::get_parameter_tree<char>(const std::string &, const std::string &);
 		template std::vector<std::string> JsonLoader::get_parameter_tree<std::string>(const std::string &, const std::string &);
 
 		template std::vector<bool> JsonLoader::get_parameter_vector<bool>(const std::string &);
 		template std::vector<int> JsonLoader::get_parameter_vector<int>(const std::string &);
 		template std::vector<float> JsonLoader::get_parameter_vector<float>(const std::string &);
+		template std::vector<double> JsonLoader::get_parameter_vector<double>(const std::string &);
 
 		template std::vector<std::vector<bool>> JsonLoader::get_parameter_tree_vector<bool>(const std::string &, const std::string &);
 		template std::vector<std::vector<int>> JsonLoader::get_parameter_tree_vector<int>(const std::string &, const std::string &);
 		template std::vector<std::vector<float>> JsonLoader::get_parameter_tree_vector<float>(const std::string &, const std::string &);
+		template std::vector<std::vector<double>> JsonLoader::get_parameter_tree_vector<double>(const std::string &, const std::string &);
 	}
 }
 
