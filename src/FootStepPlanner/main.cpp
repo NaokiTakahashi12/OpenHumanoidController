@@ -15,52 +15,85 @@
 int main(int argc, char **argv) {
 	auto logger = std::make_shared<Tools::Log::Logger>(argc, argv);
 	logger->start_loger_thread();
+
 	try {
-		FootStepPlanner::FootprintPlanner::ConstantRangeBasedHumanoid<double>::Ptr planner = FootStepPlanner::FootprintPlanner::ConstantRangeBasedHumanoid<double>::make_ptr();
+		logger->message(Tools::Log::MessageLevels::debug, "Make pointer");
+
 		FootStepPlanner::HumanoidFootprintManager<double>::Ptr footprint_manager = FootStepPlanner::HumanoidFootprintManager<double>::make_ptr();
 
-		planner->footstep_range(0.1);
-		planner->maximum_footprint(100);
-		planner->upper_limit_of_forward(0.9);
-		planner->lower_limit_of_forward(0.4);
-		planner->set_begin(-0.2, 0.2, 0, 0, 0, 0);
-		planner->set_goal(1, -0.4, 0, 0, 0, 0);
-		planner->register_damping(
-			[](const double &x) {
-				return std::abs(std::sin(M_PI * x));
-			}
-		);
-		planner->begin_footstep_interval(5);
+		if(!footprint_manager) {
+			throw std::runtime_error("Failed make footprint_manager");
+		}
+		logger->message(Tools::Log::MessageLevels::debug, "Success make pointer");
 
-		footprint_manager->register_footprint_planner(std::move(planner));
-		auto start_p = std::chrono::high_resolution_clock::now();
-		footprint_manager->generate_footprint();
-		auto end_p = std::chrono::high_resolution_clock::now();
-		logger->message(Tools::Log::MessageLevels::debug, std::to_string(std::chrono::duration<double, std::milli>(end_p - start_p).count()) + " [ms]");
+		footprint_manager->choice_footprint_planner("footstep_planner.conf.json");
 
+		footprint_manager->set_begin(-0.2, 0.2, 0, 0, 0, 0);
+		footprint_manager->set_goal(1, -0.4, 0, 0, 0, 0);
+
+		footprint_manager->make_full_footprint();
+
+		//! Footprint printing
 		{
 			std::vector<double> x, y;
-			std::vector<std::vector<double>> shadow_x, shadow_y;
+
+			logger->message(Tools::Log::MessageLevels::debug, "Landing point line");
 
 			for(auto &&fp : footprint_manager->get_footprint_list()) {
 				x.push_back(fp.left.x()), x.push_back(fp.right.x());
 				y.push_back(fp.left.y()), y.push_back(fp.right.y());
 			}
+			logger->message(Tools::Log::MessageLevels::debug, "X size is " + std::to_string(x.size()));
+			logger->message(Tools::Log::MessageLevels::debug, "Y size is " + std::to_string(y.size()));
+
 			{
-				logger->message(Tools::Log::MessageLevels::debug, "X size is " + std::to_string(x.size()));
-				std::stringstream ss;
-				for(auto &xx : x) {
-					ss << xx << ", ";
+				for(unsigned int i = 0; i < x.size(); i ++) {
+					std::stringstream ss;
+
+					ss << "ML:" << x.at(i) << "," << y.at(i);
+
+					logger->message(Tools::Log::MessageLevels::debug, ss.str());
 				}
-				logger->message(Tools::Log::MessageLevels::debug, ss.str());
 			}
+			x.clear(), y.clear();
+
+			logger->message(Tools::Log::MessageLevels::debug, "Landing point left only");
+
+			for(auto &&fp : footprint_manager->get_footprint_list()) {
+				x.push_back(fp.left.x());
+				y.push_back(fp.left.y());
+			}
+			logger->message(Tools::Log::MessageLevels::debug, "X size is " + std::to_string(x.size()));
+			logger->message(Tools::Log::MessageLevels::debug, "Y size is " + std::to_string(y.size()));
+
 			{
-				logger->message(Tools::Log::MessageLevels::debug, "Y size is " + std::to_string(y.size()));
-				std::stringstream ss;
-				for(auto &yy : y) {
-					ss << yy << ", ";
+				for(unsigned int i = 0; i < x.size(); i ++) {
+					std::stringstream ss;
+
+					ss << "LL:" << x.at(i) << "," << y.at(i);
+
+					logger->message(Tools::Log::MessageLevels::debug, ss.str());
 				}
-				logger->message(Tools::Log::MessageLevels::debug, ss.str());
+			}
+			x.clear(), y.clear();
+
+			logger->message(Tools::Log::MessageLevels::debug, "Landing point right only");
+
+			for(auto &&fp : footprint_manager->get_footprint_list()) {
+				x.push_back(fp.right.x());
+				y.push_back(fp.right.y());
+			}
+			logger->message(Tools::Log::MessageLevels::debug, "X size is " + std::to_string(x.size()));
+			logger->message(Tools::Log::MessageLevels::debug, "Y size is " + std::to_string(y.size()));
+
+			{
+				for(unsigned int i = 0; i < x.size(); i ++) {
+					std::stringstream ss;
+
+					ss << "RL:" << x.at(i) << "," << y.at(i);
+
+					logger->message(Tools::Log::MessageLevels::debug, ss.str());
+				}
 			}
 			x.clear(), y.clear();
 		}
