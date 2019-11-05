@@ -8,6 +8,7 @@ var dir_fae119eb913a40fe8ed97cde8b98911e =
       [ "DeviceManager", "class_i_o_1_1_device_manager.html", "class_i_o_1_1_device_manager" ]
     ] ],
     [ "DeviceSelector.hpp", "_device_selector_8hpp_source.html", null ],
+    [ "main.cpp", "_i_o_2main_8cpp.html", "_i_o_2main_8cpp" ],
     [ "Robot.cpp", "_robot_8cpp.html", "_robot_8cpp" ],
     [ "Robot.hpp", "_robot_8hpp.html", [
       [ "Robot", "class_i_o_1_1_robot.html", "class_i_o_1_1_robot" ]

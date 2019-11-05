@@ -1,5 +1,21 @@
 var annotated_dup =
 [
+    [ "FootStepPlanner", null, [
+      [ "Footprint", null, [
+        [ "Bipedal", "struct_foot_step_planner_1_1_footprint_1_1_bipedal.html", "struct_foot_step_planner_1_1_footprint_1_1_bipedal" ],
+        [ "SpatialPoint", "struct_foot_step_planner_1_1_footprint_1_1_spatial_point.html", "struct_foot_step_planner_1_1_footprint_1_1_spatial_point" ]
+      ] ],
+      [ "FootprintPlanner", null, [
+        [ "ConstantRangeBasedHumanoid", "class_foot_step_planner_1_1_footprint_planner_1_1_constant_range_based_humanoid.html", "class_foot_step_planner_1_1_footprint_planner_1_1_constant_range_based_humanoid" ],
+        [ "CustomHumanoid", "class_foot_step_planner_1_1_footprint_planner_1_1_custom_humanoid.html", "class_foot_step_planner_1_1_footprint_planner_1_1_custom_humanoid" ],
+        [ "FootprintPlannerBase", "class_foot_step_planner_1_1_footprint_planner_1_1_footprint_planner_base.html", "class_foot_step_planner_1_1_footprint_planner_1_1_footprint_planner_base" ],
+        [ "Humanoid", "class_foot_step_planner_1_1_footprint_planner_1_1_humanoid.html", "class_foot_step_planner_1_1_footprint_planner_1_1_humanoid" ],
+        [ "PlanSelector", "class_foot_step_planner_1_1_footprint_planner_1_1_plan_selector.html", "class_foot_step_planner_1_1_footprint_planner_1_1_plan_selector" ]
+      ] ],
+      [ "ConfigManager", "class_foot_step_planner_1_1_config_manager.html", "class_foot_step_planner_1_1_config_manager" ],
+      [ "FootStepManager", "class_foot_step_planner_1_1_foot_step_manager.html", "class_foot_step_planner_1_1_foot_step_manager" ],
+      [ "HumanoidFootprintManager", "class_foot_step_planner_1_1_humanoid_footprint_manager.html", "class_foot_step_planner_1_1_humanoid_footprint_manager" ]
+    ] ],
     [ "IO", null, [
       [ "Communicator", null, [
         [ "SerialController", null, [

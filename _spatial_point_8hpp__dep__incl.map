@@ -1,0 +1,19 @@
+<map id="src/FootStepPlanner/Footprint/SpatialPoint.hpp" name="src/FootStepPlanner/Footprint/SpatialPoint.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="515,5,694,44"/>
+<area shape="rect" id="node2" href="$_bipedal_8hpp.html" title=" " alt="" coords="339,99,491,137"/>
+<area shape="rect" id="node15" href="$_spatial_point_8cpp.html" title=" " alt="" coords="516,99,693,137"/>
+<area shape="rect" id="node16" href="$_footprint_planner_base_8hpp.html" title="Footprint base class." alt="" coords="717,92,897,144"/>
+<area shape="rect" id="node3" href="$_bipedal_8cpp.html" title=" " alt="" coords="322,199,473,237"/>
+<area shape="rect" id="node4" href="$_humanoid_8hpp.html" title="Humanoid footprint base class." alt="" coords="498,199,712,237"/>
+<area shape="rect" id="node5" href="$_constant_range_based_humanoid_8hpp.html" title="Constant range based footprint generator." alt="" coords="5,292,190,344"/>
+<area shape="rect" id="node8" href="$_custom_humanoid_8hpp.html" title=" " alt="" coords="215,299,475,337"/>
+<area shape="rect" id="node10" href="$_humanoid_8cpp.html" title=" " alt="" coords="498,299,711,337"/>
+<area shape="rect" id="node11" href="$_plan_selector_8hpp.html" title=" " alt="" coords="736,299,964,337"/>
+<area shape="rect" id="node13" href="$_humanoid_footprint_manager_8hpp.html" title=" " alt="" coords="887,399,1103,437"/>
+<area shape="rect" id="node6" href="$_constant_range_based_humanoid_8cpp.html" title=" " alt="" coords="6,392,190,444"/>
+<area shape="rect" id="node7" href="$_humanoid_footprint_manager_8cpp.html" title=" " alt="" coords="203,492,419,531"/>
+<area shape="rect" id="node9" href="$_custom_humanoid_8cpp.html" title=" " alt="" coords="348,399,608,437"/>
+<area shape="rect" id="node12" href="$_plan_selector_8cpp.html" title=" " alt="" coords="636,399,864,437"/>
+<area shape="rect" id="node14" href="$_foot_step_manager_8hpp_source.html" title=" " alt="" coords="917,492,1074,531"/>
+<area shape="rect" id="node17" href="$_footprint_planner_base_8cpp.html" title=" " alt="" coords="736,192,916,244"/>
+</map>

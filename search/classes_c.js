@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['tcp',['TCP',['../class_i_o_1_1_communicator_1_1_t_c_p.html',1,'IO::Communicator']]],
-  ['threadpool',['ThreadPool',['../class_tools_1_1_thread_pool.html',1,'Tools']]],
-  ['timeseries',['TimeSeries',['../class_robot_status_1_1_time_series.html',1,'RobotStatus']]],
-  ['timeseriesbuffer',['TimeSeriesBuffer',['../class_robot_status_1_1_time_series_buffer.html',1,'RobotStatus']]],
-  ['timeseriesdata',['TimeSeriesData',['../class_robot_status_1_1_time_series_data.html',1,'RobotStatus']]]
+  ['robot_174',['Robot',['../class_i_o_1_1_robot.html',1,'IO']]],
+  ['robotconfig_175',['RobotConfig',['../class_i_o_1_1_load_config_1_1_robot_config.html',1,'IO::LoadConfig']]]
 ];

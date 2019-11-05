@@ -5,9 +5,18 @@ var hierarchy =
       [ "RobotStatus::TimeSeriesBuffer< T >", "class_robot_status_1_1_time_series_buffer.html", null ]
     ] ],
     [ "Tools::CommandLineArgumentReader", "class_tools_1_1_command_line_argument_reader.html", null ],
+    [ "FootStepPlanner::ConfigManager", "class_foot_step_planner_1_1_config_manager.html", null ],
     [ "IO::DeviceManager", "class_i_o_1_1_device_manager.html", null ],
     [ "IO::DeviceSelector", "class_i_o_1_1_device_selector.html", null ],
+    [ "FootStepPlanner::FootprintPlanner::FootprintPlannerBase< Scalar >", "class_foot_step_planner_1_1_footprint_planner_1_1_footprint_planner_base.html", [
+      [ "FootStepPlanner::FootprintPlanner::Humanoid< Scalar >", "class_foot_step_planner_1_1_footprint_planner_1_1_humanoid.html", [
+        [ "FootStepPlanner::FootprintPlanner::ConstantRangeBasedHumanoid< Scalar >", "class_foot_step_planner_1_1_footprint_planner_1_1_constant_range_based_humanoid.html", null ],
+        [ "FootStepPlanner::FootprintPlanner::CustomHumanoid< Scalar >", "class_foot_step_planner_1_1_footprint_planner_1_1_custom_humanoid.html", null ]
+      ] ]
+    ] ],
+    [ "FootStepPlanner::FootStepManager", "class_foot_step_planner_1_1_foot_step_manager.html", null ],
     [ "Tools::Math::Differential::Function< T >", "class_tools_1_1_math_1_1_differential_1_1_function.html", null ],
+    [ "FootStepPlanner::HumanoidFootprintManager< Scalar >", "class_foot_step_planner_1_1_humanoid_footprint_manager.html", null ],
     [ "IO::Device::Sensor::IMU::IMUBase", "class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_i_m_u_base.html", null ],
     [ "IO::LoadConfig::SensorDeviceConfig::IMUConfigData", "struct_i_o_1_1_load_config_1_1_sensor_device_config_1_1_i_m_u_config_data.html", null ],
     [ "IO::Device::Sensor::IMU::InertialMeasurementUnitBase", "class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_inertial_measurement_unit_base.html", [
@@ -28,6 +37,7 @@ var hierarchy =
       [ "IO::Communicator::SerialController::Dynamixel", "class_i_o_1_1_communicator_1_1_serial_controller_1_1_dynamixel.html", null ],
       [ "IO::Robot", "class_i_o_1_1_robot.html", null ]
     ] ],
+    [ "FootStepPlanner::FootprintPlanner::PlanSelector< T >", "class_foot_step_planner_1_1_footprint_planner_1_1_plan_selector.html", null ],
     [ "IO::Device::ControlBoard::SerialControlBoardBase", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board_base.html", [
       [ "IO::Device::ControlBoard::SerialControlBoard< CONTROLLER >", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html", null ],
       [ "IO::Device::ControlBoard::SerialControlBoard< Communicator::SerialController::Dynamixel >", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html", [
@@ -51,6 +61,10 @@ var hierarchy =
     ] ],
     [ "IO::Device::Actuator::ServoMotor::ServoMotorBase", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_servo_motor_base.html", null ],
     [ "IO::LoadConfig::ActuatorDeviceConfig::ServoMotorConfigData", "struct_i_o_1_1_load_config_1_1_actuator_device_config_1_1_servo_motor_config_data.html", null ],
+    [ "FootStepPlanner::Footprint::SpatialPoint< Scalar, Dimention >", "struct_foot_step_planner_1_1_footprint_1_1_spatial_point.html", null ],
+    [ "FootStepPlanner::Footprint::SpatialPoint< Scalar, 3 >", "struct_foot_step_planner_1_1_footprint_1_1_spatial_point.html", [
+      [ "FootStepPlanner::Footprint::Bipedal< Scalar >", "struct_foot_step_planner_1_1_footprint_1_1_bipedal.html", null ]
+    ] ],
     [ "IO::Communicator::TCP", "class_i_o_1_1_communicator_1_1_t_c_p.html", null ],
     [ "Tools::ThreadPool< N >", "class_tools_1_1_thread_pool.html", null ],
     [ "RobotStatus::TimeSeries< T >", "class_robot_status_1_1_time_series.html", null ],

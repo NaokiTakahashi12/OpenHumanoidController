@@ -1,8 +1,9 @@
 <map id="src/IO/LoadConfig/RobotConfig.hpp" name="src/IO/LoadConfig/RobotConfig.hpp">
 <area shape="rect" id="node1" title="Load robot setting class." alt="" coords="208,5,441,31"/>
 <area shape="rect" id="node2" href="$_device_manager_8hpp.html" title="I/O device manager class." alt="" coords="5,79,185,104"/>
-<area shape="rect" id="node4" href="$_robot_config_8cpp.html" title=" " alt="" coords="208,79,440,104"/>
-<area shape="rect" id="node5" href="$_robot_8hpp.html" title="I/O Robot interface class." alt="" coords="465,79,587,104"/>
+<area shape="rect" id="node5" href="$_robot_config_8cpp.html" title=" " alt="" coords="208,79,440,104"/>
+<area shape="rect" id="node6" href="$_robot_8hpp.html" title="I/O Robot interface class." alt="" coords="465,79,587,104"/>
 <area shape="rect" id="node3" href="$_device_manager_8cpp.html" title=" " alt="" coords="6,152,184,177"/>
-<area shape="rect" id="node6" href="$_robot_8cpp.html" title=" " alt="" coords="465,152,586,177"/>
+<area shape="rect" id="node4" href="$_i_o_2main_8cpp.html" title="IO module test." alt="" coords="267,152,382,177"/>
+<area shape="rect" id="node7" href="$_robot_8cpp.html" title=" " alt="" coords="465,152,586,177"/>
 </map>

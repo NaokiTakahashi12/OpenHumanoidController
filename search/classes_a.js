@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['robot',['Robot',['../class_i_o_1_1_robot.html',1,'IO']]],
-  ['robotconfig',['RobotConfig',['../class_i_o_1_1_load_config_1_1_robot_config.html',1,'IO::LoadConfig']]]
+  ['noncopyable_172',['NonCopyable',['../class_tools_1_1_non_copyable.html',1,'Tools']]]
 ];

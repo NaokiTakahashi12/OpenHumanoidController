@@ -1,10 +1,11 @@
 <map id="src/IO/Device/Actuator/ServoMotor/SerialServoMotorBase.hpp" name="src/IO/Device/Actuator/ServoMotor/SerialServoMotorBase.hpp">
-<area shape="rect" id="node1" title="Serial communication servo motor base class." alt="" coords="319,5,520,57"/>
-<area shape="rect" id="node2" href="$_serial_servo_motor_8hpp.html" title="Servo motor class." alt="" coords="188,112,413,151"/>
-<area shape="rect" id="node8" href="$_serial_servo_motor_base_8cpp.html" title=" " alt="" coords="438,105,638,157"/>
-<area shape="rect" id="node3" href="$_m_x28_8hpp.html" title="MX28 communication class @auther Naoki Takahashi." alt="" coords="5,205,164,244"/>
-<area shape="rect" id="node5" href="$_serial_servo_motor_8cpp.html" title=" " alt="" coords="188,205,413,244"/>
-<area shape="rect" id="node6" href="$_robot_8hpp.html" title="I/O Robot interface class." alt="" coords="437,212,559,237"/>
-<area shape="rect" id="node4" href="$_m_x28_8cpp.html" title=" " alt="" coords="6,292,163,331"/>
-<area shape="rect" id="node7" href="$_robot_8cpp.html" title=" " alt="" coords="437,299,559,324"/>
+<area shape="rect" id="node1" title="Serial communication servo motor base class." alt="" coords="315,5,515,57"/>
+<area shape="rect" id="node2" href="$_serial_servo_motor_8hpp.html" title="Servo motor class." alt="" coords="183,112,409,151"/>
+<area shape="rect" id="node9" href="$_serial_servo_motor_base_8cpp.html" title=" " alt="" coords="433,105,634,157"/>
+<area shape="rect" id="node3" href="$_m_x28_8hpp.html" title="MX28 communication class @auther Naoki Takahashi." alt="" coords="26,205,185,244"/>
+<area shape="rect" id="node5" href="$_i_o_2main_8cpp.html" title="IO module test." alt="" coords="187,299,302,324"/>
+<area shape="rect" id="node6" href="$_serial_servo_motor_8cpp.html" title=" " alt="" coords="258,205,483,244"/>
+<area shape="rect" id="node7" href="$_robot_8hpp.html" title="I/O Robot interface class." alt="" coords="507,212,629,237"/>
+<area shape="rect" id="node4" href="$_m_x28_8cpp.html" title=" " alt="" coords="5,292,163,331"/>
+<area shape="rect" id="node8" href="$_robot_8cpp.html" title=" " alt="" coords="507,299,629,324"/>
 </map>

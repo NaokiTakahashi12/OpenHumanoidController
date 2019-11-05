@@ -1,9 +1,9 @@
 <map id="src/IO/Device/Sensor/IMU" name="src/IO/Device/Sensor/IMU">
 <area shape="rect" id="node1" href="dir_580502745e8a1121488472e638bc66fa.html" title="IMU" alt="" coords="70,51,142,99"/>
 <area shape="rect" id="node2" href="dir_a7661527acee32ec481f79e4422b8ef0.html" title="Communicator" alt="" coords="5,147,113,195"/>
-<area shape="rect" id="edge2-headlabel" href="dir_000010_000002.html" title="1" alt="" coords="83,127,91,140"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000015_000007.html" title="1" alt="" coords="83,127,90,141"/>
 <area shape="rect" id="node3" href="dir_76a766bd02caca2e6c91ab26cb52c585.html" title="RobotStatus" alt="" coords="57,243,152,291"/>
-<area shape="rect" id="edge3-headlabel" href="dir_000010_000012.html" title="1" alt="" coords="124,221,131,234"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000002_000012.html" title="1" alt="" coords="89,215,97,229"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000015_000005.html" title="1" alt="" coords="124,221,131,234"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000007_000005.html" title="1" alt="" coords="90,216,97,229"/>
 <area shape="rect" id="clust1" href="dir_d8fd4386d00bf30323b7f0a7d8ca77dd.html" title="Sensor" alt="" coords="59,16,153,109"/>
 </map>

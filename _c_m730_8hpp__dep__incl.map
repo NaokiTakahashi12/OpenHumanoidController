@@ -1,4 +1,5 @@
 <map id="src/IO/Device/ControlBoard/CM730.hpp" name="src/IO/Device/ControlBoard/CM730.hpp">
-<area shape="rect" id="node1" title="CM730 board communicator class." alt="" coords="5,5,189,44"/>
+<area shape="rect" id="node1" title="CM730 board communicator class." alt="" coords="92,5,276,44"/>
 <area shape="rect" id="node2" href="$_c_m730_8cpp.html" title=" " alt="" coords="5,92,189,131"/>
+<area shape="rect" id="node3" href="$_i_o_2main_8cpp.html" title="IO module test." alt="" coords="213,99,328,124"/>
 </map>

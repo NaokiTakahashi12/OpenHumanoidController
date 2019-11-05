@@ -1,18 +1,17 @@
 /*
-@ @licstart  The following is the entire license notice for the
+@licstart  The following is the entire license notice for the
 JavaScript code in this file.
 
-Copyright (C) 1997-2017 by Dimitri van Heesch
+Copyright (C) 1997-2019 by Dimitri van Heesch
 
 This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
+it under the terms of version 2 of the GNU General Public License as published by
+the Free Software Foundation
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
@@ -32,7 +31,8 @@ var NAVTREE =
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ]
+        [ "Functions", "functions_func.html", null ],
+        [ "Typedefs", "functions_type.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -44,8 +44,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"_serial_control_board_8hpp.html",
-"class_i_o_1_1_load_config_1_1_robot_config.html#a56032458988f040e9885debbb9354473"
+"_matrix_operation_8hpp.html#af5e1d4e55896098c3bb2cc1bdf6e3118",
+"class_i_o_1_1_communicator_1_1_serial_flow_schedule_base.html#a8238e47bf660eb3d78366e69d73a0246",
+"class_robot_status_1_1_time_series_data.html#ad8ea0d1be16dbcbb5f6a1cf56b83d23c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

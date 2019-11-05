@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_i_o_1_1_communicator_1_1_t_c_p.html" title=" " alt="" coords="5,5,169,31"/>
+<area shape="rect" id="node1" href="$class_foot_step_planner_1_1_footprint_planner_1_1_footprint_planner_base.html" title=" " alt="" coords="5,44,209,96"/>
+<area shape="rect" id="node2" href="$class_foot_step_planner_1_1_footprint_planner_1_1_humanoid.html" title=" " alt="" coords="257,51,453,89"/>
+<area shape="rect" id="node3" href="$class_foot_step_planner_1_1_footprint_planner_1_1_constant_range_based_humanoid.html" title=" " alt="" coords="501,5,767,57"/>
+<area shape="rect" id="node4" href="$class_foot_step_planner_1_1_footprint_planner_1_1_custom_humanoid.html" title=" " alt="" coords="544,81,725,133"/>
 </map>

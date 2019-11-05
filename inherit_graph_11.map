@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_i_o_1_1_load_config_1_1_load_config_base.html" title=" " alt="" coords="5,68,222,93"/>
-<area shape="rect" id="node2" href="$class_i_o_1_1_load_config_1_1_actuator_device_config.html" title=" " alt="" coords="287,5,455,44"/>
-<area shape="rect" id="node3" href="$class_i_o_1_1_load_config_1_1_robot_config.html" title=" " alt="" coords="275,68,467,93"/>
-<area shape="rect" id="node4" href="$class_i_o_1_1_load_config_1_1_sensor_device_config.html" title=" " alt="" coords="270,117,472,156"/>
+<area shape="rect" id="node1" href="$class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_serial_servo_motor_base.html" title=" " alt="" coords="5,53,244,92"/>
+<area shape="rect" id="node2" href="$class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_serial_servo_motor.html" title=" " alt="" coords="297,5,505,57"/>
+<area shape="rect" id="node3" href="$class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_serial_servo_motor.html" title=" " alt="" coords="292,81,511,147"/>
+<area shape="rect" id="node4" href="$class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_m_x28.html" title=" " alt="" coords="559,95,699,133"/>
 </map>

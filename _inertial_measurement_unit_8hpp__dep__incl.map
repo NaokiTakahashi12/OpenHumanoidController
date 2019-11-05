@@ -1,6 +1,7 @@
 <map id="src/IO/Device/Sensor/IMU/InertialMeasurementUnit.hpp" name="src/IO/Device/Sensor/IMU/InertialMeasurementUnit.hpp">
-<area shape="rect" id="node1" title="IMU utility class." alt="" coords="109,5,333,44"/>
+<area shape="rect" id="node1" title="IMU utility class." alt="" coords="214,5,439,44"/>
 <area shape="rect" id="node2" href="$_inertial_measurement_unit_8cpp.html" title=" " alt="" coords="5,92,229,131"/>
 <area shape="rect" id="node3" href="$_v_m_u931_8hpp.html" title="VMU931 (IMU) serial communicator class." alt="" coords="253,92,400,131"/>
-<area shape="rect" id="node4" href="$_v_m_u931_8cpp.html" title=" " alt="" coords="253,179,400,217"/>
+<area shape="rect" id="node5" href="$_i_o_2main_8cpp.html" title="IO module test." alt="" coords="380,185,494,211"/>
+<area shape="rect" id="node4" href="$_v_m_u931_8cpp.html" title=" " alt="" coords="209,179,356,217"/>
 </map>
