@@ -1,0 +1,31 @@
+{
+	"Commnets": {
+		"Description": "This is a Kinematics module top level config file.",
+		"Unit type": "SI"
+	},
+	"Support": {
+		"Solver names": {
+			"FK": [
+				{"Forward": "CustomMultipleFK"},
+				{"Forward": "SimpleForSerialLink"}
+			],
+			"IK": [
+				{"Inverse": "CustomMultipleIK"},
+				{"Inverse": "LevenbergMarquardtForSerialLink"}
+			]
+		},
+		"Model": [
+			{"Type": "Humanoid", "Robot name": "DARwInOP", "File type": "urdf"}
+		]
+	},
+	"Assign solver": {
+		"Forward": "SimpleForSerialLink",
+		"Inverse": "LevenbergMarquardtForSerialLink"
+	},
+	"Model": {
+		"Directory": "../../../data/urdf/",
+		"File": "DARwInOP.urdf"
+	},
+	"Control point map config": "control_point_map.darwin.conf.json",
+	"Joint space config": "joint_space.darwin.conf.json"
+}

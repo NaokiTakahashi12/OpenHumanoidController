@@ -1,0 +1,13 @@
+{
+	"Comments": {
+		"Description": "Control point map for DARwInOP"
+	},
+	"Robot type": "Humanoid",
+	"Control point names": {
+		"Left arm": "MP_ARM_LOW_L",
+		"Right arm": "MP_ARM_LOW_R",
+		"Left foot": "MP_ANKLE2_L",
+		"Right foot": "MP_ANKLE2_R",
+		"Head": "MP_HEAD"
+	}
+}
