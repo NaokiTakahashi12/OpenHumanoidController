@@ -2,128 +2,146 @@
 #include <iostream>
 #include <exception>
 #include <sstream>
-#include <vector>
-#include <string>
+#include <chrono>
 
-#include <Tools/Log/Logger.hpp>
+#include <RobotStatus/Information.hpp>
 
-#include "Model.hpp"
-#include "BodyOrbitMap.hpp"
+#include "Launcher.hpp"
+#include "InverseProblemSolvers/CustomMultipleIK.hpp"
+#include "ForwardProblemSolvers/CustomMultipleFK.hpp"
+
+void test_spatial_point(Tools::Log::LoggerPtr &);
 
 int main(int argc, char **argv) {
-	Tools::Log::LoggerPtr logger;
-	logger = std::make_shared<Tools::Log::Logger>(argc, argv);
+	auto robo_info = std::make_shared<RobotStatus::Information>(argc, argv);
+	auto logger = robo_info->logger;
+
 	logger->start_loger_thread();
 
 	try {
-		std::string urdf_filename;
-		urdf_filename = "../../../data/urdf/DARwInOP.urdf";
+		logger->message(Tools::Log::MessageLevels::info, "Startup");
 
-		Kinematics::ModelPtr model;
-		model = std::make_shared<Kinematics::Model>(urdf_filename);
+		Kinematics::Launcher<double> launcher("./", "kinematics.conf.json");
+		logger->message(Tools::Log::MessageLevels::info, "Load config");
 
-		if(model->is_load_model()) {
-			logger->message(Tools::Log::MessageLevels::info, "Model load success");
-		}
-		else {
-			logger->message(Tools::Log::MessageLevels::info, "Model load fatal");
-		}
-
-		RigidBodyDynamics::InverseDynamics(model->access(), model->get_q(), model->get_qd(), model->get_qdd(), model->access_tau());
-		RigidBodyDynamics::ForwardDynamics(model->access(), model->get_q(), model->get_qd(), model->get_tau(), model->access_qdd());
-		RigidBodyDynamics::UpdateKinematics(model->access(), model->get_q(), model->get_qd(), model->get_qdd());
-
-		Kinematics::BodyOrbitMap coordinate_base;
-		Kinematics::BodyOrbitMap::Vector3 body_centor;
-		Kinematics::Model::BodyIdentity body_name("MP_ANKLE2_R");
-		const auto body_id = model->get_body_id(body_name);
+			auto model = launcher.get_model();
+			auto control_point_map = launcher.get_control_point_map();
+			logger->message(Tools::Log::MessageLevels::info, "Cloning control point map");
+			auto parameters = launcher.get_parameters();
+			logger->message(Tools::Log::MessageLevels::info, "Cloning parameters");
 
 		{
-			body_centor = RigidBodyDynamics::CalcBaseToBodyCoordinates(model->access(), model->get_q(), body_id, body_centor.Zero());
-			auto swap_body_centor = 0.89 * body_centor;
-			body_centor.x() = swap_body_centor.z();
-			body_centor.y() = swap_body_centor.y();
-			body_centor.z() = -1 * swap_body_centor.x();
-
-			coordinate_base.append_body_orbit(body_id, body_centor);
-
-			logger->message(Tools::Log::MessageLevels::debug, body_name + " Body ID is " + std::to_string(body_id));
-		}
-
-		auto orbit = coordinate_base.get_world_orbit(body_id);
-
-		std::vector<Kinematics::BodyOrbitMap::BodyID> body_ids;
-		body_ids.push_back(body_id);
-		body_ids.push_back(body_id);
-		body_ids.push_back(body_id);
-		std::vector<RigidBodyDynamics::Math::Vector3d> body_point;
-		body_point.push_back(Kinematics::BodyOrbitMap::Vector3(0, 0, 0));
-		body_point.push_back(Kinematics::BodyOrbitMap::Vector3(0, 1, 0));
-		body_point.push_back(Kinematics::BodyOrbitMap::Vector3(0, 0, 1));
-
-		std::vector<RigidBodyDynamics::Math::Vector3d> target_point;
-		for(auto &o : orbit) {
-			std::stringstream ss;
-			ss << "Body orbit " << o.transpose();
-			logger->message(Tools::Log::MessageLevels::debug, ss.str());
-			target_point.push_back(o);
-		}
-
-		auto q_result = model->get_q();
-
-		auto is_success = RigidBodyDynamics::InverseKinematics(
-				model->access(),
-				model->get_q(),
-				body_ids,
-				body_point,
-				target_point,
-				q_result
-		);
-		q_result *= M_PI / 180;
-		if(is_success) {
-			logger->message(Tools::Log::MessageLevels::debug, "Success");
-			std::stringstream ss;
-			ss << q_result.transpose();
-			logger->message(Tools::Log::MessageLevels::debug, ss.str());
-		}
-		else {
-			logger->message(Tools::Log::MessageLevels::debug, "Fatal");
-			std::stringstream ss;
-			ss << q_result.transpose();
-			logger->message(Tools::Log::MessageLevels::debug, ss.str());
-		}
-
-		{
-			logger->message(Tools::Log::MessageLevels::debug, "Q");
-			std::stringstream ss;
-			ss << model->get_q().transpose();
-			logger->message(Tools::Log::MessageLevels::debug, ss.str());
+			auto custom_fk = Kinematics::ForwardProblemSolvers::CustomMultipleFK<double>::make_ptr(model);
+			custom_fk->register_map(control_point_map);
+			custom_fk->register_parameters(parameters);
+			custom_fk->register_solver_function(
+				[](Kinematics::Model::RBDLBased::Ptr &, typename Kinematics::Parameters<double>::Ptr &, typename Kinematics::ControlPointMap<double>::Ptr &) {
+					return true;
+				}
+			);
+			launcher.entry_new_fk_solver(
+				{custom_fk->get_key(), std::move(custom_fk)}
+			);
 		}
 		{
-			logger->message(Tools::Log::MessageLevels::debug, "Qd");
-			std::stringstream ss;
-			ss << model->get_qd().transpose();
-			logger->message(Tools::Log::MessageLevels::debug, ss.str());
-		}
-		{
-			logger->message(Tools::Log::MessageLevels::debug, "Qdd");
-			std::stringstream ss;
-			ss << model->get_qdd().transpose();
-			logger->message(Tools::Log::MessageLevels::debug, ss.str());
-		}
-		{
-			logger->message(Tools::Log::MessageLevels::debug, "Tau");
-			std::stringstream ss;
-			ss << model->get_tau().transpose();
-			logger->message(Tools::Log::MessageLevels::debug, ss.str());
+			auto custom_ik = Kinematics::InverseProblemSolvers::CustomMultipleIK<double>::make_ptr(model);
+			custom_ik->register_map(control_point_map);
+			custom_ik->register_parameters(parameters);
+			custom_ik->register_solver_function(
+				[](Kinematics::Model::RBDLBased::Ptr &, typename Kinematics::Parameters<double>::Ptr &, typename Kinematics::ControlPointMap<double>::Ptr &) {
+					return true;
+				}
+			);
+			launcher.entry_new_ik_solver(
+				{custom_ik->get_key(), std::move(custom_ik)}
+			);
 		}
 
+		launcher.initialize();
+		logger->message(Tools::Log::MessageLevels::info, "Launcher initialized");
+		logger->message(Tools::Log::MessageLevels::info, "Success startup");
+
+		launcher();
+		logger->message(Tools::Log::MessageLevels::info, "Thread start");
+
+		control_point_map->add(20, Kinematics::Quantity::SpatialPoint<double>().point(-0.001, 0.001, 0.1));
+		control_point_map->add(14, Kinematics::Quantity::SpatialPoint<double>().point(-0.001, 0.001, 0.1));
+		control_point_map->add(6, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -1e-4));
+		control_point_map->add(3, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -1e-4));
+
+		int i = 0;
+		while(1) {
+			const auto lock = std::lock_guard<std::mutex>(launcher.get_mutex());
+
+			if(i == 1900) {
+				logger->message(Tools::Log::MessageLevels::info, "Thread finish");
+				break;
+			}
+
+			control_point_map->add(20, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -0.00005));
+			control_point_map->add(14, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -0.00005));
+
+			for(auto &&[body_id, spatial_point] : control_point_map->get_list_with_id()) {
+				std::stringstream ss;
+				ss << "Point of " << body_id << " : " << spatial_point.point().transpose();
+				logger->message(Tools::Log::MessageLevels::trace, ss.str());
+			}
+			for(auto i = 0; i < parameters->joint_angle()().size(); i ++) {
+				logger->message(Tools::Log::MessageLevels::trace, std::to_string(parameters->joint_angle()()(i)));
+			}
+
+			i ++;
+		}
 	}
 	catch(const std::exception &error) {
 		std::cerr << error.what() << std::endl;
-		logger->message(Tools::Log::MessageLevels::fatal, error.what());
 	}
 
+	logger->close_loger_thread();
+
 	return 0;
+}
+
+void test_spatial_point(Tools::Log::LoggerPtr &logger) {
+	Kinematics::Quantity::SpatialPoint spatial_point;
+	{
+		std::stringstream ss;
+		ss << "Initial point of " << spatial_point.point().transpose();
+		logger->message(Tools::Log::MessageLevels::debug, ss.str());
+	}
+	{
+		std::stringstream ss;
+		ss << "Initial Angle of " << spatial_point.angle().transpose();
+		logger->message(Tools::Log::MessageLevels::debug, ss.str());
+	}
+	{
+		std::stringstream ss;
+		spatial_point.point(1, 2, 3);
+		ss << "Added point(1, 2, 3) of " << spatial_point.point().transpose();
+		logger->message(Tools::Log::MessageLevels::debug, ss.str());
+	}
+	{
+		std::stringstream ss;
+		spatial_point.angle(M_PI / 2, M_PI / 2, M_PI / 2);
+		ss << "Added Angle(pi/2, pi/2, pi/2) of " << spatial_point.angle().transpose();
+		logger->message(Tools::Log::MessageLevels::debug, ss.str());
+	}
+	{
+		logger->message(Tools::Log::MessageLevels::debug, "Reconstruction test for rotation matrix");
+		spatial_point.rotation(spatial_point.rotation());
+		logger->message(Tools::Log::MessageLevels::debug, "Success reconstruction test for rotation matrix");
+	}
+	{
+		std::stringstream ss;
+		spatial_point += Kinematics::Quantity::SpatialPoint().point(-1, -2, -3);
+		ss << "Added point(-1, -2, -3) of " << spatial_point.point().transpose();
+		logger->message(Tools::Log::MessageLevels::debug, ss.str());
+	}
+	{
+		std::stringstream ss;
+		spatial_point += Kinematics::Quantity::SpatialPoint().angle(-M_PI / 2, -M_PI / 2, -M_PI / 2);
+		ss << "Added Angle(-pi/2, -pi/2, -pi/2) of " << spatial_point.angle().transpose();
+		logger->message(Tools::Log::MessageLevels::debug, ss.str());
+	}
 }
 
