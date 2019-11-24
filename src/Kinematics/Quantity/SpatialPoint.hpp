@@ -12,7 +12,7 @@
 
 namespace Kinematics {
 	namespace Quantity {
-		template <typename Scalar = float>
+		template <typename Scalar = double>
 		class SpatialPoint final {
 			private :
 				static constexpr int Rank3 = 3;

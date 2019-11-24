@@ -133,13 +133,13 @@ void test_spatial_point(Tools::Log::LoggerPtr &logger) {
 	}
 	{
 		std::stringstream ss;
-		spatial_point += Kinematics::Quantity::SpatialPoint().point(-1, -2, -3);
+		spatial_point += Kinematics::Quantity::SpatialPoint<double>().point(-1, -2, -3);
 		ss << "Added point(-1, -2, -3) of " << spatial_point.point().transpose();
 		logger->message(Tools::Log::MessageLevels::debug, ss.str());
 	}
 	{
 		std::stringstream ss;
-		spatial_point += Kinematics::Quantity::SpatialPoint().angle(-M_PI / 2, -M_PI / 2, -M_PI / 2);
+		spatial_point += Kinematics::Quantity::SpatialPoint<double>().angle(-M_PI / 2, -M_PI / 2, -M_PI / 2);
 		ss << "Added Angle(-pi/2, -pi/2, -pi/2) of " << spatial_point.angle().transpose();
 		logger->message(Tools::Log::MessageLevels::debug, ss.str());
 	}

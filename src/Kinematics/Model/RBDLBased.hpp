@@ -10,9 +10,9 @@
 
 #include "ModelBase.hpp"
 
-#include <Tools/Math/Matrix.hpp>
-
 #include <rbdl/Model.h>
+
+#include <Tools/Math/Matrix.hpp>
 
 namespace Kinematics {
 	namespace Model {

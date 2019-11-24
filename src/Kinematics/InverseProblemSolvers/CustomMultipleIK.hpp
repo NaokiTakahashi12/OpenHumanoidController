@@ -19,7 +19,7 @@ namespace Kinematics {
 			public :
 				using Ptr = std::unique_ptr<CustomMultipleIK>;
 
-				using InverseProblemSolverBase::ModelPtr;
+				using ModelPtr = InverseProblemSolverBase::ModelPtr;
 
 				using SolverFunction = std::function<
 					bool(ModelPtr &, typename Parameters<Scalar>::Ptr &, typename ControlPointMap<Scalar>::Ptr &)

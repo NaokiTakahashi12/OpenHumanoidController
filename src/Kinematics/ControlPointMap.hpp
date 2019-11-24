@@ -12,6 +12,7 @@
 #include <mutex>
 #include <tuple>
 #include <vector>
+#include <memory>
 
 #include "Quantity/SpatialPoint.hpp"
 

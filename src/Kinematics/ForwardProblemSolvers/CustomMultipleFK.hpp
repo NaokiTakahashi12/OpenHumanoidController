@@ -17,7 +17,7 @@ namespace Kinematics {
 		template <typename Scalar>
 		class CustomMultipleFK : public MultipleFK<Scalar> {
 			public :
-				using ForwardProblemSolverBase::ModelPtr;
+				using ModelPtr = ForwardProblemSolverBase::ModelPtr;
 
 				using Ptr = std::unique_ptr<CustomMultipleFK>;
 
@@ -25,7 +25,7 @@ namespace Kinematics {
 					bool(ModelPtr &, typename Parameters<Scalar>::Ptr &, typename ControlPointMap<Scalar>::Ptr &)
 				>;
 
-				CustomMultipleFK(ModelPtr &);
+				CustomMultipleFK(ModelPtr &new_model);
 
 				virtual ~CustomMultipleFK();
 

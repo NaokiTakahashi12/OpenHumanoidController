@@ -17,7 +17,7 @@ namespace Kinematics {
 			public :
 				using Ptr = std::unique_ptr<SimpleForSerialLink>;
 
-				using ForwardProblemSolverBase::ModelPtr;
+				using ModelPtr = ForwardProblemSolverBase::ModelPtr;
 
 				SimpleForSerialLink(ModelPtr &);
 				virtual ~SimpleForSerialLink();
