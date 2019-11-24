@@ -1,11 +1,25 @@
 var hierarchy =
 [
+    [ "Kinematics::Quantity::AngularMomentum< Scaler >", "class_kinematics_1_1_quantity_1_1_angular_momentum.html", null ],
+    [ "Kinematics::Quantity::AngularMomentum< Scalar >", "class_kinematics_1_1_quantity_1_1_angular_momentum.html", null ],
+    [ "Kinematics::Quantity::BasicPhysicalQuantity< Base >", "class_kinematics_1_1_quantity_1_1_basic_physical_quantity.html", null ],
+    [ "Kinematics::Quantity::BasicPhysicalQuantity< Tools::Math::Vector3< Scalar > >", "class_kinematics_1_1_quantity_1_1_basic_physical_quantity.html", [
+      [ "Kinematics::Quantity::CenterOfMass< Scalar >", "class_kinematics_1_1_quantity_1_1_center_of_mass.html", null ]
+    ] ],
+    [ "Kinematics::Quantity::BasicPhysicalQuantity< Tools::Math::Vector3< Scaler > >", "class_kinematics_1_1_quantity_1_1_basic_physical_quantity.html", [
+      [ "Kinematics::Quantity::CenterOfMass< Scaler >", "class_kinematics_1_1_quantity_1_1_center_of_mass.html", null ]
+    ] ],
+    [ "Kinematics::Quantity::BasicPhysicalQuantity< Tools::Math::VectorX< Scalar > >", "class_kinematics_1_1_quantity_1_1_basic_physical_quantity.html", [
+      [ "Kinematics::Quantity::JointAngle< Scalar >", "class_kinematics_1_1_quantity_1_1_joint_angle.html", null ]
+    ] ],
     [ "RobotStatus::Buffer< T >", "class_robot_status_1_1_buffer.html", null ],
     [ "RobotStatus::Buffer< TimeSeriesData< T > >", "class_robot_status_1_1_buffer.html", [
       [ "RobotStatus::TimeSeriesBuffer< T >", "class_robot_status_1_1_time_series_buffer.html", null ]
     ] ],
     [ "Tools::CommandLineArgumentReader", "class_tools_1_1_command_line_argument_reader.html", null ],
     [ "FootStepPlanner::ConfigManager", "class_foot_step_planner_1_1_config_manager.html", null ],
+    [ "Kinematics::ConfigManager", "class_kinematics_1_1_config_manager.html", null ],
+    [ "Kinematics::ControlPointMap< Scalar >", "class_kinematics_1_1_control_point_map.html", null ],
     [ "IO::DeviceManager", "class_i_o_1_1_device_manager.html", null ],
     [ "IO::DeviceSelector", "class_i_o_1_1_device_selector.html", null ],
     [ "FootStepPlanner::FootprintPlanner::FootprintPlannerBase< Scalar >", "class_foot_step_planner_1_1_footprint_planner_1_1_footprint_planner_base.html", [
@@ -15,6 +29,12 @@ var hierarchy =
       ] ]
     ] ],
     [ "FootStepPlanner::FootStepManager", "class_foot_step_planner_1_1_foot_step_manager.html", null ],
+    [ "Kinematics::ForwardProblemSolvers::ForwardProblemSolverBase", "class_kinematics_1_1_forward_problem_solvers_1_1_forward_problem_solver_base.html", [
+      [ "Kinematics::ForwardProblemSolvers::MultipleFK< Scalar >", "class_kinematics_1_1_forward_problem_solvers_1_1_multiple_f_k.html", [
+        [ "Kinematics::ForwardProblemSolvers::CustomMultipleFK< Scalar >", "class_kinematics_1_1_forward_problem_solvers_1_1_custom_multiple_f_k.html", null ],
+        [ "Kinematics::ForwardProblemSolvers::SimpleForSerialLink< Scalar >", "class_kinematics_1_1_forward_problem_solvers_1_1_simple_for_serial_link.html", null ]
+      ] ]
+    ] ],
     [ "Tools::Math::Differential::Function< T >", "class_tools_1_1_math_1_1_differential_1_1_function.html", null ],
     [ "FootStepPlanner::HumanoidFootprintManager< Scalar >", "class_foot_step_planner_1_1_humanoid_footprint_manager.html", null ],
     [ "IO::Device::Sensor::IMU::IMUBase", "class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_i_m_u_base.html", null ],
@@ -25,7 +45,15 @@ var hierarchy =
       ] ]
     ] ],
     [ "RobotStatus::Information", "class_robot_status_1_1_information.html", null ],
+    [ "Kinematics::InverseProblemSolvers::InverseProblemSolverBase", "class_kinematics_1_1_inverse_problem_solvers_1_1_inverse_problem_solver_base.html", [
+      [ "Kinematics::InverseProblemSolvers::MultipleIK< Scalar >", "class_kinematics_1_1_inverse_problem_solvers_1_1_multiple_i_k.html", [
+        [ "Kinematics::InverseProblemSolvers::CustomMultipleIK< Scalar >", "class_kinematics_1_1_inverse_problem_solvers_1_1_custom_multiple_i_k.html", null ],
+        [ "Kinematics::InverseProblemSolvers::LevenbergMarquardtForSerialLink< Scalar >", "class_kinematics_1_1_inverse_problem_solvers_1_1_levenberg_marquardt_for_serial_link.html", null ]
+      ] ]
+    ] ],
+    [ "Kinematics::JointAngleModificator< Scalar >", "class_kinematics_1_1_joint_angle_modificator.html", null ],
     [ "Tools::ConfigFileOperator::JsonLoader", "class_tools_1_1_config_file_operator_1_1_json_loader.html", null ],
+    [ "Kinematics::Launcher< Scalar >", "class_kinematics_1_1_launcher.html", null ],
     [ "IO::LoadConfig::LoadConfigBase", "class_i_o_1_1_load_config_1_1_load_config_base.html", [
       [ "IO::LoadConfig::ActuatorDeviceConfig", "class_i_o_1_1_load_config_1_1_actuator_device_config.html", null ],
       [ "IO::LoadConfig::RobotConfig", "class_i_o_1_1_load_config_1_1_robot_config.html", null ],
@@ -33,10 +61,24 @@ var hierarchy =
     ] ],
     [ "Tools::Log::Logger", "class_tools_1_1_log_1_1_logger.html", null ],
     [ "Tools::Log::Messenger", "class_tools_1_1_log_1_1_messenger.html", null ],
+    [ "Kinematics::Model::ModelBase", "class_kinematics_1_1_model_1_1_model_base.html", [
+      [ "Kinematics::Model::RBDLBased", "class_kinematics_1_1_model_1_1_r_b_d_l_based.html", [
+        [ "Kinematics::Model::Humanoid", "class_kinematics_1_1_model_1_1_humanoid.html", null ]
+      ] ]
+    ] ],
+    [ "Kinematics::Model::ModelSelector< Scalar >", "class_kinematics_1_1_model_1_1_model_selector.html", null ],
     [ "Tools::NonCopyable", "class_tools_1_1_non_copyable.html", [
       [ "IO::Communicator::SerialController::Dynamixel", "class_i_o_1_1_communicator_1_1_serial_controller_1_1_dynamixel.html", null ],
       [ "IO::Robot", "class_i_o_1_1_robot.html", null ]
     ] ],
+    [ "Kinematics::ObjectSelector< Base, Key >", "class_kinematics_1_1_object_selector.html", null ],
+    [ "Kinematics::ObjectSelector< MultipleFK< Scalar >, std::string >", "class_kinematics_1_1_object_selector.html", [
+      [ "Kinematics::ForwardProblemSolvers::MultipleFKSelector< Scalar >", "class_kinematics_1_1_forward_problem_solvers_1_1_multiple_f_k_selector.html", null ]
+    ] ],
+    [ "Kinematics::ObjectSelector< MultipleIK< Scalar >, std::string >", "class_kinematics_1_1_object_selector.html", [
+      [ "Kinematics::InverseProblemSolvers::MultipleIKSelector< Scalar >", "class_kinematics_1_1_inverse_problem_solvers_1_1_multiple_i_k_selector.html", null ]
+    ] ],
+    [ "Kinematics::Parameters< Scalar >", "class_kinematics_1_1_parameters.html", null ],
     [ "FootStepPlanner::FootprintPlanner::PlanSelector< T >", "class_foot_step_planner_1_1_footprint_planner_1_1_plan_selector.html", null ],
     [ "IO::Device::ControlBoard::SerialControlBoardBase", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board_base.html", [
       [ "IO::Device::ControlBoard::SerialControlBoard< CONTROLLER >", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html", null ],
@@ -61,7 +103,9 @@ var hierarchy =
     ] ],
     [ "IO::Device::Actuator::ServoMotor::ServoMotorBase", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_servo_motor_base.html", null ],
     [ "IO::LoadConfig::ActuatorDeviceConfig::ServoMotorConfigData", "struct_i_o_1_1_load_config_1_1_actuator_device_config_1_1_servo_motor_config_data.html", null ],
+    [ "Kinematics::SolverManager< Scalar >", "class_kinematics_1_1_solver_manager.html", null ],
     [ "FootStepPlanner::Footprint::SpatialPoint< Scalar, Dimention >", "struct_foot_step_planner_1_1_footprint_1_1_spatial_point.html", null ],
+    [ "Kinematics::Quantity::SpatialPoint< Scalar >", "class_kinematics_1_1_quantity_1_1_spatial_point.html", null ],
     [ "FootStepPlanner::Footprint::SpatialPoint< Scalar, 3 >", "struct_foot_step_planner_1_1_footprint_1_1_spatial_point.html", [
       [ "FootStepPlanner::Footprint::Bipedal< Scalar >", "struct_foot_step_planner_1_1_footprint_1_1_bipedal.html", null ]
     ] ],

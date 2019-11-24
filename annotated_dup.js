@@ -61,6 +61,42 @@ var annotated_dup =
       [ "DeviceSelector", "class_i_o_1_1_device_selector.html", "class_i_o_1_1_device_selector" ],
       [ "Robot", "class_i_o_1_1_robot.html", "class_i_o_1_1_robot" ]
     ] ],
+    [ "Kinematics", null, [
+      [ "ForwardProblemSolvers", null, [
+        [ "CustomMultipleFK", "class_kinematics_1_1_forward_problem_solvers_1_1_custom_multiple_f_k.html", "class_kinematics_1_1_forward_problem_solvers_1_1_custom_multiple_f_k" ],
+        [ "ForwardProblemSolverBase", "class_kinematics_1_1_forward_problem_solvers_1_1_forward_problem_solver_base.html", "class_kinematics_1_1_forward_problem_solvers_1_1_forward_problem_solver_base" ],
+        [ "MultipleFK", "class_kinematics_1_1_forward_problem_solvers_1_1_multiple_f_k.html", "class_kinematics_1_1_forward_problem_solvers_1_1_multiple_f_k" ],
+        [ "MultipleFKSelector", "class_kinematics_1_1_forward_problem_solvers_1_1_multiple_f_k_selector.html", "class_kinematics_1_1_forward_problem_solvers_1_1_multiple_f_k_selector" ],
+        [ "SimpleForSerialLink", "class_kinematics_1_1_forward_problem_solvers_1_1_simple_for_serial_link.html", "class_kinematics_1_1_forward_problem_solvers_1_1_simple_for_serial_link" ]
+      ] ],
+      [ "InverseProblemSolvers", null, [
+        [ "CustomMultipleIK", "class_kinematics_1_1_inverse_problem_solvers_1_1_custom_multiple_i_k.html", "class_kinematics_1_1_inverse_problem_solvers_1_1_custom_multiple_i_k" ],
+        [ "InverseProblemSolverBase", "class_kinematics_1_1_inverse_problem_solvers_1_1_inverse_problem_solver_base.html", "class_kinematics_1_1_inverse_problem_solvers_1_1_inverse_problem_solver_base" ],
+        [ "LevenbergMarquardtForSerialLink", "class_kinematics_1_1_inverse_problem_solvers_1_1_levenberg_marquardt_for_serial_link.html", "class_kinematics_1_1_inverse_problem_solvers_1_1_levenberg_marquardt_for_serial_link" ],
+        [ "MultipleIK", "class_kinematics_1_1_inverse_problem_solvers_1_1_multiple_i_k.html", "class_kinematics_1_1_inverse_problem_solvers_1_1_multiple_i_k" ],
+        [ "MultipleIKSelector", "class_kinematics_1_1_inverse_problem_solvers_1_1_multiple_i_k_selector.html", "class_kinematics_1_1_inverse_problem_solvers_1_1_multiple_i_k_selector" ]
+      ] ],
+      [ "Model", null, [
+        [ "Humanoid", "class_kinematics_1_1_model_1_1_humanoid.html", "class_kinematics_1_1_model_1_1_humanoid" ],
+        [ "ModelBase", "class_kinematics_1_1_model_1_1_model_base.html", "class_kinematics_1_1_model_1_1_model_base" ],
+        [ "ModelSelector", "class_kinematics_1_1_model_1_1_model_selector.html", "class_kinematics_1_1_model_1_1_model_selector" ],
+        [ "RBDLBased", "class_kinematics_1_1_model_1_1_r_b_d_l_based.html", "class_kinematics_1_1_model_1_1_r_b_d_l_based" ]
+      ] ],
+      [ "Quantity", null, [
+        [ "AngularMomentum", "class_kinematics_1_1_quantity_1_1_angular_momentum.html", "class_kinematics_1_1_quantity_1_1_angular_momentum" ],
+        [ "BasicPhysicalQuantity", "class_kinematics_1_1_quantity_1_1_basic_physical_quantity.html", "class_kinematics_1_1_quantity_1_1_basic_physical_quantity" ],
+        [ "CenterOfMass", "class_kinematics_1_1_quantity_1_1_center_of_mass.html", "class_kinematics_1_1_quantity_1_1_center_of_mass" ],
+        [ "JointAngle", "class_kinematics_1_1_quantity_1_1_joint_angle.html", "class_kinematics_1_1_quantity_1_1_joint_angle" ],
+        [ "SpatialPoint", "class_kinematics_1_1_quantity_1_1_spatial_point.html", "class_kinematics_1_1_quantity_1_1_spatial_point" ]
+      ] ],
+      [ "ConfigManager", "class_kinematics_1_1_config_manager.html", "class_kinematics_1_1_config_manager" ],
+      [ "ControlPointMap", "class_kinematics_1_1_control_point_map.html", "class_kinematics_1_1_control_point_map" ],
+      [ "JointAngleModificator", "class_kinematics_1_1_joint_angle_modificator.html", "class_kinematics_1_1_joint_angle_modificator" ],
+      [ "Launcher", "class_kinematics_1_1_launcher.html", "class_kinematics_1_1_launcher" ],
+      [ "ObjectSelector", "class_kinematics_1_1_object_selector.html", "class_kinematics_1_1_object_selector" ],
+      [ "Parameters", "class_kinematics_1_1_parameters.html", "class_kinematics_1_1_parameters" ],
+      [ "SolverManager", "class_kinematics_1_1_solver_manager.html", "class_kinematics_1_1_solver_manager" ]
+    ] ],
     [ "RobotStatus", null, [
       [ "Buffer", "class_robot_status_1_1_buffer.html", "class_robot_status_1_1_buffer" ],
       [ "Information", "class_robot_status_1_1_information.html", "class_robot_status_1_1_information" ],

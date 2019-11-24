@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['robot_174',['Robot',['../class_i_o_1_1_robot.html',1,'IO']]],
-  ['robotconfig_175',['RobotConfig',['../class_i_o_1_1_load_config_1_1_robot_config.html',1,'IO::LoadConfig']]]
+  ['parameters_263',['Parameters',['../class_kinematics_1_1_parameters.html',1,'Kinematics']]],
+  ['planselector_264',['PlanSelector',['../class_foot_step_planner_1_1_footprint_planner_1_1_plan_selector.html',1,'FootStepPlanner::FootprintPlanner']]]
 ];

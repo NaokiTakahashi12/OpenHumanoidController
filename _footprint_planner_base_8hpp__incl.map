@@ -1,7 +1,7 @@
 <map id="src/FootStepPlanner/FootprintPlanner/FootprintPlannerBase.hpp" name="src/FootStepPlanner/FootprintPlanner/FootprintPlannerBase.hpp">
 <area shape="rect" id="node1" title="Footprint base class." alt="" coords="130,5,310,57"/>
-<area shape="rect" id="node2" href="$_spatial_point_8hpp.html" title=" " alt="" coords="31,105,217,131"/>
-<area shape="rect" id="node6" href="$_config_manager_8hpp.html" title=" " alt="" coords="241,105,390,131"/>
+<area shape="rect" id="node2" href="$_foot_step_planner_2_footprint_2_spatial_point_8hpp.html" title=" " alt="" coords="31,105,217,131"/>
+<area shape="rect" id="node6" href="$_foot_step_planner_2_config_manager_8hpp.html" title=" " alt="" coords="241,105,390,131"/>
 <area shape="rect" id="node3" title=" " alt="" coords="181,185,251,211"/>
 <area shape="rect" id="node4" href="$_matrix_8hpp_source.html" title=" " alt="" coords="5,185,157,211"/>
 <area shape="rect" id="node5" title=" " alt="" coords="32,272,130,297"/>

@@ -1,19 +1,19 @@
 <map id="src/FootStepPlanner/HumanoidFootprintManager.cpp" name="src/FootStepPlanner/HumanoidFootprintManager.cpp">
 <area shape="rect" id="node1" title=" " alt="" coords="597,5,813,44"/>
 <area shape="rect" id="node2" href="$_humanoid_footprint_manager_8hpp.html" title=" " alt="" coords="95,99,307,124"/>
-<area shape="rect" id="node9" href="$_config_manager_8hpp.html" title=" " alt="" coords="480,399,629,424"/>
+<area shape="rect" id="node9" href="$_foot_step_planner_2_config_manager_8hpp.html" title=" " alt="" coords="480,399,629,424"/>
 <area shape="rect" id="node19" title=" " alt="" coords="871,99,950,124"/>
 <area shape="rect" id="node20" href="$_constant_range_based_humanoid_8hpp.html" title="Constant range based footprint generator." alt="" coords="613,92,798,131"/>
 <area shape="rect" id="node24" href="$_custom_humanoid_8hpp.html" title=" " alt="" coords="332,99,588,124"/>
 <area shape="rect" id="node3" href="$_matrix_8hpp_source.html" title=" " alt="" coords="5,479,157,504"/>
-<area shape="rect" id="node5" href="$_humanoid_8hpp.html" title="Humanoid footprint base class." alt="" coords="396,252,606,277"/>
+<area shape="rect" id="node5" href="$_foot_step_planner_2_footprint_planner_2_humanoid_8hpp.html" title="Humanoid footprint base class." alt="" coords="396,252,606,277"/>
 <area shape="rect" id="node17" href="$_plan_selector_8hpp.html" title=" " alt="" coords="100,179,324,204"/>
 <area shape="rect" id="node4" title=" " alt="" coords="32,565,130,591"/>
 <area shape="rect" id="node6" href="$_footprint_planner_base_8hpp.html" title="Footprint base class." alt="" coords="453,325,629,351"/>
 <area shape="rect" id="node14" title=" " alt="" coords="653,325,704,351"/>
 <area shape="rect" id="node15" title=" " alt="" coords="728,325,786,351"/>
 <area shape="rect" id="node16" href="$_bipedal_8hpp.html" title=" " alt="" coords="270,325,429,351"/>
-<area shape="rect" id="node7" href="$_spatial_point_8hpp.html" title=" " alt="" coords="270,399,455,424"/>
+<area shape="rect" id="node7" href="$_foot_step_planner_2_footprint_2_spatial_point_8hpp.html" title=" " alt="" coords="270,399,455,424"/>
 <area shape="rect" id="node8" title=" " alt="" coords="352,479,421,504"/>
 <area shape="rect" id="node10" href="$_json_loader_8hpp.html" title=" " alt="" coords="457,472,626,511"/>
 <area shape="rect" id="node11" title=" " alt="" coords="451,565,509,591"/>

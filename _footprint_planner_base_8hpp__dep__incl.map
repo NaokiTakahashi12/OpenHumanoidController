@@ -1,10 +1,10 @@
 <map id="src/FootStepPlanner/FootprintPlanner/FootprintPlannerBase.hpp" name="src/FootStepPlanner/FootprintPlanner/FootprintPlannerBase.hpp">
 <area shape="rect" id="node1" title="Footprint base class." alt="" coords="625,5,805,57"/>
-<area shape="rect" id="node2" href="$_humanoid_8hpp.html" title="Humanoid footprint base class." alt="" coords="498,112,712,151"/>
+<area shape="rect" id="node2" href="$_foot_step_planner_2_footprint_planner_2_humanoid_8hpp.html" title="Humanoid footprint base class." alt="" coords="498,112,712,151"/>
 <area shape="rect" id="node13" href="$_footprint_planner_base_8cpp.html" title=" " alt="" coords="736,105,916,157"/>
 <area shape="rect" id="node3" href="$_constant_range_based_humanoid_8hpp.html" title="Constant range based footprint generator." alt="" coords="5,205,190,257"/>
 <area shape="rect" id="node6" href="$_custom_humanoid_8hpp.html" title=" " alt="" coords="215,212,475,251"/>
-<area shape="rect" id="node8" href="$_humanoid_8cpp.html" title=" " alt="" coords="498,212,711,251"/>
+<area shape="rect" id="node8" href="$_foot_step_planner_2_footprint_planner_2_humanoid_8cpp.html" title=" " alt="" coords="498,212,711,251"/>
 <area shape="rect" id="node9" href="$_plan_selector_8hpp.html" title=" " alt="" coords="736,212,964,251"/>
 <area shape="rect" id="node11" href="$_humanoid_footprint_manager_8hpp.html" title=" " alt="" coords="887,312,1103,351"/>
 <area shape="rect" id="node4" href="$_constant_range_based_humanoid_8cpp.html" title=" " alt="" coords="6,305,190,357"/>

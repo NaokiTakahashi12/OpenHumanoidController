@@ -1,6 +1,6 @@
 <map id="src/FootStepPlanner/FootprintPlanner/ConstantRangeBasedHumanoid.hpp" name="src/FootStepPlanner/FootprintPlanner/ConstantRangeBasedHumanoid.hpp">
 <area shape="rect" id="node1" title="Constant range based footprint generator." alt="" coords="402,5,587,57"/>
-<area shape="rect" id="node2" href="$_humanoid_8hpp.html" title="Humanoid footprint base class." alt="" coords="279,105,387,131"/>
+<area shape="rect" id="node2" href="$_foot_step_planner_2_footprint_planner_2_humanoid_8hpp.html" title="Humanoid footprint base class." alt="" coords="279,105,387,131"/>
 <area shape="rect" id="node16" title=" " alt="" coords="411,105,489,131"/>
 <area shape="rect" id="node17" title=" " alt="" coords="513,105,563,131"/>
 <area shape="rect" id="node18" title=" " alt="" coords="587,105,639,131"/>
@@ -8,8 +8,8 @@
 <area shape="rect" id="node13" title=" " alt="" coords="268,179,320,204"/>
 <area shape="rect" id="node14" title=" " alt="" coords="344,179,402,204"/>
 <area shape="rect" id="node15" href="$_bipedal_8hpp.html" title=" " alt="" coords="427,179,586,204"/>
-<area shape="rect" id="node4" href="$_spatial_point_8hpp.html" title=" " alt="" coords="277,252,463,277"/>
-<area shape="rect" id="node8" href="$_config_manager_8hpp.html" title=" " alt="" coords="82,252,231,277"/>
+<area shape="rect" id="node4" href="$_foot_step_planner_2_footprint_2_spatial_point_8hpp.html" title=" " alt="" coords="277,252,463,277"/>
+<area shape="rect" id="node8" href="$_foot_step_planner_2_config_manager_8hpp.html" title=" " alt="" coords="82,252,231,277"/>
 <area shape="rect" id="node5" title=" " alt="" coords="222,332,292,357"/>
 <area shape="rect" id="node6" href="$_matrix_8hpp_source.html" title=" " alt="" coords="316,332,467,357"/>
 <area shape="rect" id="node7" title=" " alt="" coords="343,419,440,444"/>
