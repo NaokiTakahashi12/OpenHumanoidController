@@ -1,11 +1,7 @@
 <?xml version="1.0" ?>
-<robot name="darwinOP">
 
+<robot name="darwinOP">
   <link name="base_link"/>
-    <joint name="base_link_to_body" type="fixed">
-      <parent link="base_link"/>
-      <child link="MP_BODY"/>
-    </joint>
 
   <link name="MP_BODY">
     <inertial>
@@ -13,6 +9,7 @@
       <mass value="0.97559947"/>
       <inertia ixx="3.1081800"  ixy="-0.25460189"  ixz="2.0318174" iyy="6.3787776" iyz="0.16417863" izz="5.3316425" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -22,6 +19,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.102 0.109 0.106" />
@@ -35,6 +33,7 @@
       <mass value="0.024357719"/>
       <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -44,6 +43,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.045 0.022 0.0325" />
@@ -57,6 +57,7 @@
       <mass value="0.15804192"/>
       <inertia ixx="0.1239683"  ixy="0.000078494368"  ixz="0.000007645979" iyy="0.11783781" iyz="0.0012199205" izz="0.1583601" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -66,6 +67,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.0634 0.061 0.033" />
@@ -79,6 +81,7 @@
       <mass value="0.010"/>
       <inertia ixx="3.1081800"  ixy="-0.25460189"  ixz="2.0318174" iyy="6.3787776" iyz="0.16417863" izz="5.3316425" />
     </inertial>
+
     <visual>
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <geometry>
@@ -88,6 +91,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.001 0.001 0.001"  scale="1 1 1"/>
@@ -101,6 +105,7 @@
       <mass value="0.025913024"/>
       <inertia ixx="0.0097758165"  ixy="0.0016911839"  ixz="-0.00045174329" iyx="0.0016911839" iyy="0.010511104" iyz="0.00033406955" izx="-0.00045174329" izy="0.00033406955" izz="0.005476798" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -110,6 +115,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.016 0.033 0.02165" />
@@ -123,6 +129,7 @@
       <mass value="0.16837715"/>
       <inertia ixx="0.12202839"  ixy="-0.0020812626"  ixz="-0.00088143449" iyx="-0.0020812626" iyy="0.038088441" iyz="0.0018251448" izx="-0.00088143449" izy="0.0018251448" izz="0.11340830" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -132,6 +139,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.06 0.032 0.035" />
@@ -145,6 +153,7 @@
       <mass value="0.059288504"/>
       <inertia ixx="0.086855267"  ixy="0.0053020311"  ixz="0.00043636051" iyx="0.0053020311" iyy="0.021192085" iyz="-0.0064855932" izx="0.00043636051" izy="-0.0064855932" izz="0.086845450" />
     </inertial>
+
     <visual>
       <origin xyz="0.016 0.016 0" rpy="0 0 0" />
       <geometry>
@@ -154,6 +163,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <origin xyz="0.016 0.016 0" rpy="0 0 0" />
       <geometry>
@@ -168,6 +178,7 @@
       <mass value="0.010"/>
       <inertia ixx="3.1081800"  ixy="-0.25460189"  ixz="2.0318174" iyy="6.3787776" iyz="0.16417863" izz="5.3316425" />
     </inertial>
+
     <visual>
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <geometry>
@@ -177,6 +188,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.001 0.001 0.001" />
@@ -190,6 +202,7 @@
       <mass value="0.025913024"/>
       <inertia ixx="0.0097758165"  ixy="0.0016911839"  ixz="-0.00045174329" iyx="0.0016911839" iyy="0.010511104" iyz="0.00033406955" izx="-0.00045174329" izy="0.00033406955" izz="0.005476798" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 3.14" />
       <geometry>
@@ -199,6 +212,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <origin xyz="0 0 0" rpy="0 0 3.14" />
       <geometry>
@@ -213,6 +227,7 @@
       <mass value="0.16837715"/>
       <inertia ixx="0.12202839"  ixy="-0.0020812626"  ixz="-0.00088143449" iyx="-0.0020812626" iyy="0.038088441" iyz="0.0018251448" izx="-0.00088143449" izy="0.0018251448" izz="0.11340830" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="3.14 0 0" />
       <geometry>
@@ -222,6 +237,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.06 0.032 0.035" />
@@ -235,6 +251,7 @@
       <mass value="0.059288504"/>
       <inertia ixx="0.086855267"  ixy="0.0053020311"  ixz="0.00043636051" iyx="0.0053020311" iyy="0.021192085" iyz="-0.0064855932" izx="0.00043636051" izy="-0.0064855932" izz="0.086845450" />
     </inertial>
+
     <visual>
       <origin xyz="0.016 -0.016 0" rpy="0 0 0" />
       <geometry>
@@ -244,6 +261,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <origin xyz="0.016 -0.016 0" rpy="0 0 0" />
       <geometry>
@@ -258,6 +276,7 @@
       <mass value="0.167"/>
       <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" iyx="0.00071127469" iyy="0.11066637" iyz="-0.0071635476" izx="0.00081143913" izy="-0.0071635476" izz="0.041877668" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -267,6 +286,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.045 0.08175 0.028652" />
@@ -280,6 +300,7 @@
       <mass value="0.11904336"/>
       <inertia ixx="0.097950272"  ixy="0.0012119368"  ixz="-0.00021223016" iyx="0.00122119368" iyy="0.032848287" iyz="-0.0019474021" izx="-0.00021223016" izy="-0.0019474021" izz="0.11493509" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -289,6 +310,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.001 0.001 0.001" />
@@ -302,6 +324,7 @@
       <mass value="0.11904336"/>
       <inertia ixx="0.097950272"  ixy="0.0012119368"  ixz="-0.00021223016" iyx="0.00122119368" iyy="0.032848287" iyz="-0.0019474021" izx="-0.00021223016" izy="-0.0019474021" izz="0.11493509" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -311,6 +334,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.093 0.035 0.045" />
@@ -324,6 +348,7 @@
       <mass value="0.070309794"/>
       <inertia ixx="0.093369608"  ixy="-0.00093567395"  ixz="-0.00023992085" iyx="-0.00093567395" iyy="0.046295534" iyz="-0.012858493" izx="-0.00023992085" izy="-0.012858493" izz="0.11351516" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -333,6 +358,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.093 0.035 0.045" />
@@ -346,6 +372,7 @@
       <mass value="0.16710792"/>
       <inertia ixx="0.12079175"  ixy="-0.00079781067"  ixz="-0.00039322246" iyx="-0.00079781067" iyy="0.10885465" iyz="0.0070770117" izx="-0.00039322246" izy="0.0070770117" izz="0.041871103" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -355,6 +382,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.028652 0.08175 0.045" />
@@ -368,6 +396,7 @@
       <mass value="0.0794462"/>
       <inertia ixx="0.12079175"  ixy="-0.00079781067"  ixz="-0.00039322246" iyx="-0.00079781067" iyy="0.10885465" iyz="0.0070770117" izx="-0.00039322246" izy="0.0070770117" izz="0.041871103" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -377,6 +406,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.008 0.066 0.104" />
@@ -390,6 +420,7 @@
       <mass value="0.197"/>
       <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" iyx="0.00071127469" iyy="0.11066637" iyz="-0.0071635476" izx="0.00081143913" izy="-0.0071635476" izz="0.041877668" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -399,6 +430,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.045 0.08175 0.028652" />
@@ -412,6 +444,7 @@
       <mass value="0.11904336"/>
       <inertia ixx="0.097950272"  ixy="0.0012119368"  ixz="-0.00021223016" iyx="0.00122119368" iyy="0.032848287" iyz="-0.0019474021" izx="-0.00021223016" izy="-0.0019474021" izz="0.11493509" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -421,6 +454,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.001 0.001 0.001" />
@@ -434,6 +468,7 @@
       <mass value="0.11904336"/>
       <inertia ixx="0.097950272"  ixy="0.0012119368"  ixz="-0.00021223016" iyx="0.00122119368" iyy="0.032848287" iyz="-0.0019474021" izx="-0.00021223016" izy="-0.0019474021" izz="0.11493509" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -443,6 +478,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.093 0.035 0.045" />
@@ -456,6 +492,7 @@
       <mass value="0.070309794"/>
       <inertia ixx="0.093369608"  ixy="-0.00093567395"  ixz="-0.00023992085" iyx="-0.00093567395" iyy="0.046295534" iyz="-0.012858493" izx="-0.00023992085" izy="-0.012858493" izz="0.11351516" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -465,6 +502,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.093 0.035 0.045" />
@@ -478,6 +516,7 @@
       <mass value="0.16710792"/>
       <inertia ixx="0.12079175"  ixy="-0.00079781067"  ixz="-0.00039322246" iyx="-0.00079781067" iyy="0.10885465" iyz="0.0070770117" izx="-0.00039322246" izy="0.0070770117" izz="0.041871103" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -487,6 +526,7 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.028652 0.08175 0.045" />
@@ -500,6 +540,7 @@
       <mass value="0.0794462"/>
       <inertia ixx="0.12079175"  ixy="-0.00079781067"  ixz="-0.00039322246" iyx="-0.00079781067" iyy="0.10885465" iyz="0.0070770117" izx="-0.00039322246" izy="0.0070770117" izz="0.041871103" />
     </inertial>
+
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -509,13 +550,14 @@
         <color rgba="0.20 0.20 0.20 1.0"/>
       </material>
     </visual>
+
     <collision>
       <geometry>
         <box size="0.008 0.066 0.104" />
       </geometry>
     </collision>
   </link>
-  
+
   <link name="MP_PMDCAMBOARD" >
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -528,12 +570,28 @@
     </visual>
   </link>
 
+  <joint name="base_link_to_body" type="fixed">
+    <parent link="base_link"/>
+    <child link="MP_BODY"/>
+  </joint>
+
   <joint name="j_camboard" type="fixed">
     <parent link="MP_HEAD"/>
-	<child link="MP_PMDCAMBOARD" />
-	<origin xyz="0 0 0.0235" rpy="3.14159 1.5707963 0" />
-	<axis xyz="0 0 1" />
-	<limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <child link="MP_PMDCAMBOARD" />
+    <origin xyz="0 0 0.0235" rpy="3.14159 1.5707963 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <joint name="j_back_l" type="fixed">
+    <parent link="MP_BODY"/>
+    <child link="MP_BACK_L" />
+    <origin xyz="0 0.06035 0" rpy="-1.5707963 0 0" />
+  </joint>
+
+  <joint name="j_back_r" type="fixed">
+    <parent link="MP_BODY"/>
+    <child link="MP_BACK_R" />
+    <origin xyz="0 -0.06035 0" rpy="1.5707963 0 0" />
   </joint>
 
   <joint name="j_pan" type="revolute">
@@ -541,7 +599,7 @@
     <child link="MP_NECK" />
     <origin xyz="0 0 0.0235" rpy="0 0 1.5707963" />
     <axis xyz="0 0 1" />
-    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-1.5707963" upper="1.5707963" />
   </joint>
 
   <joint name="j_tilt" type="revolute">
@@ -549,14 +607,7 @@
     <child link="MP_HEAD" />
     <origin xyz="0 0 0.02715" rpy="-1.5707963 0 1.5707963" />
     <axis xyz="0 0 1" />
-    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
-  </joint>
-
-  <joint name="j_back_l" type="fixed">
-    <parent link="MP_BODY"/>
-    <child link="MP_BACK_L" />
-    <origin xyz="0 0.06035 0" rpy="-1.5707963 0 0" />
-    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-0.3926991" upper="0.7853981" />
   </joint>
 
   <joint name="j_shoulder_l" type="revolute">
@@ -572,7 +623,7 @@
     <child link="MP_ARM_HIGH_L" />
     <origin xyz="-0.016 0 0.02165" rpy="1.5707963 1.5707963 0" />
     <axis xyz="0 0 1" />
-    <limit effort="2.8" velocity="5.648668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.648668" lower="-1.5707963" upper="1.5707963" />
   </joint>
 
   <joint name="j_low_arm_l" type="revolute">
@@ -580,14 +631,7 @@
     <child link="MP_ARM_LOW_L" />
     <origin xyz="-0.06 0 -0.016" rpy="-1.5707963 3.14159 0" />
     <axis xyz="0 0 1" />
-    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
-  </joint>
-
-  <joint name="j_back_r" type="fixed">
-    <parent link="MP_BODY"/>
-    <child link="MP_BACK_R" />
-    <origin xyz="0 -0.06035 0" rpy="1.5707963 0 0" />
-    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="0" />
   </joint>
 
   <joint name="j_shoulder_r" type="revolute">
@@ -603,7 +647,7 @@
     <child link="MP_ARM_HIGH_R" />
     <origin xyz="0.016 0 0.02165" rpy="-1.5707963 1.5707963 0" />
     <axis xyz="0 0 1" />
-    <limit effort="2.8" velocity="5.648668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.648668" lower="-1.5707963" upper="1.5707963" />
   </joint>
 
   <joint name="j_low_arm_r" type="revolute">
@@ -611,7 +655,7 @@
     <child link="MP_ARM_LOW_R" />
     <origin xyz="-0.06 0 0.016" rpy="-1.5707963 3.14159 0" />
     <axis xyz="0 0 1" />
-    <limit effort="2.8" velocity="5.6548668" lower="-1.635" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="0" upper="2.6179939" />
   </joint>
 
   <joint name="j_pelvis_l" type="revolute">
@@ -619,7 +663,7 @@
     <child link="MP_PELVIS_L" />
     <origin xyz="-0.005 0.037 -0.09355" rpy="0 3.14159 -1.5707963" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-0.7853981" upper="0.7853981" />
   </joint>
 
   <joint name="j_thigh1_l" type="revolute">
@@ -627,7 +671,7 @@
     <child link="MP_THIGH1_L" />
     <origin xyz="0 0 0.028652" rpy="1.5707963 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-1.5707963" upper="1.5707963" />
   </joint>
 
   <joint name="j_thigh2_l" type="revolute">
@@ -635,7 +679,7 @@
     <child link="MP_THIGH2_L" />
     <origin xyz="0 0 0" rpy="1.5707963 0 -1.5707963" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-0.3926991" upper="1.5707963" />
   </joint>
 
   <joint name="j_tibia_l" type="revolute">
@@ -643,7 +687,7 @@
     <child link="MP_TIBIA_L" />
     <origin xyz="-0.093 0 0" rpy="0 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6548668" upper="0" />
   </joint>
 
   <joint name="j_ankle1_l" type="revolute">
@@ -651,7 +695,7 @@
     <child link="MP_ANKLE1_L" />
     <origin xyz="-0.093 0 0" rpy="3.14159 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-1.5" upper="0.7" />
   </joint>
 
   <joint name="j_ankle2_l" type="revolute">
@@ -659,7 +703,7 @@
     <child link="MP_ANKLE2_L" />
     <origin xyz="0 0 0" rpy="-1.5707963 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-0.7" upper="0.7" />
   </joint>
 
   <joint name="j_pelvis_r" type="revolute">
@@ -667,7 +711,7 @@
     <child link="MP_PELVIS_R" />
     <origin xyz="-0.005 -0.037 -0.09355" rpy="0 3.14159 1.5707963" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-0.7853981" upper="0.7853981" />
   </joint>
 
   <joint name="j_thigh1_r" type="revolute">
@@ -675,7 +719,7 @@
     <child link="MP_THIGH1_R" />
     <origin xyz="0 0 0.028652" rpy="-1.5707963 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-1.5707963" upper="1.5707963" />
   </joint>
 
   <joint name="j_thigh2_r" type="revolute">
@@ -683,7 +727,7 @@
     <child link="MP_THIGH2_R" />
     <origin xyz="0 0 0" rpy="1.5707963 0 -1.5707963" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-1.5707963" upper="0.3926991" />
   </joint>
 
   <joint name="j_tibia_r" type="revolute">
@@ -691,7 +735,7 @@
     <child link="MP_TIBIA_R" />
     <origin xyz="0.093 0 0" rpy="0 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="0" upper="2.6179939" />
   </joint>
 
   <joint name="j_ankle1_r" type="revolute">
@@ -699,7 +743,7 @@
     <child link="MP_ANKLE1_R" />
     <origin xyz="0.093 0 0" rpy="3.14159 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-0.7" upper="1.5" />
   </joint>
 
   <joint name="j_ankle2_r" type="revolute">
@@ -707,9 +751,9 @@
     <child link="MP_ANKLE2_R" />
     <origin xyz="0 0 0" rpy="-1.5707963 0 0" />
     <axis xyz="0 0 1" />
-    <limit effort="10" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <limit effort="2.8" velocity="5.6548668" lower="-0.7" upper="0.7" />
   </joint>
-  
+
   <transmission name="t_j_pan">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_pan">
@@ -720,7 +764,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_tilt">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_tilt">
@@ -731,7 +775,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_shoulder_l">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_shoulder_l">
@@ -742,7 +786,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_high_arm_l">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_high_arm_l">
@@ -753,7 +797,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_low_arm_l">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_low_arm_l">
@@ -764,7 +808,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_shoulder_r">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_shoulder_r">
@@ -775,7 +819,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_high_arm_r">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_high_arm_r">
@@ -786,7 +830,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_low_arm_r">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_low_arm_r">
@@ -797,7 +841,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_pelvis_l">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_pelvis_l">
@@ -808,7 +852,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_thigh1_l">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_thigh1_l">
@@ -819,7 +863,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_thigh2_l">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_thigh2_l">
@@ -830,7 +874,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_tibia_l">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_tibia_l">
@@ -841,7 +885,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_ankle1_l">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_ankle1_l">
@@ -852,7 +896,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_ankle2_l">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_ankle2_l">
@@ -863,7 +907,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_pelvis_r">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_pelvis_r">
@@ -874,7 +918,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_thigh1_r">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_thigh1_r">
@@ -885,7 +929,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_thigh2_r">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_thigh2_r">
@@ -896,7 +940,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_tibia_r">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_tibia_r">
@@ -907,7 +951,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_ankle1_r">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_ankle1_r">
@@ -918,7 +962,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  
+
   <transmission name="t_j_ankle2_r">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="j_ankle2_r">
