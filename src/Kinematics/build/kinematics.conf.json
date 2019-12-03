@@ -7,7 +7,8 @@
 		"Solver names": {
 			"FK": [
 				{"Forward": "CustomMultipleFK"},
-				{"Forward": "SimpleForSerialLink"}
+				{"Forward": "SimpleForSerialLink"},
+				{"Forward": "GankenKunFK"}
 			],
 			"IK": [
 				{"Inverse": "CustomMultipleIK"},
@@ -19,8 +20,8 @@
 		]
 	},
 	"Assign solver": {
-		"Forward": "SimpleForSerialLink",
-		"Inverse": "LevenbergMarquardtForSerialLink"
+		"Forward": "GankenKunFK",
+		"Inverse": "CustomMultipleIK"
 	},
 	"Model": {
 		"Directory": "../../../data/urdf/",
