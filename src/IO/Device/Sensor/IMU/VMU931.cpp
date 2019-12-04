@@ -16,13 +16,16 @@ namespace IO {
 	namespace Device {
 		namespace Sensor {
 			namespace IMU {
-				VMU931::VMU931(RobotStatus::InformationPtr &robot_status_information) : InertialMeasurementUnit() {
-					robo_info = robot_status_information;
+				VMU931::VMU931(RobotStatus::InformationPtr &robot_status_information) : InertialMeasurementUnit(robot_status_information) {
+					this->robo_info->create_quat_data_space();
+					this->robo_info->create_euler_data_space();
+				}
 
-					robo_info->create_quat_data_space();
-					robo_info->create_euler_data_space();
+				VMU931::~VMU931() {
+				}
 
-					simple_serial_controller = std::make_unique<Communicator::SerialController::Simple>();
+				std::string VMU931::get_key() {
+					return "VMU931";
 				}
 
 				void VMU931::enable(const VMU931::Streams &streams) {
@@ -50,56 +53,54 @@ namespace IO {
 				}
 
 				void VMU931::launch() {
-					if(!simple_serial_controller) {
+					if(!this->command_controller) {
 						throw std::runtime_error("Not exist serial controller pointer from IO::Device::Sensor::IMU::VMU931");
 					}
 
-					simple_serial_controller->register_parse(
+					this->command_controller->register_parse(
 							[this](const ReadBuffer &read_buffer, const Length &bytes) {
 								return packet_splitter(read_buffer, bytes);
 							}
 					);
-					simple_serial_controller->set_packet(streaming_list);
-					simple_serial_controller->port_name(this->port_name());
+					this->command_controller->set_packet(streaming_list);
 
-					simple_serial_controller->launch();
+					this->command_controller->launch();
 				}
 
 				void VMU931::async_launch() {
-					if(!simple_serial_controller) {
+					if(!this->command_controller) {
 						throw std::runtime_error("Not exist serial controller pointer from IO::Device::Sensor::IMU::VMU931");
 					}
 
-					simple_serial_controller->register_parse(
+					this->command_controller->register_parse(
 							[this](const ReadBuffer &read_buffer, const Length &bytes) {
 								return packet_splitter(read_buffer, bytes);
 							}
 					);
-					simple_serial_controller->set_packet(streaming_list);
-					simple_serial_controller->port_name(this->port_name());
+					this->command_controller->set_packet(streaming_list);
 
-					simple_serial_controller->async_launch();
+					this->command_controller->async_launch();
 				}
 
 				void VMU931::create_data_space(const Streams &stream) {
 					switch(stream) {
 						case Streams::Accelerometers :
-							robo_info->create_accel_data_space();
+							this->robo_info->create_accel_data_space();
 							break;
 						case Streams::Gyroscopes :
-							robo_info->create_gyro_data_space();
+							this->robo_info->create_gyro_data_space();
 							break;
 						case Streams::Magnetometers :
-							robo_info->create_magnet_data_space();
+							this->robo_info->create_magnet_data_space();
 							break;
 						case Streams::EulerAngles :
-							robo_info->create_euler_data_space();
+							this->robo_info->create_euler_data_space();
 							break;
 						case Streams::Quaternions :
-							robo_info->create_quat_data_space();
+							this->robo_info->create_quat_data_space();
 							break;
 						case Streams::Heading :
-							robo_info->create_head_data_space();
+							this->robo_info->create_head_data_space();
 							break;
 					}
 				}
@@ -176,39 +177,40 @@ namespace IO {
 				}
 
 				void VMU931::packet_parse(const ReadBuffer &read_buffer, const uint8_t &head_position) {
-					switch(static_cast<Streams>(read_buffer.at(head_position + 2))) {
+					constexpr auto head_size = 2;
+					switch(static_cast<Streams>(read_buffer.at(head_position + head_size))) {
 						case Streams::Accelerometers :
-							robo_info->accelerometers_data->set(
+							this->robo_info->accelerometers_data->set(
 									vector3_parser(read_buffer, head_position),
 									timestamp_parser<uint64_t>(read_buffer, head_position)
 							);
 							break;
 						case Streams::Gyroscopes :
-							robo_info->gyroscopes_data->set(
+							this->robo_info->gyroscopes_data->set(
 									vector3_parser(read_buffer, head_position),
 									timestamp_parser<uint64_t>(read_buffer, head_position)
 							);
 							break;
 						case Streams::Magnetometers :
-							robo_info->magnetometers_data->set(
+							this->robo_info->magnetometers_data->set(
 									vector3_parser(read_buffer, head_position),
 									timestamp_parser<uint64_t>(read_buffer, head_position)
 							);
 							break;
 						case Streams::EulerAngles :
-							robo_info->eulerangles_data->set(
+							this->robo_info->eulerangles_data->set(
 									vector3_parser(read_buffer, head_position),
 									timestamp_parser<uint64_t>(read_buffer, head_position)
 							);
 							break;
 						case Streams::Quaternions :
-							robo_info->quaternions_data->set(
+							this->robo_info->quaternions_data->set(
 									vector4_parser(read_buffer, head_position),
 									timestamp_parser<uint64_t>(read_buffer, head_position)
 							);
 							break;
 						case Streams::Heading :
-							robo_info->heading_data->set(
+							this->robo_info->heading_data->set(
 									heading_parser(read_buffer, head_position),
 									timestamp_parser<uint64_t>(read_buffer, head_position)
 							);

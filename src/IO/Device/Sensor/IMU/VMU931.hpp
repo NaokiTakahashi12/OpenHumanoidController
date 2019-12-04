@@ -9,8 +9,9 @@
 
 #pragma once
 
-#include "../../../Communicator/SerialController/Simple.hpp"
 #include "InertialMeasurementUnit.hpp"
+
+#include "../../../Communicator/SerialController/SerialControllerBase.hpp"
 
 namespace IO {
 	namespace Device {
@@ -20,6 +21,10 @@ namespace IO {
 				class VMU931 final : public InertialMeasurementUnit {
 					public :
 						VMU931(RobotStatus::InformationPtr &);
+
+						~VMU931();
+
+						static std::string get_key();
 
 						void enable(const Streams &) override final;
 						void enable_all() override final;
@@ -35,10 +40,6 @@ namespace IO {
 								  		  		 data_end_bit = 0x04;
 
 						static constexpr auto streams_prefix = "var";
-
-						RobotStatus::InformationPtr robo_info;
-
-						std::unique_ptr<Communicator::SerialController::Simple> simple_serial_controller;
 
 						Communicator::SerialFlowScheduler::SinglePacket streaming_list;
 
