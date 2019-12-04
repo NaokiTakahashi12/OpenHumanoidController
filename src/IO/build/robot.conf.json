@@ -4,8 +4,12 @@
 			"Robot type": "Humanoid"
 		}
 	},
-	"Robot type": "Humanoid",
-	"URDF file": "../../../data/urdf/DARwInIO.urdf",
-	"Actuator config file": "actuator.conf.json",
-	"Sensor config file": "sensor.conf.json"
+	"IO": {
+		"Serial port config file": "serial_port.conf.json",
+		"Devices": {
+			"Control board config file": "control_board.conf.json",
+			"Actuator config file": "actuator.conf.json",
+			"Sensor config file": "sensor.conf.json"
+		}
+	}
 }

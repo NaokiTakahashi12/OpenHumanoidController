@@ -289,7 +289,8 @@ namespace IO {
 				}
 
 				bool is_exist_header(const Packet &packet, const unsigned int &head_position) {
-					for(auto i = head_position; i < head_position + number_of_header_size; ++ i) {
+					auto maximum_packet_header_range = head_position + number_of_header_size;
+					for(auto i = head_position; i < maximum_packet_header_range; ++ i) {
 						if(header.at(i - head_position) != packet.at(i)) {
 							return false;
 						}
@@ -298,7 +299,8 @@ namespace IO {
 				}
 
 				bool is_exist_header(const ReadBuffer &read_buffer, const unsigned int &head_position) {
-					for(auto i = head_position; i < head_position + number_of_header_size; ++ i) {
+					auto maximum_packet_header_range = head_position + number_of_header_size;
+					for(auto i = head_position; i < maximum_packet_header_range; ++ i) {
 						if(static_cast<Byte>(header.at(i - head_position)) != read_buffer.at(i)) {
 							return false;
 						}

@@ -13,5 +13,5 @@
 	},
 	"Servo motor": "MX28",
 	"Control board": "CM730",
-	"Servo motor device path": "/dev/ttyUSB0"
+	"Servo motor device port": "/dev/ttyUSB0"
 }

@@ -9,26 +9,39 @@
 
 #pragma once
 
-#include "SerialControlBoardBase.hpp"
+#include "../SerialDeviceBase.hpp"
+
+#include <RobotStatus/Information.hpp>
+
+#include "../../Communicator/SerialReturnPacket.hpp"
+#include "../../Communicator/SerialController/SerialControllerBase.hpp"
 
 namespace IO {
 	namespace Device {
 		namespace ControlBoard {
-			template <class CONTROLLER>
-			class SerialControlBoard : public SerialControlBoardBase {
+			class SerialControlBoard : public SerialDeviceBase<Communicator::SerialController::SerialControllerBase> {
 				protected :
-					using CommandControllerPtr = std::shared_ptr<CONTROLLER>;
-
-					CommandControllerPtr command_controller;
+					using SendPacket = Communicator::SerialFlowScheduler::SinglePacket;
+					using WriteValue = Communicator::SerialFlowScheduler::Byte;
 
 				public :
+					using ID = Communicator::SerialReturnPacket::PacketID;
+
 					SerialControlBoard(RobotStatus::InformationPtr &);
 					SerialControlBoard(const ID &, RobotStatus::InformationPtr &);
-
-					void register_controller(CommandControllerPtr &);
+					virtual ~SerialControlBoard();
 
 					virtual void ping(),
 								 enable_power(const bool &flag);
+
+					ID &id() const;
+					void id(const ID &);
+
+				protected :
+					RobotStatus::InformationPtr robo_info;
+
+				private :
+					std::unique_ptr<ID> device_id;
 			};
 		}
 	}

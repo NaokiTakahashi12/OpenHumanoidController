@@ -24,7 +24,11 @@ namespace IO {
 	}
 
 	void Robot::set_config(const std::string &filename) {
-		robot_config = std::make_unique<LoadConfig::RobotConfig>(filename, robo_info->logger);
+		robot_config = std::make_unique<LoadConfig::RobotConfig>("./", filename, robo_info->logger);
+	}
+
+	void Robot::set_config(const std::string &dir, const std::string &filename) {
+		robot_config = std::make_unique<LoadConfig::RobotConfig>(dir, filename, robo_info->logger);
 	}
 
 	template <>

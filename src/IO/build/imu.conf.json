@@ -1,20 +1,20 @@
 {
 	"Commnet" : {
-		"Support IMU": {
-			"IMU": "None",
-			"IMU": "Virtual",
-			"IMU": "VMU931"
-		}
+	},
+	"Support IMU": {
+		"IMU": "None",
+		"IMU": "Virtual",
+		"IMU": "VMU931"
 	},
 
 	"IMU" : "VMU931",
-
 	"Enable list" : {
 		"Accelerometers" : true,
 		"Gyroscopes" : true,
 		"Magnetometers" : true,
-		"Quaternions" : true,
-		"EulerAngles" : true,
+		"Quaternions" : false,
+		"EulerAngles" : false,
 		"Heading" : true
-	}
+	},
+	"Serial ID": 2
 }

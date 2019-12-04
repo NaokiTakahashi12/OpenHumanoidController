@@ -1,0 +1,26 @@
+{
+	"Commnet": {
+	},
+	"Support": {
+		"Serial control types": [
+			{"Serial controller": "Dynamixel"},
+			{"Serial controller": "Simple"}
+		]
+	},
+	"Serial control": [
+		{
+			"Serial controller": "Simple",
+			"Port": "/dev/ttyACM0",
+			"Baud rate": 115200,
+			"Timeout[ms]": 5,
+			"Serial ID": 2
+		},
+		{
+			"Serial controller": "Dynamixel",
+			"Port": "/dev/ttyUSB0",
+			"Baud rate": 1000000,
+			"Timeout[ms]": 8,
+			"Serial ID": 1
+		}
+	]
+}

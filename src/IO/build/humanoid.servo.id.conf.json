@@ -1,6 +1,7 @@
 {
 	"Comment": {
 	},
+	"Sum number of servo": 20,
 	"Servo motor ID": {
 		"Head yaw": 19,
 		"Head pitch": 20,

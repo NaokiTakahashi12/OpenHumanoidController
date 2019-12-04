@@ -11,11 +11,9 @@
 #include <iostream>
 
 #include <Tools/CommandLineArgumentReader.hpp>
-#include <Tools/Log/Logger.hpp>
 
 #include <RobotStatus/Information.hpp>
 
-#include "Communicator/SerialFlowScheduler.hpp"
 #include "Communicator/TCP.hpp"
 
 #include "Device/Sensor/IMU/VMU931.hpp"
@@ -27,10 +25,13 @@
 #include "Device/Actuator/ServoMotor/MX28.hpp"
 #include "Device/Actuator/ServoMotor/SerialServoMotor.hpp"
 
+#include "SerialDeviceSelector.hpp"
+#include "Communicator/SerialControlSelector.hpp"
 #include "DeviceManager.hpp"
 
 #include "Communicator/Protocols/DynamixelVersion1.hpp"
 #include "Communicator/SerialController/Dynamixel.hpp"
+#include "Communicator/SerialController/Simple.hpp"
 
 #include "Robot.hpp"
 
@@ -40,29 +41,38 @@ int main(int argc, char **argv) {
 	auto robo_info = std::make_shared<RobotStatus::Information>(argc, argv);
 	auto logger = robo_info->logger;
 
+	logger->start_loger_thread();
+
 	try {
-		logger->start_loger_thread();
 		logger->message(Tools::Log::MessageLevels::warning, "This is IO test code");
 		logger->message(Tools::Log::MessageLevels::info, "IO module test start");
 		logger->message(Tools::Log::MessageLevels::debug, "Starttime access count of " + std::to_string(logger.use_count()));
 		logger->message(Tools::Log::MessageLevels::info, "");
 
 		Tools::CommandLineArgumentReader clar(argc, argv);
-        std::string imu_port_name = clar.get("-imu");
-		std::string servo_port_name = clar.get("-servo");
+        std::string imu_port_name = clar.get("--imu");
+		std::string servo_port_name = clar.get("--servo");
 
 		auto robot = std::make_unique<IO::Robot>(robo_info);
 
 		if(!servo_port_name.empty()) {
 			logger->message(Tools::Log::MessageLevels::info, "Servo control device name is " + servo_port_name);
-			auto serial_controller = std::make_shared<IO::Communicator::SerialController::Dynamixel>();
-			auto control_board = std::make_unique<IO::Device::ControlBoard::CM730>(robo_info);
-			auto serial_servo_motors = std::vector<IO::Device::Actuator::ServoMotor::MX28>();
+
+			auto command_control_selector = std::make_unique<IO::Communicator::SerialControlSelector>();
+			auto device_selector = std::make_unique<IO::SerialDeviceSelector<IO::Device::ControlBoard::SerialControlBoard>>(robo_info);
+
+			auto serial_controller = command_control_selector->choice_shared_object("Dynamixel");
+			auto control_board = device_selector->choice_object("CM730");
+
+			auto serial_servo_motors = std::vector<std::unique_ptr<IO::Device::Actuator::ServoMotor::SerialServoMotor>>();
 
 			control_board->register_controller(serial_controller);
+
 			for(auto i = 1; i <= 20; ++ i) {
-				serial_servo_motors.push_back(IO::Device::Actuator::ServoMotor::MX28(i, robo_info));
-				serial_servo_motors.back().register_controller(serial_controller);
+				serial_servo_motors.push_back(
+					std::make_unique<IO::Device::Actuator::ServoMotor::MX28>(i, robo_info)
+				);
+				serial_servo_motors.back()->register_controller(serial_controller);
 			}
 
 			serial_controller->port_name(servo_port_name);
@@ -72,15 +82,27 @@ int main(int argc, char **argv) {
 			control_board->enable_power(true);
 			std::this_thread::sleep_for(std::chrono::milliseconds(50));
             for(auto &&ssm : serial_servo_motors) {
-				ssm.enable_torque(true);
+				ssm->enable_torque(true);
 				std::this_thread::sleep_for(std::chrono::milliseconds(50));
             }
             for(auto &&ssm : serial_servo_motors) {
-				ssm.write_gain(1, 0, 0);
+				ssm->write_gain(1, 1, 1);
 				std::this_thread::sleep_for(std::chrono::milliseconds(50));
             }
+			serial_controller->wait_for_send_packets();
+			std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
 			while(true) {
-				serial_controller->wait_for_send_packets();
+				std::stringstream ss;
+				for(unsigned int i = 0; i < serial_servo_motors.size(); i ++) {
+					std::string string_angle_of_degree = clar.get("-angular" + std::to_string(i + 1));
+					if(!string_angle_of_degree.empty()) {
+						auto angle_of_degree = std::stof(string_angle_of_degree);
+						ss << "ID" + std::to_string(i + 1) + ": " << angle_of_degree << " ";
+						serial_servo_motors.at(i)->write_angle(angle_of_degree);
+					}
+				}
+				logger->message(Tools::Log::MessageLevels::debug, ss.str());
 			}
 		}
 		else {
@@ -89,19 +111,32 @@ int main(int argc, char **argv) {
 
 		if(!imu_port_name.empty()) {
 			logger->message(Tools::Log::MessageLevels::info, "IMU device name is " + imu_port_name);
-			auto imu_device = std::make_unique<IO::Device::Sensor::IMU::VMU931>(robo_info);
+
+			auto command_control_selector = std::make_unique<IO::Communicator::SerialControlSelector>();
+			auto device_selector = std::make_unique<IO::SerialDeviceSelector<IO::Device::Sensor::IMU::InertialMeasurementUnit>>(robo_info);
+
+			auto command_controller = command_control_selector->choice_shared_object("Simple");
+			auto imu_device = device_selector->choice_object("VMU931");
+
+			imu_device = std::make_unique<IO::Device::Sensor::IMU::VMU931>(robo_info);
+			command_controller = std::make_shared<IO::Communicator::SerialController::Simple>();
+			command_controller->port_name(imu_port_name);
+
+			imu_device->register_controller(command_controller);
 
 			imu_device->enable_all();
 			logger->message(Tools::Log::MessageLevels::info, "Enable IMU functions");
-			imu_device->port_name(imu_port_name);
-			logger->message(Tools::Log::MessageLevels::info, "Set IMU port name");
+
 			imu_device->async_launch();
 			logger->message(Tools::Log::MessageLevels::info, "IMU launch");
 
 			while(true) {
 				RobotStatus::TimeSeriesData<Tools::Math::Vector3<float>> accel, euler, gyro;
+				RobotStatus::TimeSeriesData<Tools::Math::Vector4<float>> q;
+
 				if(robo_info->accelerometers_data) {
 					const auto current_accel = robo_info->accelerometers_data->latest();
+
 					if(current_accel != accel) {
 						accel = current_accel;
 						std::stringstream ss;
@@ -109,8 +144,12 @@ int main(int argc, char **argv) {
 						logger->message(Tools::Log::MessageLevels::debug, ss.str());
 					}
 				}
+				else {
+					logger->message(Tools::Log::MessageLevels::debug, "Not found accelerometers");
+				}
 				if(robo_info->eulerangles_data) {
 					const auto current_euler = robo_info->eulerangles_data->latest();
+
 					if(current_euler != euler) {
 						euler = current_euler;
 						std::stringstream ss;
@@ -118,12 +157,29 @@ int main(int argc, char **argv) {
 						logger->message(Tools::Log::MessageLevels::debug, ss.str());
 					}
 				}
+				else {
+					logger->message(Tools::Log::MessageLevels::debug, "Not found eulerangles");
+				}
 				if(robo_info->gyroscopes_data) {
 					const auto current_gyro = robo_info->gyroscopes_data->latest();
+
 					if(current_gyro != gyro) {
 						gyro = current_gyro;
 						std::stringstream ss;
 						ss << "gyr: " << gyro.value.transpose() << "\t" << gyro.timestamp << "\t";
+						logger->message(Tools::Log::MessageLevels::debug, ss.str());
+					}
+				}
+				else {
+					logger->message(Tools::Log::MessageLevels::debug, "Not found gyroscopes");
+				}
+				if(robo_info->quaternions_data) {
+					const auto current_q = robo_info->quaternions_data->latest();
+
+					if(current_q != q) {
+						q = current_q;
+						std::stringstream ss;
+						ss << "Qua: " << q.value.transpose() << "\t" << q.timestamp << "\t";
 						logger->message(Tools::Log::MessageLevels::debug, ss.str());
 					}
 				}
@@ -199,11 +255,76 @@ int main(int argc, char **argv) {
 
 		logger->message(Tools::Log::MessageLevels::info, "Load RobotConfig debug");
 		robo_info->set_config_filename<RobotStatus::Information::RobotType::Humanoid>("robot.conf.json");
-		robo_info->set_config_filename<RobotStatus::Information::DeviceType::Sensor>("sensor.conf.json");
-		robo_info->set_config_filename<RobotStatus::Information::DeviceType::Actuator>("actuator.conf.json");
+		//robo_info->set_config_filename<RobotStatus::Information::DeviceType::Sensor>("sensor.conf.json");
+		//robo_info->set_config_filename<RobotStatus::Information::DeviceType::Actuator>("actuator.conf.json");
 
-		auto device_manager = std::make_unique<IO::DeviceManager>(robo_info, logger);
-		device_manager->update_config();
+		{
+			auto device_manager = std::make_unique<IO::DeviceManager>(robo_info, logger);
+			device_manager->spawn_device();
+			device_manager->launch_device();
+
+			while(true) {
+				static int i;
+
+				if(i > 100000) {
+					break;
+				}
+				i ++;
+
+				RobotStatus::TimeSeriesData<Tools::Math::Vector3<float>> accel, euler, gyro;
+				RobotStatus::TimeSeriesData<Tools::Math::Vector4<float>> q;
+
+				if(robo_info->accelerometers_data) {
+					const auto current_accel = robo_info->accelerometers_data->latest();
+
+					if(current_accel != accel) {
+						accel = current_accel;
+						std::stringstream ss;
+						ss << "acc: " << accel.value.transpose() << "\t" << accel.timestamp << "\t";
+						logger->message(Tools::Log::MessageLevels::debug, ss.str());
+					}
+				}
+				else {
+					logger->message(Tools::Log::MessageLevels::debug, "Not found accelerometers");
+				}
+				if(robo_info->eulerangles_data) {
+					const auto current_euler = robo_info->eulerangles_data->latest();
+
+					if(current_euler != euler) {
+						euler = current_euler;
+						std::stringstream ss;
+						ss << "ang: " << euler.value.transpose() << "\t" << euler.timestamp << "\t";
+						logger->message(Tools::Log::MessageLevels::debug, ss.str());
+					}
+				}
+				else {
+					logger->message(Tools::Log::MessageLevels::debug, "Not found eulerangles");
+				}
+				if(robo_info->gyroscopes_data) {
+					const auto current_gyro = robo_info->gyroscopes_data->latest();
+
+					if(current_gyro != gyro) {
+						gyro = current_gyro;
+						std::stringstream ss;
+						ss << "gyr: " << gyro.value.transpose() << "\t" << gyro.timestamp << "\t";
+						logger->message(Tools::Log::MessageLevels::debug, ss.str());
+					}
+				}
+				else {
+					logger->message(Tools::Log::MessageLevels::debug, "Not found gyroscopes");
+				}
+				if(robo_info->quaternions_data) {
+					const auto current_q = robo_info->quaternions_data->latest();
+
+					if(current_q != q) {
+						q = current_q;
+						std::stringstream ss;
+						ss << "Qua: " << q.value.transpose() << "\t" << q.timestamp << "\t";
+						logger->message(Tools::Log::MessageLevels::debug, ss.str());
+					}
+				}
+			}
+		}
 
 		logger->message(Tools::Log::MessageLevels::info, "");
 	}

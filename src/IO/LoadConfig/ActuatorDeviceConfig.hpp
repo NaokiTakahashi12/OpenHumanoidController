@@ -15,68 +15,66 @@
 
 #include <Tools/Log/Logger.hpp>
 
+#include "SerialPortConfig.hpp"
+
 namespace IO {
 	namespace LoadConfig {
 		class ActuatorDeviceConfig : public LoadConfigBase {
 			public :
-				ActuatorDeviceConfig(const std::string &config_file_name);
-				ActuatorDeviceConfig(const std::string &config_file_name, Tools::Log::LoggerPtr &);
+				ActuatorDeviceConfig(const std::string &config_dir, const std::string &config_file_name);
+				ActuatorDeviceConfig(const std::string &config_dir, const std::string &config_file_name, Tools::Log::LoggerPtr &);
 
 				ActuatorDeviceConfig(const ActuatorDeviceConfig &) = delete;
 
-				struct ServoMotorConfigData {
-					using IDIdentityMap = std::unordered_map<std::string, int>;
-					std::vector<int> id_list;
-					IDIdentityMap id_map;
-					std::string path,
-								control_board_name,
-								servo_name;
+				struct SerialServoMotorData {
+					using JointID = int;
+					using DeviceName = std::string;
+					//! Map key
+					using DeviceID = int;
+
+					JointID joint_id;
+					DeviceName name;
+
+					SerialPortConfig::SerialControlData::SerialID serial_id;
 				};
 
-				std::unique_ptr<ServoMotorConfigData> servomotor_config;
+				struct ActuatorDeviceData {
+					using SerialServoMotorMap = std::unordered_map<SerialServoMotorData::DeviceID, SerialServoMotorData>;
+
+					SerialServoMotorMap serial_motor;
+				};
+
+				std::unique_ptr<ActuatorDeviceData> config_data;
 
 				void update() override final;
 				void force_update() override final;
 
 			private :
+				std::string config_dir;
 				std::string config_file_name;
 
 				Tools::Log::LoggerPtr logger_ptr;
 
-				const std::string servo_config_file_name = "Servo motor config file",
-								  servo_id_config_file_name = "Servo motor id config file",
-								  servo_type_name = "Servo motor",
-								  control_board_type_name = "Control board",
-								  servo_path_name = "Servo motor device path";
+				const std::string serial_servo_motor_config_key = "Serial servo motor config";
 
-				const std::string servomotor_id_head_name = "Servo motor ID.";
+				const std::string serial_servo_motor_tree_key = "Serial Servo Motor",
+					  			  serial_servo_id_key         = "ID",
+								  serial_servo_name_key       = "Motor type",
+								  serial_servo_serial_id_key  = "Serial ID";
 
-				const std::vector<std::string> id_config_identities = {
-					"Head yaw",
-					"Head pitch",
-					"Left shoulder pitch",
-					"Left shoulder roll",
-					"Left elbow",
-					"Right shoulder pitch",
-					"Right shoulder roll",
-					"Right elbow",
-					"Left hip yaw",
-					"Left hip roll",
-					"Left hip pitch",
-					"Left knee",
-					"Left ankle pitch",
-					"Left ankle roll",
-					"Right hip yaw",
-					"Right hip roll",
-					"Right hip pitch",
-					"Right knee",
-					"Right ankle pitch",
-					"Right ankle roll",
-				};
+				const std::string angle_id_tree_key  = "Angle ID",
+					  			  angle_id_key       = "ID",
+								  angle_motor_id_key = "Motor ID";
 
-				void update_serial_servo_config();
 
-				void print_out_status();
+				void load_config();
+				void load_serial_servo_config(const std::string &);
+
+				void serial_servo_data_assertion();
+				void check_full_config_data();
+
+				void print_serial_servo_from_logger();
+
 		};
 	}
 }

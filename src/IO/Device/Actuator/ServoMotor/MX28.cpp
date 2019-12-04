@@ -23,10 +23,18 @@ namespace IO {
 				MX28::MX28(const ID &new_id, RobotStatus::InformationPtr &robot_status_information_ptr) : SerialServoMotor(new_id, robot_status_information_ptr) {
 				}
 
+				MX28::~MX28() {
+				}
+
+				std::string MX28::get_key() {
+					return "MX28";
+				}
+
 				void MX28::ping() {
 					if(!command_controller) {
 						throw std::runtime_error("Can not access serial controller from IO::Device::Actuator::ServoMotor::MX28");
 					}
+
 					command_controller->set_packet(Communicator::Protocols::DynamixelVersion1::create_ping_packet(id()));
 				}
 
@@ -34,6 +42,7 @@ namespace IO {
 					if(!command_controller) {
 						throw std::runtime_error("Can not access serial controller from IO::Device::Actuator::ServoMotor::MX28");
 					}
+
 					command_controller->set_packet(create_switch_torque_packet(flag, id()));
 				}
 
@@ -47,6 +56,7 @@ namespace IO {
 					if(!command_controller) {
 						throw std::runtime_error("Can not access serial controller from IO::Device::Actuator::ServoMotor::MX28");
 					}
+
 					command_controller->set_packet(create_angle_write_packet(degree, id()));
 				}
 
@@ -54,6 +64,7 @@ namespace IO {
 					if(!command_controller) {
 						throw std::runtime_error("Can not access serial controller from IO::Device::Actuator::ServoMotor::MX28");
 					}
+
 					command_controller->set_packet(create_write_p_gain_packet(gain, id()));
 				}
 
@@ -61,6 +72,7 @@ namespace IO {
 					if(!command_controller) {
 						throw std::runtime_error("Can not access serial controller from IO::Device::Actuator::ServoMotor::MX28");
 					}
+
 					command_controller->set_packet(create_write_i_gain_packet(gain, id()));
 				}
 
@@ -68,6 +80,7 @@ namespace IO {
 					if(!command_controller) {
 						throw std::runtime_error("Can not access serial controller from IO::Device::Actuator::ServoMotor::MX28");
 					}
+
 					command_controller->set_packet(create_write_d_gain_packet(gain, id()));
 				}
 
@@ -110,7 +123,7 @@ namespace IO {
 				}
 
 				MX28::SendPacket MX28::create_angle_write_packet(const float &degree, const ID &id) const {
-					Communicator::Protocols::DynamixelVersion1::Bytes write_degree_bytes;
+					static Communicator::Protocols::DynamixelVersion1::Bytes write_degree_bytes;
 					const short degree_write_value = degree * 10;
 
 					write_degree_bytes = static_cast<uint8_t>(Tools::Byte::low_byte(degree_write_value));

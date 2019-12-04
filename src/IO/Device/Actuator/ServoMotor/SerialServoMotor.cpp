@@ -10,51 +10,52 @@
 
 #include <stdexcept>
 
-#include "../../../Communicator/SerialController/Dynamixel.hpp"
-
 namespace IO {
 	namespace Device {
 		namespace Actuator {
 			namespace ServoMotor {
-				template <class CONTROLLER>
-				SerialServoMotor<CONTROLLER>::SerialServoMotor(RobotStatus::InformationPtr &robot_status_information_ptr) : SerialServoMotorBase(robot_status_information_ptr) {
+				SerialServoMotor::SerialServoMotor(RobotStatus::InformationPtr &robot_status_information_ptr) {
+					this->robo_info = robot_status_information_ptr;
 				}
 
-				template <class CONTROLLER>
-				SerialServoMotor<CONTROLLER>::SerialServoMotor(const ID &new_id, RobotStatus::InformationPtr &robot_status_information_ptr) : SerialServoMotorBase(new_id, robot_status_information_ptr) {
+				SerialServoMotor::SerialServoMotor(const ID &new_id, RobotStatus::InformationPtr &robot_status_information_ptr) : SerialServoMotor(robot_status_information_ptr) {
+					id(new_id);
 				}
 
-				template <class CONTROLLER>
-				void SerialServoMotor<CONTROLLER>::register_controller(CommandControllerPtr &command_controller) {
-					if(!this->command_controller) {
-						this->command_controller = command_controller;
+				SerialServoMotor::~SerialServoMotor() {
+				}
+
+				void SerialServoMotor::ping() {
+					throw std::logic_error("Unoverride from IO::Device::Actuator::ServoMotor::SerialServoMotor");
+				}
+
+				void SerialServoMotor::enable_torque(const bool &) {
+					throw std::logic_error("Unoverride from IO::Device::Actuator::ServoMotor::SerialServoMotor");
+				}
+
+				void SerialServoMotor::write_gain(const WriteValue &, const WriteValue &, const WriteValue &) {
+					throw std::logic_error("Unoverride from IO::Device::Actuator::ServoMotor::SerialServoMotor");
+				}
+
+				void SerialServoMotor::write_angle(const float &) {
+					throw std::logic_error("Unoverride from IO::Device::Actuator::ServoMotor::SerialServoMotor");
+				}
+
+				SerialServoMotor::ID &SerialServoMotor::id() const {
+					if(!device_id) {
+						throw std::runtime_error("Failed access device_id from IO::Device::Actuator::ServoMotor::SerialServoMotor");
 					}
-					else {
-						throw std::runtime_error("Can not regist command controller from IO::Device::Actuator::ServoMotor::SerialServoMotor");
+
+					return *device_id;
+				}
+
+				void SerialServoMotor::id(const ID &new_id) {
+					if(!device_id) {
+						device_id = std::make_unique<ID>();
 					}
-				}
 
-				template <class CONTROLLER>
-				void SerialServoMotor<CONTROLLER>::ping() {
-					throw std::logic_error("Unoverride from IO::Device::Actuator::ServoMotor::SerialServoMotor");
+					*device_id = new_id;
 				}
-
-				template <class CONTROLLER>
-				void SerialServoMotor<CONTROLLER>::enable_torque(const bool &) {
-					throw std::logic_error("Unoverride from IO::Device::Actuator::ServoMotor::SerialServoMotor");
-				}
-
-				template <class CONTROLLER>
-				void SerialServoMotor<CONTROLLER>::write_gain(const WriteValue &, const WriteValue &, const WriteValue &) {
-					throw std::logic_error("Unoverride from IO::Device::Actuator::ServoMotor::SerialServoMotor");
-				}
-
-				template <class CONTROLLER>
-				void SerialServoMotor<CONTROLLER>::write_angle(const float &) {
-					throw std::logic_error("Unoverride from IO::Device::Actuator::ServoMotor::SerialServoMotor");
-				}
-
-				template class SerialServoMotor<Communicator::SerialController::Dynamixel>;
 			}
 		}
 	}

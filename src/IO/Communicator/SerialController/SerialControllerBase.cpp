@@ -15,12 +15,13 @@ namespace IO {
 		namespace SerialController {
 			SerialControllerBase::SerialControllerBase() {
 				baudrate = std::make_unique<BaudRate>();
+				timeoutms = std::make_unique<TimeoutMs>();
 				device_port_name = std::make_unique<std::string>();
-				baud_rate(0);
-			}
+				return_packet_map = std::make_unique<ReturnPacketMap>();
+				data_access_mutex = std::make_unique<std::mutex>();
 
-			SerialControllerBase::SerialControllerBase(RobotStatus::InformationPtr &robot_status_information_ptr) : SerialControllerBase() {
-				robo_info = robot_status_information_ptr;
+				baud_rate(0);
+				timeout_ms(15);
 				serial_flow_scheduler = std::make_unique<Communicator::SerialFlowScheduler>();
 			}
 
@@ -49,6 +50,14 @@ namespace IO {
 				return *baudrate;
 			}
 
+			void SerialControllerBase::timeout_ms(const TimeoutMs &new_timeout_ms) {
+				*timeoutms = new_timeout_ms;
+			}
+
+			SerialControllerBase::TimeoutMs &SerialControllerBase::timeout_ms() const {
+				return *timeoutms;
+			}
+
 			void SerialControllerBase::launch() {
 				throw std::runtime_error("Unoverride from IO::Communicator::SerialController::SerialControllerBase");
 			}
@@ -57,14 +66,11 @@ namespace IO {
 				throw std::runtime_error("Unoverride from IO::Communicator::SerialController::SerialControllerBase");
 			}
 
-			SerialFlowScheduler::ParseFunction SerialControllerBase::create_data_parser() {
-				throw std::runtime_error("Unoverride from IO::Communicator::SerialController::SerialControllerBase");
-			}
-
 			void SerialControllerBase::register_parse(ParseFunction data_parse_function) {
 				if(!serial_flow_scheduler) {
 					throw std::runtime_error("Can not register data parse function from IO::Communicator::SerialController::SerialControllerBase");
 				}
+
 				serial_flow_scheduler->register_parse(data_parse_function);
 			}
 
@@ -72,6 +78,7 @@ namespace IO {
 				if(!serial_flow_scheduler) {
 					throw std::runtime_error("Can not set packet from IO::Communicator::SerialController::SerialControllerBase");
 				}
+
 				serial_flow_scheduler->set_send_packet(send_packet);
 			}
 
@@ -85,6 +92,28 @@ namespace IO {
 						wait_for_send_packets();
 					}
 				}
+			}
+
+			SerialReturnPacket &SerialControllerBase::return_packet(const SerialReturnPacket::PacketID &packet_id) const {
+				const auto lock = std::lock_guard<std::mutex>(*data_access_mutex);
+
+				return (*return_packet_map)[packet_id];
+			}
+
+			bool SerialControllerBase::is_exist_return_packet(const SerialReturnPacket::PacketID &packet_id) const {
+				const auto lock = std::lock_guard<std::mutex>(*data_access_mutex);
+
+				return return_packet_map->find(packet_id) != return_packet_map->cend();
+			}
+
+			SerialControllerBase::ReturnPacketMap &SerialControllerBase::access_return_packet_map() {
+				const auto lock = std::lock_guard<std::mutex>(*data_access_mutex);
+
+				return *return_packet_map;
+			}
+
+			SerialFlowScheduler::ParseFunction SerialControllerBase::create_data_parser() {
+				throw std::runtime_error("Unoverride from IO::Communicator::SerialController::SerialControllerBase");
 			}
 		}
 	}
