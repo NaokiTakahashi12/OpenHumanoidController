@@ -27,11 +27,16 @@ namespace IO {
 				}
 			}
 
+			std::string Dynamixel::get_key() {
+				return "Dynamixel";
+			}
+
 			void Dynamixel::launch() {
 				serial_flow_scheduler->register_parse(create_data_parser());
 				serial_flow_scheduler->open(port_name());
 				{
 					serial_flow_scheduler->set_baudrate(baud_rate());
+					serial_flow_scheduler->set_timeout_ms(timeout_ms());
 					serial_flow_scheduler->set_flow_control_none();
 					serial_flow_scheduler->set_parity_none();
 				}
@@ -42,22 +47,6 @@ namespace IO {
 				async_launch_thread = std::make_unique<Thread>(&Dynamixel::launch, this);
 			}
 
-			Dynamixel::DynamixelData Dynamixel::catch_packet(const ID &id) {
-				return data_map[id];
-			}
-
-			Dynamixel::IDList Dynamixel::catch_packet_id() {
-				IDList id_list;
-				for(const auto &[id, data] : data_map) {
-					id_list.push_back(id);
-				}
-				return id_list;
-			}
-
-			bool Dynamixel::is_exist(const ID &id) {
-				return data_map.count(id) != 0;
-			}
-
 			Dynamixel::ParseFunction Dynamixel::create_data_parser() {
 				return [this](const ReadBuffer &read_buffer, const Length &length) {
 					return packet_splitter(read_buffer, length);
@@ -66,6 +55,7 @@ namespace IO {
 
 			bool Dynamixel::packet_checker(const ReadBuffer &read_buffer, const Length &length, const Length &head_position) {
 				const auto return_packet_length = Protocols::DynamixelVersion1::packet_length(read_buffer, head_position);
+
 				if(SerialFlowScheduler::maximum_read_buffer <= head_position) {
 					return false;
 				}
@@ -75,11 +65,13 @@ namespace IO {
 				else if(Protocols::DynamixelVersion1::is_broken_packet(read_buffer, head_position)) {
 					return false;
 				}
+
 				return true;
 			}
 
 			bool Dynamixel::packet_splitter(const ReadBuffer &read_buffer, const Length &length) {
-				static unsigned int head_position;
+				static Length head_position;
+
 				if(!packet_checker(read_buffer, length, head_position)) {
 					head_position = 0;
 					return false;
@@ -91,17 +83,31 @@ namespace IO {
 					packet_splitter(read_buffer, length);
 				}
 				head_position = 0;
+
 				return true;
 			}
 
 			void Dynamixel::data_parser(const ReadBuffer &read_buffer, const unsigned int &head_position) {
 				const auto id = Protocols::DynamixelVersion1::packet_id(read_buffer, head_position);
-				const auto data_length = Protocols::DynamixelVersion1::packet_length(read_buffer, head_position) - Protocols::DynamixelVersion1::number_of_error_size;
-				data_map[id].id = id;
-				data_map[id].error_code = Protocols::DynamixelVersion1::packet_error_code(read_buffer, head_position);
-				data_map[id].contents.resize(data_length);
-				const auto read_buffer_begin = read_buffer.cbegin() + head_position + Protocols::DynamixelVersion1::constant_head_byte_size() + 1;
-				std::copy(read_buffer_begin, read_buffer_begin + data_length, data_map[id].contents.begin());
+				const auto data_length =
+					Protocols::DynamixelVersion1::packet_length(read_buffer, head_position)
+					- Protocols::DynamixelVersion1::number_of_error_size;
+
+				SerialReturnPacket ret_pack;
+
+				ret_pack.id = id;
+				ret_pack.status = Protocols::DynamixelVersion1::packet_error_code(read_buffer, head_position);
+				ret_pack.contents.resize(data_length);
+
+				const auto read_buffer_begin = 
+					read_buffer.cbegin()
+					+ head_position
+					+ Protocols::DynamixelVersion1::constant_head_byte_size()
+					+ 1;
+
+				std::copy(read_buffer_begin, read_buffer_begin + data_length, ret_pack.contents.begin());
+
+				access_return_packet_map()[ret_pack.id] = ret_pack;
 			}
 		}
 	}
