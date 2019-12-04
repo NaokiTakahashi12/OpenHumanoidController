@@ -18,6 +18,8 @@ namespace IO {
 				public :
 					~Simple();
 
+					static std::string get_key();
+
 					void launch() override,
 						 async_launch() override;
 			};
