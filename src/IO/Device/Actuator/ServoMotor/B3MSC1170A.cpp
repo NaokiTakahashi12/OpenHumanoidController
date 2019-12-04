@@ -2,11 +2,17 @@
 /**
   *
   * @file B3MSC1170A.cpp
-  * @author Napki Takahashi
+  * @authors Yasuo Hayashibara
+  *			 Naoki Takahashi
   *
   **/
 
 #include "B3MSC1170A.hpp"
+
+#include <Tools/Byte.hpp>
+
+#include "B3MSC1170AControlTable.hpp"
+#include "../../../Communicator/Protocols/KondoB3M.hpp"
 
 namespace IO {
 	namespace Device {
@@ -79,20 +85,45 @@ namespace IO {
 					return ret_packet;
 				}
 
-				B3MSC1170A::SendPacket B3MSC1170A::create_enable_torque_packet(const ID &, const bool &) {
-					SendPacket ret_packet;
+				B3MSC1170A::SendPacket B3MSC1170A::create_enable_torque_packet(const ID &id, const bool &flag) {
+					SendPacket value; 
+					value += flag ? Communicator::Protocols::KondoB3M::enable :
+								    Communicator::Protocols::KondoB3M::disable;
+
+					const auto ret_packet = Communicator::Protocols::KondoB3M::create_write_packet(
+						id,
+						B3MSC1170AControlTable::servo_servo_mode,
+						value
+					);
 
 					return ret_packet;
 				}
 
-				B3MSC1170A::SendPacket B3MSC1170A::create_write_angle_packet(const ID &, const float &) {
-					SendPacket ret_packet;
+				B3MSC1170A::SendPacket B3MSC1170A::create_write_angle_packet(const ID &id, const float &degree) {
+					Communicator::Protocols::KondoB3M::Bytes write_degree_bytes;
+					const auto degree_write_value = static_cast<short>(degree * 10);
+
+					write_degree_bytes = static_cast<uint8_t>(Tools::Byte::low_byte(degree_write_value));
+					write_degree_bytes += static_cast<uint8_t>(Tools::Byte::high_byte(degree_write_value));
+
+					const auto ret_packet = Communicator::Protocols::KondoB3M::create_write_packet(
+						id,
+						B3MSC1170AControlTable::servo_desired_position,
+						write_degree_bytes
+					);
 
 					return ret_packet;
 				}
 
-				B3MSC1170A::SendPacket B3MSC1170A::create_write_p_gain_packet(const ID &, const WriteValue &) {
-					SendPacket ret_packet;
+				B3MSC1170A::SendPacket B3MSC1170A::create_write_p_gain_packet(const ID &id, const WriteValue &gain) {
+					SendPacket value;
+					value += gain;
+
+					const auto ret_packet = Communicator::Protocols::KondoB3M::create_write_packet(
+						id,
+						B3MSC1170AControlTable::control_kp0,
+						value
+					);
 					
 					return ret_packet;
 				}
