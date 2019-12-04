@@ -23,14 +23,14 @@
 namespace IO {
 	class Robot : Tools::NonCopyable {
 		public :
-			using RegistMapHash = std::string;
-
 			Robot();
 			Robot(RobotStatus::InformationPtr &);
 			Robot(const int &argc, char **argv);
+
 			virtual ~Robot();
 
 			void set_config(const std::string &filename);
+			void set_config(const std::string &dir, const std::string &filename);
 
 			enum class UpdateCommands : char {
 				All,
@@ -46,21 +46,9 @@ namespace IO {
 				SerialIMU
 			};
 
-			template <RegisterDeviceType DEVICE, class BASE>
-			void register_device_map(const RegistMapHash &, BASE &);
-
-			template <RegisterDeviceType DEVICE, class BASE>
-			void register_device(BASE &);
-
 		private :
-			using IMU = Device::Sensor::IMU::InertialMeasurementUnit;
-			using IMURegistMap = std::unordered_map<RegistMapHash, IMU>;
-
 			RobotStatus::InformationPtr robo_info;
 
-			std::unique_ptr<IMURegistMap> imu_device_map;
-			std::unique_ptr<IMU> imu_device;
-			
 			std::unique_ptr<LoadConfig::RobotConfig> robot_config;
 
 			void thread_launcher();
