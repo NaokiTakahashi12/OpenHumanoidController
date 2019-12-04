@@ -1,9 +1,12 @@
 <map id="src/IO/Device/ControlBoard/SerialControlBoard.hpp" name="src/IO/Device/ControlBoard/SerialControlBoard.hpp">
-<area shape="rect" id="node1" title="Control board utile class." alt="" coords="220,5,404,44"/>
-<area shape="rect" id="node2" href="$_c_m730_8hpp.html" title="CM730 board communicator class." alt="" coords="27,92,210,131"/>
-<area shape="rect" id="node4" href="$_i_o_2main_8cpp.html" title="IO module test." alt="" coords="213,185,328,211"/>
-<area shape="rect" id="node5" href="$_serial_control_board_8cpp.html" title=" " alt="" coords="285,92,469,131"/>
-<area shape="rect" id="node6" href="$_robot_8hpp.html" title="I/O Robot interface class." alt="" coords="493,99,616,124"/>
-<area shape="rect" id="node3" href="$_c_m730_8cpp.html" title=" " alt="" coords="5,179,189,217"/>
-<area shape="rect" id="node7" href="$_robot_8cpp.html" title=" " alt="" coords="494,185,615,211"/>
+<area shape="rect" id="node1" title="Control board utile class." alt="" coords="430,5,614,44"/>
+<area shape="rect" id="node2" href="$_c_m730_8hpp.html" title="CM730 board communicator class." alt="" coords="238,92,422,131"/>
+<area shape="rect" id="node4" href="$_i_o_2main_8cpp.html" title="IO module test." alt="" coords="446,185,560,211"/>
+<area shape="rect" id="node5" href="$_serial_device_selector_8cpp.html" title=" " alt="" coords="5,185,214,211"/>
+<area shape="rect" id="node6" href="$_serial_control_board_8cpp.html" title=" " alt="" coords="846,92,1030,131"/>
+<area shape="rect" id="node7" href="$_device_manager_8hpp.html" title="I/O device manager class." alt="" coords="496,99,675,124"/>
+<area shape="rect" id="node9" href="$_robot_8hpp.html" title="I/O Robot interface class." alt="" coords="699,99,821,124"/>
+<area shape="rect" id="node3" href="$_c_m730_8cpp.html" title=" " alt="" coords="238,179,422,217"/>
+<area shape="rect" id="node8" href="$_device_manager_8cpp.html" title=" " alt="" coords="585,185,763,211"/>
+<area shape="rect" id="node10" href="$_robot_8cpp.html" title=" " alt="" coords="786,185,908,211"/>
 </map>

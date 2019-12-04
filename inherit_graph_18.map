@@ -1,6 +1,8 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_i_o_1_1_load_config_1_1_load_config_base.html" title=" " alt="" coords="5,68,222,93"/>
+<area shape="rect" id="node1" href="$class_i_o_1_1_load_config_1_1_load_config_base.html" title=" " alt="" coords="5,131,222,156"/>
 <area shape="rect" id="node2" href="$class_i_o_1_1_load_config_1_1_actuator_device_config.html" title=" " alt="" coords="287,5,455,44"/>
-<area shape="rect" id="node3" href="$class_i_o_1_1_load_config_1_1_robot_config.html" title=" " alt="" coords="275,68,467,93"/>
-<area shape="rect" id="node4" href="$class_i_o_1_1_load_config_1_1_sensor_device_config.html" title=" " alt="" coords="270,117,472,156"/>
+<area shape="rect" id="node3" href="$class_i_o_1_1_load_config_1_1_control_board_config.html" title=" " alt="" coords="273,68,470,107"/>
+<area shape="rect" id="node4" href="$class_i_o_1_1_load_config_1_1_robot_config.html" title=" " alt="" coords="275,131,467,156"/>
+<area shape="rect" id="node5" href="$class_i_o_1_1_load_config_1_1_sensor_device_config.html" title=" " alt="" coords="270,180,472,219"/>
+<area shape="rect" id="node6" href="$class_i_o_1_1_load_config_1_1_serial_port_config.html" title=" " alt="" coords="283,243,460,281"/>
 </map>

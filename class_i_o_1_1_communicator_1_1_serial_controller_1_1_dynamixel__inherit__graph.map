@@ -1,5 +1,4 @@
 <map id="IO::Communicator::SerialController::Dynamixel" name="IO::Communicator::SerialController::Dynamixel">
-<area shape="rect" id="node1" title=" " alt="" coords="123,92,294,131"/>
-<area shape="rect" id="node2" href="$class_i_o_1_1_communicator_1_1_serial_controller_1_1_serial_controller_base.html" title=" " alt="" coords="5,5,214,44"/>
-<area shape="rect" id="node3" href="$class_tools_1_1_non_copyable.html" title=" " alt="" coords="238,12,379,37"/>
+<area shape="rect" id="node1" title=" " alt="" coords="24,313,195,453"/>
+<area shape="rect" id="node2" href="$class_i_o_1_1_communicator_1_1_serial_controller_1_1_serial_controller_base.html" title=" " alt="" coords="5,5,214,265"/>
 </map>

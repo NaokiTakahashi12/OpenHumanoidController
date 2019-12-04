@@ -20,9 +20,11 @@ var annotated_dup =
       [ "Communicator", null, [
         [ "SerialController", null, [
           [ "Dynamixel", "class_i_o_1_1_communicator_1_1_serial_controller_1_1_dynamixel.html", "class_i_o_1_1_communicator_1_1_serial_controller_1_1_dynamixel" ],
+          [ "Kondo", "class_i_o_1_1_communicator_1_1_serial_controller_1_1_kondo.html", "class_i_o_1_1_communicator_1_1_serial_controller_1_1_kondo" ],
           [ "SerialControllerBase", "class_i_o_1_1_communicator_1_1_serial_controller_1_1_serial_controller_base.html", "class_i_o_1_1_communicator_1_1_serial_controller_1_1_serial_controller_base" ],
           [ "Simple", "class_i_o_1_1_communicator_1_1_serial_controller_1_1_simple.html", "class_i_o_1_1_communicator_1_1_serial_controller_1_1_simple" ]
         ] ],
+        [ "SerialControlSelector", "class_i_o_1_1_communicator_1_1_serial_control_selector.html", "class_i_o_1_1_communicator_1_1_serial_control_selector" ],
         [ "SerialFlowScheduleBase", "class_i_o_1_1_communicator_1_1_serial_flow_schedule_base.html", "class_i_o_1_1_communicator_1_1_serial_flow_schedule_base" ],
         [ "SerialFlowScheduler", "class_i_o_1_1_communicator_1_1_serial_flow_scheduler.html", "class_i_o_1_1_communicator_1_1_serial_flow_scheduler" ],
         [ "SerialReturnPacket", "struct_i_o_1_1_communicator_1_1_serial_return_packet.html", "struct_i_o_1_1_communicator_1_1_serial_return_packet" ],
@@ -31,35 +33,35 @@ var annotated_dup =
       [ "Device", null, [
         [ "Actuator", null, [
           [ "ServoMotor", null, [
+            [ "B3MSC1170A", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_b3_m_s_c1170_a.html", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_b3_m_s_c1170_a" ],
             [ "MX28", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_m_x28.html", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_m_x28" ],
-            [ "SerialServoMotor", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_serial_servo_motor.html", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_serial_servo_motor" ],
-            [ "SerialServoMotorBase", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_serial_servo_motor_base.html", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_serial_servo_motor_base" ],
-            [ "ServoMotorBase", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_servo_motor_base.html", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_servo_motor_base" ]
+            [ "SerialServoMotor", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_serial_servo_motor.html", "class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_serial_servo_motor" ]
           ] ]
         ] ],
         [ "ControlBoard", null, [
           [ "CM730", "class_i_o_1_1_device_1_1_control_board_1_1_c_m730.html", "class_i_o_1_1_device_1_1_control_board_1_1_c_m730" ],
-          [ "SerialControlBoard", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board" ],
-          [ "SerialControlBoardBase", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board_base.html", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board_base" ]
+          [ "SerialControlBoard", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board" ]
         ] ],
         [ "Sensor", null, [
           [ "IMU", null, [
-            [ "IMUBase", "class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_i_m_u_base.html", "class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_i_m_u_base" ],
             [ "InertialMeasurementUnit", "class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_inertial_measurement_unit.html", "class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_inertial_measurement_unit" ],
-            [ "InertialMeasurementUnitBase", "class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_inertial_measurement_unit_base.html", "class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_inertial_measurement_unit_base" ],
             [ "VMU931", "class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_v_m_u931.html", "class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_v_m_u931" ]
           ] ]
-        ] ]
+        ] ],
+        [ "SerialDeviceBase", "class_i_o_1_1_device_1_1_serial_device_base.html", "class_i_o_1_1_device_1_1_serial_device_base" ]
       ] ],
       [ "LoadConfig", null, [
         [ "ActuatorDeviceConfig", "class_i_o_1_1_load_config_1_1_actuator_device_config.html", "class_i_o_1_1_load_config_1_1_actuator_device_config" ],
+        [ "ControlBoardConfig", "class_i_o_1_1_load_config_1_1_control_board_config.html", "class_i_o_1_1_load_config_1_1_control_board_config" ],
         [ "LoadConfigBase", "class_i_o_1_1_load_config_1_1_load_config_base.html", "class_i_o_1_1_load_config_1_1_load_config_base" ],
         [ "RobotConfig", "class_i_o_1_1_load_config_1_1_robot_config.html", "class_i_o_1_1_load_config_1_1_robot_config" ],
-        [ "SensorDeviceConfig", "class_i_o_1_1_load_config_1_1_sensor_device_config.html", "class_i_o_1_1_load_config_1_1_sensor_device_config" ]
+        [ "SensorDeviceConfig", "class_i_o_1_1_load_config_1_1_sensor_device_config.html", "class_i_o_1_1_load_config_1_1_sensor_device_config" ],
+        [ "SerialPortConfig", "class_i_o_1_1_load_config_1_1_serial_port_config.html", "class_i_o_1_1_load_config_1_1_serial_port_config" ]
       ] ],
       [ "DeviceManager", "class_i_o_1_1_device_manager.html", "class_i_o_1_1_device_manager" ],
-      [ "DeviceSelector", "class_i_o_1_1_device_selector.html", "class_i_o_1_1_device_selector" ],
-      [ "Robot", "class_i_o_1_1_robot.html", "class_i_o_1_1_robot" ]
+      [ "ObjectSelector", "class_i_o_1_1_object_selector.html", "class_i_o_1_1_object_selector" ],
+      [ "Robot", "class_i_o_1_1_robot.html", "class_i_o_1_1_robot" ],
+      [ "SerialDeviceSelector", "class_i_o_1_1_serial_device_selector.html", "class_i_o_1_1_serial_device_selector" ]
     ] ],
     [ "Kinematics", null, [
       [ "ForwardProblemSolvers", null, [

@@ -1,6 +1,6 @@
 <map id="Kinematics::Model::Humanoid" name="Kinematics::Model::Humanoid">
-<area shape="rect" id="node1" title=" " alt="" coords="101,193,239,232"/>
-<area shape="rect" id="node2" href="$class_kinematics_1_1_model_1_1_r_b_d_l_based.html" title=" " alt="" coords="101,105,239,144"/>
-<area shape="rect" id="node3" href="$class_kinematics_1_1_model_1_1_model_base.html" title=" " alt="" coords="5,5,143,44"/>
-<area shape="rect" id="node4" title=" " alt="" coords="167,12,368,37"/>
+<area shape="rect" id="node1" title=" " alt="" coords="133,623,295,736"/>
+<area shape="rect" id="node2" href="$class_kinematics_1_1_model_1_1_r_b_d_l_based.html" title=" " alt="" coords="111,220,317,573"/>
+<area shape="rect" id="node3" href="$class_kinematics_1_1_model_1_1_model_base.html" title=" " alt="" coords="5,5,202,159"/>
+<area shape="rect" id="node4" title=" " alt="" coords="225,45,427,119"/>
 </map>

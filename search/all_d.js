@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['rbdlbased_141',['RBDLBased',['../class_kinematics_1_1_model_1_1_r_b_d_l_based.html',1,'Kinematics::Model']]],
-  ['rbdlbased_2ecpp_142',['RBDLBased.cpp',['../_r_b_d_l_based_8cpp.html',1,'']]],
-  ['rbdlbased_2ehpp_143',['RBDLBased.hpp',['../_r_b_d_l_based_8hpp.html',1,'']]],
-  ['robot_144',['Robot',['../class_i_o_1_1_robot.html',1,'IO']]],
-  ['robot_2ecpp_145',['Robot.cpp',['../_robot_8cpp.html',1,'']]],
-  ['robot_2ehpp_146',['Robot.hpp',['../_robot_8hpp.html',1,'']]],
-  ['robotconfig_147',['RobotConfig',['../class_i_o_1_1_load_config_1_1_robot_config.html',1,'IO::LoadConfig']]],
-  ['robotconfig_2ecpp_148',['RobotConfig.cpp',['../_robot_config_8cpp.html',1,'']]],
-  ['robotconfig_2ehpp_149',['RobotConfig.hpp',['../_robot_config_8hpp.html',1,'']]]
+  ['parameters_143',['Parameters',['../class_kinematics_1_1_parameters.html',1,'Kinematics']]],
+  ['parameters_2ecpp_144',['Parameters.cpp',['../_parameters_8cpp.html',1,'']]],
+  ['parameters_2ehpp_145',['Parameters.hpp',['../_parameters_8hpp.html',1,'']]],
+  ['planselector_146',['PlanSelector',['../class_foot_step_planner_1_1_footprint_planner_1_1_plan_selector.html',1,'FootStepPlanner::FootprintPlanner']]],
+  ['planselector_2ecpp_147',['PlanSelector.cpp',['../_plan_selector_8cpp.html',1,'']]],
+  ['planselector_2ehpp_148',['PlanSelector.hpp',['../_plan_selector_8hpp.html',1,'']]]
 ];

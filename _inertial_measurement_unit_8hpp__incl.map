@@ -1,26 +1,35 @@
 <map id="src/IO/Device/Sensor/IMU/InertialMeasurementUnit.hpp" name="src/IO/Device/Sensor/IMU/InertialMeasurementUnit.hpp">
-<area shape="rect" id="node1" title="IMU utility class." alt="" coords="1259,5,1483,44"/>
-<area shape="rect" id="node2" href="$_information_8hpp.html" title="robot state class" alt="" coords="1161,92,1352,117"/>
-<area shape="rect" id="node24" href="$_inertial_measurement_unit_base_8hpp.html" title="IMU device base class." alt="" coords="1376,92,1599,117"/>
-<area shape="rect" id="node3" title=" " alt="" coords="188,385,242,411"/>
-<area shape="rect" id="node4" title=" " alt="" coords="1200,312,1270,337"/>
-<area shape="rect" id="node5" title=" " alt="" coords="1134,385,1192,411"/>
-<area shape="rect" id="node6" href="$_logger_8hpp.html" title="Logging class." alt="" coords="822,165,971,191"/>
-<area shape="rect" id="node20" href="$_time_series_8hpp.html" title="TimeSeriesData class utilty class @auther Naoki Takahashi." alt="" coords="1345,239,1459,264"/>
-<area shape="rect" id="node7" href="$_messenger_8hpp.html" title="Message output processing." alt="" coords="840,239,953,264"/>
-<area shape="rect" id="node17" title=" " alt="" coords="758,239,817,264"/>
-<area shape="rect" id="node18" href="$_matrix_8hpp_source.html" title=" " alt="" coords="28,239,156,264"/>
-<area shape="rect" id="node8" title=" " alt="" coords="839,312,954,337"/>
-<area shape="rect" id="node9" title=" " alt="" coords="978,312,1044,337"/>
-<area shape="rect" id="node10" title=" " alt="" coords="1344,312,1406,337"/>
-<area shape="rect" id="node11" title=" " alt="" coords="543,312,602,337"/>
-<area shape="rect" id="node12" title=" " alt="" coords="1068,312,1125,337"/>
-<area shape="rect" id="node13" href="$_message_levels_8hpp.html" title="Message levels." alt="" coords="625,312,765,337"/>
-<area shape="rect" id="node14" href="$_command_line_argument_reader_8hpp_source.html" title=" " alt="" coords="273,312,519,337"/>
-<area shape="rect" id="node15" title=" " alt="" coords="377,385,456,411"/>
-<area shape="rect" id="node16" title=" " alt="" coords="275,385,353,411"/>
-<area shape="rect" id="node19" title=" " alt="" coords="44,312,141,337"/>
-<area shape="rect" id="node21" title=" " alt="" coords="1481,312,1544,337"/>
-<area shape="rect" id="node22" href="$_time_series_data_8hpp.html" title="Timed value class @auther Naoki Takahashi." alt="" coords="1568,312,1710,337"/>
-<area shape="rect" id="node23" title=" " alt="" coords="1609,385,1669,411"/>
+<area shape="rect" id="node1" title="IMU utility class." alt="" coords="1145,5,1369,44"/>
+<area shape="rect" id="node2" href="$_serial_device_base_8hpp_source.html" title=" " alt="" coords="5,339,180,364"/>
+<area shape="rect" id="node5" href="$_information_8hpp.html" title="robot state class" alt="" coords="1161,192,1352,217"/>
+<area shape="rect" id="node25" href="$_serial_controller_base_8hpp.html" title="Serial communication controller class." alt="" coords="1436,92,1648,144"/>
+<area shape="rect" id="node3" title=" " alt="" coords="290,499,368,524"/>
+<area shape="rect" id="node4" title=" " alt="" coords="1243,419,1313,444"/>
+<area shape="rect" id="node6" title=" " alt="" coords="554,499,608,524"/>
+<area shape="rect" id="node7" title=" " alt="" coords="1177,499,1235,524"/>
+<area shape="rect" id="node8" href="$_logger_8hpp.html" title="Logging class." alt="" coords="1072,265,1220,291"/>
+<area shape="rect" id="node21" href="$_time_series_8hpp.html" title="TimeSeriesData class utilty class @auther Naoki Takahashi." alt="" coords="1512,339,1626,364"/>
+<area shape="rect" id="node9" href="$_messenger_8hpp.html" title="Message output processing." alt="" coords="1090,339,1202,364"/>
+<area shape="rect" id="node18" title=" " alt="" coords="1327,339,1386,364"/>
+<area shape="rect" id="node19" href="$_matrix_8hpp_source.html" title=" " alt="" coords="566,339,694,364"/>
+<area shape="rect" id="node10" title=" " alt="" coords="428,419,544,444"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1102,419,1168,444"/>
+<area shape="rect" id="node12" title=" " alt="" coords="1642,419,1704,444"/>
+<area shape="rect" id="node13" title=" " alt="" coords="1861,419,1919,444"/>
+<area shape="rect" id="node14" title=" " alt="" coords="1728,419,1786,444"/>
+<area shape="rect" id="node15" href="$_message_levels_8hpp.html" title="Message levels." alt="" coords="617,419,757,444"/>
+<area shape="rect" id="node16" href="$_command_line_argument_reader_8hpp_source.html" title=" " alt="" coords="782,419,1028,444"/>
+<area shape="rect" id="node17" title=" " alt="" coords="866,499,944,524"/>
+<area shape="rect" id="node20" title=" " alt="" coords="307,419,404,444"/>
+<area shape="rect" id="node22" title=" " alt="" coords="1337,419,1400,444"/>
+<area shape="rect" id="node23" href="$_time_series_data_8hpp.html" title="Timed value class @auther Naoki Takahashi." alt="" coords="1475,419,1617,444"/>
+<area shape="rect" id="node24" title=" " alt="" coords="1516,499,1576,524"/>
+<area shape="rect" id="node26" href="$_serial_return_packet_8hpp_source.html" title=" " alt="" coords="1735,192,1909,217"/>
+<area shape="rect" id="node27" href="$_serial_flow_scheduler_8hpp.html" title="Serial communication management class @auther Naoki Takahashi." alt="" coords="1684,265,1853,291"/>
+<area shape="rect" id="node28" href="$_serial_flow_schedule_base_8hpp.html" title="Serial communication management base class @auther Naoki Takahashi." alt="" coords="1927,339,2122,364"/>
+<area shape="rect" id="node29" title=" " alt="" coords="2548,419,2600,444"/>
+<area shape="rect" id="node30" title=" " alt="" coords="2624,419,2703,444"/>
+<area shape="rect" id="node31" title=" " alt="" coords="1993,419,2165,444"/>
+<area shape="rect" id="node32" title=" " alt="" coords="2190,412,2326,451"/>
+<area shape="rect" id="node33" title=" " alt="" coords="2350,419,2524,444"/>
 </map>

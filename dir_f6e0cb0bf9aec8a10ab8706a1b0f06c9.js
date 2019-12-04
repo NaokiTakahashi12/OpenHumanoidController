@@ -16,7 +16,7 @@ var dir_f6e0cb0bf9aec8a10ab8706a1b0f06c9 =
     [ "Launcher.hpp", "_launcher_8hpp.html", [
       [ "Launcher", "class_kinematics_1_1_launcher.html", "class_kinematics_1_1_launcher" ]
     ] ],
-    [ "ObjectSelector.hpp", "_object_selector_8hpp.html", [
+    [ "ObjectSelector.hpp", "_kinematics_2_object_selector_8hpp.html", [
       [ "ObjectSelector", "class_kinematics_1_1_object_selector.html", "class_kinematics_1_1_object_selector" ]
     ] ],
     [ "Parameters.cpp", "_parameters_8cpp.html", null ],

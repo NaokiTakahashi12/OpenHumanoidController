@@ -1,7 +1,12 @@
 <map id="src/IO/Device/Sensor/IMU/InertialMeasurementUnit.hpp" name="src/IO/Device/Sensor/IMU/InertialMeasurementUnit.hpp">
-<area shape="rect" id="node1" title="IMU utility class." alt="" coords="214,5,439,44"/>
+<area shape="rect" id="node1" title="IMU utility class." alt="" coords="320,5,544,44"/>
 <area shape="rect" id="node2" href="$_inertial_measurement_unit_8cpp.html" title=" " alt="" coords="5,92,229,131"/>
-<area shape="rect" id="node3" href="$_v_m_u931_8hpp.html" title="VMU931 (IMU) serial communicator class." alt="" coords="253,92,400,131"/>
-<area shape="rect" id="node5" href="$_i_o_2main_8cpp.html" title="IO module test." alt="" coords="380,185,494,211"/>
-<area shape="rect" id="node4" href="$_v_m_u931_8cpp.html" title=" " alt="" coords="209,179,356,217"/>
+<area shape="rect" id="node3" href="$_v_m_u931_8hpp.html" title="VMU931 (IMU) serial communicator class." alt="" coords="304,92,451,131"/>
+<area shape="rect" id="node5" href="$_i_o_2main_8cpp.html" title="IO module test." alt="" coords="474,185,589,211"/>
+<area shape="rect" id="node6" href="$_serial_device_selector_8cpp.html" title=" " alt="" coords="70,185,279,211"/>
+<area shape="rect" id="node7" href="$_device_manager_8hpp.html" title="I/O device manager class." alt="" coords="525,99,704,124"/>
+<area shape="rect" id="node9" href="$_robot_8hpp.html" title="I/O Robot interface class." alt="" coords="728,99,850,124"/>
+<area shape="rect" id="node4" href="$_v_m_u931_8cpp.html" title=" " alt="" coords="304,179,451,217"/>
+<area shape="rect" id="node8" href="$_device_manager_8cpp.html" title=" " alt="" coords="613,185,792,211"/>
+<area shape="rect" id="node10" href="$_robot_8cpp.html" title=" " alt="" coords="815,185,937,211"/>
 </map>

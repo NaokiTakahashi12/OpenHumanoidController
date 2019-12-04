@@ -1,4 +1,6 @@
-<map id="IO::Device::Actuator::ServoMotor::SerialServoMotor&lt; CONTROLLER &gt;" name="IO::Device::Actuator::ServoMotor::SerialServoMotor&lt; CONTROLLER &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="21,92,229,144"/>
-<area shape="rect" id="node2" href="$class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_serial_servo_motor_base.html" title=" " alt="" coords="5,5,244,44"/>
+<map id="IO::Device::Actuator::ServoMotor::SerialServoMotor" name="IO::Device::Actuator::ServoMotor::SerialServoMotor">
+<area shape="rect" id="node1" title=" " alt="" coords="89,153,297,347"/>
+<area shape="rect" id="node3" href="$class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_b3_m_s_c1170_a.html" title=" " alt="" coords="5,395,194,575"/>
+<area shape="rect" id="node4" href="$class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_m_x28.html" title=" " alt="" coords="217,395,358,575"/>
+<area shape="rect" id="node2" href="$class_i_o_1_1_device_1_1_serial_device_base.html" title=" " alt="" coords="68,5,318,105"/>
 </map>

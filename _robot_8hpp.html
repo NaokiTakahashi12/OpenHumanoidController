@@ -94,60 +94,63 @@ $(document).ready(function(){initNavTree('_robot_8hpp.html','');});
 
 <p>I/O Robot interface class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="_information_8hpp_source.html">RobotStatus/Information.hpp</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;unordered_map&gt;</code><br />
+<code>#include &lt;<a class="el" href="_information_8hpp_source.html">RobotStatus/Information.hpp</a>&gt;</code><br />
 <code>#include &lt;Tools/NonCopyable.hpp&gt;</code><br />
 <code>#include &quot;<a class="el" href="_robot_config_8hpp_source.html">LoadConfig/RobotConfig.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_serial_servo_motor_8hpp_source.html">Device/Actuator/ServoMotor/SerialServoMotor.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_serial_control_board_8hpp_source.html">Device/ControlBoard/SerialControlBoard.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_inertial_measurement_unit_8hpp_source.html">Device/Sensor/IMU/InertialMeasurementUnit.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_dynamixel_8hpp_source.html">Communicator/SerialController/Dynamixel.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Robot.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="_robot_8hpp__incl.png" border="0" usemap="#src_2_i_o_2_robot_8hpp" alt=""/></div>
 <map name="src_2_i_o_2_robot_8hpp" id="src_2_i_o_2_robot_8hpp">
-<area shape="rect" title="I/O Robot interface class." alt="" coords="881,5,1003,31"/>
-<area shape="rect" href="_information_8hpp.html" title="robot state class" alt="" coords="1094,245,1285,271"/>
-<area shape="rect" href="_non_copyable_8hpp_source.html" title=" " alt="" coords="496,165,659,191"/>
-<area shape="rect" href="_robot_config_8hpp.html" title="Load robot setting class." alt="" coords="278,165,472,191"/>
-<area shape="rect" href="_serial_servo_motor_8hpp.html" title="Servo motor class." alt="" coords="733,79,921,117"/>
-<area shape="rect" href="_serial_control_board_8hpp.html" title="Control board utile class." alt="" coords="1448,79,1612,117"/>
-<area shape="rect" href="_dynamixel_8hpp.html" title=" " alt="" coords="951,79,1154,117"/>
-<area shape="rect" title=" " alt="" coords="573,559,627,584"/>
-<area shape="rect" title=" " alt="" coords="1615,479,1684,504"/>
-<area shape="rect" title=" " alt="" coords="1002,559,1060,584"/>
-<area shape="rect" href="_logger_8hpp.html" title="Logging class." alt="" coords="705,325,853,351"/>
-<area shape="rect" href="_time_series_8hpp.html" title="TimeSeriesData class utilty class @auther Naoki Takahashi." alt="" coords="1206,399,1320,424"/>
-<area shape="rect" href="_messenger_8hpp.html" title="Message output processing." alt="" coords="723,399,835,424"/>
-<area shape="rect" title=" " alt="" coords="910,399,969,424"/>
-<area shape="rect" href="_matrix_8hpp_source.html" title=" " alt="" coords="571,399,699,424"/>
-<area shape="rect" title=" " alt="" coords="5,479,121,504"/>
-<area shape="rect" title=" " alt="" coords="638,479,704,504"/>
-<area shape="rect" title=" " alt="" coords="1313,479,1375,504"/>
-<area shape="rect" title=" " alt="" coords="2491,479,2550,504"/>
-<area shape="rect" title=" " alt="" coords="1232,479,1289,504"/>
-<area shape="rect" href="_message_levels_8hpp.html" title="Message levels." alt="" coords="728,479,868,504"/>
-<area shape="rect" href="_command_line_argument_reader_8hpp_source.html" title=" " alt="" coords="317,479,563,504"/>
-<area shape="rect" title=" " alt="" coords="333,559,412,584"/>
-<area shape="rect" title=" " alt="" coords="436,559,514,584"/>
-<area shape="rect" title=" " alt="" coords="196,479,293,504"/>
-<area shape="rect" title=" " alt="" coords="1145,479,1208,504"/>
-<area shape="rect" href="_time_series_data_8hpp.html" title="Timed value class @auther Naoki Takahashi." alt="" coords="1449,479,1592,504"/>
-<area shape="rect" title=" " alt="" coords="1490,559,1550,584"/>
-<area shape="rect" href="_load_config_base_8hpp.html" title="load config base class" alt="" coords="249,325,395,351"/>
-<area shape="rect" href="_sensor_device_config_8hpp.html" title="Load sensor setting class." alt="" coords="240,245,409,271"/>
-<area shape="rect" href="_actuator_device_config_8hpp.html" title="Load actuator setting class." alt="" coords="432,245,609,271"/>
-<area shape="rect" href="_serial_servo_motor_base_8hpp.html" title="Serial communication servo motor base class." alt="" coords="734,165,915,191"/>
-<area shape="rect" title=" " alt="" coords="741,239,907,277"/>
-<area shape="rect" href="_serial_control_board_base_8hpp.html" title="Serial communicatoin basic class for control board device." alt="" coords="1547,165,1737,191"/>
-<area shape="rect" href="_serial_return_packet_8hpp_source.html" title=" " alt="" coords="1560,239,1726,277"/>
-<area shape="rect" href="_serial_flow_scheduler_8hpp.html" title="Serial communication management class @auther Naoki Takahashi." alt="" coords="1560,325,1729,351"/>
-<area shape="rect" href="_serial_flow_schedule_base_8hpp.html" title="Serial communication management base class @auther Naoki Takahashi." alt="" coords="1687,399,1882,424"/>
-<area shape="rect" title=" " alt="" coords="1759,479,1810,504"/>
-<area shape="rect" title=" " alt="" coords="1835,479,1913,504"/>
-<area shape="rect" title=" " alt="" coords="1937,479,2109,504"/>
-<area shape="rect" title=" " alt="" coords="2134,472,2270,511"/>
-<area shape="rect" title=" " alt="" coords="2293,479,2467,504"/>
-<area shape="rect" href="_serial_controller_base_8hpp.html" title="Serial communication controller class." alt="" coords="1094,165,1264,191"/>
+<area shape="rect" title="I/O Robot interface class." alt="" coords="1336,5,1458,31"/>
+<area shape="rect" title=" " alt="" coords="258,505,374,531"/>
+<area shape="rect" href="_information_8hpp.html" title="robot state class" alt="" coords="1043,272,1234,297"/>
+<area shape="rect" href="_non_copyable_8hpp_source.html" title=" " alt="" coords="2020,85,2183,111"/>
+<area shape="rect" href="_robot_config_8hpp.html" title="Load robot setting class." alt="" coords="337,85,530,111"/>
+<area shape="rect" href="_serial_servo_motor_8hpp.html" title="Servo motor class." alt="" coords="1807,79,1995,117"/>
+<area shape="rect" href="_serial_control_board_8hpp.html" title="Control board utile class." alt="" coords="1620,79,1783,117"/>
+<area shape="rect" href="_inertial_measurement_unit_8hpp.html" title="IMU utility class." alt="" coords="1415,79,1595,117"/>
+<area shape="rect" href="_dynamixel_8hpp.html" title=" " alt="" coords="1188,79,1391,117"/>
+<area shape="rect" title=" " alt="" coords="688,585,742,611"/>
+<area shape="rect" title=" " alt="" coords="1645,505,1715,531"/>
+<area shape="rect" title=" " alt="" coords="1057,585,1114,611"/>
+<area shape="rect" href="_logger_8hpp.html" title="Logging class." alt="" coords="660,352,809,377"/>
+<area shape="rect" href="_time_series_8hpp.html" title="TimeSeriesData class utilty class @auther Naoki Takahashi." alt="" coords="1174,425,1288,451"/>
+<area shape="rect" href="_messenger_8hpp.html" title="Message output processing." alt="" coords="936,425,1048,451"/>
+<area shape="rect" title=" " alt="" coords="1362,425,1422,451"/>
+<area shape="rect" href="_matrix_8hpp_source.html" title=" " alt="" coords="5,425,133,451"/>
+<area shape="rect" title=" " alt="" coords="448,505,514,531"/>
+<area shape="rect" title=" " alt="" coords="1261,505,1323,531"/>
+<area shape="rect" title=" " alt="" coords="1739,505,1797,531"/>
+<area shape="rect" title=" " alt="" coords="1563,505,1621,531"/>
+<area shape="rect" href="_message_levels_8hpp.html" title="Message levels." alt="" coords="538,505,678,531"/>
+<area shape="rect" href="_command_line_argument_reader_8hpp_source.html" title=" " alt="" coords="752,505,998,531"/>
+<area shape="rect" title=" " alt="" coords="835,585,914,611"/>
+<area shape="rect" title=" " alt="" coords="1237,585,1315,611"/>
+<area shape="rect" title=" " alt="" coords="21,505,118,531"/>
+<area shape="rect" title=" " alt="" coords="1174,505,1237,531"/>
+<area shape="rect" href="_time_series_data_8hpp.html" title="Timed value class @auther Naoki Takahashi." alt="" coords="1397,505,1539,531"/>
+<area shape="rect" title=" " alt="" coords="1438,585,1498,611"/>
+<area shape="rect" href="_load_config_base_8hpp.html" title="load config base class" alt="" coords="250,352,396,377"/>
+<area shape="rect" href="_serial_port_config_8hpp.html" title=" " alt="" coords="361,272,506,297"/>
+<area shape="rect" href="_sensor_device_config_8hpp.html" title="Load sensor setting class." alt="" coords="540,179,708,204"/>
+<area shape="rect" href="_actuator_device_config_8hpp.html" title="Load actuator setting class." alt="" coords="100,179,276,204"/>
+<area shape="rect" href="_control_board_config_8hpp.html" title=" " alt="" coords="351,179,516,204"/>
+<area shape="rect" href="_serial_device_base_8hpp_source.html" title=" " alt="" coords="1815,179,1990,204"/>
+<area shape="rect" href="_serial_return_packet_8hpp_source.html" title=" " alt="" coords="1698,265,1864,304"/>
+<area shape="rect" href="_serial_controller_base_8hpp.html" title="Serial communication controller class." alt="" coords="1476,165,1689,217"/>
+<area shape="rect" href="_serial_flow_scheduler_8hpp.html" title="Serial communication management class @auther Naoki Takahashi." alt="" coords="1648,352,1816,377"/>
+<area shape="rect" href="_serial_flow_schedule_base_8hpp.html" title="Serial communication management base class @auther Naoki Takahashi." alt="" coords="1890,425,2086,451"/>
+<area shape="rect" title=" " alt="" coords="2070,505,2122,531"/>
+<area shape="rect" title=" " alt="" coords="2146,505,2225,531"/>
+<area shape="rect" title=" " alt="" coords="2249,505,2421,531"/>
+<area shape="rect" title=" " alt="" coords="2445,499,2581,537"/>
+<area shape="rect" title=" " alt="" coords="1872,505,2046,531"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">

@@ -1,10 +1,14 @@
 var class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board =
 [
-    [ "CommandControllerPtr", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#a872138813ad8545c8fb81c5229e3097e", null ],
-    [ "SerialControlBoard", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#a9bd27f43dd7ed6206084afbc6ec5d69b", null ],
-    [ "SerialControlBoard", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#aedb9ade9fe3f1e0e5cfe53f324b4af52", null ],
-    [ "enable_power", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#abaa3d8f39197fe09a2ddc8f2e6e5d110", null ],
-    [ "ping", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#a23c81c79cc251a14f0661e21a0096edb", null ],
-    [ "register_controller", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#a6978c35d99359e584179ac904d830eb3", null ],
-    [ "command_controller", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#a509f9b8885ef0d08439ee8efc9e89893", null ]
+    [ "ID", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#ad39c52caf9a45f38368371e5aea7656f", null ],
+    [ "SendPacket", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#ad84e292d4e9e5900fe68a6ddd6b3f163", null ],
+    [ "WriteValue", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#a9cdf5d97fb657e634438bc7cfae61f19", null ],
+    [ "SerialControlBoard", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#abafaf6d135a9f8872d1495c3c069316e", null ],
+    [ "SerialControlBoard", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#a4e79d7ca006babafa3d32c4e8b08d21a", null ],
+    [ "~SerialControlBoard", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#a865f0c1da0d21eb33f8f947a0703cb05", null ],
+    [ "enable_power", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#aadd625763f80534531fed5b8a8302e7c", null ],
+    [ "id", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#ac82144ddebbe818122a935620213cf48", null ],
+    [ "id", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#a95b030ae3ce4013ddb0dfa07154ab246", null ],
+    [ "ping", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#aef5e3d112c2e062248a7ddaf94acf2f5", null ],
+    [ "robo_info", "class_i_o_1_1_device_1_1_control_board_1_1_serial_control_board.html#a2879123d05e724897895da21a892e226", null ]
 ];

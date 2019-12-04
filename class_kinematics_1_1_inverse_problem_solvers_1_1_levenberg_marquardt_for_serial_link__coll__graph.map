@@ -1,8 +1,8 @@
 <map id="Kinematics::InverseProblemSolvers::LevenbergMarquardtForSerialLink&lt; Scalar &gt;" name="Kinematics::InverseProblemSolvers::LevenbergMarquardtForSerialLink&lt; Scalar &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="97,367,314,419"/>
-<area shape="rect" id="node2" href="$class_kinematics_1_1_inverse_problem_solvers_1_1_multiple_i_k.html" title=" " alt="" coords="109,279,302,317"/>
-<area shape="rect" id="node3" href="$class_kinematics_1_1_inverse_problem_solvers_1_1_inverse_problem_solver_base.html" title=" " alt="" coords="5,191,240,229"/>
-<area shape="rect" id="node4" title="STL class." alt="" coords="80,92,221,117"/>
-<area shape="rect" id="node5" title=" " alt="" coords="187,5,226,31"/>
-<area shape="rect" id="node6" title="STL class." alt="" coords="206,141,346,167"/>
+<area shape="rect" id="node1" title=" " alt="" coords="79,700,331,920"/>
+<area shape="rect" id="node2" href="$class_kinematics_1_1_inverse_problem_solvers_1_1_multiple_i_k.html" title=" " alt="" coords="109,497,302,651"/>
+<area shape="rect" id="node3" href="$class_kinematics_1_1_inverse_problem_solvers_1_1_inverse_problem_solver_base.html" title=" " alt="" coords="5,335,240,448"/>
+<area shape="rect" id="node4" title="STL class." alt="" coords="80,140,221,213"/>
+<area shape="rect" id="node5" title=" " alt="" coords="189,5,227,79"/>
+<area shape="rect" id="node6" title="STL class." alt="" coords="207,237,347,311"/>
 </map>

@@ -1,12 +1,20 @@
 <map id="IO::LoadConfig::RobotConfig" name="IO::LoadConfig::RobotConfig">
-<area shape="rect" id="node1" title=" " alt="" coords="1532,56,1725,81"/>
-<area shape="rect" id="node2" href="$class_i_o_1_1_load_config_1_1_load_config_base.html" title=" " alt="" coords="1120,5,1337,31"/>
-<area shape="rect" id="node3" title=" " alt="" coords="909,41,1096,93"/>
-<area shape="rect" id="node4" href="$struct_i_o_1_1_load_config_1_1_sensor_device_config_1_1_i_m_u_config_data.html" title=" " alt="" coords="344,40,546,79"/>
-<area shape="rect" id="node5" title="STL class." alt="" coords="180,159,259,184"/>
-<area shape="rect" id="node8" href="$struct_i_o_1_1_load_config_1_1_actuator_device_config_1_1_servo_motor_config_data.html" title=" " alt="" coords="641,145,885,184"/>
-<area shape="rect" id="node9" title=" " alt="" coords="375,152,515,191"/>
-<area shape="rect" id="node6" title="STL class." alt="" coords="5,152,131,191"/>
-<area shape="rect" id="node7" title=" " alt="" coords="1122,120,1336,172"/>
-<area shape="rect" id="node10" title=" " alt="" coords="385,103,505,128"/>
+<area shape="rect" id="node1" title=" " alt="" coords="303,1088,495,1215"/>
+<area shape="rect" id="node2" href="$class_i_o_1_1_load_config_1_1_load_config_base.html" title=" " alt="" coords="5,927,222,1027"/>
+<area shape="rect" id="node3" title=" " alt="" coords="151,655,338,755"/>
+<area shape="rect" id="node4" href="$struct_i_o_1_1_load_config_1_1_sensor_device_config_1_1_i_m_u_config_data.html" title=" " alt="" coords="96,289,297,456"/>
+<area shape="rect" id="node5" title="STL class." alt="" coords="476,141,555,215"/>
+<area shape="rect" id="node10" href="$struct_i_o_1_1_load_config_1_1_serial_port_config_1_1_serial_control_data.html" title=" " alt="" coords="321,323,498,423"/>
+<area shape="rect" id="node14" href="$struct_i_o_1_1_load_config_1_1_control_board_config_1_1_control_board_data.html" title=" " alt="" coords="522,329,719,416"/>
+<area shape="rect" id="node18" href="$struct_i_o_1_1_load_config_1_1_actuator_device_config_1_1_serial_servo_motor_data.html" title=" " alt="" coords="744,323,983,423"/>
+<area shape="rect" id="node6" title="STL class." alt="" coords="452,5,578,92"/>
+<area shape="rect" id="node7" title=" " alt="" coords="298,927,500,1027"/>
+<area shape="rect" id="node8" href="$struct_i_o_1_1_load_config_1_1_serial_port_config_1_1_serial_port_data.html" title=" " alt="" coords="309,779,486,865"/>
+<area shape="rect" id="node9" title=" " alt="" coords="295,524,495,624"/>
+<area shape="rect" id="node11" title=" " alt="" coords="524,927,707,1027"/>
+<area shape="rect" id="node12" href="$struct_i_o_1_1_load_config_1_1_control_board_config_1_1_config_data.html" title=" " alt="" coords="521,779,718,865"/>
+<area shape="rect" id="node13" title=" " alt="" coords="520,524,721,624"/>
+<area shape="rect" id="node15" title=" " alt="" coords="746,927,943,1027"/>
+<area shape="rect" id="node16" href="$struct_i_o_1_1_load_config_1_1_actuator_device_config_1_1_actuator_device_data.html" title=" " alt="" coords="747,779,974,865"/>
+<area shape="rect" id="node17" title=" " alt="" coords="765,517,958,631"/>
 </map>

@@ -96,46 +96,61 @@ $(document).ready(function(){initNavTree('_robot_config_8hpp_source.html','');})
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_logger_8hpp.html">Tools/Log/Logger.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_sensor_device_config_8hpp.html">SensorDeviceConfig.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_actuator_device_config_8hpp.html">ActuatorDeviceConfig.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span>IO {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">namespace </span>LoadConfig {</div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_i_o_1_1_load_config_1_1_robot_config.html">   21</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_i_o_1_1_load_config_1_1_robot_config.html">RobotConfig</a> final : <span class="keyword">public</span> <a class="code" href="class_i_o_1_1_load_config_1_1_load_config_base.html">LoadConfigBase</a> {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            public :</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                <a class="code" href="class_i_o_1_1_load_config_1_1_robot_config.html">RobotConfig</a>(<span class="keyword">const</span> std::string &amp;config_filename);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                <a class="code" href="class_i_o_1_1_load_config_1_1_robot_config.html">RobotConfig</a>(<span class="keyword">const</span> std::string &amp;config_filename, Tools::Log::LoggerPtr &amp;);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                <a class="code" href="class_i_o_1_1_load_config_1_1_robot_config.html">RobotConfig</a>(<span class="keyword">const</span> <a class="code" href="class_i_o_1_1_load_config_1_1_robot_config.html">RobotConfig</a> &amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_serial_port_config_8hpp.html">SerialPortConfig.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_sensor_device_config_8hpp.html">SensorDeviceConfig.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_actuator_device_config_8hpp.html">ActuatorDeviceConfig.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_control_board_config_8hpp.html">ControlBoardConfig.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>IO {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">namespace </span>LoadConfig {</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_i_o_1_1_load_config_1_1_robot_config.html">   23</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_i_o_1_1_load_config_1_1_robot_config.html">RobotConfig</a> final : <span class="keyword">public</span> <a class="code" href="class_i_o_1_1_load_config_1_1_load_config_base.html">LoadConfigBase</a> {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            public :</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                <a class="code" href="class_i_o_1_1_load_config_1_1_robot_config.html">RobotConfig</a>(<span class="keyword">const</span> std::string &amp;config_dir, <span class="keyword">const</span> std::string &amp;config_filename);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                <a class="code" href="class_i_o_1_1_load_config_1_1_robot_config.html">RobotConfig</a>(<span class="keyword">const</span> std::string &amp;config_dir, <span class="keyword">const</span> std::string &amp;config_filename, Tools::Log::LoggerPtr &amp;);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keywordtype">void</span> update() <span class="keyword">override</span> <span class="keyword">final</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="keywordtype">void</span> force_update() <span class="keyword">override</span> <span class="keyword">final</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                std::unique_ptr&lt;SensorDeviceConfig::IMUConfigData&gt; imu_config_data;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                std::unique_ptr&lt;ActuatorDeviceConfig::ServoMotorConfigData&gt; servomotor_config_data;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            private :</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                std::string config_file_name;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                Tools::Log::LoggerPtr logger_ptr;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                <span class="keyword">const</span> std::string sensor_device_config_identitiy = <span class="stringliteral">&quot;Sensor config file&quot;</span>,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                                  actuator_device_config_identity = <span class="stringliteral">&quot;Actuator config file&quot;</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <a class="code" href="class_i_o_1_1_load_config_1_1_robot_config.html">RobotConfig</a>(<span class="keyword">const</span> <a class="code" href="class_i_o_1_1_load_config_1_1_robot_config.html">RobotConfig</a> &amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                <span class="keywordtype">void</span> update() <span class="keyword">override</span> <span class="keyword">final</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <span class="keywordtype">void</span> force_update() <span class="keyword">override</span> <span class="keyword">final</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                std::unique_ptr&lt;SerialPortConfig::SerialPortData&gt; port_config_data;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                std::unique_ptr&lt;SensorDeviceConfig::IMUConfigData&gt; imu_config_data;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                std::unique_ptr&lt;ActuatorDeviceConfig::ActuatorDeviceData&gt; actuator_config_data;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                std::unique_ptr&lt;ControlBoardConfig::ConfigData&gt; control_board_config_data;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            private :</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                std::string config_dir,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                            config_file_name;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                std::unique_ptr&lt;SensorDeviceConfig&gt; load_sensor_device_config;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                std::unique_ptr&lt;ActuatorDeviceConfig&gt; load_actuator_device_config;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keywordtype">void</span> move_data();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        };</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                Tools::Log::LoggerPtr logger_ptr;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="keyword">const</span> std::string serial_port_group_key      = <span class="stringliteral">&quot;IO.&quot;</span>,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                                  serial_device_group_key    = serial_port_group_key   + <span class="stringliteral">&quot;Devices.&quot;</span>,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                                  serial_port_config_key     = serial_port_group_key   + <span class="stringliteral">&quot;Serial port config file&quot;</span>,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                  sensor_device_config_key   = serial_device_group_key + <span class="stringliteral">&quot;Sensor config file&quot;</span>,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                                  actuator_device_config_key = serial_device_group_key + <span class="stringliteral">&quot;Actuator config file&quot;</span>,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                                  control_device_config_key  = serial_device_group_key + <span class="stringliteral">&quot;Control board config file&quot;</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                std::unique_ptr&lt;SerialPortConfig&gt; load_serial_port_config;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                std::unique_ptr&lt;SensorDeviceConfig&gt; load_sensor_device_config;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                std::unique_ptr&lt;ActuatorDeviceConfig&gt; load_actuator_device_config;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                std::unique_ptr&lt;ControlBoardConfig&gt; load_control_board_device_config;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="keywordtype">void</span> move_data();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                std::string make_config_file_path();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        };</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_sensor_device_config_8hpp_html"><div class="ttname"><a href="_sensor_device_config_8hpp.html">SensorDeviceConfig.hpp</a></div><div class="ttdoc">Load sensor setting class.</div></div>
-<div class="ttc" id="aclass_i_o_1_1_load_config_1_1_robot_config_html"><div class="ttname"><a href="class_i_o_1_1_load_config_1_1_robot_config.html">IO::LoadConfig::RobotConfig</a></div><div class="ttdef"><b>Definition:</b> RobotConfig.hpp:21</div></div>
+<div class="ttc" id="aclass_i_o_1_1_load_config_1_1_robot_config_html"><div class="ttname"><a href="class_i_o_1_1_load_config_1_1_robot_config.html">IO::LoadConfig::RobotConfig</a></div><div class="ttdef"><b>Definition:</b> RobotConfig.hpp:23</div></div>
 <div class="ttc" id="a_actuator_device_config_8hpp_html"><div class="ttname"><a href="_actuator_device_config_8hpp.html">ActuatorDeviceConfig.hpp</a></div><div class="ttdoc">Load actuator setting class.</div></div>
 <div class="ttc" id="aclass_tools_1_1_config_file_operator_1_1_json_loader_html"><div class="ttname"><a href="class_tools_1_1_config_file_operator_1_1_json_loader.html">Tools::ConfigFileOperator::JsonLoader</a></div><div class="ttdef"><b>Definition:</b> JsonLoader.hpp:18</div></div>
+<div class="ttc" id="a_control_board_config_8hpp_html"><div class="ttname"><a href="_control_board_config_8hpp.html">ControlBoardConfig.hpp</a></div></div>
+<div class="ttc" id="a_serial_port_config_8hpp_html"><div class="ttname"><a href="_serial_port_config_8hpp.html">SerialPortConfig.hpp</a></div></div>
 <div class="ttc" id="aclass_i_o_1_1_load_config_1_1_load_config_base_html"><div class="ttname"><a href="class_i_o_1_1_load_config_1_1_load_config_base.html">IO::LoadConfig::LoadConfigBase</a></div><div class="ttdef"><b>Definition:</b> LoadConfigBase.hpp:14</div></div>
 <div class="ttc" id="a_load_config_base_8hpp_html"><div class="ttname"><a href="_load_config_base_8hpp.html">LoadConfigBase.hpp</a></div><div class="ttdoc">load config base class</div></div>
 <div class="ttc" id="a_robot_config_8hpp_html"><div class="ttname"><a href="_robot_config_8hpp.html">RobotConfig.hpp</a></div><div class="ttdoc">Load robot setting class.</div></div>

@@ -91,36 +91,47 @@ $(document).ready(function(){initNavTree('_inertial_measurement_unit_8cpp.html',
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_inertial_measurement_unit_8hpp_source.html">InertialMeasurementUnit.hpp</a>&quot;</code><br />
 <code>#include &lt;stdexcept&gt;</code><br />
+<code>#include &quot;<a class="el" href="_simple_8hpp_source.html">../../../Communicator/SerialController/Simple.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for InertialMeasurementUnit.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="_inertial_measurement_unit_8cpp__incl.png" border="0" usemap="#src_2_i_o_2_device_2_sensor_2_i_m_u_2_inertial_measurement_unit_8cpp" alt=""/></div>
 <map name="src_2_i_o_2_device_2_sensor_2_i_m_u_2_inertial_measurement_unit_8cpp" id="src_2_i_o_2_device_2_sensor_2_i_m_u_2_inertial_measurement_unit_8cpp">
-<area shape="rect" title=" " alt="" coords="1011,5,1235,44"/>
-<area shape="rect" href="_inertial_measurement_unit_8hpp.html" title="IMU utility class." alt="" coords="500,92,693,117"/>
-<area shape="rect" title=" " alt="" coords="1671,459,1749,484"/>
-<area shape="rect" href="_information_8hpp.html" title="robot state class" alt="" coords="501,165,692,191"/>
-<area shape="rect" href="_inertial_measurement_unit_base_8hpp.html" title="IMU device base class." alt="" coords="254,165,477,191"/>
-<area shape="rect" title=" " alt="" coords="1500,459,1554,484"/>
-<area shape="rect" title=" " alt="" coords="528,385,598,411"/>
-<area shape="rect" title=" " alt="" coords="606,459,664,484"/>
-<area shape="rect" href="_logger_8hpp.html" title="Logging class." alt="" coords="627,239,776,264"/>
-<area shape="rect" href="_time_series_8hpp.html" title="TimeSeriesData class utilty class @auther Naoki Takahashi." alt="" coords="283,312,398,337"/>
-<area shape="rect" href="_messenger_8hpp.html" title="Message output processing." alt="" coords="755,312,867,337"/>
-<area shape="rect" title=" " alt="" coords="672,312,731,337"/>
-<area shape="rect" href="_matrix_8hpp_source.html" title=" " alt="" coords="1191,312,1319,337"/>
-<area shape="rect" title=" " alt="" coords="723,385,838,411"/>
-<area shape="rect" title=" " alt="" coords="862,385,928,411"/>
-<area shape="rect" title=" " alt="" coords="309,385,372,411"/>
-<area shape="rect" title=" " alt="" coords="953,385,1011,411"/>
-<area shape="rect" title=" " alt="" coords="396,385,453,411"/>
-<area shape="rect" href="_message_levels_8hpp.html" title="Message levels." alt="" coords="1035,385,1174,411"/>
-<area shape="rect" href="_command_line_argument_reader_8hpp_source.html" title=" " alt="" coords="1199,385,1445,411"/>
-<area shape="rect" title=" " alt="" coords="1283,459,1361,484"/>
-<area shape="rect" title=" " alt="" coords="1520,385,1617,411"/>
-<area shape="rect" title=" " alt="" coords="222,385,285,411"/>
-<area shape="rect" href="_time_series_data_8hpp.html" title="Timed value class @auther Naoki Takahashi." alt="" coords="5,385,148,411"/>
-<area shape="rect" title=" " alt="" coords="47,459,106,484"/>
+<area shape="rect" title=" " alt="" coords="976,5,1200,44"/>
+<area shape="rect" href="_inertial_measurement_unit_8hpp.html" title="IMU utility class." alt="" coords="992,99,1184,124"/>
+<area shape="rect" title=" " alt="" coords="190,585,269,611"/>
+<area shape="rect" href="_simple_8hpp.html" title="Simple serial communication class." alt="" coords="1218,92,1406,131"/>
+<area shape="rect" href="_serial_device_base_8hpp_source.html" title=" " alt="" coords="246,425,421,451"/>
+<area shape="rect" href="_information_8hpp.html" title="robot state class" alt="" coords="992,279,1184,304"/>
+<area shape="rect" href="_serial_controller_base_8hpp.html" title="Serial communication controller class." alt="" coords="1211,179,1424,231"/>
+<area shape="rect" title=" " alt="" coords="1131,505,1200,531"/>
+<area shape="rect" title=" " alt="" coords="442,585,496,611"/>
+<area shape="rect" title=" " alt="" coords="1065,585,1122,611"/>
+<area shape="rect" href="_logger_8hpp.html" title="Logging class." alt="" coords="902,352,1050,377"/>
+<area shape="rect" href="_time_series_8hpp.html" title="TimeSeriesData class utilty class @auther Naoki Takahashi." alt="" coords="1342,425,1456,451"/>
+<area shape="rect" href="_messenger_8hpp.html" title="Message output processing." alt="" coords="920,425,1032,451"/>
+<area shape="rect" title=" " alt="" coords="1157,425,1216,451"/>
+<area shape="rect" href="_matrix_8hpp_source.html" title=" " alt="" coords="93,425,221,451"/>
+<area shape="rect" title=" " alt="" coords="266,505,382,531"/>
+<area shape="rect" title=" " alt="" coords="827,505,893,531"/>
+<area shape="rect" title=" " alt="" coords="1312,505,1374,531"/>
+<area shape="rect" title=" " alt="" coords="1747,505,1805,531"/>
+<area shape="rect" title=" " alt="" coords="1665,505,1722,531"/>
+<area shape="rect" href="_message_levels_8hpp.html" title="Message levels." alt="" coords="917,505,1057,531"/>
+<area shape="rect" href="_command_line_argument_reader_8hpp_source.html" title=" " alt="" coords="506,505,752,531"/>
+<area shape="rect" title=" " alt="" coords="590,585,669,611"/>
+<area shape="rect" title=" " alt="" coords="94,505,192,531"/>
+<area shape="rect" title=" " alt="" coords="1225,505,1287,531"/>
+<area shape="rect" href="_time_series_data_8hpp.html" title="Timed value class @auther Naoki Takahashi." alt="" coords="1447,505,1590,531"/>
+<area shape="rect" title=" " alt="" coords="1489,585,1549,611"/>
+<area shape="rect" href="_serial_return_packet_8hpp_source.html" title=" " alt="" coords="1621,279,1795,304"/>
+<area shape="rect" href="_serial_flow_scheduler_8hpp.html" title="Serial communication management class @auther Naoki Takahashi." alt="" coords="1570,352,1739,377"/>
+<area shape="rect" href="_serial_flow_schedule_base_8hpp.html" title="Serial communication management base class @auther Naoki Takahashi." alt="" coords="1813,425,2008,451"/>
+<area shape="rect" title=" " alt="" coords="2537,505,2589,531"/>
+<area shape="rect" title=" " alt="" coords="1879,505,1958,531"/>
+<area shape="rect" title=" " alt="" coords="1982,505,2154,531"/>
+<area shape="rect" title=" " alt="" coords="2179,499,2315,537"/>
+<area shape="rect" title=" " alt="" coords="2338,505,2512,531"/>
 </map>
 </div>
 </div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

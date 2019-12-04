@@ -1,6 +1,6 @@
 <map id="Kinematics::ForwardProblemSolvers::ForwardProblemSolverBase" name="Kinematics::ForwardProblemSolvers::ForwardProblemSolverBase">
-<area shape="rect" id="node1" title=" " alt="" coords="5,51,245,89"/>
-<area shape="rect" id="node2" href="$class_kinematics_1_1_forward_problem_solvers_1_1_multiple_f_k.html" title=" " alt="" coords="293,51,490,89"/>
-<area shape="rect" id="node3" href="$class_kinematics_1_1_forward_problem_solvers_1_1_custom_multiple_f_k.html" title=" " alt="" coords="538,5,731,57"/>
-<area shape="rect" id="node4" href="$class_kinematics_1_1_forward_problem_solvers_1_1_simple_for_serial_link.html" title=" " alt="" coords="538,81,731,133"/>
+<area shape="rect" id="node1" title=" " alt="" coords="90,5,330,119"/>
+<area shape="rect" id="node2" href="$class_kinematics_1_1_forward_problem_solvers_1_1_multiple_f_k.html" title=" " alt="" coords="111,167,308,320"/>
+<area shape="rect" id="node3" href="$class_kinematics_1_1_forward_problem_solvers_1_1_custom_multiple_f_k.html" title=" " alt="" coords="5,375,198,541"/>
+<area shape="rect" id="node4" href="$class_kinematics_1_1_forward_problem_solvers_1_1_simple_for_serial_link.html" title=" " alt="" coords="221,368,414,548"/>
 </map>

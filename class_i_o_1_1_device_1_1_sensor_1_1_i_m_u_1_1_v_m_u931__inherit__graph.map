@@ -1,6 +1,5 @@
 <map id="IO::Device::Sensor::IMU::VMU931" name="IO::Device::Sensor::IMU::VMU931">
-<area shape="rect" id="node1" title=" " alt="" coords="492,44,626,83"/>
-<area shape="rect" id="node2" href="$class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_inertial_measurement_unit.html" title=" " alt="" coords="237,12,443,51"/>
-<area shape="rect" id="node3" href="$class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_inertial_measurement_unit_base.html" title=" " alt="" coords="5,5,187,57"/>
-<area shape="rect" id="node4" href="$class_i_o_1_1_communicator_1_1_serial_controller_1_1_serial_controller_base.html" title=" " alt="" coords="235,75,444,113"/>
+<area shape="rect" id="node1" title=" " alt="" coords="63,381,197,548"/>
+<area shape="rect" id="node2" href="$class_i_o_1_1_device_1_1_sensor_1_1_i_m_u_1_1_inertial_measurement_unit.html" title=" " alt="" coords="27,153,233,333"/>
+<area shape="rect" id="node3" href="$class_i_o_1_1_device_1_1_serial_device_base.html" title=" " alt="" coords="5,5,255,105"/>
 </map>

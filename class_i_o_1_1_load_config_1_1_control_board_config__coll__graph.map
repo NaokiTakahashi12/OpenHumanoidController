@@ -1,0 +1,10 @@
+<map id="IO::LoadConfig::ControlBoardConfig" name="IO::LoadConfig::ControlBoardConfig">
+<area shape="rect" id="node1" title=" " alt="" coords="37,895,234,1035"/>
+<area shape="rect" id="node2" href="$class_i_o_1_1_load_config_1_1_load_config_base.html" title=" " alt="" coords="5,733,222,833"/>
+<area shape="rect" id="node3" title=" " alt="" coords="246,733,429,833"/>
+<area shape="rect" id="node4" href="$struct_i_o_1_1_load_config_1_1_control_board_config_1_1_config_data.html" title=" " alt="" coords="239,585,436,672"/>
+<area shape="rect" id="node5" title=" " alt="" coords="237,424,438,524"/>
+<area shape="rect" id="node6" href="$struct_i_o_1_1_load_config_1_1_control_board_config_1_1_control_board_data.html" title=" " alt="" coords="239,276,436,363"/>
+<area shape="rect" id="node7" title="STL class." alt="" coords="298,141,377,215"/>
+<area shape="rect" id="node8" title="STL class." alt="" coords="275,5,401,92"/>
+</map>
