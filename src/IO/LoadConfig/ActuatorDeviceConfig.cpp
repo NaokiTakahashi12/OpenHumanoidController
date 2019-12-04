@@ -12,57 +12,100 @@
 
 namespace IO {
 	namespace LoadConfig {
-		ActuatorDeviceConfig::ActuatorDeviceConfig(const std::string &config_file_name) {
+		ActuatorDeviceConfig::ActuatorDeviceConfig(const std::string &config_dir, const std::string &config_file_name) {
+			this->config_dir = config_dir;
 			this->config_file_name = config_file_name;
+
 			logger_ptr = std::make_unique<Tools::Log::Logger>();
 		}
 
-		ActuatorDeviceConfig::ActuatorDeviceConfig(const std::string &config_file_name, Tools::Log::LoggerPtr &logger_ptr) {
+		ActuatorDeviceConfig::ActuatorDeviceConfig(const std::string &config_dir, const std::string &config_file_name, Tools::Log::LoggerPtr &logger_ptr) {
+			this->config_dir = config_dir;
 			this->config_file_name = config_file_name;
+
 			this->logger_ptr = logger_ptr;
 		}
 
 		void ActuatorDeviceConfig::update() {
 			logger_ptr->message(Tools::Log::MessageLevels::trace, "Update actuator device config now");
-			if(!servomotor_config) {
-				servomotor_config = std::make_unique<ServoMotorConfigData>();
+
+			if(!config_data) {
+				config_data = std::make_unique<ActuatorDeviceData>();
+				load_config();
 			}
-			update_serial_servo_config();
 		}
 
 		void ActuatorDeviceConfig::force_update() {
 			logger_ptr->message(Tools::Log::MessageLevels::trace, "Force update actuator device config now");
-			servomotor_config = std::make_unique<ServoMotorConfigData>();
-			update_serial_servo_config();
+
+			if(config_data) {
+				config_data.reset();
+			}
+			config_data = std::make_unique<ActuatorDeviceData>();
+
+			load_config();
 		}
 
-		void ActuatorDeviceConfig::update_serial_servo_config() {
-			logger_ptr->message(Tools::Log::MessageLevels::trace, "Update config from " + config_file_name);
-			Tools::ConfigFileOperator::JsonLoader mather_config_file(config_file_name);
-			Tools::ConfigFileOperator::JsonLoader servo_config_file(mather_config_file.get_parameter<std::string>(servo_config_file_name));
-			logger_ptr->message(Tools::Log::MessageLevels::trace, "Loading servo motor config from " + servo_config_file.get_filename());
-			Tools::ConfigFileOperator::JsonLoader servo_id_config_file(mather_config_file.get_parameter<std::string>(servo_id_config_file_name));
-			logger_ptr->message(Tools::Log::MessageLevels::trace, "Loading servo motor ID config from " + servo_id_config_file.get_filename());
+		void ActuatorDeviceConfig::load_config() {
+			Tools::ConfigFileOperator::JsonLoader config(config_dir + config_file_name);
 
-			servomotor_config->control_board_name = servo_config_file.get_parameter<std::string>(control_board_type_name);
-			servomotor_config->path = servo_config_file.get_parameter<std::string>(servo_path_name);
-			servomotor_config->servo_name = servo_config_file.get_parameter<std::string>(servo_type_name);
+			load_serial_servo_config(
+				config.get_parameter<std::string>(serial_servo_motor_config_key)
+			);
 
-			for(auto &&ici : id_config_identities) {
-				std::string load_identities = servomotor_id_head_name + ici;
-				servomotor_config->id_list.push_back(servo_id_config_file.get_parameter<int>(load_identities));
-				servomotor_config->id_map[ici] = servo_id_config_file.get_parameter<int>(load_identities);
+			print_serial_servo_from_logger();
+		}
+
+		void ActuatorDeviceConfig::load_serial_servo_config(const std::string &serial_config_filename) {
+			Tools::ConfigFileOperator::JsonLoader config(config_dir + serial_config_filename);
+
+			const auto dev_ids    = config.get_parameter_tree<int>(serial_servo_motor_tree_key, serial_servo_id_key);
+			const auto serial_ids = config.get_parameter_tree<int>(serial_servo_motor_tree_key, serial_servo_serial_id_key);
+			const auto dev_names  = config.get_parameter_tree<std::string>(serial_servo_motor_tree_key, serial_servo_name_key);
+			const auto angle_ids  = config.get_parameter_tree<int>(angle_id_tree_key, angle_id_key);
+			const auto angle_motor_ids  = config.get_parameter_tree<int>(angle_id_tree_key, angle_motor_id_key);
+
+			if(dev_ids.size() != dev_names.size()) {
+				throw std::runtime_error("Different size of Servo ID vs Servo name from IO::LoadConfig::ActuatorDeviceConfig");
+			}
+			else if(dev_ids.size() != serial_ids.size()) {
+				throw std::runtime_error("Different size of Servo ID vs Servo serial id from IO::LoadConfig::ActuatorDeviceConfig");
+			}
+			else if(dev_ids.size() != angle_ids.size()) {
+				throw std::runtime_error("Different size of Servo ID vs Angle ID from IO::LoadConfig::ActuatorDeviceConfig");
+			}
+			else if(dev_ids.size() != angle_motor_ids.size()) {
+				throw std::runtime_error("Different size of Servo ID vs Angle motor ID from IO::LoadConfig::ActuatorDeviceConfig");
 			}
 
-			print_out_status();
+			for(unsigned int i = 0; i < dev_ids.size(); i ++) {
+				config_data->serial_motor[dev_ids.at(i)].name = dev_names.at(i);
+				config_data->serial_motor[dev_ids.at(i)].serial_id = serial_ids.at(i);
+				config_data->serial_motor[angle_motor_ids.at(i)].joint_id = angle_ids.at(i);
+			}
+
+			serial_servo_data_assertion();
 		}
 
-		void ActuatorDeviceConfig::print_out_status() {
-			logger_ptr->message(Tools::Log::MessageLevels::trace, " Servo motor name is " + servomotor_config->servo_name);
-			logger_ptr->message(Tools::Log::MessageLevels::trace, " Control board name is " + servomotor_config->control_board_name);
-			logger_ptr->message(Tools::Log::MessageLevels::trace, " Servo motor path is " + servomotor_config->path);
-			for(auto &&[id_name, id] : servomotor_config->id_map) {
-				logger_ptr->message(Tools::Log::MessageLevels::trace, " " + id_name + "," + std::to_string(id) + " from map");
+		void ActuatorDeviceConfig::serial_servo_data_assertion() {
+			for(auto &&[id, data] : config_data->serial_motor) {
+				if(data.name.empty()) {
+					throw std::runtime_error("Failed empty serial servo name from IO::LoadConfig::ActuatorDeviceConfig");
+				}
+			}
+		}
+
+		void ActuatorDeviceConfig::print_serial_servo_from_logger() {
+			for(auto &&[id, data] : config_data->serial_motor) {
+				std::stringstream ss;
+
+				ss << "Config_SerialServoMotor:";
+				ss << " Name: " << data.name;
+				ss << " SerialID: " << data.serial_id;
+				ss << " ID: " << id;
+				ss << " JointID: " << data.joint_id;
+
+				logger_ptr->message(Tools::Log::MessageLevels::trace, ss.str());
 			}
 		}
 	}

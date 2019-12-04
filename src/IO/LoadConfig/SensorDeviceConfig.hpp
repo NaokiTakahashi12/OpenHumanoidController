@@ -13,6 +13,8 @@
 
 #include <Tools/Log/Logger.hpp>
 
+#include "SerialPortConfig.hpp"
+
 namespace IO {
 	namespace LoadConfig {
 		class SensorDeviceConfig : public LoadConfigBase {
@@ -24,8 +26,16 @@ namespace IO {
 
 				struct IMUConfigData {
 					// Enable list
-					bool accel, gyro, compas, eulerangle, quaternion, heading;
+					bool accel,
+						 gyro,
+						 compas,
+						 eulerangle,
+						 quaternion,
+						 heading;
+
 					std::string name;
+
+					SerialPortConfig::SerialControlData::SerialID serial_id;
 				};
 
 				std::unique_ptr<IMUConfigData> imu_config;
@@ -40,6 +50,7 @@ namespace IO {
 				// Config file value identities
 				const std::string imu_config_file_name = "IMU config file",
 								  use_imu_name = "IMU",
+								  serial_id_key = "Serial ID",
 							   	  imu_enable = "Enable list.",
 							      accelerometer = "Accelerometers",
 							      gyroscope = "Gyroscopes",
