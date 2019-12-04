@@ -2,6 +2,5 @@
 	"Comment" : {
 		"Brief": "IO actuator config files"
 	},
-	"Servo motor config file": "servo.conf.json",
-	"Servo motor id config file": "humanoid.servo.id.conf.json"
+	"Serial servo motor config": "serial_servo_motor.conf.json"
 }
