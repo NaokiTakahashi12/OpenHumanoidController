@@ -23,7 +23,7 @@ namespace Kinematics {
 
 		parameters = Parameters<Scalar>::make_ptr(model->dof());
 		control_point_map = ControlPointMap<Scalar>::make_ptr();
-		set_control_point_from_config_for_humanoid(config_manager->get_value<std::string>("Control point map config"));
+//		set_control_point_from_config_for_humanoid(config_manager->get_value<std::string>("Control point map config"));
 
 		solver_manager = SolverManager<Scalar>::make_ptr(model, dir, config_file);
 		joint_angle_modificator = JointAngleModificator<Scalar>::make_ptr(parameters, dir, config_manager->get_value<std::string>("Joint space config"));

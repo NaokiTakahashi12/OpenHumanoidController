@@ -20,26 +20,28 @@ namespace Const {
 /*
  * @class Acceliteの定数を記述する
  */
-const int SERVO_NUM = 18;	//! サーボの個数 (Accelite)
+const int SERVO_NUM = 19;	//! サーボの個数 (Accelite)
 enum {								//! サーボの番号
-	ANKLE_ROLL_L 	= 	0,			//! 左足首のロール軸
-	ANKLE_PITCH_L	=	1,			//! 左足首のピッチ軸
-	SHIN_PITCH_L 	= 	2,			//! 左足膝下ピッチ軸（平行リンク）
-	THIGH_PITCH_L 	= 	3,			//! 左足膝上ピッチ軸（平行リンク）
-	HIP_ROLL_L	 	= 	4,			//! 左股のロール軸
-	HIP_YAW_L 		= 	5,			//! 左股のヨー軸
-	ANKLE_ROLL_R 	= 	6,			//! 右足首のロール軸
-	ANKLE_PITCH_R	=	7,			//! 右足首のピッチ軸
-	SHIN_PITCH_R 	= 	8,			//! 右足膝下ピッチ軸（平行リンク）
-	THIGH_PITCH_R 	= 	9,			//! 右足膝上ピッチ軸（平行リンク）
-	HIP_ROLL_R	 	= 	10,			//! 右股のロール軸
-	HIP_YAW_R 		= 	11,			//! 右股のヨー軸	
-	ARM_PITCH_L		= 	14,			//! 左腕のピッチ軸
-	ARM_ROLL_L		= 	15,			//! 左腕のロール軸
-	ARM_PITCH_R		= 	18,			//! 右腕のピッチ軸
-	ARM_ROLL_R		= 	19,			//! 右腕のロール軸
-	HEAD_YAW		= 	22,			//! 首のヨー軸
-	HEAD_PITCH		= 	23,			//! 首のピッチ軸（Acceliteは無い）
+	ANKLE_ROLL_L 	= 	9,			//! 左足首のロール軸
+	ANKLE_PITCH_L	=	10,			//! 左足首のピッチ軸
+	SHIN_PITCH_L 	= 	11,			//! 左足膝下ピッチ軸（平行リンク）
+	THIGH_PITCH_L 	= 	12,			//! 左足膝上ピッチ軸（平行リンク）
+	HIP_ROLL_L	 	= 	13,			//! 左股のロール軸
+	HIP_YAW_L 		= 	14,			//! 左股のヨー軸
+	ANKLE_ROLL_R 	= 	0,			//! 右足首のロール軸
+	ANKLE_PITCH_R	=	1,			//! 右足首のピッチ軸
+	SHIN_PITCH_R 	= 	2,			//! 右足膝下ピッチ軸（平行リンク）
+	THIGH_PITCH_R 	= 	3,			//! 右足膝上ピッチ軸（平行リンク）
+	HIP_ROLL_R	 	= 	4,			//! 右股のロール軸
+	HIP_YAW_R 		= 	5,			//! 右股のヨー軸	
+	ARM_PITCH_L		= 	15,			//! 左腕のピッチ軸
+	ARM_ROLL_L		= 	16,			//! 左腕のロール軸
+	ELBOW_PITCH_L	= 	17,			//! 左腕のピッチ軸
+	ARM_PITCH_R		= 	6,			//! 右腕のピッチ軸
+	ARM_ROLL_R		= 	7,			//! 右腕のロール軸
+	ELBOW_PITCH_R	= 	8,			//! 左腕のピッチ軸
+	HEAD_YAW		= 	18,			//! 首のヨー軸
+//	HEAD_PITCH		= 	23,			//! 首のピッチ軸（Acceliteは無い）
 	SERVO_MAX_ID
 };
 

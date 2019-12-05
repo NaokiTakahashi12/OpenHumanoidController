@@ -8,16 +8,21 @@
 
 #include "GankenKunFK.hpp"
 
-#include <rbdl/Kinematics.h>
+using namespace GankenKun2018;
 
 namespace Kinematics {
 	namespace ForwardProblemSolvers {
 		template <typename Scalar>
 		GankenKunFK<Scalar>::GankenKunFK(ModelPtr &new_model) : MultipleFK<Scalar>(new_model) {
+			link = new Link[Const::LINK_NUM];
+			kine = new GankenKun2018::Kinematics(link);
+			initLink(link);
 		}
 
 		template <typename Scalar>
 		GankenKunFK<Scalar>::~GankenKunFK() {
+			delete(kine);
+			delete(link);
 		}
 
 		template <typename Scalar>
@@ -32,53 +37,44 @@ namespace Kinematics {
 
 		template <>
 		bool GankenKunFK<double>::compute() {
-			const auto base_position = Quantity::SpatialPoint<double>::Vector3::Zero();
-			for(auto &&[body_id, spatial_point] : this->control_point_map->access_to_this_storage()) {
-				spatial_point.point(
-					RigidBodyDynamics::CalcBodyToBaseCoordinates(
-						this->model->access(),
-						this->parameters->joint_angle()(),
-						body_id,
-						base_position,
-						true
-					)
-				)
-				.rotation(
-					RigidBodyDynamics::CalcBodyWorldOrientation(
-						this->model->access(),
-						this->parameters->joint_angle()(),
-						body_id,
-						false
-					)
-				);
+			for(int i = 0; i < Const::SERVO_NUM; i ++)
+				servo_angle[i] = parameters->joint_angle()()(i);
+
+			printf("\r\n--- compute forward kinematics ---\r\n");
+			std::cout << parameters->joint_angle()() << std::endl;
+			for(int i = 0; i < Const::SERVO_NUM; i ++) {
+				printf("%f ", servo_angle[i]);
 			}
+			printf("\r\n");
+
+			kine->setJointAngle(servo_angle);
+			kine->calcForwardKinematics();
+
+			for(auto &&[body_id, spatial_point] : this->control_point_map->access_to_this_storage()) {
+				if (body_id == Const::ANKLE_ROLL_R + 1) {
+					auto p = link[Const::RR2].p;
+					spatial_point.point(p[0], p[1], p[2]);
+				}
+				if (body_id == Const::ANKLE_ROLL_L + 1) {
+					auto p = link[Const::LR2].p;
+					spatial_point.point(p[0], p[1], p[2]);
+				}
+			}
+			printf("\r\ncompute forward kinematics\r\n");
+			for(int i = 0; i < Const::SERVO_NUM; i ++) {
+				parameters->joint_angle()()(i) = servo_angle[i];
+				printf("%f ", servo_angle[i]);
+			}
+			std::cout << link[Const::RR2].p << std::endl;
+			std::cout << link[Const::LR2].p << std::endl;
+			printf("\r\n");
+
 			return true;
 		}
 
 		template <>
 		[[deprecated("Please use double template.")]]
 		bool GankenKunFK<float>::compute() {
-			const auto base_position = Quantity::SpatialPoint<double>::Vector3::Zero();
-
-			for(auto &&[body_id, spatial_point] : this->control_point_map->access_to_this_storage()) {
-				spatial_point.point(
-					RigidBodyDynamics::CalcBodyToBaseCoordinates(
-						this->model->access(),
-						this->parameters->joint_angle()().cast<double>(),
-						body_id,
-						base_position,
-						true
-					).cast<float>()
-				)
-				.rotation(
-					RigidBodyDynamics::CalcBodyWorldOrientation(
-						this->model->access(),
-						this->parameters->joint_angle()().cast<double>(),
-						body_id,
-						false
-					).cast<float>()
-				);
-			}
 			return true;
 		}
 

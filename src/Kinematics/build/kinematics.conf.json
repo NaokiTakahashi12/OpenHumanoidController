@@ -12,7 +12,8 @@
 			],
 			"IK": [
 				{"Inverse": "CustomMultipleIK"},
-				{"Inverse": "LevenbergMarquardtForSerialLink"}
+				{"Inverse": "LevenbergMarquardtForSerialLink"},
+				{"Inverse": "GankenKunIK"}
 			]
 		},
 		"Model": [
@@ -21,12 +22,12 @@
 	},
 	"Assign solver": {
 		"Forward": "GankenKunFK",
-		"Inverse": "CustomMultipleIK"
+		"Inverse": "GankenKunIK"
 	},
 	"Model": {
 		"Directory": "../../../data/urdf/",
 		"File": "DARwInOP.urdf"
 	},
-	"Control point map config": "control_point_map.darwin.conf.json",
-	"Joint space config": "joint_space.darwin.conf.json"
+	"Control point map config": "control_point_map.dummy.conf.json",
+	"Joint space config": "joint_space.dummy.conf.json"
 }

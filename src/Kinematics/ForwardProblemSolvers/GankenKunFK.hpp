@@ -9,6 +9,9 @@
 #pragma once
 
 #include "MultipleFK.hpp"
+#include "../Hardware/GankenKun2018/Kinematics.h"
+#include "../Hardware/GankenKun2018/Link.h"
+#include "../Hardware/GankenKun2018/Constant.h"
 
 namespace Kinematics {
 	namespace ForwardProblemSolvers {
@@ -28,6 +31,10 @@ namespace Kinematics {
 
 				bool compute() override;
 
+			private:
+				GankenKun2018::Kinematics *kine;
+				GankenKun2018::Link *link;
+				float servo_angle[GankenKun2018::Const::SERVO_NUM];
 		};
 	}
 }

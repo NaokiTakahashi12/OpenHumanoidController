@@ -93,7 +93,7 @@ void Kinematics::setJointAngle(float *angle)
 	link[Const::RSR].q =  angle[Const::ARM_ROLL_R ];	// 右肩ロール軸
 
 	link[Const::SH ].q =  angle[Const::HEAD_YAW   ];	// 首ヨー軸
-	link[Const::HP ].q =  angle[Const::HEAD_PITCH ];	// 首ピッチ軸（Acceliteは無い）
+	link[Const::HP ].q =  0;	// 首ピッチ軸（Acceliteは無い）
 }
 
 #if 0
@@ -199,16 +199,16 @@ void Kinematics::InverseKinematics(vector<int> to, vector<Link> target)
 
 	ForwardKinematics(Const::CC);
 	std::vector<std::vector<int> > idx;
-	for(int i = 0; i < to.size(); i ++){
+	for(int i = 0; i < (int)to.size(); i ++){
 		idx.push_back(FindRoute(to[i]));
 	}
 
 	vector<bool> is_finish;
-	for(int i = 0; i < to.size(); i ++) is_finish.push_back(false);
+	for(int i = 0; i < (int)to.size(); i ++) is_finish.push_back(false);
 
 	for(int i = 0; i < 100; i ++){
 		int finish_count = 0;
-		for(int j = 0; j < to.size(); j ++){
+		for(int j = 0; j < (int)to.size(); j ++){
 			if (is_finish[j]){
 				finish_count ++;
 				continue;
@@ -219,7 +219,7 @@ void Kinematics::InverseKinematics(vector<int> to, vector<Link> target)
 			if (err.norm() < EPS){
 				is_finish[j] = true;
 				finish_count ++;
-	            std::cout << "finish id: " << j << ", num: " << i << std::endl;
+//	            std::cout << "finish id: " << j << ", num: " << i << std::endl;
 				continue;
 			}
 
@@ -248,12 +248,12 @@ void Kinematics::InverseKinematics(vector<int> to, vector<Link> target)
 			VectorXf dq = lambda * (J.inverse() * err);
 #endif
 
-			for(int nn = 0; nn < idx[j].size(); nn ++){
+			for(int nn = 0; nn < (int)idx[j].size(); nn ++){
 				int k = idx[j].at(nn);
 				link[k].q = link[k].q + dq(nn);
 			}
 		}
-		if (finish_count == to.size()) break;
+		if (finish_count == (int)to.size()) break;
 		link[Const::RP2].q = - link[Const::RP1].q;		// 平行リンクのために追加した処理
 		link[Const::LP2].q = - link[Const::LP1].q;
 		ForwardKinematics(Const::CC);
@@ -355,7 +355,12 @@ MatrixXf Kinematics::CalcJacobian(std::vector<int> idx)
  */
 void Kinematics::calcInverseKinematics(float *angle, Link RFLink, Link LFLink)
 {
-	float q2, q3, q4, q4a, q5, q6, q7;
+	if (((link[Const::LP3].q == 0.0) && (link[Const::LP2].q == 0.0)) ||
+	   ((link[Const::RP3].q == 0.0) && (link[Const::RP2].q == 0.0))){
+		std::cerr << "Could not calculate Inverse Kinematics" << std::endl;
+		return;
+	}
+
 	vector<int> to;
 	vector<Link> target;
 
@@ -382,7 +387,7 @@ void Kinematics::calcInverseKinematics(float *angle, Link RFLink, Link LFLink)
 	angle[Const::HIP_YAW_L    ] =  link[Const::LY ].q						;	// 股ヨー軸
 }
 
-#if 1
+#if 0
 
 // チェックプログラム
 int main()
