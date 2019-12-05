@@ -70,16 +70,6 @@ int main(int argc, char **argv) {
 		launcher();
 		logger->message(Tools::Log::MessageLevels::info, "Thread start");
 
-		parameters->joint_angle()()(0) = M_PI / 8.0;
-		parameters->joint_angle()()(1) =  M_PI / 8.0;
-		parameters->joint_angle()()(2) =  M_PI / 4.0;
-		parameters->joint_angle()()(3) = -M_PI / 4.0;
-		parameters->joint_angle()()(4) =  M_PI / 8.0;
-		parameters->joint_angle()()(5) =  M_PI / 8.0;
-		std::cout << "--- angle ---" << std::endl;
-		std::cout << parameters->joint_angle()()(0) << std::endl;
-		std::cout << "--- angle ---" << std::endl;
-
 		control_point_map->add( 1, Kinematics::Quantity::SpatialPoint<double>().point(0.0, 0.0, 0.03));
 		control_point_map->add(10, Kinematics::Quantity::SpatialPoint<double>().point(0.0, 0.0, 0.03));
 
@@ -88,13 +78,13 @@ int main(int argc, char **argv) {
 			{
 				const auto lock = std::lock_guard<std::mutex>(launcher.get_mutex());
 
-				if(i == 100) {
+				if(i == 1000) {
 					logger->message(Tools::Log::MessageLevels::info, "Thread finish");
 					break;
 				}
 
-				control_point_map->add( 1, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, 0.01* i));
-//				control_point_map->add(10, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, 0.0001));
+				control_point_map->add( 1, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, 0.0001));
+				control_point_map->add(10, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, 0.0001));
 
 				for(auto &&[body_id, spatial_point] : control_point_map->get_list_with_id()) {
 					std::stringstream ss;
@@ -105,7 +95,7 @@ int main(int argc, char **argv) {
 //					logger->message(Tools::Log::MessageLevels::trace, std::to_string(parameters->joint_angle()()(i)));
 				}
 				i ++;
-				std::cout << "\r\nNumber: " << i << std::endl;
+//				std::cout << "\r\n ---------- Number: " << i << " ---------- " << std::endl;
 			}
 			usleep(10000);
 		}

@@ -95,20 +95,23 @@ namespace Kinematics {
 			static auto cache = control_point_map->get_list();
 
 				while(enable_loop) {
-					const auto lock = std::lock_guard<std::mutex>(access_mutex);
+					{
+						const auto lock = std::lock_guard<std::mutex>(access_mutex);
 
-					if(is_update(cache)) {
-						if(!solver_manager->ik()) {
-							throw std::runtime_error("Failed IK");
+						if(is_update(cache)) {
+							if(!solver_manager->ik()) {
+								throw std::runtime_error("Failed IK");
+							}
+
+							joint_angle_modificator->modify();
+
+							solver_manager->fk();
 						}
-
-						joint_angle_modificator->modify();
-
-						solver_manager->fk();
+						else {
+							std::this_thread::yield();
+						}
 					}
-					else {
-						std::this_thread::yield();
-					}
+					usleep(1000);
 				}
 			}
 		);
@@ -165,7 +168,9 @@ namespace Kinematics {
 		const auto current = control_point_map->get_list();
 
 		for(unsigned int i = 0; i < cache.size(); i ++) {
-			if(cache.at(i) != current.at(i)) {
+			using Vector3 = Tools::Math::Vector<Scalar, 3>;
+			Vector3 err = cache.at(i).point() - current.at(i).point();
+			if(err.norm() > 5.0e-4) {
 				cache = current;
 				return true;
 			}

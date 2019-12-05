@@ -194,7 +194,7 @@ t_matrix PseudoInverse(const t_matrix& m, const float &tolerance=1.e-6)
  */
 void Kinematics::InverseKinematics(vector<int> to, vector<Link> target)
 {
-	const float EPS = 1.0e-6;
+	const float EPS = 5.0e-4;
 	Matrix3f J;
 
 	ForwardKinematics(Const::CC);
@@ -355,10 +355,18 @@ MatrixXf Kinematics::CalcJacobian(std::vector<int> idx)
  */
 void Kinematics::calcInverseKinematics(float *angle, Link RFLink, Link LFLink)
 {
-	if (((link[Const::LP3].q == 0.0) && (link[Const::LP2].q == 0.0)) ||
-	   ((link[Const::RP3].q == 0.0) && (link[Const::RP2].q == 0.0))){
-		std::cerr << "Could not calculate Inverse Kinematics" << std::endl;
-		return;
+	if (fabs(link[Const::LP3].q) < 0.05 && fabs(link[Const::LP1].q) < 0.05) {
+		link[Const::LP4].q = -0.05;
+		link[Const::LP3].q = 0.05;
+		link[Const::LP2].q = 0.05;
+		link[Const::LP1].q = -0.05;
+	}
+
+	if (fabs(link[Const::RP3].q) < 0.05 && fabs(link[Const::RP1].q) < 0.05) {
+		link[Const::RP4].q = -0.05;
+		link[Const::RP3].q = 0.05;
+		link[Const::RP2].q = 0.05;
+		link[Const::RP1].q = -0.05;
 	}
 
 	vector<int> to;

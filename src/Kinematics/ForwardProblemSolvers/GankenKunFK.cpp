@@ -40,13 +40,6 @@ namespace Kinematics {
 			for(int i = 0; i < Const::SERVO_NUM; i ++)
 				servo_angle[i] = parameters->joint_angle()()(i);
 
-			printf("\r\n--- compute forward kinematics ---\r\n");
-			std::cout << parameters->joint_angle()() << std::endl;
-			for(int i = 0; i < Const::SERVO_NUM; i ++) {
-				printf("%f ", servo_angle[i]);
-			}
-			printf("\r\n");
-
 			kine->setJointAngle(servo_angle);
 			kine->calcForwardKinematics();
 
@@ -60,15 +53,18 @@ namespace Kinematics {
 					spatial_point.point(p[0], p[1], p[2]);
 				}
 			}
-			printf("\r\ncompute forward kinematics\r\n");
 			for(int i = 0; i < Const::SERVO_NUM; i ++) {
 				parameters->joint_angle()()(i) = servo_angle[i];
+			}
+#if 0
+			printf("\r\ncompute forward kinematics\r\n");
+			for(int i = 0; i < Const::SERVO_NUM; i ++) {
 				printf("%f ", servo_angle[i]);
 			}
 			std::cout << link[Const::RR2].p << std::endl;
 			std::cout << link[Const::LR2].p << std::endl;
 			printf("\r\n");
-
+#endif
 			return true;
 		}
 

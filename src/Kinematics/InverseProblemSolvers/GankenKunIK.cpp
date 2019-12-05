@@ -22,7 +22,7 @@ namespace Kinematics {
 			link = new Link[Const::LINK_NUM];
 			kine = new GankenKun2018::Kinematics(link);
 			initLink(link);
-			for(int i = 0; i < Const::SERVO_NUM; i ++) servo_angle[i] = 0;
+			for(int i = 0; i < Const::SERVO_NUM; i ++) servo_angle[i] = 0.0;
 		}
 
 		template <typename Scalar>
@@ -57,23 +57,20 @@ namespace Kinematics {
 				}
 			}
 
-			printf("\r\ncompute inverse kinematics\r\n");
-			for(int i = 0; i < Const::SERVO_NUM; i ++) {
-				printf("%f ", servo_angle[i]);
-			}
-			kine->setJointAngle(servo_angle);
-			kine->calcForwardKinematics();
 			kine->calcInverseKinematics(servo_angle, RFLink, LFLink);
-
+			for(int i = 0; i < Const::SERVO_NUM; i ++) {
+				parameters->joint_angle()()(i) = servo_angle[i];
+			}
+#if 0
+			printf("\r\ncompute inverse kinematics\r\n");
 			std::cout << RFLink.p << std::endl;
 			std::cout << LFLink.p << std::endl;
 			printf("\r\n");
 			for(int i = 0; i < Const::SERVO_NUM; i ++) {
-				parameters->joint_angle()()(i) = servo_angle[i];
 				printf("%f ", servo_angle[i]);
 			}
 			printf("\r\n");
-
+#endif
 			return true;
 		}
 
