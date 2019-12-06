@@ -33,6 +33,7 @@ namespace IO {
 
 			void Kondo::launch() {
 				serial_flow_scheduler->register_parse(create_data_parser());
+				serial_flow_scheduler->set_write_end_sleep_ms(10);
 				serial_flow_scheduler->open(port_name());
 				{
 					serial_flow_scheduler->set_baudrate(baud_rate());
@@ -70,6 +71,10 @@ namespace IO {
 					return_packet_length
 					- Protocols::KondoB3M::constant_recieve_data_header_byte_size()
 					- Protocols::KondoB3M::constant_recieve_data_tail_byte_size();
+				if(length >= contents_size) {
+					head_position = 0;
+					return false;
+				}
 
 				SerialReturnPacket ret_pack;
 				ret_pack.status = read_buffer.at(head_position + 2);
