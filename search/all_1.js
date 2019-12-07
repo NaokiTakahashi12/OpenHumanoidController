@@ -15,6 +15,7 @@ var searchData=
   ['buffer_2ecpp_21',['Buffer.cpp',['../_buffer_8cpp.html',1,'']]],
   ['buffer_2ehpp_22',['Buffer.hpp',['../_buffer_8hpp.html',1,'']]],
   ['buffer_3c_20timeseriesdata_3c_20t_20_3e_20_3e_23',['Buffer&lt; TimeSeriesData&lt; T &gt; &gt;',['../class_robot_status_1_1_buffer.html',1,'RobotStatus']]],
-  ['byte_2ecpp_24',['Byte.cpp',['../_byte_8cpp.html',1,'']]],
-  ['byte_2ehpp_25',['Byte.hpp',['../_byte_8hpp.html',1,'']]]
+  ['byte_24',['Byte',['../_kondo_b3_m_8hpp.html#a81033c90514e1f2ea1f093e2e5216c5a',1,'IO::Communicator::Protocols::KondoB3M']]],
+  ['byte_2ecpp_25',['Byte.cpp',['../_byte_8cpp.html',1,'']]],
+  ['byte_2ehpp_26',['Byte.hpp',['../_byte_8hpp.html',1,'']]]
 ];
