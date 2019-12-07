@@ -89,6 +89,19 @@ namespace IO {
 					    command_status = 0x08;
 				}
 
+				namespace ServoMode {
+					constexpr Byte
+						run_normal		 = 0x00,
+						run_free		 = 0x02,
+						control_position = 0x00,
+						control_velocity = 0x04,
+						control_torque	 = 0x08,
+						control_fforward = 0x0c,
+						servo_normal	 = 0x00,
+						servo_clone		 = 0x40,
+						servo_reverse	 = 0x80;
+				}
+
 				Byte &create_checksum(const Packet &, const size_t &size = 0),
 					 &create_checksum(const ReadBuffer &, const size_t &size = 0);
 
