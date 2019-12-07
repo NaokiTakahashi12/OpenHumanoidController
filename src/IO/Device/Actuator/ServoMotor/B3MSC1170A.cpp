@@ -67,10 +67,7 @@ namespace IO {
 					}
 				}
 
-				void B3MSC1170A::write_gain_packet(const ID &packet_id, const WriteValue &p, const WriteValue &, const WriteValue &) {
-					command_controller->set_packet(
-						create_write_p_gain_packet(packet_id, p)
-					);
+				void B3MSC1170A::write_gain_packet(const ID &packet_id, const WriteValue &, const WriteValue &, const WriteValue &) {
 				}
 
 				B3MSC1170A::SendPacket B3MSC1170A::create_ping_packet(const ID &) {

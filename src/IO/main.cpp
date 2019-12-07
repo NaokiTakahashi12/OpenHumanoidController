@@ -88,10 +88,10 @@ int main(int argc, char **argv) {
 				ssm->enable_torque(true);
 				std::this_thread::sleep_for(std::chrono::milliseconds(50));
             }
-//            for(auto &&ssm : serial_servo_motors) {
-//				ssm->write_gain(1, 1, 1);
-//				std::this_thread::sleep_for(std::chrono::milliseconds(50));
-//            }
+            for(auto &&ssm : serial_servo_motors) {
+				ssm->write_gain(1, 1, 1);
+				std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            }
 			serial_controller->wait_for_send_packets();
 			std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
