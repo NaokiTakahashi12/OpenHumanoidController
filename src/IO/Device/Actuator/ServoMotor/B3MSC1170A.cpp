@@ -81,8 +81,8 @@ namespace IO {
 
 				B3MSC1170A::SendPacket B3MSC1170A::create_enable_torque_packet(const ID &id, const bool &flag) {
 					SendPacket value; 
-					value += flag ? Communicator::Protocols::KondoB3M::enable :
-								    Communicator::Protocols::KondoB3M::disable;
+					value += flag ? Communicator::Protocols::KondoB3M::ServoMode::run_normal :
+								    Communicator::Protocols::KondoB3M::ServoMode::run_free;
 
 					const auto ret_packet = Communicator::Protocols::KondoB3M::create_write_packet(
 						id,
