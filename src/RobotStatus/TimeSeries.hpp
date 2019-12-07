@@ -2,7 +2,6 @@
 /**
   *
   * @file TimeSeries.hpp
-  * @brief TimeSeriesData class utilty class
   * @auther Naoki Takahashi
   *
   **/
