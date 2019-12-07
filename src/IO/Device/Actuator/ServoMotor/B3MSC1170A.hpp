@@ -2,7 +2,8 @@
 /**
   *
   * @file B3MSC1170A.hpp
-  * @author Napki Takahashi
+  * @authors Yasuo Hayashibara
+  *			 Naoki Takahashi
   *
   **/
 

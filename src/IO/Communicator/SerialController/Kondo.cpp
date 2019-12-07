@@ -2,18 +2,20 @@
 /**
   *
   * @file Kondo.cpp
-  * @author Naoki Takahashi
+  * @authors Yasuo Hayashibara
+  *		     Naoki Takahashi
   *
   **/
 
 #include "Kondo.hpp"
 
+#include "../Protocols/KondoB3M.hpp"
+
 namespace IO {
 	namespace Communicator {
 		namespace SerialController {
 			Kondo::Kondo() : SerialControllerBase() {
-				constexpr auto default_baud_rate = 1000000;
-				baud_rate(default_baud_rate);
+				baud_rate(Protocols::KondoB3M::default_baudrate);
 			}
 
 			Kondo::~Kondo() {
@@ -30,6 +32,8 @@ namespace IO {
 			}
 
 			void Kondo::launch() {
+				serial_flow_scheduler->register_parse(create_data_parser());
+				serial_flow_scheduler->set_write_end_sleep_ms(10);
 				serial_flow_scheduler->open(port_name());
 				{
 					serial_flow_scheduler->set_baudrate(baud_rate());
@@ -63,24 +67,24 @@ namespace IO {
 					return false;
 				}
 
-				//! Check sum
-				SerialFlowScheduler::Byte sum_check = 0;
-				for(unsigned int i = 0; i < return_packet_length - 1; i ++) {
-					sum_check = read_buffer.at(head_position + i);
-				}
-				if(sum_check != read_buffer.at(head_position + return_packet_length)) {
+				const auto contents_size = 
+					return_packet_length
+					- Protocols::KondoB3M::constant_recieve_data_header_byte_size()
+					- Protocols::KondoB3M::constant_recieve_data_tail_byte_size();
+				if(length >= contents_size) {
 					head_position = 0;
 					return false;
 				}
-
-				const auto contents_size = return_packet_length - 5;
 
 				SerialReturnPacket ret_pack;
 				ret_pack.status = read_buffer.at(head_position + 2);
 				ret_pack.id = read_buffer.at(head_position + 3);
 				ret_pack.contents.resize(contents_size);
 
-				const auto contents_begin = read_buffer.cbegin() + head_position + 4;
+				const auto contents_begin = 
+					read_buffer.cbegin()
+					+ head_position
+					+ Protocols::KondoB3M::constant_recieve_data_header_byte_size();
 				std::copy(contents_begin, contents_begin + contents_size, ret_pack.contents.begin());
 
 				access_return_packet_map()[ret_pack.id] = ret_pack;

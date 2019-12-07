@@ -2,7 +2,8 @@
 /**
   *
   * @file Kondo.hpp
-  * @author Naoki Takahashi
+  * @authors Yasuo Hayashibara
+  *		     Naoki Takahashi
   *
   **/
 

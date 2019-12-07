@@ -74,7 +74,7 @@ namespace IO {
 
 				erase(key);
 
-				return std::move(p);
+				return p;
 			}
 
 			float load_factor() const {
