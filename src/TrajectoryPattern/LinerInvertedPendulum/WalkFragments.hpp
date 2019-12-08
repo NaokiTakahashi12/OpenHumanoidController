@@ -14,15 +14,17 @@
 
 #include <Tools/Math/Matrix.hpp>
 
+#include <RobotStatus/Information.hpp>
+
 namespace TrajectoryPattern {
 	namespace LinerInvertedPendulum {
 		class WalkFragments {
 			public :
-				using MatrixElement = double;
+				using MatrixElement = float;
 				using Vector2 = Tools::Math::Vector2<MatrixElement>;
-				using FootPrintList = std::vector<Vector2>;
+				using Footprints = Tools::Math::MatrixX<MatrixElement>;
 
-				WalkFragments();
+				WalkFragments(RobotStatus::InformationPtr &);
 
 				void compute(
 					const MatrixElement &one_leg_holding_time,
@@ -39,13 +41,16 @@ namespace TrajectoryPattern {
 
 				void set_com_hight(const MatrixElement &);
 
-				void set_footprint_list(const FootPrintList &);
+				void set_footprint_list(const Footprints &left, const Footprints &right, const bool &priority_left = true);
 
-				std::vector<Vector2> com_line,
-									 changed_footprint;
+				std::vector<Vector2> com_line;
 
 			private :
 				static constexpr MatrixElement gravity = 9.80665;
+
+				RobotStatus::InformationPtr robo_info;
+
+				bool priority_left;
 
 				MatrixElement com_z_hight,
 							  one_leg_holding_time,
@@ -61,18 +66,30 @@ namespace TrajectoryPattern {
 						before_velocity,
 						walk_fragment_velocity,
 						footprint,
-						modiy_footprint;
+						modified_footprint;
 
-				FootPrintList footprint_list;
+				Footprints footprint_matrix,
+						   left_footprint,
+						   right_footprint,
+						   modified_left_footprint,
+						   modified_right_footprint;
+
 
 				void iterate_footprint(const unsigned int &);
-
 				void update_traject_com(const MatrixElement &current_time);
-
 				void footprint_modificator(const unsigned int &number_of_footprint);
 
 				void initialize();
-				 
+
+				Vector2 get_footprint(const unsigned int &number_of_footprint);
+				void set_modified_footprint(const unsigned int &number_of_footprint, const Vector2 &);
+
+				void set_com_trajectory_point();
+				void set_left_modified_footprint();
+				void set_right_modified_footprint();
+
+				unsigned int footprint_size();
+
 		};
 	}
 }
