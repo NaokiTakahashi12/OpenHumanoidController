@@ -13,7 +13,7 @@ var dir_f6e0cb0bf9aec8a10ab8706a1b0f06c9 =
       [ "ControlPointMap", "class_kinematics_1_1_control_point_map.html", "class_kinematics_1_1_control_point_map" ]
     ] ],
     [ "JointAngleModificator.hpp", "_joint_angle_modificator_8hpp_source.html", null ],
-    [ "Launcher.hpp", "_launcher_8hpp.html", [
+    [ "Launcher.hpp", "_kinematics_2_launcher_8hpp.html", [
       [ "Launcher", "class_kinematics_1_1_launcher.html", "class_kinematics_1_1_launcher" ]
     ] ],
     [ "ObjectSelector.hpp", "_kinematics_2_object_selector_8hpp.html", [

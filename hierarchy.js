@@ -21,6 +21,7 @@ var hierarchy =
     [ "IO::LoadConfig::ControlBoardConfig::ConfigData", "struct_i_o_1_1_load_config_1_1_control_board_config_1_1_config_data.html", null ],
     [ "FootStepPlanner::ConfigManager", "class_foot_step_planner_1_1_config_manager.html", null ],
     [ "Kinematics::ConfigManager", "class_kinematics_1_1_config_manager.html", null ],
+    [ "TrajectoryPattern::ConfigManager", "class_trajectory_pattern_1_1_config_manager.html", null ],
     [ "IO::LoadConfig::ControlBoardConfig::ControlBoardData", "struct_i_o_1_1_load_config_1_1_control_board_config_1_1_control_board_data.html", null ],
     [ "Kinematics::ControlPointMap< Scalar >", "class_kinematics_1_1_control_point_map.html", null ],
     [ "IO::DeviceManager", "class_i_o_1_1_device_manager.html", null ],
@@ -50,6 +51,7 @@ var hierarchy =
     [ "Kinematics::JointAngleModificator< Scalar >", "class_kinematics_1_1_joint_angle_modificator.html", null ],
     [ "Tools::ConfigFileOperator::JsonLoader", "class_tools_1_1_config_file_operator_1_1_json_loader.html", null ],
     [ "Kinematics::Launcher< Scalar >", "class_kinematics_1_1_launcher.html", null ],
+    [ "TrajectoryPattern::Launcher", "class_trajectory_pattern_1_1_launcher.html", null ],
     [ "IO::LoadConfig::LoadConfigBase", "class_i_o_1_1_load_config_1_1_load_config_base.html", [
       [ "IO::LoadConfig::ActuatorDeviceConfig", "class_i_o_1_1_load_config_1_1_actuator_device_config.html", null ],
       [ "IO::LoadConfig::ControlBoardConfig", "class_i_o_1_1_load_config_1_1_control_board_config.html", null ],
@@ -119,5 +121,6 @@ var hierarchy =
     [ "Tools::ThreadPool< N >", "class_tools_1_1_thread_pool.html", null ],
     [ "RobotStatus::TimeSeries< T >", "class_robot_status_1_1_time_series.html", null ],
     [ "RobotStatus::TimeSeriesData< T >", "class_robot_status_1_1_time_series_data.html", null ],
-    [ "Tools::Math::Unit::Value< T, UNIT >", "class_tools_1_1_math_1_1_unit_1_1_value.html", null ]
+    [ "Tools::Math::Unit::Value< T, UNIT >", "class_tools_1_1_math_1_1_unit_1_1_value.html", null ],
+    [ "TrajectoryPattern::LinerInvertedPendulum::WalkFragments", "class_trajectory_pattern_1_1_liner_inverted_pendulum_1_1_walk_fragments.html", null ]
 ];

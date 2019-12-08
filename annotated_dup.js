@@ -125,5 +125,12 @@ var annotated_dup =
       [ "CommandLineArgumentReader", "class_tools_1_1_command_line_argument_reader.html", "class_tools_1_1_command_line_argument_reader" ],
       [ "NonCopyable", "class_tools_1_1_non_copyable.html", "class_tools_1_1_non_copyable" ],
       [ "ThreadPool", "class_tools_1_1_thread_pool.html", "class_tools_1_1_thread_pool" ]
+    ] ],
+    [ "TrajectoryPattern", null, [
+      [ "LinerInvertedPendulum", null, [
+        [ "WalkFragments", "class_trajectory_pattern_1_1_liner_inverted_pendulum_1_1_walk_fragments.html", "class_trajectory_pattern_1_1_liner_inverted_pendulum_1_1_walk_fragments" ]
+      ] ],
+      [ "ConfigManager", "class_trajectory_pattern_1_1_config_manager.html", "class_trajectory_pattern_1_1_config_manager" ],
+      [ "Launcher", "class_trajectory_pattern_1_1_launcher.html", "class_trajectory_pattern_1_1_launcher" ]
     ] ]
 ];

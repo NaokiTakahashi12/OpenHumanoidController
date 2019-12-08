@@ -44,11 +44,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"_kondo_b3_m_8hpp.html#a128df8bb893bcdf4571d70b273dcc12c",
-"_time_series_buffer_8hpp_source.html",
-"class_i_o_1_1_device_1_1_control_board_1_1_c_m730.html#ad90e60d293d1535d3ae73a9f7a7b8ff4",
-"class_kinematics_1_1_joint_angle_modificator.html",
-"class_robot_status_1_1_time_series.html#a6ee5d1b81e2be3f8de5b4f45c33e6e8b"
+"_kondo_b3_m_8hpp.html",
+"_time_series_buffer_8hpp.html#aed495a5d93441904dc542cdb6871b626",
+"class_i_o_1_1_device_1_1_actuator_1_1_servo_motor_1_1_serial_servo_motor.html#a774dc4bb25bdeec861e8d21dc4604ddf",
+"class_kinematics_1_1_inverse_problem_solvers_1_1_multiple_i_k.html#a84123ce78bff80c5c79e9d5b731e5398",
+"class_robot_status_1_1_information.html#ac7451a31651b1b889301f66e425d3145"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

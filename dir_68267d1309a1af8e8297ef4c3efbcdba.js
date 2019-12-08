@@ -4,5 +4,6 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "IO", "dir_fae119eb913a40fe8ed97cde8b98911e.html", "dir_fae119eb913a40fe8ed97cde8b98911e" ],
     [ "Kinematics", "dir_f6e0cb0bf9aec8a10ab8706a1b0f06c9.html", "dir_f6e0cb0bf9aec8a10ab8706a1b0f06c9" ],
     [ "RobotStatus", "dir_76a766bd02caca2e6c91ab26cb52c585.html", "dir_76a766bd02caca2e6c91ab26cb52c585" ],
-    [ "Tools", "dir_b90d73d79b67ccd72c2aaf78972ad885.html", "dir_b90d73d79b67ccd72c2aaf78972ad885" ]
+    [ "Tools", "dir_b90d73d79b67ccd72c2aaf78972ad885.html", "dir_b90d73d79b67ccd72c2aaf78972ad885" ],
+    [ "TrajectoryPattern", "dir_c9e7d33645196b93e06f9dbfb20a9b41.html", "dir_c9e7d33645196b93e06f9dbfb20a9b41" ]
 ];
