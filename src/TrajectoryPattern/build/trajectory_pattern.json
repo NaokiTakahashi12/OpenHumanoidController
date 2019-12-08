@@ -1,0 +1,12 @@
+{
+	"Comment": {
+	},
+	"Walk fragments": {
+		"Foot contact time[ms]": 800,
+		"CoM hight[mm]": 300,
+		"Minimize": {
+			"A": 10,
+			"B": 1
+		}
+	}
+}

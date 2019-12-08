@@ -136,5 +136,22 @@ namespace RobotStatus {
 			write_servo_data = std::make_unique<ServoDataType>(size);
 		}
 	}
+
+	void Information::create_footprints_data_space(const int &size) {
+		if(!left_footprint && !right_footprint) {
+			left_footprint = std::make_unique<Footprints>(size);
+			right_footprint = std::make_unique<Footprints>(size);
+		}
+		if(!left_modified_footprint && !right_modified_footprint) {
+			left_modified_footprint = std::make_unique<Footprints>(size);
+			right_modified_footprint = std::make_unique<Footprints>(size);
+		}
+	}
+
+	void Information::create_com_trajectory_data_space(const int &size) {
+		if(!com_trajectory) {
+			com_trajectory = std::make_unique<CenterOfMass>(size);
+		}
+	}
 }
 

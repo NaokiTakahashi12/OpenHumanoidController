@@ -29,6 +29,10 @@ namespace RobotStatus {
 
 			using ServoDataType = std::vector<TimeSeries<float>>;
 
+			using Footprints = TimeSeries<Tools::Math::MatrixX<float>>;
+
+			using CenterOfMass = TimeSeries<Tools::Math::Vector3<float>>;
+
 		public :
 			Information();
 			Information(const int &argc, char **argv);
@@ -44,6 +48,13 @@ namespace RobotStatus {
 
 			std::unique_ptr<ServoDataType> read_servo_data;
 			std::unique_ptr<ServoDataType> write_servo_data;
+
+			std::unique_ptr<Footprints> left_footprint,
+										right_footprint,
+										left_modified_footprint,
+										right_modified_footprint;
+
+			std::unique_ptr<CenterOfMass> com_trajectory;
 
 			std::shared_ptr<Tools::Log::Logger> logger;
 
@@ -84,6 +95,10 @@ namespace RobotStatus {
 				 create_head_data_space(const int &size = 18);
 
 			void create_servo_data_space(const int &size);
+
+			void create_footprints_data_space(const int &size = 18);
+
+			void create_com_trajectory_data_space(const int &size = 18);
 
 		private :
 			RobotType robot_type;
