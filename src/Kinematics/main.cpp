@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
 	try {
 		logger->message(Tools::Log::MessageLevels::info, "Startup");
 
-		Kinematics::Launcher<double> launcher("./", "kinematics.conf.json");
+		Kinematics::Launcher<double> launcher(robo_info, "./", "kinematics.conf.json");
 		logger->message(Tools::Log::MessageLevels::info, "Load config");
 
 			auto model = launcher.get_model();
@@ -73,13 +73,13 @@ int main(int argc, char **argv) {
 		while(1) {
 			const auto lock = std::lock_guard<std::mutex>(launcher.get_mutex());
 
-			if(i == 1900) {
+			if(i == 19) {
 				logger->message(Tools::Log::MessageLevels::info, "Thread finish");
 				break;
 			}
 
-			control_point_map->add(20, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -0.00005));
-			control_point_map->add(14, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -0.00005));
+			control_point_map->add(20, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -0.005));
+			control_point_map->add(14, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -0.005));
 
 			for(auto &&[body_id, spatial_point] : control_point_map->get_list_with_id()) {
 				std::stringstream ss;

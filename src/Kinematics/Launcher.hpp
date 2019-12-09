@@ -11,6 +11,8 @@
 #include <mutex>
 #include <thread>
 
+#include <RobotStatus/Information.hpp>
+
 #include "Model/RBDLBased.hpp"
 #include "Parameters.hpp"
 #include "ControlPointMap.hpp"
@@ -28,7 +30,7 @@ namespace Kinematics {
 			using FKObject = typename FKSelector::EntryObject;
 			using IKObject = typename IKSelector::EntryObject;
 
-			Launcher(const std::string &dir, const std::string &config_file);
+			Launcher(RobotStatus::InformationPtr &, const std::string &config_dir, const std::string &config_file);
 			virtual ~Launcher();
 
 			void initialize();
@@ -51,8 +53,10 @@ namespace Kinematics {
 
 			bool enable_loop;
 
-			const std::string directory,
+			const std::string config_dir,
 				  			  config_file;
+
+			RobotStatus::InformationPtr robo_info;
 
 			RuntimeThread runtime_thread;
 

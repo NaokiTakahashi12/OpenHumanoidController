@@ -16,8 +16,10 @@
 
 namespace Kinematics {
 	template <typename Scalar>
-	Launcher<Scalar>::Launcher(const std::string &dir, const std::string &config_file) : directory(dir), config_file(config_file) {
-		auto config_manager = ConfigManager::make_ptr(dir, config_file);
+	Launcher<Scalar>::Launcher(RobotStatus::InformationPtr &robot_status_information_ptr, const std::string &config_dir, const std::string &config_file) : config_dir(config_dir), config_file(config_file) {
+		auto config_manager = ConfigManager::make_ptr(config_dir, config_file);
+
+		robo_info = robot_status_information_ptr;
 
 		make_model(config_manager->get_value<std::string>("Model.Directory") + config_manager->get_value<std::string>("Model.File"));
 
@@ -25,8 +27,8 @@ namespace Kinematics {
 		control_point_map = ControlPointMap<Scalar>::make_ptr();
 		set_control_point_from_config_for_humanoid(config_manager->get_value<std::string>("Control point map config"));
 
-		solver_manager = SolverManager<Scalar>::make_ptr(model, dir, config_file);
-		joint_angle_modificator = JointAngleModificator<Scalar>::make_ptr(parameters, dir, config_manager->get_value<std::string>("Joint space config"));
+		solver_manager = SolverManager<Scalar>::make_ptr(model, config_dir, config_file);
+		joint_angle_modificator = JointAngleModificator<Scalar>::make_ptr(parameters, config_dir, config_manager->get_value<std::string>("Joint space config"));
 	}
 
 	template <typename Scalar>
@@ -99,7 +101,14 @@ namespace Kinematics {
 
 					if(is_update(cache)) {
 						if(!solver_manager->ik()) {
-							throw std::runtime_error("Failed IK");
+							std::stringstream ss;
+							for(auto &&[key, value] : control_point_map->access_to_this_storage()) {
+								ss << "Key: " << key << std::endl;
+								ss << "Point: " << value.point().transpose() << std::endl;
+								ss << "Angle: " << value.angle().transpose() << std::endl;
+								ss << std::endl;
+							}
+							throw std::runtime_error("Failed IK\n" + ss.str());
 						}
 
 						joint_angle_modificator->modify();
@@ -131,7 +140,7 @@ namespace Kinematics {
 
 	template <typename Scalar>
 	void Launcher<Scalar>::set_control_point_from_config_for_humanoid(const std::string &config_file) {
-		auto config_manager = ConfigManager::make_ptr(directory, config_file);
+		auto config_manager = ConfigManager::make_ptr(config_dir, config_file);
 
 		control_point_map->set(
 			model->body_id(
