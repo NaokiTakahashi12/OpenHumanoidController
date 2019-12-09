@@ -119,7 +119,7 @@ int  main(int argc, char **argv) {
 				y.push_back(modified_left_footprint(1, i));
 
 				std::stringstream ss;
-				ss << modified_left_footprint.block<3, 1>(0, i).transpose();
+				ss << "Left: " << modified_left_footprint.block<3, 1>(0, i).transpose();
 				logger->message(Tools::Log::MessageLevels::debug, ss.str());
 			}
 		}
@@ -131,7 +131,7 @@ int  main(int argc, char **argv) {
 				y.push_back(modified_right_footprint(1, i));
 
 				std::stringstream ss;
-				ss << modified_right_footprint.block<3, 1>(0, i).transpose();
+				ss << "Right: " << modified_right_footprint.block<3, 1>(0, i).transpose();
 				logger->message(Tools::Log::MessageLevels::debug, ss.str());
 			}
 		}

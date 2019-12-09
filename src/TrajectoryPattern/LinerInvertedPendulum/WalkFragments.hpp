@@ -39,6 +39,9 @@ namespace TrajectoryPattern {
 					const MatrixElement &weight_b
 				);
 
+				void set_raising_foot(const MatrixElement &);
+				void set_delay_raising_foot(const MatrixElement &);
+
 				void set_com_hight(const MatrixElement &);
 
 				void set_footprint_list(const Footprints &left, const Footprints &right, const bool &priority_left = true);
@@ -53,6 +56,8 @@ namespace TrajectoryPattern {
 				bool priority_left;
 
 				MatrixElement com_z_hight,
+							  raising_foot,
+							  delay_raising_foot,
 							  one_leg_holding_time,
 							  time_constant;
 
@@ -66,7 +71,8 @@ namespace TrajectoryPattern {
 						before_velocity,
 						walk_fragment_velocity,
 						footprint,
-						modified_footprint;
+						modified_footprint,
+						before_modified_footprint;
 
 				Footprints footprint_matrix,
 						   left_footprint,
@@ -78,6 +84,8 @@ namespace TrajectoryPattern {
 				void iterate_footprint(const unsigned int &);
 				void update_traject_com(const MatrixElement &current_time);
 				void footprint_modificator(const unsigned int &number_of_footprint);
+				void update_swing_foot_trajectory(const MatrixElement &current_time, const unsigned int &number_of_footprint);
+				void update_finish_foot_trajectory();
 
 				void initialize();
 

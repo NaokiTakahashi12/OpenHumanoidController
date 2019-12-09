@@ -34,6 +34,16 @@ namespace TrajectoryPattern {
 			for(unsigned int i = 0; i < number_of_footprint - 1; i ++) {
 				iterate_footprint(i);
 			}
+
+			update_finish_foot_trajectory();
+		}
+
+		void WalkFragments::set_raising_foot(const MatrixElement &raising_foot) {
+			this->raising_foot = raising_foot;
+		}
+
+		void WalkFragments::set_delay_raising_foot(const MatrixElement &delay_raising_foot) {
+			this->delay_raising_foot = delay_raising_foot;
 		}
 
 		void WalkFragments::set_com_hight(const MatrixElement &com_z_hight) {
@@ -57,16 +67,19 @@ namespace TrajectoryPattern {
 			modified_footprint = footprint;
 			footprint_modificator(number_of_footprint);
 
-			for(MatrixElement current_time = 0; current_time <= one_leg_holding_time;) {
-				const auto start_point = std::chrono::high_resolution_clock::now();
+			for(MatrixElement current_time = 0; current_time < one_leg_holding_time;) {
+				const auto start_point = std::chrono::steady_clock::now();
 
 				update_traject_com(current_time);
+				update_swing_foot_trajectory(current_time, number_of_footprint);
 
-				const auto end_point = std::chrono::high_resolution_clock::now();
+				const auto end_point = std::chrono::steady_clock::now();
 				current_time += std::chrono::duration<MatrixElement, std::ratio<1, 1>>(end_point - start_point).count();
 			}
+
 			before_position = com_position;
 			before_velocity = com_velocity;
+			before_modified_footprint = modified_footprint;
 		}
 
 		void WalkFragments::update_traject_com(const MatrixElement &current_time) {
@@ -142,6 +155,51 @@ namespace TrajectoryPattern {
 			modified_right_footprint = modified_right_footprint.Zero(3, left_footprint.cols());
 		}
 
+		void WalkFragments::update_swing_foot_trajectory(const MatrixElement &current_time, const unsigned int &number_of_footprint) {
+			Tools::Math::Vector3<MatrixElement> left_foot, right_foot;
+			left_foot = Tools::Math::Vector3<MatrixElement>::Zero();
+			right_foot = Tools::Math::Vector3<MatrixElement>::Zero();
+			auto next_landing_point = get_footprint(number_of_footprint + 1);
+
+			if(number_of_footprint % 2 ^ priority_left) {
+				left_foot.x() = modified_footprint.x() - com_position.x();
+				left_foot.y() = modified_footprint.y() - com_position.y();
+
+				right_foot.x() = next_landing_point.x() - com_position.x();
+				right_foot.y() = next_landing_point.y() - com_position.y();
+
+				if(current_time >= delay_raising_foot) {
+					right_foot.z() = raising_foot;
+				}
+			}
+			else {
+				right_foot.x() = modified_footprint.x() - com_position.x();
+				right_foot.y() = modified_footprint.y() - com_position.y();
+
+				left_foot.x() = next_landing_point.x() - com_position.x();
+				left_foot.y() = next_landing_point.y() - com_position.y();
+
+				if(current_time >= delay_raising_foot) {
+					left_foot.z() = raising_foot;
+				}
+			}
+
+			robo_info->left_foot_trajectory->set(left_foot);
+			robo_info->right_foot_trajectory->set(right_foot);
+		}
+
+		void WalkFragments::update_finish_foot_trajectory() {
+			Tools::Math::Vector3<MatrixElement> left_foot, right_foot;
+
+			left_foot = robo_info->left_foot_trajectory->latest().value;
+			right_foot = robo_info->right_foot_trajectory->latest().value;
+			left_foot.z() = 0;
+			right_foot.z() = 0;
+
+			robo_info->left_foot_trajectory->set(left_foot);
+			robo_info->right_foot_trajectory->set(right_foot);
+		}
+
 		WalkFragments::Vector2 WalkFragments::get_footprint(const unsigned int &number_of_footprint) {
 			constexpr auto footprint_dimention = 2;
 			const auto access_footprint_number = static_cast<int>(number_of_footprint * 0.5);
@@ -162,10 +220,11 @@ namespace TrajectoryPattern {
 				modified_left_footprint(2, access_footprint_number) = left_footprint(2, access_footprint_number);
 				set_left_modified_footprint();
 			}
-
-			modified_right_footprint.block<footprint_dimention, 1>(0, access_footprint_number) = new_modified_footprint;
-			modified_right_footprint(2, access_footprint_number) = right_footprint(2, access_footprint_number);
-			set_right_modified_footprint();
+			else {
+				modified_right_footprint.block<footprint_dimention, 1>(0, access_footprint_number) = new_modified_footprint;
+				modified_right_footprint(2, access_footprint_number) = right_footprint(2, access_footprint_number);
+				set_right_modified_footprint();
+			}
 		}
 
 		void WalkFragments::set_com_trajectory_point() {
