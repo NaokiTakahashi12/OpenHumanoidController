@@ -33,6 +33,8 @@ namespace Core {
 			std::unique_ptr<TrajectoryPattern::Launcher> trajectory_pattern_generator;
 			std::unique_ptr<IO::DeviceManager> io_device_manager;
 
+			std::unique_ptr<std::thread> command_thread_for_kinematics;
+
 			void launch_up_humanoid_footprint_manager();
 			void launch_up_kinematics();
 			void launch_up_io();
