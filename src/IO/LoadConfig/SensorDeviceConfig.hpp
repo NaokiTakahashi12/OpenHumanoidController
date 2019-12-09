@@ -19,8 +19,8 @@ namespace IO {
 	namespace LoadConfig {
 		class SensorDeviceConfig : public LoadConfigBase {
 			public :
-				SensorDeviceConfig(const std::string &config_filename);
-				SensorDeviceConfig(const std::string &config_filename, Tools::Log::LoggerPtr &);
+				SensorDeviceConfig(const std::string &config_dir, const std::string &config_filename);
+				SensorDeviceConfig(const std::string &config_dir, const std::string &config_filename, Tools::Log::LoggerPtr &);
 
 				SensorDeviceConfig(const SensorDeviceConfig &) = delete;
 
@@ -44,7 +44,8 @@ namespace IO {
 				void force_update() override final;
 
 			private :
-				std::string config_filename;
+				std::string config_dir,
+							config_filename;
 				Tools::Log::LoggerPtr logger_ptr;
 
 				// Config file value identities

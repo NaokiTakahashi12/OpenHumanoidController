@@ -39,6 +39,7 @@ namespace IO {
 			}
 			if(!load_sensor_device_config) {
 				load_sensor_device_config = std::make_unique<SensorDeviceConfig>(
+					config_dir,
 					config_file.get_parameter<std::string>(sensor_device_config_key),
 					logger_ptr
 				);
@@ -76,6 +77,7 @@ namespace IO {
 				logger_ptr
 			);
 			load_sensor_device_config = std::make_unique<SensorDeviceConfig>(
+				config_dir,
 				config_file.get_parameter<std::string>(sensor_device_config_key),
 				logger_ptr
 			);

@@ -12,12 +12,14 @@
 
 namespace IO {
 	namespace LoadConfig {
-		SensorDeviceConfig::SensorDeviceConfig(const std::string &config_filename) {
+		SensorDeviceConfig::SensorDeviceConfig(const std::string &config_dir, const std::string &config_filename) {
+			this->config_dir = config_dir;
 			this->config_filename = config_filename;
 			logger_ptr = std::make_unique<Tools::Log::Logger>();
 		}
 
-		SensorDeviceConfig::SensorDeviceConfig(const std::string &config_filename, Tools::Log::LoggerPtr &logger_ptr) {
+		SensorDeviceConfig::SensorDeviceConfig(const std::string &config_dir, const std::string &config_filename, Tools::Log::LoggerPtr &logger_ptr) {
+			this->config_dir = config_dir;
 			this->config_filename = config_filename;
 			this->logger_ptr = logger_ptr;
 		}
@@ -44,14 +46,14 @@ namespace IO {
 		}
 
 		void SensorDeviceConfig::update_imu_config_data() {
-			logger_ptr->message(Tools::Log::MessageLevels::trace, "Update config from " + config_filename);
+			logger_ptr->message(Tools::Log::MessageLevels::trace, "Update config from " + config_dir + config_filename);
 
-			Tools::ConfigFileOperator::JsonLoader mather_config_file(config_filename);
+			Tools::ConfigFileOperator::JsonLoader mather_config_file(config_dir + config_filename);
 			std::string sensor_config_filename = mather_config_file.get_parameter<std::string>(imu_config_file_name);
 
 			logger_ptr->message(Tools::Log::MessageLevels::trace, "Load imu config from " + sensor_config_filename);
 
-			set_imu_config_from_jsonfilename(sensor_config_filename);
+			set_imu_config_from_jsonfilename(config_dir + sensor_config_filename);
 
 			print_out_status();
 		}

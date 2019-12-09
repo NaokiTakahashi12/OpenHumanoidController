@@ -39,6 +39,31 @@ namespace IO {
 		update_config();
 	}
 
+	DeviceManager::DeviceManager(const std::string &dir, const std::string &configname, RobotStatus::InformationPtr &robo_info) {
+        this->robo_info = robo_info;
+        logger_ptr = std::make_unique<Tools::Log::Logger>();
+
+        load_robot_config = std::make_unique<LoadConfig::RobotConfig>(
+            dir,
+            configname
+        );
+
+        update_config();
+    }
+
+    DeviceManager::DeviceManager(const std::string &dir, const std::string &configname, RobotStatus::InformationPtr &robo_info, Tools::Log::LoggerPtr &logger_ptr) {
+        this->robo_info = robo_info;
+        this->logger_ptr = logger_ptr;
+
+        load_robot_config = std::make_unique<LoadConfig::RobotConfig>(
+            dir,
+            configname,
+            this->logger_ptr
+        );
+
+        update_config();
+    }
+
 	DeviceManager::~DeviceManager() {
 		if(update_servo_angle_thread) {
 			update_servo_angle_thread->join();

@@ -25,6 +25,8 @@ namespace IO {
 		public :
 			DeviceManager(RobotStatus::InformationPtr &);
 			DeviceManager(RobotStatus::InformationPtr &, Tools::Log::LoggerPtr &);
+			DeviceManager(const std::string &dir, const std::string &configname, RobotStatus::InformationPtr &);
+            DeviceManager(const std::string &dir, const std::string &configname, RobotStatus::InformationPtr &, Tools::Log::LoggerPtr &);
 
 			DeviceManager(const DeviceManager &) = delete;
 
