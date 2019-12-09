@@ -32,8 +32,7 @@ int main(int argc, char **argv) {
 			control_point_map->set( 1);
 			control_point_map->set(10);
 			logger->message(Tools::Log::MessageLevels::info, "Cloning control point map");
-//			auto parameters = launcher.get_parameters();
-			Kinematics::Parameters<double>::Ptr parameters = Kinematics::Parameters<double>::make_ptr(20);
+			auto parameters = launcher.get_parameters();
 			logger->message(Tools::Log::MessageLevels::info, "Cloning parameters");
 
 		{
@@ -72,13 +71,11 @@ int main(int argc, char **argv) {
 
 		control_point_map->add( 1, Kinematics::Quantity::SpatialPoint<double>().point(0.0, 0.0, 0.03));
 		control_point_map->add(10, Kinematics::Quantity::SpatialPoint<double>().point(0.0, 0.0, 0.03));
-
 		int i = 0;
 		while(1) {
 			{
 				const auto lock = std::lock_guard<std::mutex>(launcher.get_mutex());
-
-				if(i == 1000) {
+				if(i == 100) {
 					logger->message(Tools::Log::MessageLevels::info, "Thread finish");
 					break;
 				}
@@ -89,13 +86,12 @@ int main(int argc, char **argv) {
 				for(auto &&[body_id, spatial_point] : control_point_map->get_list_with_id()) {
 					std::stringstream ss;
 					ss << "Point of " << body_id << " : " << spatial_point.point().transpose();
-//					logger->message(Tools::Log::MessageLevels::trace, ss.str());
+					logger->message(Tools::Log::MessageLevels::trace, ss.str());
 				}
 				for(auto i = 0; i < parameters->joint_angle()().size(); i ++) {
-//					logger->message(Tools::Log::MessageLevels::trace, std::to_string(parameters->joint_angle()()(i)));
+					logger->message(Tools::Log::MessageLevels::trace, std::to_string(parameters->joint_angle()()(i)));
 				}
 				i ++;
-//				std::cout << "\r\n ---------- Number: " << i << " ---------- " << std::endl;
 			}
 			usleep(10000);
 		}

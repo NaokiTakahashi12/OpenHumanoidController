@@ -38,6 +38,7 @@ namespace Kinematics {
 				GankenKun2018::Kinematics *kine;
 				GankenKun2018::Link *link;
 				float servo_angle[GankenKun2018::Const::SERVO_NUM];
+				bool is_first_compute = true;
 		};
 	}
 }

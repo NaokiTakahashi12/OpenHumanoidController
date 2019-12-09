@@ -14,15 +14,10 @@ namespace Kinematics {
 	namespace ForwardProblemSolvers {
 		template <typename Scalar>
 		GankenKunFK<Scalar>::GankenKunFK(ModelPtr &new_model) : MultipleFK<Scalar>(new_model) {
-			link = new Link[Const::LINK_NUM];
-			kine = new GankenKun2018::Kinematics(link);
-			initLink(link);
 		}
 
 		template <typename Scalar>
 		GankenKunFK<Scalar>::~GankenKunFK() {
-			delete(kine);
-			delete(link);
 		}
 
 		template <typename Scalar>
@@ -37,6 +32,12 @@ namespace Kinematics {
 
 		template <>
 		bool GankenKunFK<double>::compute() {
+			if (is_first_compute) {
+				link = new Link[Const::LINK_NUM];
+				kine = new GankenKun2018::Kinematics(link);
+				initLink(link);
+				is_first_compute = false;
+			}
 			for(int i = 0; i < Const::SERVO_NUM; i ++)
 				servo_angle[i] = parameters->joint_angle()()(i);
 
@@ -53,9 +54,6 @@ namespace Kinematics {
 					spatial_point.point(p[0], p[1], p[2]);
 				}
 			}
-			for(int i = 0; i < Const::SERVO_NUM; i ++) {
-				parameters->joint_angle()()(i) = servo_angle[i];
-			}
 #if 0
 			printf("\r\ncompute forward kinematics\r\n");
 			for(int i = 0; i < Const::SERVO_NUM; i ++) {
@@ -71,7 +69,28 @@ namespace Kinematics {
 		template <>
 		[[deprecated("Please use double template.")]]
 		bool GankenKunFK<float>::compute() {
-			return true;
+			if (is_first_compute) {
+				link = new Link[Const::LINK_NUM];
+				kine = new GankenKun2018::Kinematics(link);
+				initLink(link);
+				is_first_compute = false;
+			}
+			for(int i = 0; i < Const::SERVO_NUM; i ++)
+				servo_angle[i] = parameters->joint_angle()()(i);
+
+			kine->setJointAngle(servo_angle);
+			kine->calcForwardKinematics();
+
+			for(auto &&[body_id, spatial_point] : this->control_point_map->access_to_this_storage()) {
+				if (body_id == Const::ANKLE_ROLL_R + 1) {
+					auto p = link[Const::RR2].p;
+					spatial_point.point(p[0], p[1], p[2]);
+				}
+				if (body_id == Const::ANKLE_ROLL_L + 1) {
+					auto p = link[Const::LR2].p;
+					spatial_point.point(p[0], p[1], p[2]);
+				}
+			}
 		}
 
 		template class GankenKunFK<float>;
