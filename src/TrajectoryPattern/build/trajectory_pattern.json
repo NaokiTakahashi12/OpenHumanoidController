@@ -3,7 +3,9 @@
 	},
 	"Walk fragments": {
 		"Foot contact time[ms]": 800,
-		"CoM hight[mm]": 300,
+		"Delay raising foot[ms]": 0,
+		"Raising foot[mm]": 10,
+		"CoM hight[mm]": 260,
 		"Minimize": {
 			"A": 10,
 			"B": 1
