@@ -31,7 +31,11 @@ namespace RobotStatus {
 
 			using Footprints = TimeSeries<Tools::Math::MatrixX<float>>;
 
-			using CenterOfMass = TimeSeries<Tools::Math::Vector3<float>>;
+			using CenterOfMassTrajectory = TimeSeries<Tools::Math::Vector3<float>>;
+
+			using ControlPoints = TimeSeries<Tools::Math::MatrixX<float>>;
+
+			using FootTrajectory = TimeSeries<Tools::Math::Vector3<float>>;
 
 		public :
 			Information();
@@ -54,7 +58,10 @@ namespace RobotStatus {
 										left_modified_footprint,
 										right_modified_footprint;
 
-			std::unique_ptr<CenterOfMass> com_trajectory;
+			std::unique_ptr<CenterOfMassTrajectory> com_trajectory;
+
+			std::unique_ptr<FootTrajectory> left_foot_trajectory,
+											right_foot_trajectory;
 
 			std::shared_ptr<Tools::Log::Logger> logger;
 
@@ -99,6 +106,8 @@ namespace RobotStatus {
 			void create_footprints_data_space(const int &size = 18);
 
 			void create_com_trajectory_data_space(const int &size = 18);
+
+			void create_foot_trajectory_data_space(const int &size = 18);
 
 		private :
 			RobotType robot_type;

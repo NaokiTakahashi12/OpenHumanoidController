@@ -150,7 +150,14 @@ namespace RobotStatus {
 
 	void Information::create_com_trajectory_data_space(const int &size) {
 		if(!com_trajectory) {
-			com_trajectory = std::make_unique<CenterOfMass>(size);
+			com_trajectory = std::make_unique<CenterOfMassTrajectory>(size);
+		}
+	}
+
+	void Information::create_foot_trajectory_data_space(const int &size) {
+		if(!left_foot_trajectory && !right_foot_trajectory) {
+			left_foot_trajectory = std::make_unique<FootTrajectory>();
+			right_foot_trajectory = std::make_unique<FootTrajectory>();
 		}
 	}
 }
