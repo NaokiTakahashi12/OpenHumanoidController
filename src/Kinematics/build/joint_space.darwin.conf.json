@@ -32,30 +32,30 @@
 		{"ID": 20, "Lower": -0.70, "Upper": 0.70}
 	],
 	"Joint offset": [
-		{"ID": 1,  "Angle": 0},
-		{"ID": 2,  "Angle": 0},
+		{"ID": 1,  "Angle": 3.490, "Note": "Head pan"},
+		{"ID": 2,  "Angle": 3.839, "Note": "Head tilt"},
 
-		{"ID": 3,  "Angle": 0},
-		{"ID": 4,  "Angle": 0},
-		{"ID": 5,  "Angle": 0},
+		{"ID": 3,  "Angle": 3.577, "Note": "Left shoulder pitch"},
+		{"ID": 4,  "Angle": 4.625, "Note": "Left shoulder roll"},
+		{"ID": 5,  "Angle": 1.832, "Note": "Left arm pitch"},
 
-		{"ID": 6,  "Angle": 0},
-		{"ID": 7,  "Angle": 0},
-		{"ID": 8,  "Angle": 0},
+		{"ID": 6,  "Angle": 3.577, "Note": "Right shoulder pitch"},
+		{"ID": 7,  "Angle": 2.617, "Note": "Right shoulder roll"},
+		{"ID": 8,  "Angle": 5.235, "Note": "Right arm pitch"},
 
-		{"ID": 9,  "Angle": 0},
-		{"ID": 10, "Angle": 0},
-		{"ID": 11, "Angle": 0},
-		{"ID": 12, "Angle": 0},
-		{"ID": 13, "Angle": 0},
-		{"ID": 14, "Angle": 0},
+		{"ID": 9,  "Angle": 3.665, "Note": "Left waist yaw"},
+		{"ID": 10, "Angle": 3.612, "Note": "Left waist roll"},
+		{"ID": 11, "Angle": 3.577, "Note": "Left waist pitch"},
+		{"ID": 12, "Angle": 3.577, "Note": "Left knee"},
+		{"ID": 13, "Angle": 3.612, "Note": "Left ankle pitch"},
+		{"ID": 14, "Angle": 3.577, "Note": "Left ankle roll"},
 
-		{"ID": 15, "Angle": 0},
-		{"ID": 16, "Angle": 0},
-		{"ID": 17, "Angle": 0},
-		{"ID": 18, "Angle": 0},
-		{"ID": 19, "Angle": 0},
-		{"ID": 20, "Angle": 0}
+		{"ID": 15, "Angle": 3.665, "Note": "Right waist yaw"},
+		{"ID": 16, "Angle": 3.543, "Note": "Right waist roll"},
+		{"ID": 17, "Angle": 3.577, "Note": "Right waist pitch"},
+		{"ID": 18, "Angle": 3.577, "Note": "Right knee"},
+		{"ID": 19, "Angle": 3.543, "Note": "Right ankle pitch"},
+		{"ID": 20, "Angle": 3.577, "Note": "Right ankle roll"}
 	],
 	"Resetting joint ID": [
 		{"ID": 1,  "New ID": 1},
