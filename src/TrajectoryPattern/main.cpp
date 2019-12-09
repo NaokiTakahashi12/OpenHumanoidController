@@ -83,10 +83,15 @@ int  main(int argc, char **argv) {
 			robo_info->right_footprint->set(right_footprint);
 		}
 
-		logger->message(Tools::Log::MessageLevels::info, "Stert com line compute");
-		launcher();
-		launcher.wait_for_computing();
-		logger->message(Tools::Log::MessageLevels::info, "Finish com line compute");
+		{
+			logger->message(Tools::Log::MessageLevels::info, "Stert com line compute");
+			auto start_point = std::chrono::high_resolution_clock::now();
+			launcher();
+			launcher.wait_for_computing();
+			auto end_point = std::chrono::high_resolution_clock::now();
+			logger->message(Tools::Log::MessageLevels::info, "Finish com line compute");
+			logger->message(Tools::Log::MessageLevels::info, "Calc time is " + std::to_string(std::chrono::duration<double, std::milli>(end_point - start_point).count()));
+		}
 
 		{
 			std::vector<double> x, y;

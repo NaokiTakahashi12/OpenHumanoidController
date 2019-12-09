@@ -67,13 +67,15 @@ namespace TrajectoryPattern {
 			modified_footprint = footprint;
 			footprint_modificator(number_of_footprint);
 
+			static std::chrono::steady_clock::time_point start_point, end_point;
 			for(MatrixElement current_time = 0; current_time < one_leg_holding_time;) {
-				const auto start_point = std::chrono::steady_clock::now();
+				start_point = std::chrono::steady_clock::now();
 
 				update_traject_com(current_time);
 				update_swing_foot_trajectory(current_time, number_of_footprint);
 
-				const auto end_point = std::chrono::steady_clock::now();
+				std::this_thread::sleep_for(std::chrono::milliseconds(1));
+				end_point = std::chrono::steady_clock::now();
 				current_time += std::chrono::duration<MatrixElement, std::ratio<1, 1>>(end_point - start_point).count();
 			}
 

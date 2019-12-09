@@ -14,8 +14,9 @@ namespace TrajectoryPattern {
 	Launcher::Launcher(RobotStatus::InformationPtr &robot_status_information_ptr) {
 		robo_info = robot_status_information_ptr;
 
-		robo_info->create_com_trajectory_data_space(18);
+		robo_info->create_com_trajectory_data_space();
 		robo_info->create_footprints_data_space();
+		robo_info->create_foot_trajectory_data_space();
 
 		liner_inverted_pendulum = std::make_unique<LinerInvertedPendulum::WalkFragments>(robo_info);
 	}
@@ -55,6 +56,7 @@ namespace TrajectoryPattern {
 		if(async_update_com_trajectory_thread) {
 			throw std::runtime_error("Already launch async thread from TrajectoryPattern::Launcher");
 		}
+
 		async_update_com_trajectory_thread = std::make_unique<std::thread>(
 			[this]() {
 				static RobotStatus::TimeSeriesData<int>::TimestampType update_time = 0;
@@ -62,6 +64,8 @@ namespace TrajectoryPattern {
 				if(update_time < robo_info->left_footprint->latest().timestamp) {
 					computing_now.store(true);
 
+					liner_inverted_pendulum->set_delay_raising_foot(delay_raising_foot);
+					liner_inverted_pendulum->set_raising_foot(raising_foot);
 					liner_inverted_pendulum->set_com_hight(com_hight);
 					liner_inverted_pendulum->set_footprint_list(
 						robo_info->left_footprint->latest().value,
@@ -90,6 +94,15 @@ namespace TrajectoryPattern {
 		minimize_b = config.get_value<float>(using_algotithm_key + "Minimize.B");
 		plane_contact_time = config.get_value<float>(using_algotithm_key + "Foot contact time[ms]") * 1e-3;
 		com_hight = config.get_value<float>(using_algotithm_key + "CoM hight[mm]") * 1e-3;
+		raising_foot = config.get_value<float>(using_algotithm_key + "Raising foot[mm]") * 1e-3;
+		delay_raising_foot = config.get_value<float>(using_algotithm_key + "Delay raising foot[ms]") * 1e-3;
+
+		robo_info->logger->message(Tools::Log::MessageLevels::info, "Minimum A:" + std::to_string(minimize_a));
+		robo_info->logger->message(Tools::Log::MessageLevels::info, "Minimum B:" + std::to_string(minimize_b));
+		robo_info->logger->message(Tools::Log::MessageLevels::info, "Foot contant time:" + std::to_string(plane_contact_time));
+		robo_info->logger->message(Tools::Log::MessageLevels::info, "CoM hight:" + std::to_string(com_hight));
+		robo_info->logger->message(Tools::Log::MessageLevels::info, "Raising foot hight:" + std::to_string(raising_foot));
+		robo_info->logger->message(Tools::Log::MessageLevels::info, "Delay raising foot:" + std::to_string(delay_raising_foot));
 	}
 }
 
