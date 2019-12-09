@@ -156,7 +156,7 @@ namespace FootStepPlanner {
 			this->clear_footprint();
 
 			//! @todo initialize point
-			begin_footstep_interval(10);
+			begin_footstep_interval(2);
 
 			static Eigen::Quaternion<Scalar> forward_x_q, forward_y_q;
 			auto landing_switch_flag = initialize_flag_of_landing();

@@ -61,19 +61,18 @@ int main(int argc, char **argv) {
 			logger->message(Tools::Log::MessageLevels::info, "Servo control device name is " + servo_port_name);
 
 			auto command_control_selector = std::make_unique<IO::Communicator::SerialControlSelector>();
-			//auto device_selector = std::make_unique<IO::SerialDeviceSelector<IO::Device::ControlBoard::SerialControlBoard>>(robo_info);
+			auto device_selector = std::make_unique<IO::SerialDeviceSelector<IO::Device::ControlBoard::SerialControlBoard>>(robo_info);
 
-			//auto serial_controller = command_control_selector->choice_shared_object("Dynamixel");
-			auto serial_controller = command_control_selector->choice_shared_object("Kondo");
-			//auto control_board = device_selector->choice_object("CM730");
+			auto serial_controller = command_control_selector->choice_shared_object("Dynamixel");
+			auto control_board = device_selector->choice_object("CM730");
 
 			auto serial_servo_motors = std::vector<std::unique_ptr<IO::Device::Actuator::ServoMotor::SerialServoMotor>>();
 
-			//control_board->register_controller(serial_controller);
+			control_board->register_controller(serial_controller);
 
-			for(auto i = 1; i <= 1; ++ i) {
+			for(auto i = 1; i <= 20; ++ i) {
 				serial_servo_motors.push_back(
-					std::make_unique<IO::Device::Actuator::ServoMotor::B3MSC1170A>(i, robo_info)
+					std::make_unique<IO::Device::Actuator::ServoMotor::MX28>(i, robo_info)
 				);
 				serial_servo_motors.back()->register_controller(serial_controller);
 			}
@@ -82,7 +81,7 @@ int main(int argc, char **argv) {
 			serial_controller->baud_rate(1000000);
 			serial_controller->async_launch();
 
-			//control_board->enable_power(true);
+			control_board->enable_power(true);
 			std::this_thread::sleep_for(std::chrono::milliseconds(500));
             for(auto &&ssm : serial_servo_motors) {
 				ssm->enable_torque(true);
@@ -106,6 +105,7 @@ int main(int argc, char **argv) {
 						std::this_thread::sleep_for(std::chrono::milliseconds(50));
 					}
 				}
+				serial_controller->wait_for_send_packets();
 				logger->message(Tools::Log::MessageLevels::debug, ss.str());
 			}
 		}

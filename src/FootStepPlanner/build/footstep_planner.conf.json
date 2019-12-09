@@ -15,7 +15,7 @@
 				]
 			},
 			"Maximum number of footprint": 200,
-			"Foot step range": 0.1,
+			"Foot step range": 0.09,
 			"Forward upper limit": 0.9,
 			"Forward lower limit": 0.4,
 			"Forward function type": "sin curve"

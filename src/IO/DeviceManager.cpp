@@ -238,14 +238,21 @@ namespace IO {
 			ptr->enable_torque(true);
 		}
 		for(auto &&[id, ptr] : servo_motor_map) {
-			ptr->write_gain(1, 1, 1);
+			ptr->write_gain(13, 1, 1);
 		}
 
 		update_servo_angle_thread = std::make_unique<std::thread>(
 			[this]() {
-				for(auto &&[id, ptr] : servo_motor_map) {
-					const auto joint_id = load_robot_config->actuator_config_data->serial_motor[id].joint_id; 
-					ptr->write_angle(robo_info->write_servo_data->at(joint_id - 1).latest().value);
+				const auto device_id = servo_motor_map.begin()->first;
+				const auto serial_control_id = load_robot_config->control_board_config_data->control_board.at(device_id).serial_id;
+
+				while(1) {
+					for(auto &&[id, ptr] : servo_motor_map) {
+						const auto joint_id = load_robot_config->actuator_config_data->serial_motor[id].joint_id; 
+						ptr->write_angle(robo_info->write_servo_data->at(joint_id - 1).latest().value);
+					}
+
+					serial_control_map[serial_control_id]->wait_for_send_packets();
 				}
 			}
 		);
