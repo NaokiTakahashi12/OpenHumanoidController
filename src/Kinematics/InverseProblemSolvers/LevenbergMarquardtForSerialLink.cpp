@@ -75,9 +75,9 @@ namespace Kinematics {
 				body_points,
 				target_points,
 				result_q,
-				1e-14,
-				1e-2,
-				200
+				5e-4,
+				1e-3,
+				300
 			);
 
 			if(is_success) {
@@ -128,9 +128,9 @@ namespace Kinematics {
 				body_points,
 				target_points,
 				result_q,
-				1e-14,
-				1e-2,
-				200
+				5e-4,
+				1e-3,
+				300
 			);
 
 			if(is_success) {
@@ -182,8 +182,8 @@ namespace Kinematics {
 				body_points,
 				target_points,
 				result_q,
-				1e-14,
-				1e-6,
+				1e-5,
+				1e-2,
 				1000
 			);
 
@@ -235,8 +235,8 @@ namespace Kinematics {
 				body_points,
 				target_points,
 				result_q,
-				1e-14,
-				1e-6,
+				1e-5,
+				1e-2,
 				1000
 			);
 
