@@ -100,15 +100,19 @@ namespace Kinematics {
 					const auto lock = std::lock_guard<std::mutex>(access_mutex);
 
 					if(is_update(cache)) {
-						if(!solver_manager->ik()) {
-							std::stringstream ss;
-							for(auto &&[key, value] : control_point_map->access_to_this_storage()) {
-								ss << "Key: " << key << std::endl;
-								ss << "Point: " << value.point().transpose() << std::endl;
-								ss << "Angle: " << value.angle().transpose() << std::endl;
-								ss << std::endl;
+						int i = 0;
+						while(!solver_manager->ik()) {
+							if(i > 5) {
+								std::stringstream ss;
+								for(auto &&[key, value] : control_point_map->access_to_this_storage()) {
+									ss << "Key: " << key << std::endl;
+									ss << "Point: " << value.point().transpose() << std::endl;
+									ss << "Angle: " << value.angle().transpose() << std::endl;
+									ss << std::endl;
+								}
+								throw std::runtime_error("Failed IK\n" + ss.str());
 							}
-							throw std::runtime_error("Failed IK\n" + ss.str());
+							i ++;
 						}
 
 						joint_angle_modificator->modify();
@@ -174,7 +178,10 @@ namespace Kinematics {
 		const auto current = control_point_map->get_list();
 
 		for(unsigned int i = 0; i < cache.size(); i ++) {
-			if(cache.at(i) != current.at(i)) {
+			const auto error_point = cache.at(i).point() - current.at(i).point();
+			const auto error_angle = cache.at(i).angle() - current.at(i).angle();
+
+			if(error_point.norm() > 1e-4 || error_angle.norm() > 1e-4) {
 				cache = current;
 				return true;
 			}

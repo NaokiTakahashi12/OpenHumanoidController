@@ -1,4 +1,11 @@
 
+/**
+  *
+  * @file JointAngleModificator.hpp
+  * @author Naoki Takahashi
+  *
+  **/
+
 #pragma once
 
 #include <map>

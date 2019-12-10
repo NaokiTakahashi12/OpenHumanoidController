@@ -1,4 +1,11 @@
 
+/**
+  *
+  * @file JointAngleModificator.cpp
+  * @author Naoki Takahashi
+  *
+  **/
+
 #include "JointAngleModificator.hpp"
 
 #include <cmath>
