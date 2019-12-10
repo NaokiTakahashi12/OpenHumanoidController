@@ -268,8 +268,10 @@ namespace IO {
 
 		update_servo_angle_thread = std::make_unique<std::thread>(
 			[this]() {
-				const auto device_id = servo_motor_map.begin()->first;
-				const auto serial_control_id = load_robot_config->control_board_config_data->control_board.at(device_id).serial_id;
+				//const auto device_id = servo_motor_map.begin()->first;
+				//const auto serial_control_id = load_robot_config->control_board_config_data->control_board.at(device_id).serial_id;
+				const auto device_id = control_board->id();
+				const auto serial_control_id = load_robot_config->control_board_config_data->control_board[device_id].serial_id;
 
 				while(1) {
 					if(robo_info->write_servo_data) {
