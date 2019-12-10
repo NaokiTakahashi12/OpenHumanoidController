@@ -28,7 +28,19 @@ namespace Kinematics {
 		set_control_point_from_config_for_humanoid(config_manager->get_value<std::string>("Control point map config"));
 
 		solver_manager = SolverManager<Scalar>::make_ptr(model, config_dir, config_file);
-		joint_angle_modificator = JointAngleModificator<Scalar>::make_ptr(parameters, config_dir, config_manager->get_value<std::string>("Joint space config"));
+		joint_angle_modificator = JointAngleModificator<Scalar>::make_ptr(
+			parameters,
+			config_dir,
+			config_manager->get_value<std::string>("Joint space config")
+		);
+		joint_angle_coordinator = JointAngleCoordinator<Scalar>::make_ptr(
+			parameters
+		);
+		joint_angle_coordinator->set_config_file(
+			config_dir,
+			config_manager->get_value<std::string>("Joint space config")
+		);
+
 	}
 
 	template <typename Scalar>
@@ -118,6 +130,8 @@ namespace Kinematics {
 						joint_angle_modificator->modify();
 
 						solver_manager->fk();
+
+						robo_info_exporter();
 					}
 					else {
 						std::this_thread::yield();
@@ -188,6 +202,20 @@ namespace Kinematics {
 		}
 
 		return false;
+	}
+
+	template <typename Scalar>
+	void Launcher<Scalar>::robo_info_exporter() {
+		if(!robo_info->write_servo_data) {
+			robo_info->create_servo_data_space(model->dof());
+		}
+		else {
+			const auto joint_angles = joint_angle_coordinator->offset_joint_angles();
+
+			for(unsigned int i = 0; i < joint_angles.size(); i ++) {
+				robo_info->write_servo_data->at(i).set(joint_angles(i));
+			}
+		}
 	}
 
 	template class Launcher<float>;
