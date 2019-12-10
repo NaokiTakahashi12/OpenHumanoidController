@@ -213,7 +213,7 @@ namespace IO {
 				servo_motor_map[id]->register_controller(serial_control_map[data.serial_id]);
 			}
 		}
-		robo_info->create_servo_data_space(servo_motor_map.size());
+		//robo_info->create_servo_data_space(servo_motor_map.size());
 
 		logger_ptr->message(Tools::Log::MessageLevels::trace, "Success spawn servo motor device");
 	}
@@ -272,9 +272,11 @@ namespace IO {
 				const auto serial_control_id = load_robot_config->control_board_config_data->control_board.at(device_id).serial_id;
 
 				while(1) {
-					for(auto &&[id, ptr] : servo_motor_map) {
-						const auto joint_id = load_robot_config->actuator_config_data->serial_motor[id].joint_id; 
-						ptr->write_angle(robo_info->write_servo_data->at(joint_id - 1).latest().value);
+					if(robo_info->write_servo_data) {
+						for(auto &&[id, ptr] : servo_motor_map) {
+							const auto joint_id = load_robot_config->actuator_config_data->serial_motor[id].joint_id; 
+							ptr->write_angle(robo_info->write_servo_data->at(joint_id - 1).latest().value);
+						}
 					}
 
 					serial_control_map[serial_control_id]->wait_for_send_packets();
