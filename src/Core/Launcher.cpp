@@ -8,6 +8,8 @@
 
 #include "Launcher.hpp"
 
+#include <iostream>
+
 namespace Core {
 	Launcher::Launcher(int argc, char **argv) {
 		robo_info = std::make_shared<RobotStatus::Information>(argc, argv);
@@ -120,20 +122,35 @@ namespace Core {
 				ready_right_foot_point = control_point_map->get_point(right_foot_id);
 			}
 		}
+		auto logger = robo_info->logger;
+
+		closeable.store(false);
 
 		command_thread_for_kinematics = std::make_unique<std::thread>(
 			[=]() {
-				while(1) {
+				static Tools::Math::Vector3<double> left_trajectory, right_trajectory;
+
+				while(!closeable.load()) {
 					if(robo_info->left_foot_trajectory && robo_info->right_foot_trajectory) {
-						const auto lock = std::lock_guard<std::mutex>(kinematics_launcher->get_mutex());
+						{
+							const auto lt = robo_info->left_foot_trajectory->latest().value.cast<double>();
+							const auto rt = robo_info->right_foot_trajectory->latest().value.cast<double>();
+
+							if(left_trajectory == lt || right_trajectory == rt) {
+								std::this_thread::yield();
+								continue;
+							}
+
+							left_trajectory = lt;
+							right_trajectory = rt;
+						}
+
 						Kinematics::Quantity::SpatialPoint<double> command_left_point, command_right_point;
 
-						const auto left_trajectory = robo_info->left_foot_trajectory->latest().value.cast<double>();
-						const auto right_trajectory = robo_info->right_foot_trajectory->latest().value.cast<double>();
-
-						if(left_trajectory.norm() < 1e-9 || right_trajectory.norm() < 1e-9) {
-							continue;
-						}
+						std::stringstream ss;
+						ss << left_trajectory.transpose() << " : ";
+						ss << right_trajectory.transpose();
+						robo_info->logger->message(Tools::Log::MessageLevels::debug, ss.str());
 
 						command_left_point.point(
 							left_trajectory
@@ -144,10 +161,14 @@ namespace Core {
 							+ ready_right_foot_point.point()
 						);
 
+						const auto lock = std::lock_guard<std::mutex>(kinematics_launcher->get_mutex());
 						control_point_map->update(left_foot_id, command_left_point);
 						control_point_map->update(right_foot_id, command_right_point);
 					}
-					std::this_thread::sleep_for(std::chrono::milliseconds(1));
+					else {
+						std::this_thread::yield();
+					}
+					std::this_thread::sleep_for(std::chrono::microseconds(10));
 				}
 			}
 		);
@@ -176,6 +197,8 @@ namespace Core {
 
 		(*trajectory_pattern_generator)();
 		trajectory_pattern_generator->wait_for_computing();
+
+		closeable.store(true);
 
 		/*
 		{

@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <atomic>
+
 #include <RobotStatus/Information.hpp>
 #include <IO/DeviceManager.hpp>
 #include <FootStepPlanner/HumanoidFootprintManager.hpp>
@@ -23,6 +25,8 @@ namespace Core {
 			~Launcher();
 
 		private :
+			std::atomic_bool closeable;
+
 			RobotStatus::InformationPtr robo_info;
 
 			Tools::Math::Vector3<double> begin_point,
