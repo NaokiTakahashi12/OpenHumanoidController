@@ -7,11 +7,13 @@
 		"Solver names": {
 			"FK": [
 				{"Forward": "CustomMultipleFK"},
-				{"Forward": "SimpleForSerialLink"}
+				{"Forward": "SimpleForSerialLink"},
+				{"Forward": "GankenKunFK"}
 			],
 			"IK": [
 				{"Inverse": "CustomMultipleIK"},
-				{"Inverse": "LevenbergMarquardtForSerialLink"}
+				{"Inverse": "LevenbergMarquardtForSerialLink"},
+				{"Inverse": "GankenKunIK"}
 			]
 		},
 		"Model": [
@@ -19,13 +21,13 @@
 		]
 	},
 	"Assign solver": {
-		"Forward": "SimpleForSerialLink",
-		"Inverse": "LevenbergMarquardtForSerialLink"
+		"Forward": "GankenKunFK",
+		"Inverse": "GankenKunIK"
 	},
 	"Model": {
 		"Directory": "../../../data/urdf/",
 		"File": "DARwInOP.urdf"
 	},
-	"Control point map config": "control_point_map.darwin.conf.json",
-	"Joint space config": "joint_space.darwin.conf.json"
+	"Control point map config": "control_point_map.dummy.conf.json",
+	"Joint space config": "joint_space.dummy.conf.json"
 }

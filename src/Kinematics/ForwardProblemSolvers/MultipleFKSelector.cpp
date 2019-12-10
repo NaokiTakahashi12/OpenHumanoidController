@@ -10,6 +10,7 @@
 
 #include "SimpleForSerialLink.hpp"
 #include "CustomMultipleFK.hpp"
+#include "GankenKunFK.hpp"
 
 namespace Kinematics {
 	namespace ForwardProblemSolvers {
@@ -33,6 +34,7 @@ namespace Kinematics {
 		void MultipleFKSelector<Scalar>::default_register() {
 			this->register_object(SimpleForSerialLink<Scalar>::get_key(), SimpleForSerialLink<Scalar>::make_ptr(model));
 			this->register_object(CustomMultipleFK<Scalar>::get_key(), CustomMultipleFK<Scalar>::make_ptr(model));
+			this->register_object(GankenKunFK<Scalar>::get_key(), GankenKunFK<Scalar>::make_ptr(model));
 		}
 
 		template class MultipleFKSelector<float>;

@@ -61,11 +61,11 @@ int main(int argc, char **argv) {
 			logger->message(Tools::Log::MessageLevels::info, "Servo control device name is " + servo_port_name);
 
 			auto command_control_selector = std::make_unique<IO::Communicator::SerialControlSelector>();
-			//auto device_selector = std::make_unique<IO::SerialDeviceSelector<IO::Device::ControlBoard::SerialControlBoard>>(robo_info);
+			auto device_selector = std::make_unique<IO::SerialDeviceSelector<IO::Device::ControlBoard::SerialControlBoard>>(robo_info);
 
 			//auto serial_controller = command_control_selector->choice_shared_object("Dynamixel");
 			auto serial_controller = command_control_selector->choice_shared_object("Kondo");
-			//auto control_board = device_selector->choice_object("CM730");
+			auto control_board = device_selector->choice_object("CM730");
 
 			auto serial_servo_motors = std::vector<std::unique_ptr<IO::Device::Actuator::ServoMotor::SerialServoMotor>>();
 
