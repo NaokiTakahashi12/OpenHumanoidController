@@ -3,7 +3,8 @@
 		"Support actuator" : {
 			"Servo motor": "None",
 			"Servo motor": "Virtual",
-			"Servo motor": "MX28"
+			"Servo motor": "MX28",
+			"Servo motor": "B3MSC1170A"
 		},
 		"Support control board" : {
 			"Control board": "None",
@@ -11,7 +12,7 @@
 			"Control board": "CM730"
 		}
 	},
-	"Servo motor": "MX28",
-	"Control board": "CM730",
+	"Servo motor": "B3MSC1170A",
+	"Control board": "None",
 	"Servo motor device port": "/dev/ttyUSB0"
 }

@@ -7,7 +7,7 @@
 		"IMU": "VMU931"
 	},
 
-	"IMU" : "VMU931",
+	"IMU" : "None",
 	"Enable list" : {
 		"Accelerometers" : true,
 		"Gyroscopes" : true,

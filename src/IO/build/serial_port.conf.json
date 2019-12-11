@@ -4,7 +4,8 @@
 	"Support": {
 		"Serial control types": [
 			{"Serial controller": "Dynamixel"},
-			{"Serial controller": "Simple"}
+			{"Serial controller": "Simple"},
+			{"Serial controller": "KondoB3M"}
 		]
 	},
 	"Serial control": [
@@ -21,6 +22,14 @@
 			"Baud rate": 1000000,
 			"Timeout[ms]": 8,
 			"Serial ID": 1
+		},
+		{
+			"Serial controller": "KondoB3M",
+			"Port": "/dev/ttyUSB0",
+			"Baud rate": 1000000,
+			"Timeout[ms]": 8,
+			"Serial ID": 3
 		}
 	]
 }
+
