@@ -18,6 +18,7 @@
 #include "ControlPointMap.hpp"
 #include "SolverManager.hpp"
 #include "JointAngleModificator.hpp"
+#include "JointAngleCoordinator.hpp"
 
 namespace Kinematics {
 	template <typename Scalar>
@@ -69,11 +70,14 @@ namespace Kinematics {
 
 			typename SolverManager<Scalar>::Ptr solver_manager;
 			typename JointAngleModificator<Scalar>::Ptr joint_angle_modificator;
+			typename JointAngleCoordinator<Scalar>::Ptr joint_angle_coordinator;
 
 			void make_model(const std::string &model_file);
 			void set_control_point_from_config_for_humanoid(const std::string &config_file);
 
 			bool is_update(typename ControlPointMap<Scalar>::DataList &);
+
+			void robo_info_exporter();
 	};
 }
 

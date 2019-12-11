@@ -1,0 +1,8 @@
+{
+	"Comments": {
+		"Description": "Control point map for Dummy"
+	},
+	"Robot type": "Humanoid",
+	"Control point names": {
+	}
+}

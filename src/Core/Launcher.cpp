@@ -159,14 +159,28 @@ namespace Core {
 							+ ready_right_foot_point.point()
 						);
 
-						const auto lock = std::lock_guard<std::mutex>(kinematics_launcher->get_mutex());
-						control_point_map->update(left_foot_id, command_left_point);
-						control_point_map->update(right_foot_id, command_right_point);
+						{
+							const auto lock = std::lock_guard<std::mutex>(kinematics_launcher->get_mutex());
+							control_point_map->update(left_foot_id, command_left_point);
+							control_point_map->update(right_foot_id, command_right_point);
+						}
 					}
 					else {
 						std::this_thread::yield();
 					}
-					std::this_thread::sleep_for(std::chrono::microseconds(10));
+					std::this_thread::sleep_for(std::chrono::microseconds(100));
+				}
+
+				left_trajectory = robo_info->left_foot_trajectory->latest().value.cast<double>();
+				right_trajectory = robo_info->right_foot_trajectory->latest().value.cast<double>();
+
+				Kinematics::Quantity::SpatialPoint<double> command_left_point, command_right_point;
+				command_left_point.point(left_trajectory + ready_left_foot_point.point());
+				command_right_point.point(right_trajectory + ready_right_foot_point.point());
+				{
+					const auto lock = std::lock_guard<std::mutex>(kinematics_launcher->get_mutex());
+					control_point_map->update(left_foot_id, command_left_point);
+					control_point_map->update(right_foot_id, command_right_point);
 				}
 			}
 		);
@@ -195,6 +209,8 @@ namespace Core {
 
 		(*trajectory_pattern_generator)();
 		trajectory_pattern_generator->wait_for_computing();
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
 		closeable.store(true);
 
