@@ -1,4 +1,4 @@
-# hc-early
+# OpenHumanoidController
 This repository is used in my research.
 
 ## Setup environmental
