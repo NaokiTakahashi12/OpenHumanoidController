@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
 
 			auto serial_servo_motors = std::vector<std::unique_ptr<IO::Device::Actuator::ServoMotor::SerialServoMotor>>();
 
-			//control_board->register_controller(serial_controller);
+			control_board->register_controller(serial_controller);
 
 			for(auto i = 1; i <= 1; ++ i) {
 				serial_servo_motors.push_back(
