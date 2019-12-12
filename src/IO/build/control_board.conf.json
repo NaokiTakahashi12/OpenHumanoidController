@@ -1,0 +1,16 @@
+{
+	"Comment": {
+		"Description": "Reference to actuator.conf.json"
+	},
+	"Support": {
+		"Control Board": [
+			{"Name": "CM730"},
+			{"Name": "None"}
+		]
+	},
+	"Control Board": {
+		"Name": "CM730",
+		"ID": 200,
+		"Serial ID": 1
+	}
+}

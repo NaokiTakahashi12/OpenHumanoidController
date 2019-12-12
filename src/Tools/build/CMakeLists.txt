@@ -1,0 +1,100 @@
+#
+# ccmake and cmake
+#
+# Author Naoki Takahashi
+# Email s16c1077hq@s.chibakoudai.jp
+#
+
+## Use cmake version ##
+cmake_minimum_required(VERSION 3.10)
+
+## Include module path ##
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/../../../build-tools/cmake/module)
+include(Finder)
+include(Settings)
+include(CheckExistence)
+include(FileListOperator)
+
+## Project name ##
+project(None CXX)
+if("${PROJECT_NAME}" MATCHES "None")
+	get_filename_component(MODULE_TOP_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/.. ABSOLUTE)
+	get_filename_component(DEFAULT_PROJECT_NAME ${MODULE_TOP_DIRECTORY} NAME_WE)
+	set(PROJECT_NAME ${DEFAULT_PROJECT_NAME} CACHE STRING "Project name" FORCE)
+endif()
+
+## CXX settings ##
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED true)
+set(CMAKE_CXX_EXTENSIONS false)
+
+## Debug, Release or RelWithDebInfo ##
+set(CMAKE_BUILD_TYPE Debug)
+
+## Output and Input directory ##
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/binary)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/libraries)
+set(INCLUDE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../..)
+set(SOURCE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/..)
+
+## Executable name and Library name ##
+set(BINARY_TARGET_NAME ${PROJECT_NAME}.out)
+set(PROJECT_LIBRARY_NAME ${PROJECT_NAME})
+
+## CXX debug flag ##
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Winline -Wextra -Wall -pedantic-errors -fPIC -g -O0")
+#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fprofile-arcs -ftest-coverage")
+
+## CXX file exts ##
+set(CXX_SOURCE_FILE_EXTS cpp)
+set(CXX_INCLUDE_FILE_EXTS hpp;h)
+
+## CXX library link ##
+set(ALL_LINK_LIBRARIES ${ALL_LINK_LIBRARIES} stdc++ pthread m)
+#set(ALL_LINK_LIBRARIES ${ALL_LINK_LIBRARIES} Python2.7)
+
+## Find library ##
+#UsingPython2(PYTHON2_INCLUDE PYTHON2_LUBRARY)
+#UsingRBDL(RBDL_INCLUDE RBDL_LIBRARY)
+#UsingQT(QT_INCLUDE QT_LIBRARY)
+#UsingSPDLOG(SPDLOG_INCLUDE SPDLOG_LIBRARY)
+#UsingGL(GL_INCLUDE GL_LIBRARY)
+#UsingSSH(SSH_INCLUDE SSH_LIBRARY)
+#UsingODE(ODE_INCLUDE ODE_LIBRARY)
+#UsingCV(CV_INCLUDE CV_LIBRARY)
+UsingBoost(Boost_INCLUDE Boost_LIBRARY)
+UsingEigen3(Eigen3_INCLUDE Eigen3_LIBRARY)
+
+## Use Module library path ##
+#set(MODULE_LIBRARY_PATHS ${MODULE_LIBRARY_PATHS} ${CMAKE_CURRENT_SOURCE_DIR}/../../XXX/build/libraries)
+
+#### Do not edit ####
+
+RequiredDirectory(${SOURCE_DIRECTORY})
+
+CreateDirectory(${EXECUTABLE_OUTPUT_PATH})
+CreateDirectory(${LIBRARY_OUTPUT_PATH})
+
+set(ALL_LINK_LIBRARIES ${ALL_LINK_LIBRARIES} ${PYTHON2_LUBRARY} ${RBDL_LIBRARY} ${QT_LIBRARY} ${SPDLOG_LIBRARY} ${GL_LIBRARY} ${SSH_LIBRARY} ${ODE_LIBRARY} ${CV_LIBRARY} ${Boost_LIBRARY} ${Eigen3_LIBRARY})
+set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} ${PYTHON2_INCLUDE} ${RBDL_INCLUDE} ${QT_INCLUDE} ${SPDLOG_INCLUDE} ${GL_INCLUDE} ${SSH_INCLUDE} ${ODE_INCLUDE} ${CV_INCLUDE} ${Boost_INCLUDE} ${Eigen3_INCLUDE})
+
+FindFiles(CXX_SOURCE_FILES "${SOURCE_DIRECTORY}" "${CXX_SOURCE_FILE_EXTS}")
+FindFiles(CXX_INCLUDE_FILES "${SOURCE_DIRECTORY}" "${CXX_INCLUDE_FILE_EXTS}")
+
+CreateDirectoryPathListFromFile(CXX_INCLUDE_DIRECTORIES "${CXX_INCLUDE_FILES}")
+
+set(SOURCE_FILES ${CXX_SOURCE_FILES})
+set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} ${INCLUDE_DIRECTORY} ${CXX_INCLUDE_DIRECTORIES})
+include_directories(${INCLUDE_DIRECTORIES})
+
+CreateLibrarySourceFromSourceList(LIBRARY_SOURCES "${SOURCE_FILES}" MAIN_FILE main.cpp)
+
+if(LIBRARY_SOURCES)
+	LinkModuleLibrary(${PROJECT_LIBRARY_NAME} "${LIBRARY_SOURCES}" "${ALL_LINK_LIBRARIES}" "${MODULE_LIBRARY_PATHS}")
+	set(ALL_LINK_LIBRARIES ${ALL_LINK_LIBRARIES} ${PROJECT_LIBRARY_NAME})
+endif()
+
+CreateExecutable(${BINARY_TARGET_NAME} "${MAIN_FILE}" ${PROJECT_LIBRARY_NAME} "${ALL_LINK_LIBRARIES}")
+
+#### Do not edit ####
+

@@ -1,0 +1,6 @@
+{
+	"Comment" : {
+		"Brief": "IO actuator config files"
+	},
+	"Serial servo motor config": "serial_servo_motor.conf.json"
+}

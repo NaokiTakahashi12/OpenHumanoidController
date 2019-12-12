@@ -1,0 +1,24 @@
+{
+	"Commnet": {
+	},
+	"Humanoid": {
+		"Use plan": "ConstantRangeBasedHumanoid",
+
+		"CustomHumanoid" : {
+		},
+
+		"ConstantRangeBasedHumanoid": {
+			"Commnet": {
+				"Support": [
+					{"Forward function type": "sin curve"},
+					{"Forward function type": "cos curve"}
+				]
+			},
+			"Maximum number of footprint": 200,
+			"Foot step range": 0.1,
+			"Forward upper limit": 0.9,
+			"Forward lower limit": 0.4,
+			"Forward function type": "sin curve"
+		}
+	}
+}

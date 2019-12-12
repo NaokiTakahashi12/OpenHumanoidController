@@ -1,0 +1,17 @@
+{
+	"Comment": {
+		"Template": [
+			{"Category": "Leg", "Identity": "Foot", "Size": [0.1, 0.1, 0.1], "Posistion:": [0.1, 0.05, 0.05], "Rotation": [1,0,0]}
+		]
+	},
+
+	"Body": [
+		{"Category": "Leg", "Identity": "Foot",  "Mass": 0.1, "Length": [0, 0, 0.05], "Radius": 0.1,  "Position": [0, 0.05, 0.05], "Rotation": [1,0,0]},
+		{"Category": "Leg", "Identity": "Foot",  "Mass": 0.0, "Length": [0, 0, 0.0],  "Radius": 0.0,  "Position": [0, 0.05, 0.05], "Rotation": [0,1,0]},
+		{"Category": "Leg", "Identity": "Calf",  "Mass": 0.2, "Length": [0, 0, 0.15], "Radius": 0.05, "Position": [0, 0.05, 0.2],  "Rotation": [1,0,0]},
+		{"Category": "Leg", "Identity": "Thigh", "Mass": 0.2, "Length": [0, 0, 0.15], "Radius": 0.05, "Position": [0, 0.05, 0.35], "Rotation": [1,0,0]},
+		{"Category": "Leg", "Identity": "Hip",   "Mass": 0.3, "Length": [0, 0, 0.05], "Radius": 0.05, "Position": [0, 0.05, 0.4],  "Rotation": [0,1,0]},
+		{"Category": "Leg", "Identity": "Hip",   "Mass": 0.0, "Length": [0, 0, 0.0],  "Radius": 0.0,  "Position": [0, 0.05, 0.4],  "Rotation": [0,0,1]},
+		{"Category": "Leg", "Identity": "Waist", "Mass": 0.4, "Length": [0, 0, 0.1],  "Radius": 0.05, "Position": [0, 0.05, 0.5],  "Rotation": [1,0,0]}
+	]
+}

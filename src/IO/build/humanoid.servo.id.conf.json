@@ -1,0 +1,31 @@
+{
+	"Comment": {
+	},
+	"Sum number of servo": 20,
+	"Servo motor ID": {
+		"Head yaw": 19,
+		"Head pitch": 20,
+
+		"Left shoulder pitch": 2,
+		"Left shoulder roll": 4,
+		"Left elbow": 6,
+
+		"Right shoulder pitch": 1,
+		"Right shoulder roll": 3,
+		"Right elbow": 5,
+
+		"Left hip yaw": 8,
+		"Left hip roll": 10,
+		"Left hip pitch": 12,
+		"Left knee": 14,
+		"Left ankle pitch": 16,
+		"Left ankle roll": 18,
+
+		"Right hip yaw": 7,
+		"Right hip roll": 9,
+		"Right hip pitch": 11,
+		"Right knee": 13,
+		"Right ankle pitch": 15,
+		"Right ankle roll": 17
+	}
+}
