@@ -1,4 +1,4 @@
-
+#include <unistd.h>
 #include <iostream>
 #include <exception>
 #include <sstream>
@@ -64,13 +64,17 @@ int main(int argc, char **argv) {
 		launcher();
 		logger->message(Tools::Log::MessageLevels::info, "Thread start");
 
-		control_point_map->add(20, Kinematics::Quantity::SpatialPoint<double>().point(-0.001, 0.001, 0.1));
-		control_point_map->add(14, Kinematics::Quantity::SpatialPoint<double>().point(-0.001, 0.001, 0.1));
-		control_point_map->add(6, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -1e-4));
-		control_point_map->add(3, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -1e-4));
+//		control_point_map->add(20, Kinematics::Quantity::SpatialPoint<double>().point(-0.001, 0.001, 0.1));
+//		control_point_map->add(14, Kinematics::Quantity::SpatialPoint<double>().point(-0.001, 0.001, 0.1));
+//		control_point_map->add(6, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -1e-4));
+//		control_point_map->add(3, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -1e-4));
+
+		control_point_map->add( 1, Kinematics::Quantity::SpatialPoint<double>().point(0.0, 0.0, 0.03));
+		control_point_map->add(10, Kinematics::Quantity::SpatialPoint<double>().point(0.0, 0.0, 0.03));
 
 		int i = 0;
 		while(1) {
+			{
 			const auto lock = std::lock_guard<std::mutex>(launcher.get_mutex());
 
 			if(i == 19) {
@@ -78,8 +82,10 @@ int main(int argc, char **argv) {
 				break;
 			}
 
-			control_point_map->add(20, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -0.005));
-			control_point_map->add(14, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -0.005));
+//			control_point_map->add(20, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -0.005));
+//			control_point_map->add(14, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, -0.005));
+			control_point_map->add( 1, Kinematics::Quantity::SpatialPoint<double>().point(0.0, 0.0, 0.001));
+			control_point_map->add(10, Kinematics::Quantity::SpatialPoint<double>().point(0.0, 0.0, 0.001));
 
 			for(auto &&[body_id, spatial_point] : control_point_map->get_list_with_id()) {
 				std::stringstream ss;
@@ -91,6 +97,8 @@ int main(int argc, char **argv) {
 			}
 
 			i ++;
+			}
+			usleep(10000);
 		}
 	}
 	catch(const std::exception &error) {

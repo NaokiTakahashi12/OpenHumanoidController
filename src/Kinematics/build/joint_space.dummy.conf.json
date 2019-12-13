@@ -1,0 +1,112 @@
+{
+	"Comments": {
+		"Target robot name": "DARwInOP",
+		"Joint limits": "Non limit is zero",
+		"Unit type": "Radian"
+	},
+	"Degree of freedom": 20,
+	"Joint limits": [
+		{"ID":  1, "Lower": -1.57, "Upper": 1.57},
+		{"ID":  2, "Lower": -0.39, "Upper": 0.78},
+
+		{"ID":  3, "Lower": -2.61, "Upper": 2.61},
+		{"ID":  4, "Lower": -1.57, "Upper": 1.57},
+		{"ID":  5, "Lower": -2.61, "Upper": 0.02},
+
+		{"ID":  6, "Lower": -2.61, "Upper": 2.61},
+		{"ID":  7, "Lower": -1.57, "Upper": 1.57},
+		{"ID":  8, "Lower": -0.02, "Upper": 2.61},
+
+		{"ID":  9, "Lower": -0.78, "Upper": 0.78},
+		{"ID": 10, "Lower": -1.57, "Upper": 1.57},
+		{"ID": 11, "Lower": -0.39, "Upper": 1.57},
+		{"ID": 12, "Lower": -2.61, "Upper": 0.02},
+		{"ID": 13, "Lower": -1.50, "Upper": 0.70},
+		{"ID": 14, "Lower": -0.70, "Upper": 0.70},
+
+		{"ID": 15, "Lower": -0.78, "Upper": 0.78},
+		{"ID": 16, "Lower": -1.57, "Upper": 1.57},
+		{"ID": 17, "Lower": -1.57, "Upper": 0.39},
+		{"ID": 18, "Lower": -0.02, "Upper": 2.61},
+		{"ID": 19, "Lower": -0.70, "Upper": 1.50},
+		{"ID": 20, "Lower": -0.70, "Upper": 0.70}
+	],
+	"Joint offset": [
+		{"ID": 1,  "Angle": 0},
+		{"ID": 2,  "Angle": 0},
+
+		{"ID": 3,  "Angle": 0},
+		{"ID": 4,  "Angle": 0},
+		{"ID": 5,  "Angle": 0},
+
+		{"ID": 6,  "Angle": 0},
+		{"ID": 7,  "Angle": 0},
+		{"ID": 8,  "Angle": 0},
+
+		{"ID": 9,  "Angle": 0},
+		{"ID": 10, "Angle": 0},
+		{"ID": 11, "Angle": 0},
+		{"ID": 12, "Angle": 0},
+		{"ID": 13, "Angle": 0},
+		{"ID": 14, "Angle": 0},
+
+		{"ID": 15, "Angle": 0},
+		{"ID": 16, "Angle": 0},
+		{"ID": 17, "Angle": 0},
+		{"ID": 18, "Angle": 0},
+		{"ID": 19, "Angle": 0},
+		{"ID": 20, "Angle": 0}
+	],
+	"Resetting joint ID": [
+		{"ID": 1,  "New ID": 1},
+		{"ID": 2,  "New ID": 2},
+
+		{"ID": 3,  "New ID": 3},
+		{"ID": 4,  "New ID": 4},
+		{"ID": 5,  "New ID": 5},
+
+		{"ID": 6,  "New ID": 6},
+		{"ID": 7,  "New ID": 7},
+		{"ID": 8,  "New ID": 8},
+
+		{"ID": 9,  "New ID": 9},
+		{"ID": 10, "New ID": 10},
+		{"ID": 11, "New ID": 11},
+		{"ID": 12, "New ID": 12},
+		{"ID": 13, "New ID": 13},
+		{"ID": 14, "New ID": 14},
+
+		{"ID": 15, "New ID": 15},
+		{"ID": 16, "New ID": 16},
+		{"ID": 17, "New ID": 17},
+		{"ID": 18, "New ID": 18},
+		{"ID": 19, "New ID": 19},
+		{"ID": 20, "New ID": 20}
+	],
+	"Before ik joint angle": [
+		{"ID": 1,  "Angle": 0.01},
+		{"ID": 2,  "Angle": 0.01},
+
+		{"ID": 3,  "Angle": 0.01},
+		{"ID": 4,  "Angle": 0.01},
+		{"ID": 5,  "Angle": 0.01},
+
+		{"ID": 6,  "Angle": 0.01},
+		{"ID": 7,  "Angle": 0.01},
+		{"ID": 8,  "Angle": 0.01},
+
+		{"ID": 9,  "Angle": 0.01},
+		{"ID": 10, "Angle": 0.01},
+		{"ID": 11, "Angle": 0.01},
+		{"ID": 12, "Angle": 0.01},
+		{"ID": 13, "Angle": 0.01},
+		{"ID": 14, "Angle": 0.01},
+
+		{"ID": 15, "Angle": 0.01},
+		{"ID": 16, "Angle": 0.01},
+		{"ID": 17, "Angle": 0.01},
+		{"ID": 18, "Angle": 0.01},
+		{"ID": 19, "Angle": 0.01},
+		{"ID": 20, "Angle": 0.01}
+	]
+}

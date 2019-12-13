@@ -3,6 +3,7 @@
 
 #include "LevenbergMarquardtForSerialLink.hpp"
 #include "CustomMultipleIK.hpp"
+#include "GankenKunIK.hpp"
 
 namespace Kinematics {
 	namespace InverseProblemSolvers {
@@ -26,6 +27,7 @@ namespace Kinematics {
 		void MultipleIKSelector<Scalar>::default_register() {
 			this->register_object(LevenbergMarquardtForSerialLink<Scalar>::get_key(), LevenbergMarquardtForSerialLink<Scalar>::make_ptr(model));
 			this->register_object(CustomMultipleIK<Scalar>::get_key(), CustomMultipleIK<Scalar>::make_ptr(model));
+			this->register_object(GankenKunIK<Scalar>::get_key(), GankenKunIK<Scalar>::make_ptr(model));
 		}
 
 		template class MultipleIKSelector<float>;

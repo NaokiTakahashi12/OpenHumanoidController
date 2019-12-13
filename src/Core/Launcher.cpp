@@ -44,7 +44,6 @@ namespace Core {
 		footstep_planner->set_goal(goal_point.x(), goal_point.y(), goal_point.z(), 0, 0, 0);
 
 		footstep_planner->make_full_footprint();
-
 		Tools::Math::MatrixX<float> left_footprint, right_footprint;
 		{
 			const auto footprint_list = footstep_planner->get_footprint_list();
@@ -76,7 +75,6 @@ namespace Core {
 				}
 			}
 		}
-		
 		robo_info->left_footprint->set(left_footprint);
 		robo_info->right_footprint->set(right_footprint);
 	}
@@ -93,8 +91,8 @@ namespace Core {
 
 		auto control_point_map = kinematics_launcher->get_control_point_map();
 		auto parameters = kinematics_launcher->get_parameters();
-		const auto left_foot_id = 20;
-		const auto right_foot_id = 14;
+		const auto left_foot_id = 10;
+		const auto right_foot_id = 1;
 		Kinematics::Quantity::SpatialPoint<double> initial_left_foot_point, initial_right_foot_point;
 		Kinematics::Quantity::SpatialPoint<double> ready_left_foot_point, ready_right_foot_point;
 
@@ -114,7 +112,7 @@ namespace Core {
 					control_point_map->add(left_foot_id, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, minimum_diff));
 					control_point_map->add(right_foot_id, Kinematics::Quantity::SpatialPoint<double>().point(0, 0, minimum_diff));
 				}
-				std::this_thread::sleep_for(std::chrono::milliseconds(250));
+				std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			}
 			{
 				const auto lock = std::lock_guard<std::mutex>(kinematics_launcher->get_mutex());
@@ -138,6 +136,7 @@ namespace Core {
 
 							if(left_trajectory == lt || right_trajectory == rt) {
 								std::this_thread::yield();
+								std::this_thread::sleep_for(std::chrono::milliseconds(1));
 								continue;
 							}
 
@@ -170,7 +169,7 @@ namespace Core {
 					else {
 						std::this_thread::yield();
 					}
-					std::this_thread::sleep_for(std::chrono::microseconds(100));
+					std::this_thread::sleep_for(std::chrono::milliseconds(1));
 				}
 
 				left_trajectory = robo_info->left_foot_trajectory->latest().value.cast<double>();
@@ -195,10 +194,8 @@ namespace Core {
 
 		io_device_manager = std::make_unique<IO::DeviceManager>("../../IO/build/", "robot.conf.json", robo_info, robo_info->logger);
 
-		/*
 		io_device_manager->spawn_device();
 		io_device_manager->launch_device();
-		*/
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	}

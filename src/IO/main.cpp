@@ -63,16 +63,17 @@ int main(int argc, char **argv) {
 			auto command_control_selector = std::make_unique<IO::Communicator::SerialControlSelector>();
 			auto device_selector = std::make_unique<IO::SerialDeviceSelector<IO::Device::ControlBoard::SerialControlBoard>>(robo_info);
 
-			auto serial_controller = command_control_selector->choice_shared_object("Dynamixel");
+			//auto serial_controller = command_control_selector->choice_shared_object("Dynamixel");
+			auto serial_controller = command_control_selector->choice_shared_object("Kondo");
 			auto control_board = device_selector->choice_object("CM730");
 
 			auto serial_servo_motors = std::vector<std::unique_ptr<IO::Device::Actuator::ServoMotor::SerialServoMotor>>();
 
 			control_board->register_controller(serial_controller);
 
-			for(auto i = 1; i <= 20; ++ i) {
+			for(auto i = 1; i <= 1; ++ i) {
 				serial_servo_motors.push_back(
-					std::make_unique<IO::Device::Actuator::ServoMotor::MX28>(i, robo_info)
+					std::make_unique<IO::Device::Actuator::ServoMotor::B3MSC1170A>(i, robo_info)
 				);
 				serial_servo_motors.back()->register_controller(serial_controller);
 			}

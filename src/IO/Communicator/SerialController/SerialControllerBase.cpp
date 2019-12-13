@@ -15,13 +15,13 @@ namespace IO {
 		namespace SerialController {
 			SerialControllerBase::SerialControllerBase() {
 				baudrate = std::make_unique<BaudRate>();
-				timeoutms = std::make_unique<TimeoutMs>();
+				timeoutus = std::make_unique<TimeoutUs>();
 				device_port_name = std::make_unique<std::string>();
 				return_packet_map = std::make_unique<ReturnPacketMap>();
 				data_access_mutex = std::make_unique<std::mutex>();
 
 				baud_rate(0);
-				timeout_ms(15);
+				timeout_us(1000);
 				serial_flow_scheduler = std::make_unique<Communicator::SerialFlowScheduler>();
 			}
 
@@ -50,12 +50,12 @@ namespace IO {
 				return *baudrate;
 			}
 
-			void SerialControllerBase::timeout_ms(const TimeoutMs &new_timeout_ms) {
-				*timeoutms = new_timeout_ms;
+			void SerialControllerBase::timeout_us(const TimeoutUs &new_timeout_us) {
+				*timeoutus = new_timeout_us;
 			}
 
-			SerialControllerBase::TimeoutMs &SerialControllerBase::timeout_ms() const {
-				return *timeoutms;
+			SerialControllerBase::TimeoutUs &SerialControllerBase::timeout_us() const {
+				return *timeoutus;
 			}
 
 			void SerialControllerBase::launch() {
@@ -80,6 +80,14 @@ namespace IO {
 				}
 
 				serial_flow_scheduler->set_send_packet(send_packet);
+//				printf("P");
+#if 0
+				printf("set_packet: ");
+				for(int i = 0; i < send_packet[0]; i ++) {
+					printf("%02X ", send_packet[i] & 0xFF);
+				}
+				printf("\r\n");
+#endif
 			}
 
 			void SerialControllerBase::wait_for_send_packets() const {
@@ -87,9 +95,9 @@ namespace IO {
 					return;
 				}
 				else if(serial_flow_scheduler->is_open()) {
-					if(!serial_flow_scheduler->is_send_packet_empty()) {
+					while(!serial_flow_scheduler->is_send_packet_empty()) {
 						std::this_thread::yield();
-						wait_for_send_packets();
+						std::this_thread::sleep_for(std::chrono::microseconds(100));
 					}
 				}
 			}

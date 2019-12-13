@@ -18,7 +18,6 @@ namespace Kinematics {
 	template <typename Scalar>
 	Launcher<Scalar>::Launcher(RobotStatus::InformationPtr &robot_status_information_ptr, const std::string &config_dir, const std::string &config_file) : config_dir(config_dir), config_file(config_file) {
 		auto config_manager = ConfigManager::make_ptr(config_dir, config_file);
-
 		robo_info = robot_status_information_ptr;
 
 		make_model(config_manager->get_value<std::string>("Model.Directory") + config_manager->get_value<std::string>("Model.File"));
@@ -159,7 +158,9 @@ namespace Kinematics {
 	template <typename Scalar>
 	void Launcher<Scalar>::set_control_point_from_config_for_humanoid(const std::string &config_file) {
 		auto config_manager = ConfigManager::make_ptr(config_dir, config_file);
-
+		control_point_map->set( 1);
+		control_point_map->set(10);
+/*
 		control_point_map->set(
 			model->body_id(
 				config_manager->template get_value<std::string>("Control point names.Left arm")
@@ -185,6 +186,7 @@ namespace Kinematics {
 				config_manager->template get_value<std::string>("Control point names.Head")
 			)
 		);
+*/
 	}
 
 	template <typename Scalar>
@@ -195,7 +197,7 @@ namespace Kinematics {
 			const auto error_point = cache.at(i).point() - current.at(i).point();
 			const auto error_angle = cache.at(i).angle() - current.at(i).angle();
 
-			if(error_point.norm() > 1e-4 || error_angle.norm() > 1e-4) {
+			if(error_point.norm() > 1e-3) {
 				cache = current;
 				return true;
 			}
