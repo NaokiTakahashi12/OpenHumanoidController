@@ -33,7 +33,7 @@ namespace IO {
 
 			void Kondo::launch() {
 				serial_flow_scheduler->register_parse(create_data_parser());
-				serial_flow_scheduler->set_write_end_sleep_ms(10);
+				serial_flow_scheduler->set_write_end_sleep_us(200);
 				serial_flow_scheduler->open(port_name());
 				{
 					serial_flow_scheduler->set_baudrate(baud_rate());

@@ -72,7 +72,7 @@ namespace IO {
 				config_data->serial_control[ids.at(i)].name = names.at(i);
 				config_data->serial_control[ids.at(i)].port_name = ports.at(i);
 				config_data->serial_control[ids.at(i)].baud_rate = baud_rates.at(i);
-				config_data->serial_control[ids.at(i)].timeout_ms = timeouts.at(i);
+				config_data->serial_control[ids.at(i)].timeout_us = timeouts.at(i);
 			}
 
 			serial_control_assertion();
@@ -97,7 +97,7 @@ namespace IO {
 				ss << " SerialID: " << id;
 				ss << " Port: " << data.port_name;
 				ss << " BaudRate: " << data.baud_rate;
-				ss << " TimeoutMs: " << data.timeout_ms;
+				ss << " TimeoutMicros: " << data.timeout_us;
 
 				logger_ptr->message(Tools::Log::MessageLevels::trace, ss.str());
 			}

@@ -194,7 +194,7 @@ t_matrix PseudoInverse(const t_matrix& m, const float &tolerance=1.e-6)
  */
 void Kinematics::InverseKinematics(vector<int> to, vector<Link> target)
 {
-	const float EPS = 5.0e-4;
+	const float EPS = 1.0e-3;
 	Matrix3f J;
 
 	ForwardKinematics(Const::CC);

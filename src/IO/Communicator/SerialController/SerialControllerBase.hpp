@@ -28,7 +28,7 @@ namespace IO {
 
 				public :
 					using BaudRate = SerialFlowScheduler::BaudRate;
-					using TimeoutMs = unsigned int;
+					using TimeoutUs = unsigned int;
 					using SendPacket = SerialFlowScheduler::SinglePacket;
 					using ParseFunction = SerialFlowScheduler::ParseFunction;
 					using ReturnPacketMap = std::unordered_map<SerialReturnPacket::PacketID, SerialReturnPacket>;
@@ -42,8 +42,8 @@ namespace IO {
 					void baud_rate(const BaudRate &);
 					BaudRate &baud_rate() const;
 
-					void timeout_ms(const TimeoutMs &);
-					TimeoutMs &timeout_ms() const;
+					void timeout_us(const TimeoutUs &);
+					TimeoutUs &timeout_us() const;
 
 					virtual void launch(),
 								 async_launch();
@@ -69,7 +69,7 @@ namespace IO {
 				private :
 					std::unique_ptr<std::mutex> data_access_mutex;
 					std::unique_ptr<BaudRate> baudrate;
-					std::unique_ptr<TimeoutMs> timeoutms;
+					std::unique_ptr<TimeoutUs> timeoutus;
 					std::unique_ptr<std::string> device_port_name;
 			};
 		}

@@ -13,21 +13,21 @@
 			"Serial controller": "Simple",
 			"Port": "/dev/ttyACM0",
 			"Baud rate": 115200,
-			"Timeout[ms]": 5,
+			"Timeout[us]": 5000,
 			"Serial ID": 2
 		},
 		{
 			"Serial controller": "Dynamixel",
 			"Port": "/dev/ttyUSB0",
 			"Baud rate": 1000000,
-			"Timeout[ms]": 8,
+			"Timeout[us]": 8000,
 			"Serial ID": 1
 		},
 		{
 			"Serial controller": "Kondo",
 			"Port": "/dev/ttyUSB0",
 			"Baud rate": 1000000,
-			"Timeout[ms]": 8,
+			"Timeout[us]": 200,
 			"Serial ID": 3
 		}
 	]

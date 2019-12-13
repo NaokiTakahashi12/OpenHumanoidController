@@ -31,7 +31,7 @@ namespace IO {
 
 				serial_flow_scheduler->open(port_name());
 				serial_flow_scheduler->set_baudrate(baud_rate());
-				serial_flow_scheduler->set_timeout_ms(timeout_ms());
+				serial_flow_scheduler->set_timeout_us(timeout_us());
 				serial_flow_scheduler->launch();
 			}
 

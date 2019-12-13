@@ -197,7 +197,7 @@ namespace Kinematics {
 			const auto error_point = cache.at(i).point() - current.at(i).point();
 			const auto error_angle = cache.at(i).angle() - current.at(i).angle();
 
-			if(error_point.norm() > 5e-4 || error_angle.norm() > 5e-4) {
+			if(error_point.norm() > 1e-3 || error_angle.norm() > 1e-3) {
 				cache = current;
 				return true;
 			}

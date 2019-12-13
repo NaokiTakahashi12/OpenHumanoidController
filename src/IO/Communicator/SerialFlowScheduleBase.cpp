@@ -21,8 +21,8 @@ namespace IO {
 			port = std::make_unique<boost::asio::serial_port>(*io_service);
 			error_code = std::make_unique<boost::system::error_code>();
 			timer = std::make_unique<boost::asio::deadline_timer>(*io_service);
-			read_end_sleep_ms = std::chrono::milliseconds(0);
-			write_end_sleep_ms = std::chrono::milliseconds(0);
+			read_end_sleep_us = std::chrono::microseconds(0);
+			write_end_sleep_us = std::chrono::microseconds(0);
 			clean_read_buffer();
 			default_settings();
 		}
@@ -77,18 +77,18 @@ namespace IO {
 			parse_data_functor = functor;
 		}
 
-		SerialFlowScheduleBase &SerialFlowScheduleBase::set_timeout_ms(const unsigned int &timeout_ms) {
-			this->timeout_ms = timeout_ms;
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_timeout_us(const unsigned int &timeout_us) {
+			this->timeout_us = timeout_us;
 			return *this;
 		}
 
-		SerialFlowScheduleBase &SerialFlowScheduleBase::set_read_end_sleep_ms(const unsigned int &read_end_sleep_ms) {
-			this->read_end_sleep_ms = std::chrono::milliseconds(read_end_sleep_ms);
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_read_end_sleep_us(const unsigned int &read_end_sleep_us) {
+			this->read_end_sleep_us = std::chrono::microseconds(read_end_sleep_us);
 			return *this;
 		}
 
-		SerialFlowScheduleBase &SerialFlowScheduleBase::set_write_end_sleep_ms(const unsigned int &write_end_sleep_ms) {
-			this->write_end_sleep_ms = std::chrono::milliseconds(write_end_sleep_ms);
+		SerialFlowScheduleBase &SerialFlowScheduleBase::set_write_end_sleep_us(const unsigned int &write_end_sleep_us) {
+			this->write_end_sleep_us = std::chrono::microseconds(write_end_sleep_us);
 			return *this;
 		}
 
@@ -134,7 +134,7 @@ namespace IO {
 
 		void SerialFlowScheduleBase::read_timeout() {
 			std::this_thread::yield();
-			timer->expires_from_now(boost::posix_time::milliseconds(timeout_ms));
+			timer->expires_from_now(boost::posix_time::microseconds(timeout_us));
 			timer->async_wait(std::bind(&SerialFlowScheduleBase::timeout_callback, this, std::placeholders::_1));
 		}
 
@@ -144,6 +144,13 @@ namespace IO {
 					boost::asio::buffer(read_buffer.data(), read_buffer.size()),
 					std::bind(&SerialFlowScheduleBase::read_callback, this, std::placeholders::_1, std::placeholders::_2)
 			);
+#if 0
+			printf("READ: ");
+			for(int i = 0; i < read_buffer.data()[0];i ++) {
+				printf("%02X ", read_buffer.data()[i] & 0xFF);
+			}
+			printf("\r\n");
+#endif
 		}
 
 		void SerialFlowScheduleBase::write() {
@@ -155,10 +162,17 @@ namespace IO {
 					boost::asio::buffer(send_packet_list.front().data(), send_packet_list.front().size()),
 					std::bind(&SerialFlowScheduleBase::write_callback, this, std::placeholders::_1, std::placeholders::_2)
 			);
+#if 0
+			printf("SEND: ");
+			for(int i = 0; i < send_packet_list.front().size();i ++) {
+				printf("%02X ", send_packet_list.front().data()[i] & 0xFF);
+			}
+			printf("\r\n");
+#endif
 		}
 
 		void SerialFlowScheduleBase::default_settings() {
-			set_timeout_ms();
+			set_timeout_us();
 		}
 
 		void SerialFlowScheduleBase::clean_read_buffer() {
@@ -220,11 +234,11 @@ namespace IO {
 		}
 
 		void SerialFlowScheduleBase::read_end() {
-			std::this_thread::sleep_for(read_end_sleep_ms);
+			std::this_thread::sleep_for(read_end_sleep_us);
 		}
 		
 		void SerialFlowScheduleBase::write_end() {
-			std::this_thread::sleep_for(write_end_sleep_ms);
+			std::this_thread::sleep_for(write_end_sleep_us);
 		}
 	}
 

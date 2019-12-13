@@ -50,9 +50,9 @@ namespace IO {
 				void set_send_packet(const SinglePacket &);
 				void register_parse(ParseFunction);
 
-				SerialFlowScheduleBase &set_timeout_ms(const unsigned int &timeout_ms = 15),
-					 				   &set_read_end_sleep_ms(const unsigned int &read_end_sleep_ms),
-					 				   &set_write_end_sleep_ms(const unsigned int &write_end_sleep_ms),
+				SerialFlowScheduleBase &set_timeout_us(const unsigned int &timeout_us = 1000),
+									   &set_read_end_sleep_us(const unsigned int &read_end_sleep_us),
+									   &set_write_end_sleep_us(const unsigned int &write_end_sleep_us),
 					 				   &set_baudrate(const BaudRate &baudrate = 115200),
 									   &set_character_size(const unsigned int &size = 8),
 									   &set_flow_control_none(),
@@ -80,9 +80,9 @@ namespace IO {
 				virtual void clean_read_buffer();
 
 			private :
-				unsigned int timeout_ms;
-				std::chrono::milliseconds read_end_sleep_ms,
-							 			  write_end_sleep_ms;
+				unsigned int timeout_us;
+				std::chrono::microseconds read_end_sleep_us,
+										  write_end_sleep_us;
 
 				std::unique_ptr<boost::asio::io_service> io_service;
 				std::unique_ptr<boost::asio::serial_port> port;

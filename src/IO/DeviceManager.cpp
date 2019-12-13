@@ -107,7 +107,7 @@ namespace IO {
 
 			serial_control_map[id]->port_name(data.port_name);
 			serial_control_map[id]->baud_rate(data.baud_rate);
-			serial_control_map[id]->timeout_ms(data.timeout_ms);
+			serial_control_map[id]->timeout_us(data.timeout_us);
 		}
 
 		logger_ptr->message(Tools::Log::MessageLevels::trace, "Success spawn serial controller");

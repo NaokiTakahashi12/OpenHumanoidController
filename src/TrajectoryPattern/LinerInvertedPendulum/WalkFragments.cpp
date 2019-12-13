@@ -74,9 +74,10 @@ namespace TrajectoryPattern {
 				update_traject_com(current_time);
 				update_swing_foot_trajectory(current_time, number_of_footprint);
 
-				std::this_thread::sleep_for(std::chrono::milliseconds(1));
+				std::this_thread::sleep_for(std::chrono::milliseconds(20));
 				end_point = std::chrono::steady_clock::now();
-				current_time = std::chrono::duration<MatrixElement, std::ratio<1, 100>>(end_point - start_point).count();
+				current_time = std::chrono::duration<MatrixElement, std::ratio<1,1>>(end_point - start_point).count();
+//				printf("*\r\n");
 			}
 
 			before_position = com_position;
@@ -140,6 +141,8 @@ namespace TrajectoryPattern {
 			* (walk_fragment_velocity.y() - sinh_one_leg_holding_time / time_constant * before_position.y() - cosh_one_leg_holding_time * before_velocity.y());
 
 			set_modified_footprint(number_of_footprint, modified_footprint);
+//			printf("x");
+//			fflush(stdout);
 		}
 
 		void WalkFragments::initialize() {

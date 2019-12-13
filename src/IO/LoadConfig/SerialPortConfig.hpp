@@ -27,14 +27,14 @@ namespace IO {
 					using SerialControlName = std::string;
 					using Port = std::string;
 					using BaudRate = unsigned int;
-					using TimeOutMs = int;
+					using TimeOutUs = int;
 					//! Map key
 					using SerialID = int;
 
 					SerialControlName name;
 					Port port_name;
 					BaudRate baud_rate;
-					TimeOutMs timeout_ms;
+					TimeOutUs timeout_us;
 				};
 
 				struct SerialPortData {
@@ -58,7 +58,7 @@ namespace IO {
 								  serial_controller_key    = "Serial controller",
 								  serial_port_key          = "Port",
 								  serial_baud_rate_key     = "Baud rate",
-								  serial_timeout_key       = "Timeout[ms]",
+								  serial_timeout_key       = "Timeout[us]",
 								  serial_controller_id_key = "Serial ID";
 
 				void load_config();

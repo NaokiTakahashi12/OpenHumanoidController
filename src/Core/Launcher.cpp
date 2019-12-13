@@ -136,6 +136,7 @@ namespace Core {
 
 							if(left_trajectory == lt || right_trajectory == rt) {
 								std::this_thread::yield();
+								std::this_thread::sleep_for(std::chrono::milliseconds(1));
 								continue;
 							}
 
@@ -168,7 +169,7 @@ namespace Core {
 					else {
 						std::this_thread::yield();
 					}
-					std::this_thread::sleep_for(std::chrono::microseconds(100));
+					std::this_thread::sleep_for(std::chrono::milliseconds(1));
 				}
 
 				left_trajectory = robo_info->left_foot_trajectory->latest().value.cast<double>();
@@ -193,10 +194,8 @@ namespace Core {
 
 		io_device_manager = std::make_unique<IO::DeviceManager>("../../IO/build/", "robot.conf.json", robo_info, robo_info->logger);
 
-		/*
 		io_device_manager->spawn_device();
 		io_device_manager->launch_device();
-		*/
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	}
