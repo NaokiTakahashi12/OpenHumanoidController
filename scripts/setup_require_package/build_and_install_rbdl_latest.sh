@@ -5,15 +5,6 @@ RBDL_INSTALL_PATH=~/.local
 
 mkdir $RBDL_INSTALL_PATH
 
-sudo apt update && \
-sudo apt install -y \
-	wget \
-	unzip \
-	cmake \
-	make \
-	libunittest++-dev \
-	build-essential \
-&& \
 wget https://bitbucket.org/rbdl/rbdl/get/default.zip -O $RBDL_SOURCE_ZIP && \
 unzip $RBDL_SOURCE_ZIP -d $RBDL_SOURCE_DIR
 mkdir $RBDL_SOURCE_DIR/rbdl-rbdl-0879ee8c548a/build && \
