@@ -69,7 +69,7 @@ function(UsingPython3 includes libraires)
 endfunction()
 
 function(UsingRBDL includes libraries)
-	set(RBDL_INCLUDE_DIR $ENV{RBDL_PATH})
+	set(RBDL_INCLUDE_DIR $ENV{RBDL_INCLUDE_PATH})
 	set(RBDL_LIBRARY_DIR $ENV{RBDL_LIBRARY_PATH})
 
 	if(EXISTS ${RBDL_INCLUDE_DIR} AND EXISTS ${RBDL_LIBRARY_DIR})
