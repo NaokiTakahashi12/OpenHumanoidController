@@ -8,8 +8,12 @@
 ## Use cmake version ##
 cmake_minimum_required(VERSION 3.10)
 
+if("${CMAKE_CURRENT_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_BINARY_DIR}")
+	message(FATAL_ERROR "Should chenge directory")
+endif()
+
 ## Include module path ##
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/../../../build-tools/cmake/module)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/../../build-tools/cmake/module)
 include(Finder)
 include(Settings)
 include(CheckExistence)
@@ -18,7 +22,7 @@ include(FileListOperator)
 ## Project name ##
 project(None CXX)
 if("${PROJECT_NAME}" MATCHES "None")
-	get_filename_component(MODULE_TOP_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/.. ABSOLUTE)
+	get_filename_component(MODULE_TOP_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} ABSOLUTE)
 	get_filename_component(DEFAULT_PROJECT_NAME ${MODULE_TOP_DIRECTORY} NAME_WE)
 	set(PROJECT_NAME ${DEFAULT_PROJECT_NAME} CACHE STRING "Project name" FORCE)
 endif()
@@ -32,10 +36,10 @@ set(CMAKE_CXX_EXTENSIONS false)
 set(CMAKE_BUILD_TYPE Debug)
 
 ## Output and Input directory ##
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/binary)
-set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/libraries)
-set(INCLUDE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../..)
-set(SOURCE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/..)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/binary)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/libraries)
+set(INCLUDE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/..)
+set(SOURCE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 ## Executable name and Library name ##
 set(BINARY_TARGET_NAME ${PROJECT_NAME}.out)
@@ -66,8 +70,7 @@ UsingBoost(Boost_INCLUDE Boost_LIBRARY)
 UsingEigen3(Eigen3_INCLUDE Eigen3_LIBRARY)
 
 ## Use Module library path ##
-#set(MODULE_LIBRARY_PATHS ${MODULE_LIBRARY_PATHS} ${CMAKE_CURRENT_SOURCE_DIR}/../../XXX/build/libraries)
-set(MODULE_LIBRARY_PATHS ${MODULE_LIBRARY_PATHS} ${CMAKE_CURRENT_SOURCE_DIR}/../../Tools/build/libraries)
+#set(MODULE_LIBRARY_PATHS ${MODULE_LIBRARY_PATHS} ${CMAKE_CURRENT_SOURCE_DIR}/../XXX/build/libraries)
 
 #### Do not edit ####
 
