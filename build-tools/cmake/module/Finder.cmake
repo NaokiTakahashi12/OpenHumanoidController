@@ -5,6 +5,8 @@
 # Email s16c1077hq@s.chibakoudai.jp
 #
 
+include(MessageProtocol)
+
 function(FindFiles result_files top_directories exts)
 	set(directory_pattern /*.)
 
